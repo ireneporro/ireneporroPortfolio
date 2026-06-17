@@ -1,0 +1,376 @@
+Designed & Built with
+Product Design UX / UI Fintech
+Figma Make
+WattlePay
+React · Tailwind CSS · SVG
+A premium dark-mode mobile banking experience built
+with iOS 26 Liquid Glass design language. From color
+palette to production-ready React prototype — every
+1:49 98
+pixel intentional.
+Total Balance
+98 1:58
+$41,332.50
+1:56
+Back
+98
+S Y av o e ur Goals ↑ +3.2% this month S Tr e a n ns d fe r Money
+T
+$
+otal
+1
+Sa
+1
+ve
+,
+d 700 Add Money Convert
+Across 3 goals · On track 🎯 My Cards See all →
+64%
+Transfer
+Sent!
+Japan Trip ✈️ +$Add $ 12,480.50 V M IS C A
+Money
+is on its way to Ana M.
+$ 3,210.00 VISA
+$3,200 of $5,000 $28,900.00 AMOUNT
+72% $325
+MacBook Pro 💻 +$Add •
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+4
+9
+8
+0
+2
+3
+1
+4
+•••• •••• •••• 1177 To
+$1,800 of $2,500
+67%
+From
+Ana M. (@anamartinez)
+Emergency Fund 🛡 +$Add Recent Activity View all → Fee
+Black
+Reserve
+•••• 4821
+$6,700 of
+$10,000
+⬆️
+Transfer to Ana M.
+$3258.00
+Status Free
+Home Cards New Tra G ns o fe a r l Save Invest H 🍣 🛍 ome T Z N T T o o o a o d d d r C b a a a a a u y y yr d – , , , R s 1 8 2 M : : : e 4 4 1 s 5 a 1 1 t d A P P a r M M M u i T d r r a an n sf t er Save $ $ 2 8 1 In 0 9 v . e . 0 9 st 0 9 NS B o M e S r a D t e t I w W n T B a t C A k R r h o A t I o F a c e o r e N T d c n k f d S & o e s e / a u a r T B v e n c i I e t n m t C i c H o P e e o n D l d E F ID e S r 7 D A 6 C o 2 C n 1 O W e 0 M U 0 a N a t 0 r T t l 8 4 Ie D n 1 W W P T A E 3 s 2 a T X t P T l y 0 6 e a A N T j 1 2 nD I a M P 0 L 6 t n i S Q E S g 1 M d T S · i h 2 U t r r B 1 M a o 3 a a C : B l r 5 4 n M M P B e o V 5 8 sa S X a m J f 6 n r A e S X L t p k 7 r X N M í D n l 8 e Q e 9 t z ed
+WattlePay
+0N4et0w8o1rk0
+Transfer to Ana M.
+⬆️ $500.00
+Yesterday
+Salary – Acme Corp
+Ro le S tack S creen s 💳 D es+i$g42n00.00
+Mar 1
+Product Design · UI/UX · Prototype React · Tailwind CSS · SVG · Context API 8+ screens · 7 flows · WalletProvider state iOS 26 Liquid Glass · Dark Mode
+Portfolio Chart 6M
+Portfolio value $41,333 ↑18.4%
+Sep Oct Nov Dec Jan Feb Mar
+Market Watch
+0 1 · B rief Co lo r F o u n datio n
+iOS 26 Liquid Glass meets
+Bitcoin $68,240
+BTC
+BTC/USD +2.4%
+fintech. Wattle
+Ethereum $3,891
+ETH
+ETH/USD +1.1% #CFD457
+Pantone 584 C · rgb(207, 212, 87)
+WattlePay adapts Apple's new design language for a dark-mode finance Solana $182
+SOL
+SOL/USD -0.8% Primary accent · CTA · highlights
+experience. Translucent panels, backdrop blur, specular highlights, and
+floating glass navigation — adapted for the Wattle palette.
+Bunker
+#040810
+🎯 Challenge
+Pantone Black 6 C · rgb(4, 8, 16)
+Design a banking app using iOS 26 Liquid Glass language — dark mode only, premium feel, fully
+Background · depth · base
+interactive prototype.
+Teal
+🔬 Approach
+#5EEAD4
+Start with two anchor colors (Wattle + Bunker). Layer glass surfaces with backdrop-blur, specular
+Tailwind Teal 300 · rgb(94, 234, 212)
+highlights, and inner-glow edges. Build shared state with React Context.
+Portfolio chart accent only
+🏗 Constraint S u ppo rtin g pa lette
+Every screen must be fully interactive with real-time state. Balance updates, transactions
+log, receipts generate — no dead-end mock screens.
+Success Error Secondary Warning Surface
+Why dark UI + Liquid Glass?
+iOS 26 introduces translucent glass surfaces that blur underlying content. On dark backgrounds, this creates depth
+hierarchy without competing with financial data. Users scan amounts faster when the chrome fades behind layered
+glass.
+0 2 · D es ig n S y s tem
+Glass. Depth.
+Hierarchy.
+Three distinct glass layers with specific hierarchy roles. Not visual decoration
+— structural communication. Every surface uses backdrop-filter blur for the
+iOS 26 Liquid Glass effect.
+Glass Accent Glass Dark Glass Nav
+rgba(207,212,87,0.04) rgba(255,255,255,0.04) rgba(207,212,87,0.03)
+Primary containers · Balance cards · Key metrics · GlassCard component Lists · Transactions · Secondary content · Specular highlight overlay Floating tab bar · Pill shape · 60px blur · Inner shadow edges
+backdrop-blur(40px) backdrop-blur(24px) backdrop-blur(60px)
+Ty po g r a phy — In ter / S y s tem S pacin g & Ra d iu s S ca le
+Micro · 10px
+$44,590.50 10
+Badges, chips, toggle knobs
+Balance display · weight 800 · tracking -3px · tabular-nums Card · 16px
+16
+Transaction rows, list items
+Surface · 22px
+Black Reserve
+22
+GlassCard component, main cards
+Card labels · weight 700 · uppercase tracking
+Nav Pill · 24px
+24
+Floating tab bar, receipts
+Today, 2:41 PM
+Meta text · weight 400 · opacity 0.35 Phone · 50px
+50
+Device shell border-radius
+ES76 2100 0813 6101
+IBAN · monospace · receipt detail rows
+0 3 · U X F lows
+Every state
+designed.
+WattlePay covers 7 complete flows with shared real-time state. Send money
+→ balance updates → transaction logs → appears in Recent Activity and Card
+Activity. No dead ends.
+Co re F low: Tra n s f er
+01 02 03 04 05 06
+Select Contact Enter Amount Add Note Review Confirm Receipt
+Search · Verified Numpad · Presets Optional message Fee · Card · Total Balance deduct IBAN · TxID · Copy
+1:58 98
+2:14 98 1:56 98
+Back
+Back Save
+Transfer
+Your Goals
+Transfer Send Money
+Send Money
+Total Saved
+Quick presets
+👩‍💼 $11,700
+Status Information
+SVG progress ring Across 3 goals · On track 🎯
+Ana M. Transfer Sent!
+@anamartinez
+Money is on its way to Ana M.
+Japan Trip ✈️ 64%
+$500
+$3,200 of $5,000 +$Add AMOUNT
+$325
+Available: $44233.50
+MacBook Pro 💻 72%
+Live goal tracking
+Add a note (optional)... To Ana M. (@anamartinez) Details
+$1,800 of $2,500 +$Add
+From Black Reserve •••• 4821
+1 2 3
+Emergency Fund 🛡 67%
+Fee Free
+$6,700 of $10,000 +$Add
+4 5 6 Large numpad Status Completed
+ACCOUNT DETAILS
+Reference WP MMBBVJLD
+7 8 9 New Goal Account Holder Alejandro Martínez
+I T B r A a N nsaction I E D S76 2100 081 T 3 X 6 N 10 Q 1 U 234 P 5 S 6 S 7 N 8 Q 9 IBAN + TxID
+. 0 ⌫ D SW at I e F T & / T B im IC e Mar 4 W 2 T 0 T 2 P 6 E · S 1 M :5 M 8 X A X M X
+Save and share Save PDF Share
+CTA activates on input Home Cards Transfer Save Invest BMaentkhod WattleInPsatya nDtig Titraaln Bsafnekr
+Review Transfer SNoerttw Coordke Done WattlePay 0N4et0w8o1rk0
+Cancel
+Amount Input Savings Goals Receipt Design
+Custom numpad with large touch targets. Note field for optional SVG circular progress. Deposits deduct from balance in real-time. Goals Full bank details: IBAN, SWIFT/BIC, account holder, sort code. Transaction
+messages. Available balance shown in real-time from WalletProvider persist via WalletProvider context. Create new goals with custom ID, real-time timestamps, copy-to-clipboard reference. Save PDF and
+context. targets. Share buttons.
+A ll a pplicatio n f lows
+🏠 💳 ↗ 💰
+Home Cards Transfer Add Money
+Balance · Cards · Txns · Portfolio Chart (#5EEAD4) Stack animation · Freeze/Unfreeze · Add card 6-step flow · Contact search · Notes Numpad · Presets · Card selection · Receipt
+⇄ 🎯 📈 ⚙️
+Convert Save Invest Settings
+5 currencies · Live rates · Swap button Goals · Progress rings · Deposits · New goal Portfolio · Donut chart · Asset details 8 full sub-screens · 14 toggles
+0 4 · U I D eta ils
+The micro decisions.
+Premium interfaces live in the details. Every component below was a
+deliberate design decision — from the card stack physics to the glass tab
+bar spacing.
+iO S Wa llet-s ty le ca rd s tack F loatin g g l as s pill n av igatio n
+BLACK RESERVE VISA
+WATTLE PLUS VISA
+$1S2AV,I4NG8S C0OR.5E 0 VISA
+$12,480.50
+$12,480.50
+•••• •••• •••• 4821
+•••• •••• •••• 4821
+•••• •••• •••• 4821
+Home Cards Transfer Save Invest
+translateY + scale transforms on tap. Active card elevates with accent glow shadow. Dot indicators track position. 28px bottom safe area
+Freeze/unfreeze per card with Snowflake overlay.
+backdrop-blur(60px) saturate(180%). Detached from bottom edge. Active item gets glass pill with border + inset
+shadow. Lucide React icons with dynamic stroke weight. Home indicator bar in Wattle accent below.
+In teractiv e to g g le s y s tem Po rtf o lio s pa rklin e cha rt
+Face ID / Touch ID
+Enabled Portfolio value $44,590 ↑18.4%
+Push Notifications
+Enabled
+Sep Oct Nov Dec Jan Feb Mar
+Promotional emails
+Disabled
+Hand-built SVG SparkLine component. Area fill uses linearGradient from teal #5EEAD4 at 30% to transparent. Teal
+Auto-hide Balance
+accent reserved exclusively for portfolio chart per design spec. Clickable to navigate to Invest screen.
+Disabled
+On-state uses Wattle accent — consistent with brand. Used across Settings: Security, Notifications,
+Appearance, and Privacy sections. 14 total toggles manage real React state.
+0 5 · A ll S creen s
+8 screens. Zero dead ends.
+Every screen is fully interactive. WalletProvider context shares balance,
+transactions, and goals across all views in real-time.
+1:49 98 1:52 98 1:54 98 1:56 98 1:57 98 1:57 98 1:58 98 1:59 98
+Exchange Settings
+Total Balance My Cards Transfer Save Invest Convert Back
+Wallet Send Money Your Goals Portfolio
+Transfer
+Send Money
+$41,332.50
+Alejandro M.
+Blac Re serve 👩‍💼 Total Saved Portfolio Value ↑ 18.4% FROM alejandro@wattlepay.com
+$12,480.50 VISA $11,700 $44,589 All time 100 Premium · Active ✓
+↑ +3.2% this month
+Ana M.
+Across 3 goals · On track 🎯
+@anamartinez
+Add Money Convert •••• •••• •••• 4821 Transfer Sent! 👤 P Na e m rs e o , e n m a a l i l I , n p f h o one
+$0 SPY 40%
+Japan Trip ✈️ 64% BTC 25% Money is on its way to Ana M.
+My Cards See all → Wattle Pl s 65% QQQ 20% TO 🔐 Security
+$3,210.00 MC $3,200 of $5,000 +$Add BND 15% 92.00 PIN, biometrics, 2FA
+Available: $41332.50 AMOUNT
+$ $ 1 3 2 , , 2 4 1 8 0 0 .0 .5 0 0 V
+V
+I M
+I
+S
+S
+A C
+A
+•••• •••• •••• 9034 Add a note (optional)... MacBook Pro 💻 72%
+$325 🔔 N
+Ale
+o
+r
+t
+t
+i
+s
+f i
+&
+c
+u
+a
+p
+t
+d
+io
+at
+n
+e
+s
+s
+$28,900.00 SPY S&P 500 ETF $17,836 Rate 1 USD = 0.9200 EUR
+1 2 3 $1,800 of $2,500 +$Add 40% allocation +12.4% To Ana M. (@anamartinez) 💳 Payment Methods
+•••• •••• •••• 4821 Sav ngs Core Cards & bank accounts
+• • • • • • • • • • • • • • • • • • • • • • • • 9 1 0 1 3 7 4 7 $28,900.00 VISA Emergency Fund 🛡 67% BTC Bitcoin $11,147 Exchange Now From Black Reserve •••• 4821
+4 5 6 25% allocation +24.1% 🌍 Currency & Region
+Fee Free USD · English (US)
+$6,700 of $10,000 +$Add
+Recent Activity View all → •••• •••• •••• 1177 QQQ Tech Growth $8,918 Status Completed
+7 8 9 20% allocation +9.7% ACCOUNT DETAILS 🎨 Appearance
+⬆️ T To ra da n y s , f 1 e :4 r 1 t o A M Ana M. $3258.00 Add New Card . 0 ⌫ New Goal BND B 15 o % n a d l s location $6, - 6 0 8 .3 8 % T A I R B r c e A a c f N n e o s r u e a n n c t c t H i e o o n ld I E e D r S76 2100 0 W 8 A 1 P T 3 le X 6 M ja N 1 n M 0 d Q 1 B r U 2 o B 3 M V 4 P J a 5 L S r t D 6 S ín 7 N e 8 Q z 9 🛟 D S a u r p k p m o od rt e · Geist
+Help center, chat
+Zara – Madrid Date & Time Mar 4 2026 · 1:58 AM
+🛍 $89.99 SWIFT / BIC WTTPESMMXXX
+Home TodCaayr,d s2:41 PMTransfer Save Invest Home Cards Transfer Save Invest Review Transfer Home Cards Transfer Save Invest Home Cards Transfer Save Invest MBaentkho S d ave PDF WattlIenPsatya nD t S i gT h irt a aa r ln e Bsafenrk 📄 Privacy & Legal
+Terms, privacy policy
+🍣 Nobu Restaurant $210.00 Cancel SNoerttw Coordke Done WattlePay0 N4et0w8o1r0k
+Today, 8:15 PM
+Home Cards Transfer Save Invest Convert Receipt Settings
+Log ut
+⬆️ Transfer to Ana M. $500.00
+Yesterday WattlePay v2.4.1
+Salary – Acme Corp
+💳 +$4200.00
+Mar 1
+Portfolio Chart 6M
+Portfolio value $41,333 ↑18.4%
+Sep Oct Nov Dec Jan Feb Mar
+Market Watch
+07 · Techn ica l Bitcoin $68,240
+BTC
+BTC/USD +2.4%
+Built to prove
+Ethereum $3,891
+ETH
+ETH/USD +1.1%
+the desSolanaign. $182
+SOL
+SOL/USD -0.8%
+A real interactive prototype with shared state management, real-time
+balance updates, timestamped transactions, and clipboard API integration.
+⚛️ 🎨 ▲
+React + Context Tailwind CSS v4 SVG-first
+WalletProvider manages balance, transactions, and savings goals. All Utility-first styling with custom theme tokens. Inline styles for glass Custom sparkline chart, circular progress rings, iOS status bar icons, card
+screens share real-time state via useWallet() hook. effects and dynamic values. stack indicators — all SVG.
+📐 🎬 🔒
+Lucide React CSS Animations Clipboard API
+Consistent icon system across all screens. Dynamic strokeWidth for ios26SlideUp keyframes with cubic-bezier easing. Active:scale transforms. Receipt reference IDs can be copied to clipboard. Real transaction IDs
+active/inactive states in navigation. Blur transitions for balance hide. generated with Date.now().toString(36).
+Wa lletProv id er S tate F low
+User Action updateBalance() addTransaction() Home Screen Cards Screen
+→ → → →
+Send / Recharge / Save / Convert Adds or subtracts delta Logs with timestamp + icon Recent Activity updates Card Activity reflects
+Pro d u ct D es ig n · U X / U I · F in tech
+Design is a
+decision,
+not a default.
+From two color swatches to 8 interactive screens with shared
+real-time state — every choice in WattlePay was made, not
+assumed. iOS 26 Liquid Glass adapted for dark-mode fintech.
+UX Design UI Design Mobile Fintech iOS 26 Liquid Glass AI - Prototype Dark Mode Design Systems
+WattlePay Irene Porro
+Built with Figma Make Product Designer
