@@ -1909,6 +1909,20 @@ h2 {
   grid-template-columns: 1fr;
 }
 
+.foundations-grid {
+  align-items: start;
+}
+
+.foundation-stack {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.foundation-stack .case-shot {
+  margin: 0;
+}
+
 .case-shot {
   padding: 0.55rem;
   width: 100%;
@@ -2513,6 +2527,10 @@ h2 {
 
   .case-section-copy {
     position: static;
+  }
+
+  .foundation-stack {
+    display: contents;
   }
 
   .case-next {
