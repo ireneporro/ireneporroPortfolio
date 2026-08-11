@@ -211,9 +211,9 @@ a {
 
 .passport-stamp {
   position: absolute;
-  right: clamp(2rem, 9vw, 7rem);
+  right: clamp(0.9rem, 3.4vw, 2.8rem);
   top: clamp(3.4rem, 6vw, 5rem);
-  width: clamp(3.2rem, 6vw, 4.6rem);
+  width: clamp(3rem, 5.2vw, 4.35rem);
   aspect-ratio: 1;
   display: block;
   perspective: 700px;
@@ -313,7 +313,7 @@ h2 {
 }
 
 h1 {
-  max-width: 56rem;
+  max-width: 52rem;
   margin-bottom: 1.2rem;
   font-size: clamp(3.2rem, 7.2vw, 6.45rem);
 }
@@ -2237,27 +2237,45 @@ h2 {
 
 @media (max-width: 1000px) {
   .spread-about {
-    grid-template-columns: minmax(14rem, 0.78fr) minmax(0, 1.22fr);
-    gap: 3rem;
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
   }
 
   .about-photo-stack {
-    min-height: 25rem;
+    min-height: 27rem;
   }
 
   .about-photo {
-    left: 0;
-    width: min(16rem, 100%);
+    left: clamp(0rem, 8vw, 4rem);
+    width: min(20rem, 72vw);
   }
 
   .about-photo.small {
-    right: -0.5rem;
-    top: 18.2rem;
-    width: 6.4rem;
+    right: clamp(1rem, 15vw, 9rem);
+    top: 20.2rem;
+    width: 7rem;
   }
 
   .about-copy h2 {
     font-size: clamp(2.7rem, 5.8vw, 4rem);
+  }
+
+  .hero-editorial h1,
+  .section-title h2,
+  .process-copy h2,
+  .more-work-hero h1,
+  .cv-hero h1,
+  .case-hero-copy h1,
+  .case-section-copy h2,
+  .case-story h2 {
+    font-size: clamp(3.1rem, 7.8vw, 5.45rem);
+  }
+
+  .passport-stamp {
+    right: 1rem;
+    top: 3.2rem;
+    width: 3.25rem;
+    opacity: 0.72;
   }
 
   .process-collage {
@@ -2285,7 +2303,7 @@ h2 {
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 900px) {
   .topbar {
     grid-template-columns: auto 1fr auto;
     gap: 0.55rem;
@@ -2338,7 +2356,7 @@ h2 {
 
   .hero-editorial {
     min-height: 0;
-    padding: 4.7rem 1rem 2.6rem;
+    padding: 4.9rem 1rem 2.6rem;
     align-content: start;
   }
 
@@ -2346,6 +2364,32 @@ h2 {
     max-width: 100%;
     font-size: clamp(3.05rem, 14vw, 4.65rem);
     line-height: 0.94;
+  }
+
+  .hero-editorial h1,
+  .more-work-hero h1,
+  .cv-hero h1,
+  .case-hero-copy h1 {
+    font-size: clamp(2.95rem, 13vw, 4.55rem);
+  }
+
+  .section-title h2,
+  .process-copy h2,
+  .about-copy h2,
+  .contact-spread h2,
+  .case-section-copy h2,
+  .case-story h2 {
+    font-size: clamp(2.55rem, 11vw, 4rem);
+    line-height: 0.96;
+  }
+
+  .legacy-copy h3,
+  .capability-grid h3,
+  .quality-ticket h3,
+  .cv-timeline h3,
+  .cv-note h3,
+  .cv-education-grid h3 {
+    overflow-wrap: anywhere;
   }
 
   .inline-portrait {
@@ -2378,9 +2422,9 @@ h2 {
   }
 
   .passport-stamp {
-    right: 1rem;
+    right: 0.8rem;
     top: 1.2rem;
-    width: 3rem;
+    width: 2.75rem;
     opacity: 0.58;
   }
 
@@ -2451,8 +2495,20 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .legacy-cover {
+    aspect-ratio: 16 / 10;
+  }
+
   .legacy-cover img {
-    min-height: 15rem;
+    min-height: 0;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .delivery-work-card .legacy-cover,
+  .valentine-work-card .legacy-cover,
+  .pet-work-card .legacy-cover {
+    background: rgba(255, 250, 240, 0.88);
   }
 
   .case-section-copy {
