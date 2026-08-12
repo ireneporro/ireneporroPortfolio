@@ -22,34 +22,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@500;600;700;800&family=Nanum+Pen+Script&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./premium.css" />
+    <link rel="stylesheet" href="./premium-resume.css" />
   </head>
-  <body>
-    <div class="paper-grain" aria-hidden="true"></div>
-
-    <header class="topbar cv-topbar">
-      <a class="stamp-logo back-logo" href="./index.html" aria-label="Back to portfolio">
-        <span aria-hidden="true">←</span>
-      </a>
-      <nav aria-label="Resume navigation">
+  <body class="premium-resume">
+    <header class="premium-nav">
+      <a class="premium-logo" href="./index.html" aria-label="Irene Porro, home"><span>I</span><span>P</span></a>
+      <nav id="premium-menu" aria-label="Resume navigation">
         <a href="./index.html">Home</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
       </nav>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <a class="nav-contact" href="./assets/CV_IrenePorroEnglish.pdf">View PDF</a>
+      <button class="premium-menu-button" type="button" aria-expanded="false" aria-controls="premium-menu" aria-label="Open navigation">
+        <span></span><span></span>
       </button>
-      <a class="tiny-cta" href="./assets/CV_IrenePorroEnglish.pdf">PDF</a>
     </header>
 
-    <main class="journal-page cv-page">
-      <section class="cv-hero">
+    <main class="resume-page">
+      <section class="cv-hero reveal">
         <div>
           <p class="eyebrow">Resume / product design</p>
           <h1>Irene Porro</h1>
@@ -76,7 +71,7 @@
         </aside>
       </section>
 
-      <section id="experience" class="cv-spread">
+      <section id="experience" class="cv-spread reveal">
         <div class="section-title">
           <span>Work Experience</span>
           <h2>Product work across SaaS, HR, CRM, internal tools and complex digital products.</h2>
@@ -168,7 +163,7 @@
         </div>
       </section>
 
-      <section id="skills" class="cv-grid-section">
+      <section id="skills" class="cv-grid-section reveal">
         <article class="cv-note">
           <p class="eyebrow">Skills</p>
           <ul>
@@ -205,7 +200,7 @@
         </article>
       </section>
 
-      <section id="education" class="cv-spread cv-education">
+      <section id="education" class="cv-spread cv-education reveal">
         <div class="section-title">
           <span>Education & Training</span>
           <h2>Formal studies, UX training and product-adjacent foundations.</h2>
@@ -228,6 +223,6 @@
         </div>
       </section>
     </main>
-    <script src="./script.js"></script>
+    <script src="./premium.js"></script>
   </body>
 </html>

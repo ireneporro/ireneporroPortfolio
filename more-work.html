@@ -22,44 +22,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@500;600;700;800&family=Nanum+Pen+Script&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./premium.css" />
+    <link rel="stylesheet" href="./premium-more-work.css" />
   </head>
-  <body>
-    <div class="paper-grain" aria-hidden="true"></div>
-
-    <header class="topbar cv-topbar">
-      <a class="stamp-logo back-logo" href="./index.html#work" aria-label="Back to selected work">
-        <span aria-hidden="true">←</span>
-      </a>
-      <nav aria-label="More work navigation">
+  <body class="premium-more-work">
+    <header class="premium-nav">
+      <a class="premium-logo" href="./index.html" aria-label="Irene Porro, home"><span>I</span><span>P</span></a>
+      <nav id="premium-menu" aria-label="More work navigation">
         <a href="./index.html">Home</a>
         <a href="./index.html#work">Selected work</a>
-        <a href="./index.html#contact">Contact</a>
+        <a href="./index.html#process">Process</a>
+        <a href="./index.html#about">About</a>
+        <a href="./cv.html">Resume</a>
       </nav>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="tiny-cta" href="./cv.html">Resume</a>
+      <a class="nav-contact" href="mailto:ireneporro6@gmail.com?subject=Portfolio%20inquiry&amp;body=Hello%20Irene%2C%0A%0AI%20want%20to%20know%20more%20about%20your%20work%20and%20availability.%0A%0AThank%20you%2C">Message me</a>
+      <button class="premium-menu-button" type="button" aria-expanded="false" aria-controls="premium-menu" aria-label="Open navigation"><span></span><span></span></button>
     </header>
 
-    <main class="journal-page more-work-page">
-      <section class="more-work-hero">
-        <p class="eyebrow">More work</p>
-        <h1>Additional case studies and visual explorations.</h1>
+    <main class="more-work-page">
+      <section class="more-work-hero reveal">
+        <p class="kicker">Project archive</p>
+        <h1>More products, contexts and visual systems.</h1>
         <p>
-          A smaller archive for projects that show range: conversion, immersive
-          storytelling, product launch strategy and visual systems outside the
-          main selected work.
+          Additional work showing range across responsive products, conversion,
+          mobile UX and immersive product storytelling.
         </p>
+        <a class="archive-back" href="./index.html#work">Back to selected work <span aria-hidden="true">↗</span></a>
       </section>
 
       <section class="more-work-grid" aria-label="Additional case studies">
-        <article class="legacy-card honeybee-work-card">
+        <article class="legacy-card honeybee-work-card reveal">
           <a
             class="legacy-card-link"
             href="./case-honeybee.html"
@@ -83,11 +78,11 @@
               A landing page redesign focused on clearer positioning,
               responsive hierarchy and conversion-oriented UI decisions.
             </p>
-            <span class="legacy-open">Open case study →</span>
+            <span class="legacy-open">Open case study <b aria-hidden="true">↗</b></span>
           </div>
         </article>
 
-        <article class="legacy-card">
+        <article class="legacy-card reveal">
           <a
             class="legacy-card-link"
             href="./case-legacy-five-shadows.html"
@@ -112,16 +107,11 @@
               responsive architecture, mobile accessibility and an immersive
               visual system.
             </p>
-            <div class="legacy-thumbs" aria-hidden="true">
-              <img src="./assets/legacy/web/page-3.jpg" alt="" />
-              <img src="./assets/legacy/web/page-5.jpg" alt="" />
-              <img src="./assets/legacy/web/page-7.jpg" alt="" />
-            </div>
-            <span class="legacy-open">Open case study →</span>
+            <span class="legacy-open">Open case study <b aria-hidden="true">↗</b></span>
           </div>
         </article>
 
-        <article class="legacy-card pet-work-card">
+        <article class="legacy-card pet-work-card reveal">
           <a
             class="legacy-card-link"
             href="./case-rastrea-patitas.html"
@@ -146,11 +136,11 @@
               alerts and helping owners reconnect through QR codes, posters and
               community-driven search.
             </p>
-            <span class="legacy-open">Open case study →</span>
+            <span class="legacy-open">Open case study <b aria-hidden="true">↗</b></span>
           </div>
         </article>
 
-        <article class="legacy-card delivery-work-card">
+        <article class="legacy-card delivery-work-card reveal">
           <a
             class="legacy-card-link"
             href="./case-deliveryya.html"
@@ -174,11 +164,11 @@
               A mobile food delivery concept focused on restaurant discovery,
               browsing, filters, item customization and a clear ordering flow.
             </p>
-            <span class="legacy-open">Open case study →</span>
+            <span class="legacy-open">Open case study <b aria-hidden="true">↗</b></span>
           </div>
         </article>
 
-        <article class="legacy-card valentine-work-card">
+        <article class="legacy-card valentine-work-card reveal">
           <a
             class="legacy-card-link"
             href="./case-my-valentine.html"
@@ -202,11 +192,11 @@
               A dating app concept exploring safer digital connection, privacy
               concerns, onboarding, user flows and a warm mobile visual system.
             </p>
-            <span class="legacy-open">Open case study →</span>
+            <span class="legacy-open">Open case study <b aria-hidden="true">↗</b></span>
           </div>
         </article>
       </section>
     </main>
-    <script src="./script.js"></script>
+    <script src="./premium.js"></script>
   </body>
 </html>
