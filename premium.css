@@ -109,7 +109,7 @@ h1 { margin: 0; max-width: 800px; font-family: var(--serif); font-size: clamp(64
 .button { display: inline-flex; align-items: center; justify-content: space-between; min-width: 180px; border: 1px solid rgba(255,255,255,.18); border-radius: 7px; padding: 15px 18px; font-size: 14px; font-weight: 700; transition: transform .2s ease, background .2s ease; }
 .button:hover { transform: translateY(-2px); }
 .button-acid { border-color: var(--acid); background: var(--acid); color: var(--ink); }
-.button-glass { background: rgba(255,255,255,.08); backdrop-filter: blur(14px); }
+.button-glass { justify-content: center; background: rgba(255,255,255,.08); backdrop-filter: blur(14px); }
 .hero-credentials { align-self: end; min-width: 0; border-top: 0; }
 .credential-person { display: flex; align-items: center; gap: 18px; padding: 0 0 24px; }
 .credential-person img { width: 82px; height: 82px; border: 1px solid rgba(255,255,255,.4); border-radius: 50%; object-fit: cover; }
