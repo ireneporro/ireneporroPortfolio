@@ -22,6 +22,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./premium.css?v=4" />
+    <link rel="stylesheet" href="./portfolio-devices.css" />
   </head>
   <body>
     <header class="premium-nav">
@@ -55,21 +56,28 @@
           </div>
         </div>
 
-        <aside class="hero-credentials reveal" aria-label="Professional profile">
-          <div class="credential-person">
-            <img src="./assets/irene-portrait-professional-v6.jpg" alt="Irene Porro" width="1200" height="1200" />
-            <div><strong>Irene Porro</strong><span>Product design · Interaction · Systems</span></div>
+        <aside class="hero-work reveal" aria-label="Meet Irene and explore her work" aria-roledescription="carousel">
+          <div class="studio-laptop">
+            <img class="studio-hardware" src="./assets/hero/laptop-studio-v1.png" alt="" width="1536" height="1024" fetchpriority="high" />
+            <div class="studio-display">
+              <section class="studio-slide studio-intro" aria-label="1 of 2: Meet Irene" data-title="What I have been doing" data-description="5+ years across product, interaction and interface design.">
+                <div class="studio-intro-copy"><h2>Irene<br><em>Porro.</em></h2><p class="intro-role">Senior Product Designer</p></div>
+                <div class="studio-portrait"><img src="./assets/irene-portrait-professional-v6.jpg" alt="Irene Porro" width="1200" height="1200" fetchpriority="high" /></div>
+              </section>
+              <section class="studio-slide studio-collage" aria-label="2 of 2: Product design across B2B, mobile and interactive websites" data-title="What I have been doing" data-description="Meralis, WattlePay and The Legacy of the Five Shadows." hidden>
+                <div class="collage-heading"><span>PRODUCT DESIGN</span><span>Across different experiences</span></div>
+                <a class="collage-shot collage-enterprise" href="./case-meralis.html" aria-label="Explore Meralis: B2B workforce platform"><img src="./assets/meralis/dashboard-hq.png" alt="Meralis workforce dashboard" width="2271" height="1323" /><span class="collage-tag">Meralis / B2B platform ↗</span></a>
+                <a class="collage-shot collage-mobile" href="./case-wattlepay.html" aria-label="Explore WattlePay: mobile fintech"><div class="wallet-crop"><img src="./assets/wallet/cover.png" alt="WattlePay wallet home screen with balance, cards and recent activity" width="780" height="435" /></div><span class="collage-tag">WattlePay / Mobile ↗</span></a>
+                <a class="collage-shot collage-interactive" href="./case-legacy-five-shadows.html" aria-label="Explore The Legacy of the Five Shadows: game website"><div class="legacy-crop"><img src="./assets/legacy/web/page-5.jpg" alt="The Legacy of the Five Shadows game landing page" width="804" height="1400" /></div><span class="collage-tag">Five Shadows / Game website ↗</span></a>
+              </section>
+            </div>
           </div>
-          <dl>
-            <div><dt>Experience</dt><dd>5+ years</dd></div>
-            <div><dt>Product focus</dt><dd>B2B SaaS &amp; Platforms</dd></div>
-            <div><dt>Core practice</dt><dd>Product &amp; Interaction Design</dd></div>
-            <div><dt>Product scope</dt><dd>Web &amp; Mobile Applications</dd></div>
-          </dl>
-          <p>I work closely with product and engineering to turn evolving requirements into product rules, interaction patterns and interfaces that can keep growing after launch.</p>
+          <div class="studio-caption">
+            <div><p class="studio-project-title">What I have been doing</p><p class="studio-project-description">5+ years across product, interaction and interface design.</p></div>
+            <div class="studio-dots" aria-label="Choose introduction or work"><button type="button" data-slide="0" aria-label="Show Irene’s introduction" aria-pressed="true"><span aria-hidden="true"></span></button><button type="button" data-slide="1" aria-label="Show collage of three projects" aria-pressed="false"><span aria-hidden="true"></span></button></div>
+          </div>
         </aside>
 
-        <div class="hero-index" aria-hidden="true">Designing clarity.</div>
       </section>
 
       <section id="work" class="section section-work">
@@ -83,30 +91,19 @@
 
         <article class="featured-project reveal">
           <a class="project-link" href="./case-meralis.html" aria-label="Open Meralis case study"></a>
-          <div class="meralis-cover" aria-label="Meralis workforce operations product preview">
-            <div class="meralis-window">
-              <div class="window-head"><span>Meralis</span><small>Workforce operations</small></div>
-              <div class="window-tabs"><span>People</span><span>Payroll</span><span>Settings</span></div>
-              <div class="window-stats">
-                <div><small>Active roles</small><strong>8</strong></div>
-                <div><small>Workflow maps</small><strong>30</strong></div>
-                <div><small>Components</small><strong>42</strong></div>
-              </div>
-              <div class="window-preview">
-                <div><b>Payroll</b><i></i><i></i><i></i></div>
-                <div><b>Catalogs</b><i></i><i></i><i></i></div>
-                <div><b>Permissions</b><i></i><i></i><i></i></div>
-              </div>
-            </div>
+          <div class="meralis-cover meralis-cover-new">
+            <div class="cover-wordmark"><span>M</span> Meralis <small>Workforce operating system</small></div>
+            <div class="cover-laptop"><div class="cover-laptop-screen"><img src="./assets/meralis/dashboard-hq.png" alt="Meralis operations dashboard in a laptop mockup" width="2271" height="1323" loading="lazy" /></div><div class="cover-laptop-base"></div></div>
+            <p>Complex operations.<br><em>One shared language.</em></p>
           </div>
           <div class="featured-copy">
             <div class="project-number">01 / Featured case</div>
             <div class="tag-row"><span>Enterprise SaaS</span><span>Workforce Ops</span><span>Product Strategy</span></div>
             <h3>Meralis</h3>
-            <p>Four years of turning fragmented HR, payroll and staffing requirements into one operational model that could keep growing without becoming a collection of disconnected screens.</p>
+            <p>Connecting HR, payroll and staffing in one platform. A closer look at the decisions behind role-based access, safer banking approvals and assignment-aware signatures.</p>
             <dl class="project-details">
               <div><dt>Role</dt><dd>Sole Product Designer</dd></div>
-              <div><dt>Scope</dt><dd>8 roles, 30 workflow maps</dd></div>
+              <div><dt>Scope</dt><dd>Multi-role platform, 30 workflow maps</dd></div>
               <div><dt>System</dt><dd>42 components, 149 CSS tokens</dd></div>
               <div><dt>Outcome</dt><dd>3 legacy platforms consolidated</dd></div>
             </dl>
@@ -193,5 +190,6 @@
     </main>
 
     <script src="./premium.js?v=4"></script>
+    <script src="./portfolio-devices.js"></script>
   </body>
 </html>
