@@ -26,27 +26,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./premium-case.css" />
+    <link rel="stylesheet" href="./premium-case.css?v=2" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
 
-    <header class="topbar cv-topbar">
-      <a class="stamp-logo back-logo" href="./more-work.html" aria-label="Back to more work">
-        <span aria-hidden="true">←</span>
-      </a>
-      <nav aria-label="Case study navigation">
-        <a href="./index.html">Home</a>
-        <a href="./more-work.html">More work</a>
-        <a href="#overview">Overview</a>
-        <a href="#flow">Flow</a>
-      </nav>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="tiny-cta" href="./index.html#contact">Contact</a>
+    <header class="case-nav">
+      <a class="back" href="./more-work.html">← <span>Irene Porro / More work</span></a>
+      <nav aria-label="Case study navigation"><a href="#overview">Overview</a><a href="#flow">Decisions</a><a href="#outcome">Outcome</a></nav>
+      <a class="contact" href="./index.html#contact">Let’s talk ↗</a>
     </header>
 
     <main class="journal-page case-page delivery-case">
@@ -99,19 +87,19 @@
       <section class="case-story">
         <div>
           <p class="eyebrow">Story</p>
-          <h2>Helping users move from craving to order with less hesitation.</h2>
+          <h2>The problem was not finding food. It was narrowing the choice.</h2>
         </div>
         <div class="case-story-copy">
           <p>
-            The concept focuses on the everyday food-ordering journey: users
-            arrive with a broad intention, narrow their options through food
-            categories and filters, compare restaurants, customize an item and
-            continue toward checkout.
+            The initial research framed the core tension as decision overload:
+            users arrive with a broad craving but still need to compare cuisine,
+            delivery conditions, offers and item options before they can act.
           </p>
           <p>
-            The design prioritizes recognizable mobile patterns, strong visual
-            food cues and clear hierarchy so the interface feels direct,
-            practical and easy to scan.
+            I organized the experience around progressive decisions. Categories
+            establish direction, filters reduce the set, restaurant cards expose
+            comparison criteria and item details delay customization until the
+            user has committed to a dish.
           </p>
         </div>
       </section>
@@ -132,19 +120,35 @@
           </ul>
         </div>
         <figure class="case-shot wide">
-          <img src="./assets/deliveryya/web/cover.jpg" alt="DeliveryYa app screens and food delivery UI" />
+          <img src="./assets/deliveryya/web/product-flow.jpg" alt="DeliveryYa research findings, user flow and early mobile wireframes" />
         </figure>
       </section>
 
-      <section class="case-section impact">
+      <section class="case-section case-section-vertical">
         <div class="case-section-copy">
-          <p class="eyebrow">02 / UI Direction</p>
-          <h2>A bright consumer interface kept secondary in the portfolio.</h2>
+          <p class="eyebrow">02 / Interface evidence</p>
+          <h2>Make the next decision visible on every screen.</h2>
           <p>
-            This project adds range to the archive without competing with the
-            main B2B and systems-focused case studies. It shows mobile commerce
-            thinking, visual polish and familiarity with consumer product
-            patterns.
+            The final screen set connects browsing, filtering, product detail,
+            customization and order preparation. The layouts use familiar mobile
+            commerce patterns so the product does not ask users to learn a new
+            interaction model during a time-sensitive task.
+          </p>
+        </div>
+        <figure class="case-shot wide">
+          <img src="./assets/deliveryya/web/final-ui.jpg" alt="DeliveryYa final mobile screens for browsing, filters, item details and ordering" />
+        </figure>
+      </section>
+
+      <section class="case-section impact" id="outcome">
+        <div class="case-section-copy">
+          <p class="eyebrow">03 / Outcome</p>
+          <h2>A coherent mobile concept from broad intent to prepared order.</h2>
+          <p>
+            The outcome is a connected product direction rather than a set of
+            isolated food-app screens. The case demonstrates how information
+            hierarchy and sequencing can reduce hesitation without claiming a
+            measured conversion result that was not tested.
           </p>
         </div>
       </section>
@@ -154,7 +158,6 @@
         <a href="./assets/deliveryya/deliveryya-compressed.pdf" target="_blank" rel="noopener">View PDF</a>
       </section>
     </main>
-    <script src="./script.js"></script>
-    <script src="./premium-case.js"></script>
+    <script src="./premium-case.js?v=2"></script>
   </body>
 </html>

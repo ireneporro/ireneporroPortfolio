@@ -26,28 +26,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./premium-case.css" />
+    <link rel="stylesheet" href="./premium-case.css?v=2" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
 
-    <header class="topbar cv-topbar">
-      <a class="stamp-logo back-logo" href="./more-work.html" aria-label="Back to more work">
-        <span aria-hidden="true">←</span>
-      </a>
-      <nav aria-label="Case study navigation">
-        <a href="./index.html">Home</a>
-        <a href="./more-work.html">More work</a>
-        <a href="#research">Research</a>
-        <a href="#mvp">MVP</a>
-        <a href="#system">System</a>
-      </nav>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="tiny-cta" href="./index.html#contact">Contact</a>
+    <header class="case-nav">
+      <a class="back" href="./more-work.html">← <span>Irene Porro / More work</span></a>
+      <nav aria-label="Case study navigation"><a href="#overview">Overview</a><a href="#research">Context</a><a href="#mvp">MVP</a><a href="#system">System</a><a href="#outcome">Outcome</a></nav>
+      <a class="contact" href="./index.html#contact">Let’s talk ↗</a>
     </header>
 
     <main class="journal-page case-page pet-case">
@@ -172,7 +159,7 @@
         </div>
       </section>
 
-      <section class="case-section impact case-section-vertical">
+      <section class="case-section impact case-section-vertical" id="mvp">
         <div class="case-section-copy">
           <p class="eyebrow">03 / Users + MVP</p>
           <h2>Defining the smallest useful product for a high-stress moment.</h2>
@@ -234,8 +221,8 @@
         </div>
         <figure class="case-shot wide pet-wireframes">
           <img
-            src="./assets/rastrea-patitas/web/high-fidelity.jpg"
-            alt="Rastrea Patitas high fidelity desktop and mobile wireframes"
+            src="./assets/rastrea-patitas/web/search-and-alerts.jpg"
+            alt="Rastrea Patitas search, alert creation and responsive interface decisions"
           />
         </figure>
       </section>
@@ -258,15 +245,23 @@
             <li>QR posters bridge online reports with offline neighborhood search.</li>
           </ul>
         </div>
-        <figure class="case-shot wide pet-wireframes">
-          <img
-            src="./assets/rastrea-patitas/web/mobile-showcase.jpg"
-            alt="Rastrea Patitas mobile interface showcase with pet detail and search screens"
-          />
-        </figure>
+        <div class="case-image-grid two">
+          <figure class="case-shot wide pet-wireframes">
+            <img
+              src="./assets/rastrea-patitas/web/mobile-showcase.jpg"
+              alt="Rastrea Patitas mobile interface showcase with pet detail and search screens"
+            />
+          </figure>
+          <figure class="case-shot wide pet-wireframes">
+            <img
+              src="./assets/rastrea-patitas/web/profile-and-poster.jpg"
+              alt="Rastrea Patitas pet profiles, QR poster and case management screens"
+            />
+          </figure>
+        </div>
       </section>
 
-      <section class="case-section impact case-section-vertical">
+      <section class="case-section impact case-section-vertical" id="outcome">
         <div class="case-section-copy">
           <p class="eyebrow">07 / Outcome</p>
           <h2>A responsive MVP that connects digital alerts with real-world search.</h2>
@@ -283,7 +278,6 @@
         </div>
       </section>
     </main>
-    <script src="./script.js"></script>
-    <script src="./premium-case.js"></script>
+    <script src="./premium-case.js?v=2"></script>
   </body>
 </html>

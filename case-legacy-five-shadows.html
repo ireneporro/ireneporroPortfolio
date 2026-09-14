@@ -26,27 +26,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./premium-case.css" />
+    <link rel="stylesheet" href="./premium-case.css?v=2" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
 
-    <header class="topbar cv-topbar">
-      <a class="stamp-logo back-logo" href="./more-work.html" aria-label="Back to more work">
-        <span aria-hidden="true">←</span>
-      </a>
-      <nav aria-label="Case study navigation">
-        <a href="./index.html">Home</a>
-        <a href="./more-work.html">More work</a>
-        <a href="#strategy">Strategy</a>
-        <a href="#mobile">Mobile</a>
-      </nav>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="tiny-cta" href="./index.html#contact">Contact</a>
+    <header class="case-nav">
+      <a class="back" href="./index.html#work">← <span>Irene Porro / Selected work</span></a>
+      <nav aria-label="Case study navigation"><a href="#overview">Overview</a><a href="#strategy">Decisions</a><a href="#mobile">Responsive</a><a href="#outcome">Outcome</a></nav>
+      <a class="contact" href="./index.html#contact">Let’s talk ↗</a>
     </header>
 
     <main class="journal-page case-page legacy-case">
@@ -188,7 +176,7 @@
         </figure>
       </section>
 
-      <section class="case-section impact case-section-vertical legacy-final">
+      <section class="case-section impact case-section-vertical legacy-final" id="outcome">
         <div class="case-section-copy">
           <p class="eyebrow">04 / Prototype Direction</p>
           <h2>Two experiences for two different player intentions.</h2>
@@ -204,7 +192,6 @@
         </div>
       </section>
     </main>
-    <script src="./script.js"></script>
-    <script src="./premium-case.js"></script>
+    <script src="./premium-case.js?v=2"></script>
   </body>
 </html>

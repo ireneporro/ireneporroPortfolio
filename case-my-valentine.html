@@ -26,27 +26,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./premium-case.css" />
+    <link rel="stylesheet" href="./premium-case.css?v=2" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
 
-    <header class="topbar cv-topbar">
-      <a class="stamp-logo back-logo" href="./more-work.html" aria-label="Back to more work">
-        <span aria-hidden="true">←</span>
-      </a>
-      <nav aria-label="Case study navigation">
-        <a href="./index.html">Home</a>
-        <a href="./more-work.html">More work</a>
-        <a href="#overview">Overview</a>
-        <a href="#privacy">Privacy</a>
-      </nav>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="tiny-cta" href="./index.html#contact">Contact</a>
+    <header class="case-nav">
+      <a class="back" href="./more-work.html">← <span>Irene Porro / More work</span></a>
+      <nav aria-label="Case study navigation"><a href="#overview">Overview</a><a href="#privacy">Decisions</a><a href="#outcome">Outcome</a></nav>
+      <a class="contact" href="./index.html#contact">Let’s talk ↗</a>
     </header>
 
     <main class="journal-page case-page valentine-case">
@@ -100,18 +88,19 @@
       <section class="case-story">
         <div>
           <p class="eyebrow">Story</p>
-          <h2>Trust becomes part of the interface, not a sentence in the copy.</h2>
+          <h2>Trust had to shape the flow before it shaped the visual identity.</h2>
         </div>
         <div class="case-story-copy">
           <p>
-            The project starts from a common tension in dating apps: users want
-            connection, but they also worry about how their data, images and
-            interactions are handled.
+            The project started from the risks around digital dating: uncertain
+            identity, unwanted contact and limited control over personal
+            information. Those concerns became product requirements rather than
+            a generic promise of safety.
           </p>
           <p>
-            The design process used research, benchmarking, empathy mapping,
-            journey mapping, user personas and flow definition to shape an app
-            experience that feels more controlled and less exposed.
+            I structured the journey so onboarding, profile setup and matching
+            establish expectations first. Privacy and reporting controls remain
+            available in the flow instead of being hidden in policy copy.
           </p>
         </div>
       </section>
@@ -132,19 +121,50 @@
           </ul>
         </div>
         <figure class="case-shot wide">
-          <img src="./assets/my-valentine/web/cover.jpg" alt="My Valentine login and brand concept screens" />
+          <img src="./assets/my-valentine/web/product-flow.jpg" alt="My Valentine onboarding, profile, matching and messaging flows" />
         </figure>
       </section>
 
-      <section class="case-section impact">
+      <section class="case-section">
         <div class="case-section-copy">
-          <p class="eyebrow">02 / Portfolio Role</p>
-          <h2>A lighter concept showing research range and mobile product sensitivity.</h2>
+          <p class="eyebrow">02 / Visual system</p>
+          <h2>A warm identity with explicit interaction states.</h2>
           <p>
-            This project belongs in More Work because it shows process,
-            emotional product thinking and mobile UI exploration, while the main
-            portfolio remains focused on systems, SaaS and complex product
-            interfaces.
+            The UI kit defines typography, color, controls, navigation and match
+            actions as one system. The expressive illustrations carry the brand;
+            the functional controls stay direct and recognizable.
+          </p>
+        </div>
+        <figure class="case-shot wide">
+          <img src="./assets/my-valentine/web/visual-system.jpg" alt="My Valentine color, typography, controls and navigation system" />
+        </figure>
+      </section>
+
+      <section class="case-section case-section-vertical">
+        <div class="case-section-copy">
+          <p class="eyebrow">03 / Interface evidence</p>
+          <h2>Show the relationship between the screens, not only the polish.</h2>
+          <p>
+            The final evidence connects account creation, profile browsing,
+            matching, conversation and premium states. Presenting the screens as
+            a sequence makes the product logic easier to assess than repeating a
+            single cover image.
+          </p>
+        </div>
+        <figure class="case-shot wide">
+          <img src="./assets/my-valentine/web/final-ui.jpg" alt="My Valentine final mobile UI and connected dating app screens" />
+        </figure>
+      </section>
+
+      <section class="case-section impact" id="outcome">
+        <div class="case-section-copy">
+          <p class="eyebrow">04 / Outcome</p>
+          <h2>A mobile concept where safety decisions are visible in the product.</h2>
+          <p>
+            The case remains a concept, so it does not claim validated safety or
+            behavioral outcomes. Its evidence is the translation of research
+            themes into a connected flow, clear controls and a coherent mobile
+            interface system.
           </p>
         </div>
       </section>
@@ -154,7 +174,6 @@
         <a href="./assets/my-valentine/my-valentine-compressed.pdf" target="_blank" rel="noopener">View PDF</a>
       </section>
     </main>
-    <script src="./script.js"></script>
-    <script src="./premium-case.js"></script>
+    <script src="./premium-case.js?v=2"></script>
   </body>
 </html>
