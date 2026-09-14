@@ -1,6 +1,13 @@
 const menuButton = document.querySelector(".premium-menu-button");
 const menu = document.querySelector("#premium-menu");
 
+const closeMenu = ({ restoreFocus = false } = {}) => {
+  menu?.classList.remove("open");
+  menuButton?.setAttribute("aria-expanded", "false");
+  menuButton?.setAttribute("aria-label", "Open navigation");
+  if (restoreFocus) menuButton?.focus();
+};
+
 menuButton?.addEventListener("click", () => {
   const isOpen = menuButton.getAttribute("aria-expanded") === "true";
   menuButton.setAttribute("aria-expanded", String(!isOpen));
@@ -10,10 +17,14 @@ menuButton?.addEventListener("click", () => {
 
 menu?.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
-    menu.classList.remove("open");
-    menuButton?.setAttribute("aria-expanded", "false");
-    menuButton?.setAttribute("aria-label", "Open navigation");
+    closeMenu();
   });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && menu?.classList.contains("open")) {
+    closeMenu({ restoreFocus: true });
+  }
 });
 
 const revealItems = document.querySelectorAll(".reveal");

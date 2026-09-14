@@ -81,7 +81,7 @@ img { display: block; max-width: 100%; }
 .case-page figcaption span:last-child { color: var(--case-accent); white-space: nowrap; font-weight: 650; }
 
 .case-page .case-summary { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-bottom: 1px solid var(--case-line); }
-.case-page .case-summary article { min-height: 180px; padding: 34px 30px 34px 0; border-right: 1px solid var(--case-line); }
+.case-page .case-summary article { min-height: 180px; padding: 34px 30px 34px 0; border-left: 0; border-right: 1px solid var(--case-line); }
 .case-page .case-summary article + article { padding-left: 30px; }
 .case-page .case-summary article:last-child { border-right: 0; }
 .case-page .case-summary span { display: block; margin-bottom: 14px; color: var(--case-accent); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
@@ -102,7 +102,7 @@ img { display: block; max-width: 100%; }
 .case-page .case-note-list { display: grid; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
 .case-page .case-note-list li { position: relative; padding-left: 17px; color: var(--case-body); font-size: 13px; font-weight: 600; line-height: 1.55; }
 .case-page .case-note-list li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--case-accent); }
-.case-page .case-section.impact { margin-inline: calc(50% - 50vw); padding-inline: max(40px,calc((100vw - 1200px)/2)); border-color: rgba(var(--case-accent-rgb),.18); background: linear-gradient(135deg,rgba(var(--case-accent-rgb),.10),rgba(var(--case-accent-rgb),.025)); }
+.case-page .case-section.impact { margin-inline: 0; padding-inline: clamp(20px,4vw,48px); border-color: rgba(var(--case-accent-rgb),.18); background: linear-gradient(135deg,rgba(var(--case-accent-rgb),.10),rgba(var(--case-accent-rgb),.025)); }
 
 .research-stat-grid,
 .foundation-stack { display: grid; gap: 14px; }
@@ -135,6 +135,13 @@ img { display: block; max-width: 100%; }
 /* Product branding stays on the product; the editorial system stays consistent. */
 body:has(.design-system-case) { --case-accent:#246a9f; --case-accent-rgb:36,106,159; --case-soft:#edf6fc; }
 body:has(.wallet-case) { --case-accent:#587414; --case-accent-rgb:88,116,20; --case-soft:#f1f6df; }
+.case-page.wallet-case .case-hero-copy h1,
+.case-page.wallet-case .case-section.impact .case-section-copy h2 { color: var(--case-ink); }
+.case-page.wallet-case .case-hero-copy > p:not(.eyebrow),
+.case-page.wallet-case .case-section.impact .case-section-copy p,
+.case-page.wallet-case .case-section.impact .case-note-list li { color: var(--case-body); }
+.case-page.wallet-case .case-hero .eyebrow,
+.case-page.wallet-case .case-section.impact .eyebrow { color: var(--case-accent); }
 body:has(.honeybee-case) { --case-accent:#087c70; --case-accent-rgb:8,124,112; --case-soft:#e8f8f5; }
 body:has(.legacy-case) { --case-accent:#9a6f20; --case-accent-rgb:154,111,32; --case-soft:#f5efe4; }
 body:has(.pet-case) { --case-accent:#6246a8; --case-accent-rgb:98,70,168; --case-soft:#f1edfb; }
@@ -160,7 +167,7 @@ body:has(.valentine-case) { --case-accent:#d83053; --case-accent-rgb:216,48,83; 
   .case-page .case-summary article:last-child { border-bottom: 0; }
   .case-page .case-story { grid-template-columns: 1fr; gap: 24px; padding: 64px 0 46px; }
   .case-page .case-section { gap: 28px; padding: 54px 0; }
-  .case-page .case-section.impact { padding-inline: 20px; }
+  .case-page .case-section.impact { margin-inline: 0; padding-inline: 20px; }
   .case-page .case-image-grid,
   .foundations-grid { grid-template-columns: 1fr; }
   .case-page .case-shot { padding: 10px; }
