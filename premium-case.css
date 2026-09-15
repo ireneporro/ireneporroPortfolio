@@ -143,6 +143,13 @@ body:has(.wallet-case) { --case-accent:#587414; --case-accent-rgb:88,116,20; --c
 .case-page.wallet-case .case-hero .eyebrow,
 .case-page.wallet-case .case-section.impact .eyebrow { color: var(--case-accent); }
 body:has(.honeybee-case) { --case-accent:#087c70; --case-accent-rgb:8,124,112; --case-soft:#e8f8f5; }
+.case-page.honeybee-case .case-hero-copy h1,
+.case-page.honeybee-case .case-section.impact .case-section-copy h2 { color: var(--case-ink); }
+.case-page.honeybee-case .case-hero-copy > p:not(.eyebrow),
+.case-page.honeybee-case .case-section.impact .case-section-copy p,
+.case-page.honeybee-case .case-section.impact .case-note-list li { color: var(--case-body); }
+.case-page.honeybee-case .case-hero .eyebrow,
+.case-page.honeybee-case .case-section.impact .eyebrow { color: var(--case-accent); }
 body:has(.legacy-case) { --case-accent:#9a6f20; --case-accent-rgb:154,111,32; --case-soft:#f5efe4; }
 body:has(.pet-case) { --case-accent:#6246a8; --case-accent-rgb:98,70,168; --case-soft:#f1edfb; }
 body:has(.delivery-case) { --case-accent:#16883d; --case-accent-rgb:22,136,61; --case-soft:#e9f7ee; }
