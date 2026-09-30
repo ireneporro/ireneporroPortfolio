@@ -1,7 +1,7 @@
 :root {
   --case-ink: #0c0e14;
   --case-body: #3c4253;
-  --case-muted: #6b7280;
+  --case-muted: #5c6370;
   --case-line: #e8eaed;
   --case-accent: #7029bd;
   --case-accent-rgb: 112, 41, 189;
@@ -133,8 +133,8 @@ img { display: block; max-width: 100%; }
 .case-dialog p { margin: 12px 0 2px; color: var(--case-body); text-align: center; font-size: 11px; }
 
 /* Product branding stays on the product; the editorial system stays consistent. */
-body:has(.design-system-case) { --case-accent:#246a9f; --case-accent-rgb:36,106,159; --case-soft:#edf6fc; }
-body:has(.wallet-case) { --case-accent:#587414; --case-accent-rgb:88,116,20; --case-soft:#f1f6df; }
+body:has(.design-system-case) { --case-accent:#1f5f91; --case-accent-rgb:31,95,145; --case-soft:#edf6fc; }
+body:has(.wallet-case) { --case-accent:#4d6512; --case-accent-rgb:77,101,18; --case-soft:#f1f6df; }
 .case-page.wallet-case .case-hero-copy h1,
 .case-page.wallet-case .case-section.impact .case-section-copy h2 { color: var(--case-ink); }
 .case-page.wallet-case .case-hero-copy > p:not(.eyebrow),
@@ -142,7 +142,7 @@ body:has(.wallet-case) { --case-accent:#587414; --case-accent-rgb:88,116,20; --c
 .case-page.wallet-case .case-section.impact .case-note-list li { color: var(--case-body); }
 .case-page.wallet-case .case-hero .eyebrow,
 .case-page.wallet-case .case-section.impact .eyebrow { color: var(--case-accent); }
-body:has(.honeybee-case) { --case-accent:#087c70; --case-accent-rgb:8,124,112; --case-soft:#e8f8f5; }
+body:has(.honeybee-case) { --case-accent:#067166; --case-accent-rgb:6,113,102; --case-soft:#e8f8f5; }
 .case-page.honeybee-case .case-hero-copy h1,
 .case-page.honeybee-case .case-section.impact .case-section-copy h2 { color: var(--case-ink); }
 .case-page.honeybee-case .case-hero-copy > p:not(.eyebrow),
@@ -150,10 +150,17 @@ body:has(.honeybee-case) { --case-accent:#087c70; --case-accent-rgb:8,124,112; -
 .case-page.honeybee-case .case-section.impact .case-note-list li { color: var(--case-body); }
 .case-page.honeybee-case .case-hero .eyebrow,
 .case-page.honeybee-case .case-section.impact .eyebrow { color: var(--case-accent); }
-body:has(.legacy-case) { --case-accent:#9a6f20; --case-accent-rgb:154,111,32; --case-soft:#f5efe4; }
+body:has(.legacy-case) { --case-accent:#775212; --case-accent-rgb:119,82,18; --case-soft:#f5efe4; }
+.case-page.legacy-case .case-hero-copy h1,
+.case-page.legacy-case .case-section.impact .case-section-copy h2 { color: var(--case-ink); }
+.case-page.legacy-case .case-hero-copy > p:not(.eyebrow),
+.case-page.legacy-case .case-section.impact .case-section-copy p,
+.case-page.legacy-case .case-section.impact .case-note-list li { color: var(--case-body); }
+.case-page.legacy-case .case-hero .eyebrow,
+.case-page.legacy-case .case-section.impact .eyebrow { color: var(--case-accent); }
 body:has(.pet-case) { --case-accent:#6246a8; --case-accent-rgb:98,70,168; --case-soft:#f1edfb; }
-body:has(.delivery-case) { --case-accent:#16883d; --case-accent-rgb:22,136,61; --case-soft:#e9f7ee; }
-body:has(.valentine-case) { --case-accent:#d83053; --case-accent-rgb:216,48,83; --case-soft:#fcedf1; }
+body:has(.delivery-case) { --case-accent:#0f7032; --case-accent-rgb:15,112,50; --case-soft:#e9f7ee; }
+body:has(.valentine-case) { --case-accent:#b72243; --case-accent-rgb:183,34,67; --case-soft:#fcedf1; }
 
 @media (max-width: 900px) {
   .case-page .case-hero { grid-template-columns: 1fr; }
