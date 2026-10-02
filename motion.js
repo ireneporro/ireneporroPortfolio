@@ -82,6 +82,18 @@
   });
   (document.fonts?.ready || Promise.resolve()).then(startHero);
 
+  /* ---------- Focus pills ---------- */
+  const pills = document.querySelector(".hero-pills");
+  pills?.querySelectorAll("li").forEach((li, i) => {
+    li.style.setProperty("--pi", i);
+    li.addEventListener("pointermove", (event) => {
+      const box = li.getBoundingClientRect();
+      li.style.setProperty("--mx", `${event.clientX - box.left}px`);
+      li.style.setProperty("--my", `${event.clientY - box.top}px`);
+    });
+  });
+  setTimeout(() => pills?.classList.add("settled"), 3200);
+
   /* ---------- Staggered reveals ---------- */
   [".project-grid", ".ai-assisted-items", ".standards-list", ".contact-links"].forEach((selector) => {
     document.querySelectorAll(`${selector} > .reveal, ${selector}.reveal > *`).forEach((item, i) => {
