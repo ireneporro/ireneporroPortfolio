@@ -28,6 +28,7 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./premium-case.css?v=7" />
+    <link rel="stylesheet" href="./wattlepay-live.css" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
@@ -211,6 +212,27 @@
             <li>Clipboard actions, generated transaction IDs and timestamped activity.</li>
           </ul>
         </div>
+        <div class="wp-live" aria-labelledby="wp-live-title">
+          <div class="wp-stage">
+            <div class="wp-phone">
+              <div class="wp-screen">
+                <iframe src="./wattlepay-prototype/index.html" title="WattlePay interactive prototype" loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="wp-live-copy">
+            <p class="wp-live-kicker"><span aria-hidden="true"></span>Live prototype</p>
+            <h3 id="wp-live-title">Don’t take my word for it. Try it.</h3>
+            <p>This is the working React prototype, running right here. Balances, cards, goals and activity share one state, so every action updates the rest of the app.</p>
+            <ul>
+              <li><b>Transfer</b> money to a contact, then check the new balance and activity on Home.</li>
+              <li><b>Cards</b>: tap the stack to move between cards.</li>
+              <li><b>Save</b>: add to a goal and watch its progress ring update.</li>
+              <li><b>Convert</b> between currencies from Home.</li>
+            </ul>
+            <a class="wp-live-open" href="./wattlepay-prototype/index.html" target="_blank" rel="noopener">Open full screen <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
         <figure class="case-shot wide wallet-board">
           <img src="./assets/wallet/prototype-evidence.png" alt="WattlePay interactive screens and technical prototype evidence" width="982" height="980" loading="lazy" decoding="async" />
         </figure>
@@ -223,5 +245,14 @@
       </section>
     </main>
     <script src="./premium-case.js?v=2"></script>
+    <script>
+      (() => {
+        const screen = document.querySelector(".wp-screen");
+        if (!screen) return;
+        const fit = () => screen.style.setProperty("--wp-scale", screen.clientWidth / 390);
+        new ResizeObserver(fit).observe(screen);
+        fit();
+      })();
+    </script>
   </body>
 </html>
