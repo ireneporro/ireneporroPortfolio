@@ -27,6 +27,8 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./premium-case.css?v=7" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Montserrat:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="./legacy-case.css" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
@@ -55,12 +57,9 @@
             <span>Visual Direction</span>
           </div>
         </div>
-        <figure class="case-hero-visual legacy-cover-shot">
-          <img
-            src="./assets/legacy/web/cover-hq.jpg"
-            alt="The Legacy of the Five Shadows game UI case study cover"
-          />
-        </figure>
+        <div class="lg-hero">
+          <img src="./assets/legacy/screens/cover.webp" alt="El Legado de las 5 Sombras key art: the five heroines in front of the castle, flanked by dragons" width="1200" height="813" fetchpriority="high" decoding="async" />
+        </div>
       </section>
 
       <section class="case-summary">
@@ -107,7 +106,7 @@
         </div>
       </section>
 
-      <section id="strategy" class="case-section">
+      <section id="strategy" class="case-section case-section-vertical">
         <div class="case-section-copy">
           <p class="eyebrow">01 / Visual Direction</p>
           <h2>Turn the genre into interface rules.</h2>
@@ -122,12 +121,38 @@
             <li>Kept UI components readable inside a high-atmosphere brand world.</li>
           </ul>
         </div>
-        <figure class="case-shot wide legacy-shot">
-          <img
-            src="./assets/legacy/web/page-3.jpg"
-            alt="Visual direction and strategy for the dark fantasy RPG interface"
-          />
-        </figure>
+        <div class="lg-system">
+          <div class="lg-type">
+            <span class="lg-logo">El Legado de las<br />5 Sombras</span>
+            <small>Metal Mania · display, gold gradient #D0BC6C → #606060</small>
+            <p class="lg-type-body"><b>Lidera a un equipo de cinco heroínas únicas.</b> Montserrat carries every functional moment: offers, forms, requirements and navigation.</p>
+            <small>Montserrat · 400 / 600 / 700 · UI and body</small>
+          </div>
+          <div class="lg-palette">
+            <span style="--c:#B53333"><i></i><b>Acento</b><code>#B53333</code><em>Action · urgency · CTA</em></span>
+            <span style="--c:#AA9955"><i></i><b>Acento secundario</b><code>#AA9955</code><em>Value · borders · countdown</em></span>
+            <span style="--c:#1A1A1A"><i></i><b>Principal</b><code>#1A1A1A</code><em>Surfaces · depth</em></span>
+            <span style="--c:#4F4F4F"><i></i><b>Secundario</b><code>#4F4F4F</code><em>Structure · dividers</em></span>
+            <span style="--c:#EAEAEA"><i></i><b>Texto-Luz</b><code>#EAEAEA</code><em>Readable text on dark</em></span>
+          </div>
+          <div class="lg-components">
+            <span class="lg-label">Conversion components</span>
+            <div class="lg-offer">50 % de descuento en pre-compra</div>
+            <div class="lg-row">
+              <button class="lg-btn-ghost" type="button" tabindex="-1">Reclama tu descuento ahora</button>
+              <div class="lg-timer"><small>La oferta termina en:</small><b class="lg-count" data-legacy-timer>47:59:34</b></div>
+            </div>
+            <div class="lg-platforms">
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="9" r="2.4" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.8" fill="currentColor"/></svg>Steam</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 7.5l9 9M16.5 7.5l-9 9" stroke="currentColor" stroke-width="2"/></svg>Xbox</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v14l3 1V7c2 0 3 1 3 3s-1 2-3 2" fill="none" stroke="currentColor" stroke-width="2"/></svg>PlayStation</span>
+            </div>
+          </div>
+          <figure class="lg-classes">
+            <img src="./assets/legacy/screens/classes.webp" alt="Class selector icons for Bruja, Punk, Exploradora, Guerrera and Soldada in default and pressed states" width="1428" height="624" loading="lazy" decoding="async" />
+            <figcaption>Class selector · default and pressed states</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="case-section impact case-section-vertical">
@@ -145,15 +170,41 @@
             <li>Reduced the form to the minimum information needed to convert.</li>
           </ul>
         </div>
-        <figure class="case-shot wide legacy-shot">
-          <img
-            src="./assets/legacy/web/page-5.jpg"
-            alt="Annotated landing page architecture and conversion strategy"
-          />
-        </figure>
+        <div class="lg-arch">
+          <article class="lg-browser">
+            <div class="lg-browser-bar"><i></i><i></i><i></i><span>legado.com / pre-compra</span></div>
+            <div class="lg-scroll" tabindex="0" aria-label="Landing page, scrollable"><img src="./assets/legacy/screens/landing-desktop.webp" alt="Full landing page: hero with pre-order offer and countdown, three feature cards, testimonial, sign-up form and footer" width="1200" height="2964" loading="lazy" decoding="async" /></div>
+            <h3>Landing · convert</h3>
+            <p>One offer, one countdown, one form. Everything above the fold points to the pre-order.</p>
+          </article>
+          <article class="lg-browser">
+            <div class="lg-browser-bar"><i></i><i></i><i></i><span>legado.com</span></div>
+            <div class="lg-scroll" tabindex="0" aria-label="Home page, scrollable"><img src="./assets/legacy/screens/home-desktop.webp" alt="Full home page: hero carousel, world lore, game pillars, character classes, news and system requirements" width="1200" height="6163" loading="lazy" decoding="async" /></div>
+            <h3>Home · explore</h3>
+            <p>Lore, classes, news and requirements for players who want to know the world before buying.</p>
+          </article>
+          <figure class="lg-modal">
+            <img src="./assets/legacy/screens/platform-modal.webp" alt="Platform picker modal with Steam, Xbox and PlayStation options" width="1200" height="813" loading="lazy" decoding="async" />
+            <figcaption>Shared exit point: both pages end in the same platform picker.</figcaption>
+          </figure>
+          <div class="lg-proto">
+            <div class="lg-proto-copy">
+              <span class="lg-label">Live prototype</span>
+              <h3>Scroll it, open the menu, jump between Home and Landing.</h3>
+              <p>The Figma prototype keeps the animations and the cross-links between both experiences.</p>
+              <a class="lg-proto-open" href="https://www.figma.com/proto/Wg2ACkQtoO8xMxrEwzTmbH/ELDL5S-VIDEOGAME---UTN-TP?node-id=60-1109&amp;p=f&amp;scaling=scale-down&amp;content-scaling=fixed&amp;starting-point-node-id=60%3A1109&amp;page-id=81%3A1396" target="_blank" rel="noopener">Open full screen <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="lg-proto-frame">
+              <button class="lg-proto-load" type="button" data-src="https://embed.figma.com/proto/Wg2ACkQtoO8xMxrEwzTmbH/ELDL5S-VIDEOGAME---UTN-TP?node-id=60-1109&amp;starting-point-node-id=60%3A1109&amp;page-id=81%3A1396&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;hide-ui=1&amp;embed-host=share">
+                <img src="./assets/legacy/screens/cover.webp" alt="" width="1200" height="813" loading="lazy" decoding="async" />
+                <span>▶ Load interactive prototype</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="mobile" class="case-section">
+      <section id="mobile" class="case-section case-section-vertical">
         <div class="case-section-copy">
           <p class="eyebrow">03 / Mobile UX</p>
           <h2>Keep the atmosphere. Remove the friction.</h2>
@@ -168,12 +219,11 @@
             <li>Created semantic button patterns for primary conversion moments.</li>
           </ul>
         </div>
-        <figure class="case-shot wide legacy-shot">
-          <img
-            src="./assets/legacy/web/page-7.jpg"
-            alt="Mobile UX and product decisions for the dark fantasy RPG launch"
-          />
-        </figure>
+        <div class="lg-phones">
+          <figure><div class="lg-phone"><div class="lg-scroll" tabindex="0" aria-label="Mobile landing, scrollable"><img src="./assets/legacy/screens/landing-mobile.webp" alt="Mobile landing page" width="444" height="4802" loading="lazy" decoding="async" /></div></div><figcaption>Landing</figcaption></figure>
+          <figure><div class="lg-phone"><div class="lg-scroll" tabindex="0" aria-label="Mobile home, scrollable"><img src="./assets/legacy/screens/home-mobile.webp" alt="Mobile home page" width="444" height="12894" loading="lazy" decoding="async" /></div></div><figcaption>Home</figcaption></figure>
+          <figure><div class="lg-phone lg-phone-menu"><img src="./assets/legacy/screens/menu-mobile.webp" alt="Mobile menu with links between Home and Landing" width="347" height="852" loading="lazy" decoding="async" /></div><figcaption>Menu · switch experiences</figcaption></figure>
+        </div>
       </section>
 
       <section class="case-section impact case-section-vertical legacy-final" id="outcome">
@@ -193,5 +243,15 @@
       </section>
     </main>
     <script src="./premium-case.js?v=2"></script>
+    <script>
+      document.querySelector(".lg-proto-load")?.addEventListener("click", (event) => {
+        const button = event.currentTarget;
+        const frame = document.createElement("iframe");
+        frame.src = button.dataset.src;
+        frame.title = "El Legado de las 5 Sombras interactive Figma prototype";
+        frame.allowFullscreen = true;
+        button.replaceWith(frame);
+      });
+    </script>
   </body>
 </html>
