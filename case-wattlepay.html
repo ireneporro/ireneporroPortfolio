@@ -57,9 +57,11 @@
             <span>React Prototype</span>
           </div>
         </div>
-        <figure class="case-hero-visual wallet-cover">
-          <img src="./assets/wallet/cover.png" alt="WattlePay mobile fintech case study cover" width="780" height="435" decoding="async" />
-        </figure>
+        <div class="wp-hero" role="img" aria-label="WattlePay Cards, Home and Invest screens">
+          <div class="wp-shot wp-hero-side"><img src="./assets/wallet/screens/cards.webp" alt="" width="780" height="1688" decoding="async" /></div>
+          <div class="wp-shot wp-hero-main"><img src="./assets/wallet/screens/home.webp" alt="" width="780" height="1688" fetchpriority="high" decoding="async" /></div>
+          <div class="wp-shot wp-hero-side"><img src="./assets/wallet/screens/invest.webp" alt="" width="780" height="1688" decoding="async" /></div>
+        </div>
       </section>
 
       <section class="case-summary">
@@ -107,7 +109,7 @@
         </div>
       </section>
 
-      <section id="system" class="case-section">
+      <section id="system" class="case-section case-section-vertical">
         <div class="case-section-copy">
           <p class="eyebrow">01 / Visual System</p>
           <h2>Dark-mode fintech with a controlled glass hierarchy.</h2>
@@ -122,9 +124,28 @@
             <li>Kept financial data high-contrast and easy to scan.</li>
           </ul>
         </div>
-        <figure class="case-shot wide wallet-evidence">
-          <img src="./assets/wallet/visual-system.png" alt="WattlePay visual system, palette and glass hierarchy" width="982" height="980" loading="lazy" decoding="async" />
-        </figure>
+        <div class="wp-system">
+          <div class="wp-colors">
+            <div class="wp-color wp-color-main" style="--c:#CFD457"><i></i><b>Wattle</b><code>#CFD457</code><span>Primary accent · CTA · highlights</span></div>
+            <div class="wp-color wp-color-main" style="--c:#040810"><i></i><b>Bunker</b><code>#040810</code><span>Background · depth · base</span></div>
+            <div class="wp-color wp-color-main" style="--c:#5EEAD4"><i></i><b>Teal</b><code>#5EEAD4</code><span>Portfolio chart accent only</span></div>
+            <div class="wp-support">
+              <span style="--c:#6dd47e">Success</span><span style="--c:#f87171">Error</span><span style="--c:#a0a8d0">Secondary</span><span style="--c:#0d1117">Surface</span>
+            </div>
+          </div>
+          <div class="wp-glass-demo">
+            <div class="wp-glass-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="wp-glass wp-glass-accent"><small>Glass accent</small><b>$44,590.50</b><code>rgba(207,212,87,.04) · blur 40px</code><span>Primary containers, balance cards, key metrics</span></div>
+            <div class="wp-glass wp-glass-dark"><small>Glass dark</small><b>Zara – Madrid <em>−$89.99</em></b><code>rgba(255,255,255,.04) · blur 24px</code><span>Lists, transactions, secondary content</span></div>
+            <div class="wp-glass wp-glass-nav"><small>Glass nav</small><span class="wp-nav-demo"><i class="on"></i><i></i><i></i><i></i><i></i></span><code>rgba(207,212,87,.03) · blur 60px</code><span>Floating tab bar, pill shape, inner shadow edges</span></div>
+          </div>
+          <div class="wp-type">
+            <div><span class="wp-type-xl">$44,590.50</span><small>Balance · Inter 800 · tabular numbers</small></div>
+            <div><span class="wp-type-label">Black Reserve</span><small>Card label · 700 · uppercase tracking</small></div>
+            <div><span class="wp-type-meta">Today, 2:41 PM</span><small>Meta · 400 · 50% opacity</small></div>
+            <div class="wp-radii"><i style="--r:10px">10</i><i style="--r:18px">18</i><i style="--r:22px">22</i><i style="--r:24px">24</i><i style="--r:50px">50</i><small>Radius scale · chips → cards → surfaces → nav → device</small></div>
+          </div>
+        </div>
       </section>
 
       <section id="flows" class="case-section compact case-section-vertical">
@@ -143,9 +164,12 @@
             <li>Included receipts, bank details, transaction IDs and save/share actions.</li>
           </ul>
         </div>
-        <figure class="case-shot wide wallet-board">
-          <img src="./assets/wallet/product-flows.png" alt="WattlePay connected product flows and interface decisions" width="982" height="1050" loading="lazy" decoding="async" />
-        </figure>
+        <div class="wp-flow">
+          <div class="wp-flow-head"><span>Transfer flow</span><span>5 steps · no dead ends</span></div>
+          <ol class="wp-steps"><li><span class="wp-step-n">01</span><div class="wp-shot"><img src="./assets/wallet/screens/send-contacts.webp" alt="Choose a contact" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Choose a contact</b><p>Recent people first, search by name, IBAN or handle.</p></li><li><span class="wp-step-n">02</span><div class="wp-shot"><img src="./assets/wallet/screens/send-amount.webp" alt="Enter the amount" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Enter the amount</b><p>Available balance stays visible while typing.</p></li><li><span class="wp-step-n">03</span><div class="wp-shot"><img src="./assets/wallet/screens/send-review.webp" alt="Review" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Review</b><p>Amount, recipient, source card and fee before committing.</p></li><li><span class="wp-step-n">04</span><div class="wp-shot"><img src="./assets/wallet/screens/send-auth.webp" alt="Authorize" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Authorize</b><p>Face ID, Touch ID or passcode, chosen by the user.</p></li><li><span class="wp-step-n">05</span><div class="wp-shot"><img src="./assets/wallet/screens/send-receipt.webp" alt="Receipt" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Receipt</b><p>Reference and transaction IDs, save as PDF or share.</p></li></ol>
+          <div class="wp-flow-head"><span>Connected flows</span><span>Same wallet state across every screen</span></div>
+          <ul class="wp-others"><li><div class="wp-shot"><img src="./assets/wallet/screens/recharge.webp" alt="Add money screen" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Add money</b></li><li><div class="wp-shot"><img src="./assets/wallet/screens/convert.webp" alt="Convert screen" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Convert</b></li><li><div class="wp-shot"><img src="./assets/wallet/screens/save.webp" alt="Save goals screen" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Save goals</b></li><li><div class="wp-shot"><img src="./assets/wallet/screens/invest.webp" alt="Invest screen" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Invest</b></li><li><div class="wp-shot"><img src="./assets/wallet/screens/cards.webp" alt="Cards screen" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Cards</b></li><li><div class="wp-shot"><img src="./assets/wallet/screens/settings.webp" alt="Settings screen" width="780" height="1688" loading="lazy" decoding="async" /></div><b>Settings</b></li></ul>
+        </div>
       </section>
 
       <section class="case-section">
@@ -233,9 +257,26 @@
             <a class="wp-live-open" href="./wattlepay-prototype/index.html" target="_blank" rel="noopener">Open full screen <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <figure class="case-shot wide wallet-board">
-          <img src="./assets/wallet/prototype-evidence.png" alt="WattlePay interactive screens and technical prototype evidence" width="982" height="980" loading="lazy" decoding="async" />
-        </figure>
+        <div class="wp-tech">
+          <div class="wp-tech-grid">
+            <article><b>React + Context</b><p>WalletProvider manages balance, transactions and savings goals. Every screen reads the same state through a useWallet() hook.</p></article>
+            <article><b>Tailwind CSS v4</b><p>Utility-first styling with custom theme tokens; inline styles for glass effects and dynamic values.</p></article>
+            <article><b>SVG-first</b><p>Sparkline chart, progress rings, status bar icons and card stack indicators, all hand-built in SVG.</p></article>
+            <article><b>Lucide React</b><p>One icon system across screens, with stroke weight changing between active and inactive states.</p></article>
+            <article><b>CSS animations</b><p>Slide-up keyframes with cubic-bezier easing, press-scale feedback and blur transitions when hiding the balance.</p></article>
+            <article><b>Clipboard API</b><p>Receipt references can be copied; transaction IDs are generated per transfer.</p></article>
+          </div>
+          <div class="wp-state">
+            <span class="wp-state-title">WalletProvider state flow</span>
+            <ol>
+              <li><b>User action</b><small>Send · recharge · save · convert</small></li>
+              <li><b>updateBalance()</b><small>Adds or subtracts the delta</small></li>
+              <li><b>addTransaction()</b><small>Logs it with timestamp and icon</small></li>
+              <li><b>Home</b><small>Recent activity updates</small></li>
+              <li><b>Cards</b><small>Card activity reflects it</small></li>
+            </ol>
+          </div>
+        </div>
       </section>
 
       <section class="case-next">
