@@ -28,6 +28,13 @@
     />
     <link rel="stylesheet" href="./premium.css?v=7" />
     <link rel="stylesheet" href="./portfolio-devices.css" />
+    <link rel="stylesheet" href="./motion.css" />
+    <script>
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("motion");
+        setTimeout(() => document.documentElement.classList.add("hero-go"), 2500);
+      }
+    </script>
   </head>
   <body>
     <header class="premium-nav">
@@ -65,25 +72,43 @@
           <div class="studio-laptop">
             <img class="studio-hardware" src="./assets/hero/laptop-studio-v1.png" alt="" width="1536" height="1024" fetchpriority="high" />
             <div class="studio-display">
-              <section class="studio-slide studio-intro" aria-label="1 of 2: Meet Irene" data-title="What I have been doing" data-description="5+ years across product, interaction and interface design.">
+              <section class="studio-slide studio-intro" aria-label="1 of 3: Meet Irene" data-title="What I have been doing" data-description="5+ years across product, interaction and interface design.">
                 <div class="studio-intro-copy"><h2>Irene<br><em>Porro.</em></h2><p class="intro-role">Senior Product Designer</p></div>
                 <div class="studio-portrait"><img src="./assets/irene-portrait-professional-v6.jpg" alt="Irene Porro" width="1200" height="1200" fetchpriority="high" /></div>
               </section>
-              <section class="studio-slide studio-collage" aria-label="2 of 2: Product design across B2B, mobile and interactive websites" data-title="What I have been doing" data-description="Meralis, WattlePay and The Legacy of the Five Shadows." hidden>
+              <section class="studio-slide studio-collage" aria-label="2 of 3: Product design across B2B, mobile and interactive websites" data-title="What I have been doing" data-description="Meralis, WattlePay and The Legacy of the Five Shadows." hidden>
                 <div class="collage-heading"><span>PRODUCT DESIGN</span><span>Across different experiences</span></div>
                 <a class="collage-shot collage-enterprise" href="./case-meralis.html" aria-label="Explore Meralis: B2B workforce platform"><img src="./assets/meralis/dashboard-hq.png" alt="Meralis workforce dashboard" width="2271" height="1323" /><span class="collage-tag">Meralis / B2B platform ↗</span></a>
                 <a class="collage-shot collage-mobile" href="./case-wattlepay.html" aria-label="Explore WattlePay: mobile fintech"><div class="wallet-crop"><img src="./assets/wallet/cover.png" alt="WattlePay wallet home screen with balance, cards and recent activity" width="780" height="435" /></div><span class="collage-tag">WattlePay / Mobile ↗</span></a>
                 <a class="collage-shot collage-interactive" href="./case-legacy-five-shadows.html" aria-label="Explore The Legacy of the Five Shadows: game website"><div class="legacy-crop"><img src="./assets/legacy/web/page-5.jpg" alt="The Legacy of the Five Shadows game landing page" width="804" height="1400" /></div><span class="collage-tag">Five Shadows / Game website ↗</span></a>
               </section>
+              <section class="studio-slide studio-impact" aria-label="3 of 3: Selected impact" data-title="The work in numbers" data-description="Meralis: one platform and one system replacing three legacy tools." hidden>
+                <div class="impact-head"><span class="impact-logo">M</span><div><b>Meralis</b><small>Workforce operating system</small></div><a class="impact-open" href="./case-meralis.html">Open case ↗</a></div>
+                <div class="impact-grid">
+                  <div class="impact-tile impact-hero"><small>Legacy platforms consolidated</small><strong><span data-count="3">3</span><i>→</i>1</strong><p>HR, payroll and staffing in one product.</p></div>
+                  <div class="impact-tile"><small>Workflow maps</small><strong data-count="30">30</strong></div>
+                  <div class="impact-tile"><small>Components</small><strong data-count="42">42</strong></div>
+                  <div class="impact-tile"><small>CSS tokens</small><strong data-count="149">149</strong></div>
+                  <div class="impact-tile impact-dark"><small>Years in product design</small><strong><span data-count="5">5</span>+</strong></div>
+                </div>
+                <div class="impact-tools"><span>Figma</span><span>Claude</span><span>Codex</span><span>React prototypes</span></div>
+              </section>
             </div>
           </div>
           <div class="studio-caption">
             <div><p class="studio-project-title">What I have been doing</p><p class="studio-project-description">5+ years across product, interaction and interface design.</p></div>
-            <div class="studio-dots" aria-label="Choose introduction or work"><button type="button" data-slide="0" aria-label="Show Irene’s introduction" aria-pressed="true"><span aria-hidden="true"></span></button><button type="button" data-slide="1" aria-label="Show collage of three projects" aria-pressed="false"><span aria-hidden="true"></span></button></div>
+            <div class="studio-dots" aria-label="Choose introduction or work"><button type="button" data-slide="0" aria-label="Show Irene’s introduction" aria-pressed="true"><span aria-hidden="true"></span></button><button type="button" data-slide="1" aria-label="Show collage of three projects" aria-pressed="false"><span aria-hidden="true"></span></button><button type="button" data-slide="2" aria-label="Show selected impact in numbers" aria-pressed="false"><span aria-hidden="true"></span></button></div>
           </div>
         </aside>
 
       </section>
+
+      <div class="hero-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>B2B SaaS</span><span>Design systems</span><span>Multi-role workflows</span><span>Interaction design</span><span>Functional prototypes</span><span>AI-assisted product development</span>
+          <span>B2B SaaS</span><span>Design systems</span><span>Multi-role workflows</span><span>Interaction design</span><span>Functional prototypes</span><span>AI-assisted product development</span>
+        </div>
+      </div>
 
       <section id="work" class="section section-work">
         <div class="section-heading reveal">
@@ -209,5 +234,6 @@
 
     <script src="./premium.js?v=4"></script>
     <script src="./portfolio-devices.js"></script>
+    <script src="./motion.js"></script>
   </body>
 </html>

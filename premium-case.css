@@ -196,3 +196,5 @@ body:has(.valentine-case) { --case-accent:#b72243; --case-accent-rgb:183,34,67; 
   html { scroll-behavior: auto; }
   .premium-reveal,.premium-media-reveal { opacity: 1; transform: none; transition: none; }
 }
+
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }

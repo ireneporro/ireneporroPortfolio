@@ -261,3 +261,5 @@ h1 { margin: 0; max-width: 800px; font-family: var(--serif); font-size: clamp(64
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
