@@ -1,0 +1,7 @@
+body.haven { --brand:#11352b; --soft:#efe7d9; --line:#e7dfd1; }
+.haven h1, .haven h2 { font-family:"Fraunces", Georgia, serif; font-weight:600; letter-spacing:-.02em; }
+.haven h1 em { font-style:italic; color:#0e9c77; }
+.haven .haven-brand b { width:36px; height:36px; border-radius:11px; background:#11352b; color:#19d3a2; font-size:17px; }
+.haven .primary-link { background:#11352b; }
+.haven .screen-stage { background:#f6f1e8; }
+.haven .wrap + .wrap { margin-top:28px; }
