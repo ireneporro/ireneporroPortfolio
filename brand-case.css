@@ -1,0 +1,8 @@
+body.brandp { --brand:#c62828; --soft:#fdecea; --line:#eee6e2; }
+.brandp h1 em { font-style:normal; color:#c62828; }
+.brandp .bp-brand b { width:36px; height:36px; border-radius:11px; background:#f7c948; color:#c62828; font-size:17px; }
+.brandp .primary-link { background:#c62828; }
+.brandp .screen-stage { background:#f7f3ef; }
+.brandp .wrap + .wrap { margin-top:28px; }
+.bp-duo { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+@media (max-width:760px) { .bp-duo { grid-template-columns:1fr; } }
