@@ -1,11 +1,11 @@
 /* Relay: Meralis case layout with the Relay palette. */
-body.relay { --brand:#0d7f75; --soft:#e6f6f3; --line:#e2e7ee; }
-.relay .relay-brand b { width:34px; height:34px; border-radius:10px; background:#13294b; position:relative; overflow:hidden; }
-.relay .relay-brand b::before { content:""; position:absolute; left:6px; top:8px; width:16px; height:16px; border-radius:50%; border:3.5px solid #14b8a6; }
+body.relay { --brand:#0277b6; --soft:#e8f6fe; --line:#e2e7ee; }
+.relay .relay-brand b { width:34px; height:34px; border-radius:10px; background:#1e3655; position:relative; overflow:hidden; }
+.relay .relay-brand b::before { content:""; position:absolute; left:6px; top:8px; width:16px; height:16px; border-radius:50%; border:3.5px solid #03a9fc; }
 .relay .primary-link { background:var(--brand); }
-.relay .hero-showcase { background:radial-gradient(ellipse at 75% 0,#bdeee6,transparent 64%),#eaf7f4; }
+.relay .hero-showcase { background:radial-gradient(ellipse at 75% 0,#bfe8fe,transparent 64%),#eaf6fd; }
 .relay .hero-showcase .device-figure { background:transparent; }
 .relay .screen-stage { background:#f2f6f8; }
 .relay .model-after { background:var(--soft); }
-.relay .delivery { background:#f2f8f7; border-color:#e0efec; }
+.relay .delivery { background:#f1f8fd; border-color:#ddeefa; }
 .relay .disclosure a { color:var(--brand); text-decoration:underline; }
