@@ -1,0 +1,20 @@
+const puppeteer = require('puppeteer-core');
+const out = '../shots/'; const wait = ms => new Promise(r => setTimeout(r, ms));
+(async () => {
+  const b = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new' });
+  const p = await b.newPage(); const errs=[]; p.on('pageerror', e => errs.push(e.message));
+  await p.setViewport({ width: 1440, height: 900 });
+  await p.goto('http://localhost:8765/', { waitUntil: 'domcontentloaded' });
+  await wait(450); await p.screenshot({ path: out + 'n-hero-early.png' });
+  await wait(2500);
+  await p.click('[data-slide="2"]'); await wait(2200); await p.screenshot({ path: out + 'n-slide3.png', clip:{x:640,y:180,width:740,height:480} });
+  await p.evaluate(() => window.scrollTo(0, 700)); await wait(300);
+  await p.screenshot({ path: out + 'n-marquee.png', clip:{x:0,y:0,width:1440,height:400} });
+  await p.evaluate(() => window.scrollTo(0, 3300)); await wait(450); await p.screenshot({ path: out + 'n-midreveal.png' });
+  await p.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+  await p.goto('http://localhost:8765/', { waitUntil: 'networkidle0' }); await wait(3000);
+  await p.screenshot({ path: out + 'n-mobile.png' });
+  await p.evaluate(() => window.scrollTo(0, 700)); await wait(1500); await p.screenshot({ path: out + 'n-mobile2.png' });
+  console.log('sw', await p.evaluate(() => document.documentElement.scrollWidth), errs);
+  await b.close();
+})();

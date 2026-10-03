@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Haven — screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root { --forest:#11352b; --forest2:#1c4a3c; --mint:#19d3a2; --mint-d:#0e9c77; --mint-bg:#dff7ee; --cream:#f6f1e8; --cream2:#efe7d9; --sand:#e4d6bf; --ink:#14201b; --body:#4b5852; --muted:#86918b; --line:#e7dfd1; --white:#fffdf9; --coral:#e8705a; --gold:#d9a441; --serif:"Fraunces", Georgia, serif; }
+* { box-sizing:border-box; } html,body { margin:0; }
+body { width:1440px; overflow:hidden; background:var(--cream); color:var(--ink); font:14px/1.5 Inter, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+.screen { display:none; width:1440px; height:900px; }
+.screen.on { display:grid; }
+.app { grid-template-columns:240px 1fr; }
+svg.ico { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+.side { display:flex; flex-direction:column; padding:26px 18px; background:var(--forest); color:#d7e6df; }
+.logo { display:flex; align-items:center; gap:10px; padding:0 8px 30px; color:#fff; font:600 24px var(--serif); letter-spacing:-.02em; }
+.logo i { display:grid; place-items:center; width:32px; height:32px; border-radius:10px; background:var(--mint); color:var(--forest); font-style:normal; font-size:16px; }
+.nav a { display:flex; align-items:center; gap:12px; padding:10px 12px; margin-bottom:2px; border-radius:11px; font-weight:500; color:#b8cdc4; }
+.nav a.on { background:rgba(255,255,255,.08); color:#fff; }
+.nav a em { margin-left:auto; padding:1px 8px; border-radius:20px; background:var(--mint); color:var(--forest); font-size:11px; font-weight:700; font-style:normal; }
+.plan { margin-top:auto; padding:16px; border-radius:16px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); font-size:12.5px; }
+.plan b { display:block; color:#fff; font:600 16px var(--serif); margin-bottom:6px; }
+.plan .bar { height:6px; margin:10px 0 6px; border-radius:6px; background:rgba(255,255,255,.12); overflow:hidden; } .plan .bar i { display:block; height:100%; background:var(--mint); }
+.main { display:flex; flex-direction:column; min-width:0; }
+.top { display:flex; align-items:center; gap:14px; height:72px; padding:0 40px; }
+.search { display:flex; align-items:center; gap:10px; width:420px; height:44px; padding:0 16px; border-radius:22px; background:var(--white); border:1px solid var(--line); color:var(--muted); }
+.sp { flex:1; }
+.av { display:grid; place-items:center; flex:none; width:38px; height:38px; border-radius:50%; background:var(--sand); color:var(--forest); font-size:12px; font-weight:700; }
+.av.m { background:var(--mint-bg); color:var(--mint-d); } .av.c { background:#f9ddd5; color:#a44533; } .av.g { background:#f4e6c6; color:#8a6417; }
+.content { flex:1; padding:6px 40px 32px; overflow:hidden; }
+h1 { margin:0; font:600 40px/1.05 var(--serif); letter-spacing:-.025em; }
+h1 em { font-style:italic; color:var(--mint-d); }
+.sub { margin:8px 0 0; color:var(--body); font-size:14.5px; }
+.card { background:var(--white); border:1px solid var(--line); border-radius:22px; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; height:42px; padding:0 18px; border-radius:21px; border:1px solid var(--line); background:var(--white); color:var(--ink); font:600 13.5px Inter; white-space:nowrap; }
+.btn.pri { border-color:var(--forest); background:var(--forest); color:#fff; }
+.btn.mint { border-color:var(--mint); background:var(--mint); color:var(--forest); }
+.pill { display:inline-flex; align-items:center; gap:6px; padding:4px 11px; border-radius:20px; font-size:11.5px; font-weight:600; }
+.pill.buy { background:#e3edfb; color:#2c5ea8; } .pill.sell { background:var(--mint-bg); color:var(--mint-d); } .pill.mort { background:#efe5fb; color:#7246b8; } .pill.neu { background:var(--cream2); color:var(--body); }
+.k small { display:block; color:var(--muted); font-size:12px; } .k b { font:600 30px var(--serif); letter-spacing:-.02em; }
+/* agent */
+.referral { display:grid; grid-template-columns:1fr 250px; gap:0; margin:22px 0 18px; overflow:hidden; border:0; background:var(--forest); color:#fff; }
+.ref-l { padding:26px 28px; }
+.ref-l .tag { display:inline-flex; gap:8px; align-items:center; padding:5px 12px; border-radius:20px; background:rgba(25,211,162,.16); color:var(--mint); font-size:12px; font-weight:700; }
+.ref-l .tag i { width:8px; height:8px; border-radius:50%; background:var(--mint); box-shadow:0 0 0 4px rgba(25,211,162,.25); }
+.ref-l h2 { margin:14px 0 4px; font:600 30px var(--serif); }
+.ref-l p { margin:0; color:#b8cdc4; }
+.facts { display:flex; gap:34px; margin-top:20px; }
+.facts small { display:block; color:#8fb0a4; font-size:11.5px; } .facts b { font-size:16px; }
+.ref-r { display:grid; place-items:center; align-content:center; gap:14px; background:rgba(255,255,255,.05); border-left:1px solid rgba(255,255,255,.08); }
+.ring { position:relative; width:118px; height:118px; }
+.ring svg { width:118px; height:118px; transform:rotate(-90deg); }
+.ring b { position:absolute; inset:0; display:grid; place-items:center; align-content:center; font:600 26px var(--serif); }
+.ring b small { font:500 11px Inter; color:#8fb0a4; }
+.row3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:18px; }
+.row3 .card { padding:20px 22px; }
+.deal { display:grid; grid-template-columns:1.4fr .8fr 1.6fr 1fr .7fr; align-items:center; gap:14px; padding:14px 22px; border-top:1px solid var(--line); font-size:13px; }
+.deal.h { border-top:0; padding-top:18px; color:var(--muted); font-size:11.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+.who { display:flex; align-items:center; gap:10px; } .who b { display:block; } .who small { color:var(--muted); font-size:11.5px; }
+.stage { display:flex; gap:3px; } .stage i { flex:1; height:6px; border-radius:6px; background:var(--cream2); } .stage i.on { background:var(--mint); }
+.stage-l { margin-top:5px; color:var(--body); font-size:11.5px; }
+/* member */
+.mem { grid-template-columns:1fr; }
+.mtop { display:flex; align-items:center; gap:30px; height:76px; padding:0 48px; }
+.mtop nav { display:flex; gap:6px; } .mtop nav span { padding:9px 15px; border-radius:20px; color:var(--body); font-weight:500; } .mtop nav span.on { background:var(--forest); color:#fff; }
+.mlogo { display:flex; align-items:center; gap:10px; font:600 24px var(--serif); } .mlogo i { display:grid; place-items:center; width:32px; height:32px; border-radius:10px; background:var(--forest); color:var(--mint); font-style:normal; font-size:16px; }
+.mwrap { padding:8px 48px; }
+.journey { display:grid; grid-template-columns:1.35fr 1fr; gap:20px; margin-top:24px; }
+.track { padding:26px 28px; }
+.steps { position:relative; display:grid; grid-template-columns:repeat(8,1fr); margin:26px 0 8px; }
+.steps::before { content:""; position:absolute; left:6%; right:6%; top:15px; height:3px; background:var(--cream2); }
+.steps::after { content:""; position:absolute; left:6%; width:27%; top:15px; height:3px; background:var(--mint); }
+.st { position:relative; z-index:1; text-align:center; font-size:11.5px; color:var(--muted); }
+.st i { display:grid; place-items:center; width:32px; height:32px; margin:0 auto 8px; border-radius:50%; background:var(--white); border:2px solid var(--cream2); font-style:normal; font-weight:700; font-size:12px; color:var(--muted); }
+.st.done i { background:var(--mint); border-color:var(--mint); color:var(--forest); } .st.now i { background:var(--forest); border-color:var(--forest); color:#fff; box-shadow:0 0 0 6px var(--mint-bg); }
+.st.now { color:var(--ink); font-weight:600; }
+.next { display:flex; align-items:center; gap:16px; margin-top:22px; padding:18px; border-radius:18px; background:var(--cream); }
+.next b { display:block; font:600 17px var(--serif); } .next small { color:var(--body); }
+.agent { display:flex; flex-direction:column; padding:24px; }
+.agent .top2 { display:flex; gap:14px; align-items:center; }
+.agent .av { width:56px; height:56px; font-size:17px; }
+.agent h3 { margin:0; font:600 20px var(--serif); }
+.reward { margin-top:18px; padding:20px; border-radius:18px; background:var(--forest); color:#fff; }
+.reward small { color:#8fb0a4; } .reward b { display:block; margin:4px 0; font:600 34px var(--serif); color:var(--mint); }
+.homes { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:20px; }
+.home { overflow:hidden; }
+.home .ph { height:140px; background-size:cover; background-position:center; position:relative; }
+.home .ph .heart { position:absolute; right:12px; top:12px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:rgba(255,253,249,.92); color:var(--coral); }
+.home .bd { padding:14px 18px 16px; }
+.home .bd b { font:600 21px var(--serif); } .home .bd small { display:block; color:var(--muted); font-size:12px; }
+.specs { display:flex; gap:14px; margin-top:8px; color:var(--body); font-size:12px; }
+/* listing */
+.gallery { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:1fr 1fr; gap:10px; height:420px; margin-top:20px; border-radius:26px; overflow:hidden; }
+.gallery div { background-size:cover; background-position:center; }
+.gallery div:first-child { grid-row:1 / 3; }
+.ldet { display:grid; grid-template-columns:1.5fr 1fr; gap:22px; margin-top:22px; }
+.price { font:600 46px var(--serif); letter-spacing:-.03em; }
+.feat { display:flex; gap:24px; margin:12px 0 16px; color:var(--body); }
+.feat span { display:flex; gap:8px; align-items:center; }
+.cta { padding:22px; }
+.cta .row { display:flex; gap:10px; margin-top:16px; } .cta .row .btn { flex:1; }
+/* onboarding */
+.onb { grid-template-columns:1fr 1fr; }
+.onb-l { display:flex; flex-direction:column; justify-content:center; padding:0 90px; }
+.chk { margin-top:28px; }
+.ci { display:flex; align-items:center; gap:16px; padding:16px 18px; margin-bottom:10px; border-radius:18px; background:var(--white); border:1px solid var(--line); }
+.ci i { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; border:2px solid var(--cream2); font-style:normal; font-weight:700; font-size:12px; color:var(--muted); }
+.ci.done i { background:var(--mint); border-color:var(--mint); color:var(--forest); } .ci.done b { color:var(--muted); text-decoration:line-through; }
+.ci.now { border-color:var(--forest); box-shadow:0 12px 30px rgba(17,53,43,.1); } .ci.now i { background:var(--forest); border-color:var(--forest); color:#fff; }
+.ci b { display:block; } .ci small { color:var(--muted); font-size:12px; } .ci .btn { margin-left:auto; height:36px; }
+.onb-r { position:relative; overflow:hidden; background-size:cover; background-position:center; }
+.onb-r::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(17,53,43,.1),rgba(17,53,43,.82)); }
+.onb-r .q { position:absolute; z-index:1; left:56px; right:56px; bottom:60px; color:#fff; }
+.onb-r .q h2 { margin:0; font:600 48px/1.05 var(--serif); letter-spacing:-.02em; } .onb-r .q h2 em { color:var(--mint); }
+.onb-r .q p { margin:12px 0 0; color:#d7e6df; font-size:16px; }
+.onb-r .chip { position:absolute; z-index:1; display:flex; gap:12px; align-items:center; padding:14px 18px; border-radius:18px; background:var(--white); box-shadow:0 20px 40px rgba(0,0,0,.2); }
+.onb-r .chip b { display:block; font:600 18px var(--serif); } .onb-r .chip small { color:var(--muted); font-size:12px; }
+/* admin */
+.bars { display:flex; align-items:flex-end; gap:20px; height:220px; padding:10px 0 0; }
+.bars div { flex:1; display:flex; gap:6px; align-items:flex-end; height:100%; }
+.bars i { flex:1; border-radius:10px 10px 4px 4px; }
+.bars span { display:block; text-align:center; color:var(--muted); font-size:11.5px; margin-top:8px; }
+/* brand board */
+.brand { grid-template-columns:1fr 1fr 1fr; grid-template-rows:auto auto; gap:18px; padding:40px 48px; align-content:start; height:auto !important; }
+.brand .card { padding:24px; }
+.brand h4 { margin:0 0 16px; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+.sw { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.sw div i { display:block; height:84px; border-radius:16px; border:1px solid rgba(0,0,0,.05); }
+.sw div b { display:block; margin-top:8px; font-size:13px; } .sw div small { color:var(--muted); font-size:11px; font-family:ui-monospace,monospace; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-deal" viewBox="0 0 24 24"><path d="M3 7h18v13H3zM8 7V4h8v3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.8.8c0 1.7-2.3 2.2-2.3 3.7M12 17h.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18V8M21 18v-5a3 3 0 0 0-3-3H10v8M3 14h18"/></symbol>
+  <symbol id="i-bath" viewBox="0 0 24 24"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM6 12V6a2 2 0 0 1 4 0"/></symbol>
+  <symbol id="i-area" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+</svg>
+
+<!-- 1 Agent deals -->
+<section class="screen app" id="agent">
+  <aside class="side"><div class="logo"><i>⌂</i>Haven</div>
+    <nav class="nav"><a class="on"><svg class="ico"><use href="#i-deal"/></svg>Deals<em>3</em></a><a><svg class="ico"><use href="#i-search"/></svg>Listings</a><a><svg class="ico"><use href="#i-msg"/></svg>Messages</a><a><svg class="ico"><use href="#i-help"/></svg>Support</a></nav>
+    <div class="plan"><b>Agent Standard</b>38 of 50 referrals this year<div class="bar"><i style="width:76%"></i></div><span style="color:var(--mint)">Upgrade plan →</span></div>
+  </aside>
+  <div class="main">
+    <header class="top"><div class="search"><svg class="ico"><use href="#i-search"/></svg>Search clients or addresses</div><div class="sp"></div><span class="av">MR</span></header>
+    <div class="content">
+      <h1>Good morning, Marco</h1><p class="sub">You have one new referral waiting and 8 deals in progress.</p>
+      <div class="card referral">
+        <div class="ref-l"><span class="tag"><i></i>New referral</span><h2>Emma Pérez wants to buy</h2><p>Renter in Houston, pre-approved, ready in the next 6 to 12 months.</p>
+          <div class="facts"><div><small>Budget</small><b>$280k – $320k</b></div><div><small>Area</small><b>Heights, Houston</b></div><div><small>Language</small><b>Spanish, English</b></div></div>
+          <div style="display:flex;gap:10px;margin-top:22px"><span class="btn mint">Accept referral</span><span class="btn" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)">See details</span></div></div>
+        <div class="ref-r"><div class="ring"><svg viewBox="0 0 118 118"><circle cx="59" cy="59" r="50" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="8"/><circle cx="59" cy="59" r="50" fill="none" stroke="#19d3a2" stroke-width="8" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="110"/></svg><b>04:53<small>to accept</small></b></div><small style="color:#8fb0a4;font-size:12px;text-align:center;padding:0 24px">If nobody accepts, it goes to the next agent</small></div>
+      </div>
+      <div class="row3"><div class="card k"><small>Referrals this month</small><b>6</b></div><div class="card k"><small>Deals in progress</small><b>8</b></div><div class="card k"><small>Closed this year</small><b>14</b></div></div>
+      <div class="card" style="overflow:hidden">
+        <div class="deal h"><span>Client</span><span>Type</span><span>Stage</span><span>Area</span><span>Value</span></div>
+        <div class="deal"><span class="who"><span class="av m">LT</span><span><b>Lauren Trott</b><small>Updated today</small></span></span><span><span class="pill buy">Buy</span></span><span><div class="stage"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div class="stage-l">Property search</div></span><span>Montrose</span><span><b>$410k</b></span></div>
+        <div class="deal"><span class="who"><span class="av c">AB</span><span><b>Andrew Butler</b><small>Updated Jan 02</small></span></span><span><span class="pill sell">Sell</span></span><span><div class="stage"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><div class="stage-l">Contingency period</div></span><span>Bellaire</span><span><b>$560k</b></span></div>
+        <div class="deal"><span class="who"><span class="av g">SN</span><span><b>Sofia Navarro</b><small>Updated Dec 29</small></span></span><span><span class="pill mort">Mortgage</span></span><span><div class="stage"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="stage-l">Pre-approval</div></span><span>Heights</span><span><b>$300k</b></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 Member home -->
+<section class="screen mem" id="member">
+  <div><header class="mtop"><div class="mlogo"><i>⌂</i>Haven</div><nav><span class="on">My home journey</span><span>Search homes</span><span>Favorites</span><span>Messages</span></nav><div class="sp"></div><span class="av c">JD</span></header>
+  <div class="mwrap">
+    <h1>Hi Jane, you’re <em>3 steps</em> into buying your first home</h1>
+    <div class="journey">
+      <div class="card track"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 19px var(--serif)">Your journey</b><span class="pill sell">On track</span></div>
+        <div class="steps"><div class="st done"><i>✓</i>Connected</div><div class="st done"><i>✓</i>Pre-approved</div><div class="st now"><i>3</i>Home search</div><div class="st"><i>4</i>Offer</div><div class="st"><i>5</i>Contingency</div><div class="st"><i>6</i>Closing</div><div class="st"><i>7</i>Keys</div><div class="st"><i>8</i>Reward</div></div>
+        <div class="next"><span class="av m" style="width:46px;height:46px">⌂</span><div style="flex:1"><b>Tour the homes you saved</b><small>Marco has 3 tours ready for Saturday. Pick the ones you want to see.</small></div><span class="btn pri">Choose tours</span></div>
+      </div>
+      <div class="card agent"><div class="top2"><span class="av">MR</span><div><small style="color:var(--muted)">Your agent</small><h3>Marco Ruiz</h3><small style="color:var(--body)">Northside Realty · speaks Spanish</small></div></div>
+        <div class="reward"><small>Your estimated reward at closing</small><b>$4,200</b><small>Paid back to you after you get your keys</small></div>
+        <div style="display:flex;gap:10px;margin-top:14px"><span class="btn" style="flex:1">Message</span><span class="btn" style="flex:1">Call</span></div></div>
+    </div>
+    <div class="homes">
+      <div class="card home"><div class="ph" style="background-image:url(./main.jpg)"><span class="heart"><svg class="ico"><use href="#i-heart"/></svg></span></div><div class="bd"><b>$312,000</b><small>245 Hillcrest St, Heights</small><div class="specs"><span>4 bd</span><span>3 ba</span><span>2,150 sqft</span></div></div></div>
+      <div class="card home"><div class="ph" style="background-image:url(./t3.jpg)"><span class="heart"><svg class="ico"><use href="#i-heart"/></svg></span></div><div class="bd"><b>$289,500</b><small>18 Maple Ct, Garden Oaks</small><div class="specs"><span>3 bd</span><span>2 ba</span><span>1,680 sqft</span></div></div></div>
+      <div class="card home"><div class="ph" style="background-image:url(./t2.jpg)"><span class="heart"><svg class="ico"><use href="#i-heart"/></svg></span></div><div class="bd"><b>$305,000</b><small>702 Oak Ridge Dr, Timbergrove</small><div class="specs"><span>3 bd</span><span>2.5 ba</span><span>1,940 sqft</span></div></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 3 Listing -->
+<section class="screen mem" id="listing">
+  <div><header class="mtop"><div class="mlogo"><i>⌂</i>Haven</div><nav><span>My home journey</span><span class="on">Search homes</span><span>Favorites</span><span>Messages</span></nav><div class="sp"></div><span class="av c">JD</span></header>
+  <div class="mwrap">
+    <span style="color:var(--body);font-size:13px">← Back to map</span>
+    <div class="gallery"><div style="background-image:url(./main.jpg)"></div><div style="background-image:url(./t1.jpg)"></div><div style="background-image:url(./t2.jpg)"></div><div style="background-image:url(./t3.jpg)"></div><div style="background-image:url(./t4.jpg);position:relative"><span class="btn" style="position:absolute;right:14px;bottom:14px;height:34px">View all 24 photos</span></div></div>
+    <div class="ldet">
+      <div><div style="display:flex;align-items:center;gap:12px"><span class="price">$312,000</span><span class="pill sell">Open house Sat</span></div><div style="color:var(--body)"><svg class="ico" style="width:15px;display:inline;vertical-align:-3px"><use href="#i-pin"/></svg> 245 Hillcrest St, Heights, Houston</div>
+        <div class="feat"><span><svg class="ico"><use href="#i-bed"/></svg>4 bedrooms</span><span><svg class="ico"><use href="#i-bath"/></svg>3 bathrooms</span><span><svg class="ico"><use href="#i-area"/></svg>2,150 sqft</span><span>Built 2010</span></div>
+        <p style="margin:0;color:var(--body);max-width:620px">A warm wood-frame home with tall windows, a covered porch and a garden that gets the evening light. Ten minutes from the light rail.</p></div>
+      <div class="card cta"><small style="color:var(--muted)">If you buy this home with Haven</small><div style="font:600 30px var(--serif);color:var(--mint-d);margin-top:4px">≈ $4,370 back</div><small style="color:var(--body)">Estimated reward, paid after closing</small><div class="row"><span class="btn">Tour this home</span><span class="btn pri">Get a mortgage</span></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 4 Onboarding -->
+<section class="screen onb" id="onboard">
+  <div class="onb-l"><div class="mlogo" style="margin-bottom:34px"><i>⌂</i>Haven</div>
+    <h1>Welcome, Jane.<br><em>Let’s get you ready.</em></h1><p class="sub">Five steps before an agent can start working with you. Most people finish in ten minutes.</p>
+    <div class="chk">
+      <div class="ci done"><i>✓</i><div><b>Fill in your application</b><small>Done Jan 2</small></div></div>
+      <div class="ci done"><i>✓</i><div><b>Get approved</b><small>Approved by the Haven team</small></div></div>
+      <div class="ci now"><i>3</i><div><b>Complete your profile</b><small>Budget, timeline and the areas you like</small></div><span class="btn pri">Continue</span></div>
+      <div class="ci"><i>4</i><div><b>Schedule a call</b><small>15 minutes with your matched agent</small></div></div>
+      <div class="ci"><i>5</i><div><b>Publish your profile</b><small>So agents in your area can see it</small></div></div>
+    </div>
+  </div>
+  <div class="onb-r" style="background-image:url(./main.jpg)">
+    <div class="chip" style="left:56px;top:70px"><span class="av m">✓</span><div><b>Pre-approved</b><small>Up to $320,000</small></div></div>
+    <div class="chip" style="right:56px;top:190px"><span class="av">MR</span><div><b>Agent matched</b><small>Marco Ruiz · Heights</small></div></div>
+    <div class="q"><h2>From renting<br>to <em>owning</em>.</h2><p>Find a home, get matched with an agent, and get part of the commission back at closing.</p></div>
+  </div>
+</section>
+
+<!-- 5 Admin -->
+<section class="screen app" id="admin">
+  <aside class="side"><div class="logo"><i>⌂</i>Haven</div>
+    <nav class="nav"><a class="on"><svg class="ico"><use href="#i-chart"/></svg>Analytics</a><a><svg class="ico"><use href="#i-users"/></svg>Users</a><a><svg class="ico"><use href="#i-deal"/></svg>Deals</a><a><svg class="ico"><use href="#i-msg"/></svg>Feedback</a></nav>
+    <div class="plan"><b>Admin</b>Branding, pages and emails are in Setup</div>
+  </aside>
+  <div class="main"><header class="top"><div class="sp"></div><span class="av">AD</span></header>
+    <div class="content">
+      <h1>Analytics</h1><p class="sub">Sign-ups and deals across the platform, last 6 months.</p>
+      <div class="row3" style="margin-top:22px"><div class="card k"><small>New sign-ups (7 days)</small><b>150</b> <span class="pill sell">+16%</span></div><div class="card k"><small>Active agents</small><b>100</b> <span class="pill sell">+10</span></div><div class="card k"><small>Deals closed</small><b>42</b> <span class="pill neu">this quarter</span></div></div>
+      <div class="card" style="padding:24px 28px"><div style="display:flex;justify-content:space-between"><b style="font:600 20px var(--serif)">Sign-ups by month</b><span style="display:flex;gap:16px;font-size:12.5px;color:var(--body)"><span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--forest);margin-right:6px"></i>Agents</span><span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--mint);margin-right:6px"></i>Members</span></span></div>
+        <div class="bars"><div><i style="height:48%;background:var(--forest)"></i><i style="height:32%;background:var(--mint)"></i></div><div><i style="height:30%;background:var(--forest)"></i><i style="height:62%;background:var(--mint)"></i></div><div><i style="height:38%;background:var(--forest)"></i><i style="height:46%;background:var(--mint)"></i></div><div><i style="height:66%;background:var(--forest)"></i><i style="height:48%;background:var(--mint)"></i></div><div><i style="height:92%;background:var(--forest)"></i><i style="height:60%;background:var(--mint)"></i></div><div><i style="height:80%;background:var(--forest)"></i><i style="height:62%;background:var(--mint)"></i></div></div>
+        <div style="display:flex;gap:20px"><span style="flex:1;text-align:center;color:var(--muted);font-size:12px">Aug</span><span style="flex:1;text-align:center;color:var(--muted);font-size:12px">Sep</span><span style="flex:1;text-align:center;color:var(--muted);font-size:12px">Oct</span><span style="flex:1;text-align:center;color:var(--muted);font-size:12px">Nov</span><span style="flex:1;text-align:center;color:var(--muted);font-size:12px">Dec</span><span style="flex:1;text-align:center;color:var(--muted);font-size:12px">Jan</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Brand board -->
+<section class="screen brand" id="brand">
+  <div class="card" style="grid-column:1 / 3;background:var(--forest);color:#fff;display:flex;align-items:center;gap:40px;padding:34px 40px"><div class="logo" style="padding:0;font-size:56px;gap:18px"><i style="width:72px;height:72px;border-radius:22px;font-size:36px">⌂</i>Haven</div><div style="color:#b8cdc4;font-size:15px;max-width:340px">A warmer, more editorial direction for a product about leaving a rental and buying a first home.</div></div>
+  <div class="card"><h4>Type</h4><div style="font:600 44px/1 var(--serif);letter-spacing:-.02em">Fraunces</div><div style="color:var(--muted);font-size:12px;margin:6px 0 16px">Headlines, prices, moments that matter</div><div style="font:600 22px Inter">Inter</div><div style="color:var(--muted);font-size:12px">Interface, forms, data</div></div>
+  <div class="card"><h4>Color</h4><div class="sw"><div><i style="background:#11352b"></i><b>Forest</b><small>#11352B</small></div><div><i style="background:#19d3a2"></i><b>Mint</b><small>#19D3A2</small></div><div><i style="background:#f6f1e8"></i><b>Cream</b><small>#F6F1E8</small></div></div></div>
+  <div class="card"><h4>Deal types</h4><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill buy">Buy</span><span class="pill sell">Sell</span><span class="pill mort">Mortgage</span><span class="pill neu">Rent</span></div><h4 style="margin-top:22px">Buttons</h4><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="btn pri">Primary</span><span class="btn mint">Accept</span><span class="btn">Secondary</span></div></div>
+  <div class="card"><h4>Deal progress</h4><div class="stage" style="margin-bottom:8px"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div style="color:var(--body);font-size:12.5px">Eight stages, from first contact to the reward payment. The same bar shows up for agents, members and admins.</div></div>
+</section>
+
+<script>
+  const id = new URLSearchParams(location.search).get('s') || 'agent';
+  document.getElementById(id).classList.add('on');
+</script>
+</body>
+</html>

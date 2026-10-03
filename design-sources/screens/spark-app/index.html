@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Spark — screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --coral:#ff5a4e; --coral-d:#e8443a; --pink:#ff3d7f; --peach:#ffb26b; --sun:#ffd166; --mint:#3ccfa0; --sky:#4f8cff; --grape:#8b5cf6;
+  --grad:linear-gradient(120deg,#ff9a3c 0%,#ff5a4e 45%,#ff3d7f 100%);
+  --ink:#1d1625; --body:#4f4658; --muted:#8a8193; --line:#efe6ea; --line2:#f6eff2; --bg:#fff7f5; --soft:#ffecec;
+}
+* { box-sizing:border-box; } html,body { margin:0; }
+body { width:1440px; height:900px; overflow:hidden; background:var(--bg); color:var(--ink); font:14px/1.5 "Plus Jakarta Sans", system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+.screen { display:none; width:1440px; height:900px; grid-template-columns:232px 1fr; }
+.screen.on { display:grid; }
+svg.ico { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+.side { display:flex; flex-direction:column; padding:24px 16px; background:#fff; border-right:1px solid var(--line); }
+.logo { display:flex; align-items:center; gap:9px; padding:0 8px 24px; font-size:22px; font-weight:800; letter-spacing:-.04em; }
+.logo i { position:relative; width:30px; height:30px; border-radius:10px; background:var(--grad); }
+.logo i::after { content:"✦"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-size:15px; font-style:normal; }
+.who { display:flex; align-items:center; gap:10px; margin:0 4px 20px; padding:10px; border-radius:14px; background:var(--bg); }
+.who b { display:block; font-size:13px; } .who small { color:var(--muted); font-size:11.5px; }
+.av { display:grid; place-items:center; flex:none; width:36px; height:36px; border-radius:50%; color:#fff; font-size:12px; font-weight:800; background:var(--grad); }
+.av.a { background:linear-gradient(135deg,#4f8cff,#8b5cf6); } .av.b { background:linear-gradient(135deg,#3ccfa0,#4f8cff); } .av.c { background:linear-gradient(135deg,#ffd166,#ff9a3c); } .av.d { background:linear-gradient(135deg,#ff3d7f,#8b5cf6); }
+.nav a { display:flex; align-items:center; gap:12px; padding:10px 12px; margin-bottom:2px; border-radius:12px; color:var(--body); font-weight:600; }
+.nav a.on { background:var(--soft); color:var(--coral-d); }
+.nav a em { margin-left:auto; padding:1px 7px; border-radius:20px; background:var(--coral); color:#fff; font-size:10.5px; font-style:normal; }
+.demo { margin:auto 4px 0; padding:14px; border-radius:16px; background:var(--grad); color:#fff; font-size:12.5px; }
+.demo b { display:block; font-size:14px; margin-bottom:4px; }
+.main { display:flex; flex-direction:column; min-width:0; }
+.top { display:flex; align-items:center; gap:12px; height:68px; padding:0 34px; background:#fff; border-bottom:1px solid var(--line); }
+.search { display:flex; align-items:center; gap:10px; flex:1; max-width:560px; height:42px; padding:0 14px; border:1.5px solid var(--line); border-radius:14px; color:var(--muted); font-size:13.5px; }
+.sp { flex:1; }
+.chipbar { display:flex; align-items:center; gap:8px; height:30px; padding:0 12px; border-radius:20px; background:#fff3e6; color:#c25e10; font-size:12px; font-weight:700; }
+.content { flex:1; padding:28px 34px; overflow:hidden; }
+.head { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:20px; }
+.kick { margin:0 0 4px; color:var(--coral); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+h1 { margin:0; font-size:30px; font-weight:800; letter-spacing:-.035em; }
+.sub { margin:4px 0 0; color:var(--body); font-size:14px; }
+.btn { display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 16px; border:1.5px solid var(--line); border-radius:12px; background:#fff; color:var(--ink); font:700 13px "Plus Jakarta Sans"; white-space:nowrap; }
+.btn.pri { border:0; background:var(--grad); color:#fff; box-shadow:0 8px 20px rgba(255,90,78,.28); }
+.btn.out { border-color:var(--coral); color:var(--coral-d); }
+.btn.sm { height:32px; padding:0 12px; font-size:12px; border-radius:10px; }
+.btns { display:flex; gap:10px; align-items:center; }
+.card { background:#fff; border:1px solid var(--line); border-radius:20px; }
+.tag { display:inline-flex; padding:4px 10px; border-radius:20px; background:var(--soft); color:var(--coral-d); font-size:11.5px; font-weight:700; }
+.tag.b { background:#eaf1ff; color:#2f5fd0; } .tag.g { background:#e6f8f1; color:#178a63; } .tag.y { background:#fff3d6; color:#a56b00; } .tag.p { background:#f1ebff; color:#6a3fd6; }
+.tags { display:flex; gap:6px; flex-wrap:wrap; }
+/* Teacher dashboard */
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+.stat { position:relative; overflow:hidden; padding:20px 22px; border-radius:20px; color:#fff; }
+.stat.s1 { background:linear-gradient(120deg,#ff9a3c,#ff5a4e); } .stat.s2 { background:linear-gradient(120deg,#ff5a4e,#ff3d7f); } .stat.s3 { background:linear-gradient(120deg,#ff3d7f,#8b5cf6); }
+.stat small { font-size:13px; font-weight:700; opacity:.9; }
+.stat b { display:block; margin-top:6px; font-size:36px; font-weight:800; letter-spacing:-.04em; }
+.stat span { font-size:12px; opacity:.85; }
+.stat::after { content:""; position:absolute; right:-30px; top:-30px; width:130px; height:130px; border-radius:50%; background:rgba(255,255,255,.14); }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1.1fr; gap:16px; }
+.card-h { display:flex; justify-content:space-between; align-items:center; padding:18px 20px 6px; }
+.card-h h3 { margin:0; font-size:15.5px; font-weight:800; }
+.card-h small { color:var(--coral-d); font-size:12px; font-weight:700; }
+.kw { display:grid; grid-template-columns:96px 1fr 28px; align-items:center; gap:10px; padding:7px 20px; font-size:12.5px; }
+.kw i { height:9px; border-radius:9px; }
+.ind { display:grid; grid-template-columns:30px 1fr 40px; align-items:center; gap:10px; padding:8px 20px; font-size:12.5px; }
+.ind .ic { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; font-size:15px; }
+.ind .bar { grid-column:2 / 3; height:7px; margin-top:4px; border-radius:7px; background:var(--line2); overflow:hidden; } .ind .bar i { display:block; height:100%; border-radius:7px; }
+.q { display:flex; gap:10px; padding:10px 20px; border-top:1px solid var(--line2); }
+.q:first-of-type { border-top:0; }
+.q p { margin:0; font-size:12.5px; } .q small { color:var(--muted); font-size:11px; }
+.lead { display:flex; align-items:center; gap:10px; padding:8px 20px; font-size:12.5px; }
+.lead .rk { width:26px; font-weight:800; color:var(--coral-d); }
+/* Explore */
+.chips { display:flex; gap:8px; margin:14px 0 20px; flex-wrap:wrap; }
+.chips span { padding:7px 14px; border:1.5px solid var(--line); border-radius:20px; background:#fff; font-size:12.5px; font-weight:700; color:var(--body); }
+.chips span.on { border-color:transparent; background:var(--grad); color:#fff; }
+.mentors { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.m { overflow:hidden; }
+.m .cover { position:relative; height:96px; }
+.m .cover .av { position:absolute; left:20px; bottom:-26px; width:62px; height:62px; font-size:19px; border:4px solid #fff; }
+.m .body { padding:34px 20px 18px; }
+.m h3 { margin:0; font-size:16px; font-weight:800; }
+.m .mrole { color:var(--body); font-size:12.5px; }
+.m p { margin:10px 0 12px; color:var(--body); font-size:12.5px; }
+.m .act { display:flex; gap:8px; margin-top:14px; }
+.m .act .btn { flex:1; justify-content:center; }
+.badge-day { position:absolute; right:14px; top:14px; padding:4px 10px; border-radius:20px; background:rgba(255,255,255,.92); color:var(--coral-d); font-size:11px; font-weight:800; }
+/* Messages */
+.msgs { display:grid; grid-template-columns:330px 1fr 290px; height:100%; }
+.thread-list { border-right:1px solid var(--line); background:#fff; }
+.th { display:flex; gap:12px; padding:14px 18px; border-bottom:1px solid var(--line2); }
+.th.on { background:var(--soft); }
+.th b { display:block; font-size:13.5px; } .th small { color:var(--muted); font-size:12px; }
+.th .t { margin-left:auto; color:var(--muted); font-size:11px; white-space:nowrap; }
+.chat { display:flex; flex-direction:column; padding:22px 28px; background:var(--bg); }
+.bub { max-width:72%; margin-bottom:12px; padding:12px 16px; border-radius:18px; font-size:13.5px; }
+.bub.in { background:#fff; border:1px solid var(--line); border-bottom-left-radius:6px; }
+.bub.out { align-self:flex-end; background:var(--grad); color:#fff; border-bottom-right-radius:6px; }
+.day { align-self:center; margin:6px 0 14px; color:var(--muted); font-size:11.5px; }
+.composer { display:flex; align-items:center; gap:10px; margin-top:auto; padding:10px 10px 10px 16px; border:1.5px solid var(--line); border-radius:16px; background:#fff; color:var(--muted); font-size:13px; }
+.composer .send { display:grid; place-items:center; width:36px; height:36px; margin-left:auto; border-radius:12px; background:var(--grad); color:#fff; }
+.prompt { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+.prompt span { padding:6px 12px; border:1.5px dashed #ffc2bd; border-radius:14px; background:#fff; color:var(--coral-d); font-size:12px; font-weight:700; }
+.profile { padding:24px 20px; background:#fff; border-left:1px solid var(--line); }
+.profile .av { width:72px; height:72px; font-size:22px; margin-bottom:12px; }
+.profile h3 { margin:0; font-size:17px; }
+.kv { margin-top:16px; font-size:12.5px; }
+.kv div { padding:9px 0; border-bottom:1px solid var(--line2); }
+.kv small { display:block; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+/* Opportunities */
+.opps { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.op { padding:20px 22px; }
+.op-h { display:flex; align-items:center; gap:14px; }
+.op-h .lg { display:grid; place-items:center; width:52px; height:52px; border-radius:16px; color:#fff; font-size:22px; }
+.op h3 { margin:0; font-size:16.5px; font-weight:800; }
+.op .org { color:var(--body); font-size:12.5px; }
+.op .save { margin-left:auto; display:grid; place-items:center; width:36px; height:36px; border:1.5px solid var(--line); border-radius:11px; color:var(--body); }
+.op .save.on { border-color:var(--coral); background:var(--soft); color:var(--coral-d); }
+.op p { margin:12px 0; color:var(--body); font-size:13px; }
+.op-f { display:flex; align-items:center; justify-content:space-between; margin-top:14px; padding-top:14px; border-top:1px solid var(--line2); }
+.new { padding:3px 9px; border-radius:8px; background:var(--ink); color:#fff; font-size:10.5px; font-weight:800; letter-spacing:.06em; }
+/* Trials */
+.trials { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.tr { position:relative; display:flex; flex-direction:column; padding:22px; }
+.tr .n { display:grid; place-items:center; width:40px; height:40px; margin-bottom:14px; border-radius:13px; background:var(--soft); color:var(--coral-d); font-size:15px; font-weight:800; }
+.tr.done .n { background:var(--mint); color:#fff; } .tr.now { border:2px solid var(--coral); box-shadow:0 14px 34px rgba(255,90,78,.15); } .tr.now .n { background:var(--grad); color:#fff; } .tr.lock .n { background:var(--ink); color:#fff; }
+.tr h3 { margin:0 0 4px; font-size:17px; font-weight:800; }
+.tr p { margin:0 0 14px; color:var(--body); font-size:13px; }
+.tr .unlock { margin-top:auto; padding:12px; border-radius:14px; background:var(--bg); font-size:12.5px; }
+.tr .unlock b { display:block; font-size:11px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:3px; }
+.meter { height:8px; border-radius:8px; background:var(--line2); overflow:hidden; margin:6px 0 14px; } .meter i { display:block; height:100%; border-radius:8px; background:var(--grad); }
+.arrow { position:absolute; right:-14px; top:38px; z-index:2; display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:#fff; border:1px solid var(--line); color:var(--coral-d); font-weight:800; font-size:12px; }
+.banner { display:flex; align-items:center; gap:22px; margin-top:18px; padding:22px 26px; border-radius:22px; background:var(--grad); color:#fff; }
+.banner h3 { margin:0 0 4px; font-size:20px; font-weight:800; }
+.banner p { margin:0; opacity:.92; font-size:13.5px; }
+.banner .btn { background:#fff; color:var(--coral-d); border:0; }
+.link { display:flex; align-items:center; gap:8px; margin-left:auto; padding:6px 6px 6px 14px; border-radius:14px; background:rgba(255,255,255,.18); font-size:13px; white-space:nowrap; }
+/* Onboarding */
+.onb { grid-template-columns:1fr 1fr; background:#fff; }
+.onb-l { display:flex; flex-direction:column; justify-content:center; padding:0 110px; }
+.onb-r { position:relative; overflow:hidden; background:var(--grad); }
+.steps { display:flex; gap:6px; margin-bottom:28px; } .steps i { width:46px; height:6px; border-radius:6px; background:var(--line); } .steps i.on { background:var(--grad); }
+.roles { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; }
+.role { padding:16px; border:2px solid var(--line); border-radius:18px; text-align:center; font-size:12.5px; color:var(--body); }
+.role .e { font-size:28px; display:block; margin-bottom:6px; }
+.role b { display:block; color:var(--ink); font-size:14px; }
+.role.on { border-color:var(--coral); background:var(--soft); }
+.field label { display:block; margin-bottom:7px; font-size:13px; font-weight:700; }
+.code { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; }
+.code span { display:grid; place-items:center; height:56px; border:2px solid var(--line); border-radius:14px; font-size:22px; font-weight:800; }
+.code span.f { border-color:var(--coral); box-shadow:0 0 0 4px #ffe1de; }
+.bubble { position:absolute; display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:18px; background:#fff; box-shadow:0 18px 40px rgba(80,20,40,.18); font-size:13px; }
+.bubble b { display:block; font-size:13.5px; } .bubble small { color:var(--muted); font-size:11.5px; }
+.big { position:absolute; left:60px; bottom:70px; color:#fff; }
+.big h2 { margin:0; font-size:46px; font-weight:800; letter-spacing:-.04em; line-height:1.05; }
+.big p { margin:10px 0 0; font-size:16px; opacity:.92; max-width:420px; }
+.blob { position:absolute; border-radius:50%; background:rgba(255,255,255,.13); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3 0 6 3 6 6l-7 7-6-6 7-7z"/><circle cx="15" cy="9" r="1.5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></symbol>
+  <symbol id="i-bm" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14a6 6 0 0 1 3 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+</svg>
+<template id="side-student"><aside class="side">
+  <div class="logo"><i></i>Spark</div>
+  <div class="who"><span class="av">MR</span><div><b>Maya Rivera</b><small>Grade 11 · Westfield High</small></div></div>
+  <nav class="nav"><a data-k="explore"><svg class="ico"><use href="#i-search"/></svg>Explore</a><a data-k="msg"><svg class="ico"><use href="#i-msg"/></svg>Messages<em>2</em></a><a data-k="opp"><svg class="ico"><use href="#i-rocket"/></svg>Opportunities</a><a data-k="saved"><svg class="ico"><use href="#i-bm"/></svg>Saved</a><a data-k="res"><svg class="ico"><use href="#i-book"/></svg>Resources</a></nav>
+  <div class="demo"><b>Ask better questions</b>Try “What does a normal day look like for you?”</div>
+</aside></template>
+<template id="side-teacher"><aside class="side">
+  <div class="logo"><i></i>Spark</div>
+  <div class="who"><span class="av a">JC</span><div><b>Ms. Jordan Cole</b><small>Career counselor</small></div></div>
+  <nav class="nav"><a class="on"><svg class="ico"><use href="#i-chart"/></svg>Dashboard</a><a><svg class="ico"><use href="#i-eye"/></svg>Student view</a><a><svg class="ico"><use href="#i-rocket"/></svg>Opportunities</a><a><svg class="ico"><use href="#i-users"/></svg>Teachers</a></nav>
+  <div class="demo"><b>School code · WFH-482</b>Share it with students to join your school.</div>
+</aside></template>
+
+<!-- 1 Teacher dashboard -->
+<section class="screen" id="teacher" data-side="teacher"><div class="main">
+  <header class="top"><div class="search"><svg class="ico"><use href="#i-search"/></svg>Search students</div><div class="sp"></div><span class="chipbar">Free trial · 9 days left</span></header>
+  <div class="content">
+    <div class="head"><div><p class="kick">Westfield High School</p><h1>What your students are curious about</h1></div><div class="btns"><span class="btn"><svg class="ico"><use href="#i-down"/></svg>Export</span><span class="btn out"><svg class="ico"><use href="#i-eye"/></svg>See student view</span><span class="btn pri"><svg class="ico"><use href="#i-plus"/></svg>Invite a teacher</span></div></div>
+    <div class="stats"><div class="stat s1"><small>Searches</small><b>5,602</b><span>+18% this month</span></div><div class="stat s2"><small>Active students</small><b>347</b><span>of 412 invited</span></div><div class="stat s3"><small>Conversations with mentors</small><b>1,312</b><span>avg. 3.8 per student</span></div></div>
+    <div class="g3">
+      <div class="card"><div class="card-h"><h3>Top searched careers</h3><small>See all</small></div>
+        <div class="kw"><span>Nursing</span><i style="width:100%;background:var(--coral)"></i><b>48</b></div>
+        <div class="kw"><span>Agriculture</span><i style="width:82%;background:var(--peach)"></i><b>39</b></div>
+        <div class="kw"><span>Game design</span><i style="width:66%;background:var(--pink)"></i><b>31</b></div>
+        <div class="kw"><span>Engineering</span><i style="width:52%;background:var(--grape)"></i><b>25</b></div>
+        <div class="kw"><span>Law</span><i style="width:38%;background:var(--sky)"></i><b>18</b></div>
+        <div class="kw" style="padding-bottom:18px"><span>Park ranger</span><i style="width:24%;background:var(--mint)"></i><b>11</b></div>
+      </div>
+      <div class="card"><div class="card-h"><h3>Top industries</h3><small>This semester</small></div>
+        <div class="ind"><span class="ic" style="background:#ffecec">💼</span><span><b>Business</b><div class="bar"><i style="width:80%;background:var(--coral)"></i></div></span><b>80%</b></div>
+        <div class="ind"><span class="ic" style="background:#e6f8f1">🩺</span><span><b>Health care</b><div class="bar"><i style="width:62%;background:var(--mint)"></i></div></span><b>62%</b></div>
+        <div class="ind"><span class="ic" style="background:#eaf1ff">💻</span><span><b>Technology</b><div class="bar"><i style="width:48%;background:var(--sky)"></i></div></span><b>48%</b></div>
+        <div class="ind"><span class="ic" style="background:#fff3d6">📚</span><span><b>Education</b><div class="bar"><i style="width:40%;background:var(--sun)"></i></div></span><b>40%</b></div>
+        <div class="ind" style="padding-bottom:18px"><span class="ic" style="background:#f1ebff">🎨</span><span><b>Arts &amp; media</b><div class="bar"><i style="width:22%;background:var(--grape)"></i></div></span><b>22%</b></div>
+      </div>
+      <div class="card"><div class="card-h"><h3>Questions they’re asking</h3><small>Show all</small></div>
+        <div class="q"><span class="av c" style="width:30px;height:30px;font-size:10px">EL</span><div><p>“Did you need to go to college to do what you do?”</p><small>Elena · to a Nurse Practitioner</small></div></div>
+        <div class="q"><span class="av b" style="width:30px;height:30px;font-size:10px">NT</span><div><p>“What’s the hardest part of your job?”</p><small>Nathan · to a Civil Engineer</small></div></div>
+        <div class="q"><span class="av d" style="width:30px;height:30px;font-size:10px">LU</span><div><p>“What can I do now to prepare for this career?”</p><small>Lucy · to a Game Designer</small></div></div>
+        <div class="q" style="padding-bottom:16px"><span class="av a" style="width:30px;height:30px;font-size:10px">JO</span><div><p>“How did you get your first internship?”</p><small>Joseph · to a Product Manager</small></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 2 Explore mentors -->
+<section class="screen" id="explore" data-side="student" data-nav="explore"><div class="main">
+  <header class="top"><div class="search"><svg class="ico"><use href="#i-search"/></svg>Search careers, industries or people</div><span class="btn sm"><svg class="ico" style="width:15px"><use href="#i-filter"/></svg>Filters</span><div class="sp"></div><span class="tag y">🔥 4-day streak</span></header>
+  <div class="content">
+    <p class="kick">Hi Maya 👋</p><h1>Mentors of the day</h1><p class="sub">Real people who love what they do, ready for your questions.</p>
+    <div class="chips"><span class="on">For you</span><span>🩺 Health care</span><span>💻 Technology</span><span>🎮 Game design</span><span>🌱 Agriculture</span><span>⚖️ Law</span><span>🎨 Arts</span><span>🏗️ Engineering</span></div>
+    <div class="mentors">
+      <div class="card m"><div class="cover" style="background:linear-gradient(120deg,#ff9a3c,#ff5a4e)"><span class="badge-day">Mentor of the day</span><span class="av c">AT</span></div><div class="body"><h3>Ashley Torres</h3><div class="mrole">Nurse Practitioner · City Hospital</div><p>“I help families understand their care. Ask me about night shifts, nursing school and what surprised me.”</p><div class="tags"><span class="tag g">Health care</span><span class="tag">No college debt</span></div><div class="act"><span class="btn pri sm">Message</span><span class="btn sm">Profile</span></div></div></div>
+      <div class="card m"><div class="cover" style="background:linear-gradient(120deg,#4f8cff,#8b5cf6)"><span class="av a">DK</span></div><div class="body"><h3>Daniel Kim</h3><div class="mrole">Game Designer · Indie studio</div><p>“I design levels for mobile games. I started by modding games in high school, happy to show you how.”</p><div class="tags"><span class="tag p">Game design</span><span class="tag b">Tech</span></div><div class="act"><span class="btn pri sm">Message</span><span class="btn sm">Profile</span></div></div></div>
+      <div class="card m"><div class="cover" style="background:linear-gradient(120deg,#3ccfa0,#4f8cff)"><span class="av b">PS</span></div><div class="body"><h3>Priya Shah</h3><div class="mrole">Civil Engineer · Transit agency</div><p>“I plan bridges and bike lanes. Ask me what engineers actually do all day — it’s not just math.”</p><div class="tags"><span class="tag b">Engineering</span><span class="tag y">Internships</span></div><div class="act"><span class="btn pri sm">Message</span><span class="btn sm">Profile</span></div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 3 Messages -->
+<section class="screen" id="messages" data-side="student" data-nav="msg"><div class="main">
+  <div class="msgs">
+    <div class="thread-list"><div style="padding:24px 18px 12px"><h1 style="font-size:24px">Messages</h1><p class="sub">Chat with mentors, ask anything.</p></div>
+      <div class="th on"><span class="av c">AT</span><div><b>Ashley Torres</b><small>Night shifts are long, but…</small></div><span class="t">Just now</span></div>
+      <div class="th"><span class="av a">DK</span><div><b>Daniel Kim</b><small>You: Thanks for the tips!</small></div><span class="t">2h</span></div>
+      <div class="th"><span class="av b">PS</span><div><b>Priya Shah</b><small>Here’s the internship link</small></div><span class="t">Mon</span></div>
+      <div class="th"><span class="av d">RM</span><div><b>Rafael Mendes</b><small>Happy to answer that</small></div><span class="t">Mar 18</span></div>
+    </div>
+    <div class="chat">
+      <div class="day">Today · 4:12 PM</div>
+      <div class="bub out">Hi Ashley! Did you need to go to college to become a nurse?</div>
+      <div class="bub in">Great question! I started with a 2-year nursing degree at a community college, worked as an RN, then went back for my master’s while working. 💪</div>
+      <div class="bub in">Night shifts are long, but you get to know your patients really well. Want me to tell you what a normal shift looks like?</div>
+      <div class="bub out">Yes please! And what classes should I take now?</div>
+      <div class="prompt"><span>✨ What surprised you most?</span><span>✨ How much does it pay?</span><span>✨ Can I shadow you?</span></div>
+      <div class="composer">Write a message…<span class="send"><svg class="ico"><use href="#i-send"/></svg></span></div>
+    </div>
+    <div class="profile"><span class="av c">AT</span><h3>Ashley Torres</h3><div style="color:var(--body);font-size:12.5px">Nurse Practitioner</div>
+      <div class="tags" style="margin-top:12px"><span class="tag g">Health care</span><span class="tag">Mentor of the day</span></div>
+      <div class="kv"><div><small>Path</small>Community college → RN → MSN</div><div><small>Favorite part</small>Helping families feel calm</div><div><small>Replies</small>Usually within a day</div></div>
+      <span class="btn out" style="width:100%;justify-content:center;margin-top:16px"><svg class="ico"><use href="#i-bm"/></svg>Save mentor</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- 4 Opportunities -->
+<section class="screen" id="opps" data-side="student" data-nav="opp"><div class="main">
+  <header class="top"><div class="search"><svg class="ico"><use href="#i-search"/></svg>Search internships, shadowing, apprenticeships</div><span class="btn sm"><svg class="ico" style="width:15px"><use href="#i-filter"/></svg>Filters</span><div class="sp"></div></header>
+  <div class="content">
+    <div class="head"><div><p class="kick">Opportunities</p><h1>Try a career before you choose it</h1><p class="sub">Internships, job shadowing and apprenticeships near you.</p></div></div>
+    <div class="chips" style="margin-top:0"><span class="on">All</span><span>Job shadowing</span><span>Internships</span><span>Apprenticeships</span><span>Summer programs</span><span>📍 Near me</span></div>
+    <div class="opps">
+      <div class="card op"><div class="op-h"><span class="lg" style="background:linear-gradient(135deg,#3ccfa0,#4f8cff)">🩺</span><div><h3>Hospital volunteer program</h3><div class="org">City Hospital · <svg class="ico" style="width:13px;display:inline;vertical-align:-2px"><use href="#i-pin"/></svg> 3 mi away</div></div><span class="save on"><svg class="ico"><use href="#i-bm"/></svg></span></div><p>Spend Saturdays shadowing nurses in pediatrics and the emergency room. Ages 16+.</p><div class="tags"><span class="tag g">Health care</span><span class="tag y">Weekends</span><span class="tag">High school</span></div><div class="op-f"><span class="new">NEW</span><span class="btn pri sm">Learn more</span></div></div>
+      <div class="card op"><div class="op-h"><span class="lg" style="background:linear-gradient(135deg,#ff9a3c,#ff3d7f)">🎮</span><div><h3>Summer game jam internship</h3><div class="org">Pixel Harbor Studio · Remote</div></div><span class="save"><svg class="ico"><use href="#i-bm"/></svg></span></div><p>Six weeks building a small game with a team of designers and developers. Portfolio included.</p><div class="tags"><span class="tag p">Game design</span><span class="tag b">Remote</span><span class="tag">Paid</span></div><div class="op-f"><span style="color:var(--muted);font-size:12px">Apply by May 15</span><span class="btn pri sm">Learn more</span></div></div>
+      <div class="card op"><div class="op-h"><span class="lg" style="background:linear-gradient(135deg,#ffd166,#ff9a3c)">🌱</span><div><h3>Urban farm apprenticeship</h3><div class="org">Green Roots Co-op · <svg class="ico" style="width:13px;display:inline;vertical-align:-2px"><use href="#i-pin"/></svg> 5 mi away</div></div><span class="save"><svg class="ico"><use href="#i-bm"/></svg></span></div><p>Learn sustainable farming, from seed to market stand. School credit available.</p><div class="tags"><span class="tag g">Agriculture</span><span class="tag y">School credit</span></div><div class="op-f"><span style="color:var(--muted);font-size:12px">Applications anytime</span><span class="btn pri sm">Learn more</span></div></div>
+      <div class="card op"><div class="op-h"><span class="lg" style="background:linear-gradient(135deg,#8b5cf6,#4f8cff)">⚖️</span><div><h3>Courtroom shadow day</h3><div class="org">County Legal Aid · Downtown</div></div><span class="save"><svg class="ico"><use href="#i-bm"/></svg></span></div><p>Shadow a public defender for a day and sit in on real hearings with a mentor.</p><div class="tags"><span class="tag b">Law</span><span class="tag">One day</span></div><div class="op-f"><span class="new">NEW</span><span class="btn pri sm">Learn more</span></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5 Trials -->
+<section class="screen" id="trials" data-side="teacher"><div class="main">
+  <header class="top"><div class="sp"></div><span class="chipbar">Trial 2 of 3 · 9 days left</span></header>
+  <div class="content">
+    <div class="head"><div><p class="kick">Your school plan</p><h1>Three ways to keep exploring</h1><p class="sub">Each free trial lasts 14 days. Earn the next one, or bring your whole school on board.</p></div></div>
+    <div class="trials">
+      <div class="card tr done"><span class="arrow">→</span><span class="n">✓</span><h3>Trial 1</h3><p>14 days of full access for your class.</p><div class="meter"><i style="width:100%;background:var(--mint)"></i></div><div class="unlock"><b>Completed</b>Mar 1 – Mar 14</div></div>
+      <div class="card tr now"><span class="arrow">→</span><span class="n">2</span><h3>Trial 2</h3><p>Unlocked by answering a 3-minute survey.</p><div class="meter"><i style="width:36%"></i></div><div class="unlock"><b>In progress</b>9 days left · 47 students active</div></div>
+      <div class="card tr"><span class="arrow">→</span><span class="n">3</span><h3>Trial 3</h3><p>Invite another teacher to unlock 14 more days.</p><div class="meter"><i style="width:0"></i></div><div class="unlock"><b>To unlock</b>Refer 1 teacher <span class="btn sm out" style="margin-top:8px">Invite</span></div></div>
+      <div class="card tr lock"><span class="n">★</span><h3>Premium</h3><p>Unlimited mentors, messages and opportunities for every student.</p><div class="meter"><i style="width:0"></i></div><div class="unlock"><b>Through your school</b>Your school or district activates it</div></div>
+    </div>
+    <div class="banner"><div><h3>Want Spark for the whole school?</h3><p>Share this link with your principal or district. We’ll take it from there.</p></div><div class="link">spark.example/request/WFH-482<span class="btn sm"><svg class="ico" style="width:14px"><use href="#i-copy"/></svg>Copy</span></div></div>
+  </div>
+</div></section>
+
+<!-- 6 Onboarding -->
+<section class="screen onb" id="onboard">
+  <div class="onb-l">
+    <div class="logo" style="padding:0 0 30px"><i></i>Spark</div>
+    <div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+    <h1>Join your school on Spark</h1><p class="sub">Spark is invite-only. Pick your role and enter the code your school shared with you.</p>
+    <div class="roles"><div class="role on"><span class="e">🎒</span><b>Student</b>Explore careers</div><div class="role"><span class="e">🍎</span><b>Teacher</b>Guide your class</div><div class="role"><span class="e">💼</span><b>Mentor</b>Share your story</div></div>
+    <div class="field"><label>School code</label><div class="code"><span>W</span><span>F</span><span>H</span><span>4</span><span class="f">|</span><span></span></div></div>
+    <p style="color:var(--muted);font-size:12.5px;margin:14px 0 22px">Don’t have a code? Ask your teacher or career counselor.</p>
+    <span class="btn pri" style="justify-content:center;height:50px;font-size:15px">Continue</span>
+  </div>
+  <div class="onb-r">
+    <i class="blob" style="width:420px;height:420px;right:-120px;top:-120px"></i><i class="blob" style="width:260px;height:260px;left:-80px;top:220px"></i>
+    <div class="bubble" style="left:70px;top:90px"><span class="av c">AT</span><div><b>Ashley · Nurse Practitioner</b><small>“Ask me about night shifts!”</small></div></div>
+    <div class="bubble" style="right:60px;top:220px"><span class="av a">DK</span><div><b>Daniel · Game Designer</b><small>“I started by modding games”</small></div></div>
+    <div class="bubble" style="left:120px;top:350px"><span class="av b">PS</span><div><b>Priya · Civil Engineer</b><small>“It’s not just math, promise”</small></div></div>
+    <div class="big"><h2>Find what you love<br>before you choose it.</h2><p>Talk to real people about real jobs, then try one out.</p></div>
+  </div>
+</section>
+
+<script>
+  const id = new URLSearchParams(location.search).get('s') || 'teacher';
+  const s = document.getElementById(id);
+  if (s.dataset.side) { const t = document.getElementById('side-' + s.dataset.side).content.cloneNode(true); if (s.dataset.nav) t.querySelector(`[data-k="${s.dataset.nav}"]`)?.classList.add('on'); s.prepend(t); }
+  s.classList.add('on');
+</script>
+</body>
+</html>

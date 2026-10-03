@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Brand boards</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rubik:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+:root { --pu:#705cf6; --dp:#38327c; --lp:#c5bdfa; --lime:#d4f53c; --bk:#0b0b0d; }
+* { box-sizing:border-box; } html,body { margin:0; }
+body { width:1440px; background:#111114; color:#fff; font:14px/1.45 Inter, sans-serif; -webkit-font-smoothing:antialiased; }
+.board { display:none; padding:48px 56px 56px; } .board.on { display:block; }
+.mark { display:inline-flex; align-items:center; letter-spacing:-.02em; }
+.mark .a { font-weight:300; } .mark .s { display:inline-block; width:.16em; height:.86em; margin:0 .12em; background:var(--pu); transform:skewX(-22deg); } .mark .b { font-weight:800; }
+.g { display:grid; gap:18px; } .card { border-radius:22px; padding:28px; position:relative; overflow:hidden; }
+.k { margin:0 0 14px; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; opacity:.6; }
+.sw i { display:block; height:110px; border-radius:16px; }
+.sw b { display:block; margin-top:10px; font-size:14px; } .sw small { font:500 11.5px ui-monospace,monospace; opacity:.6; }
+.no { position:relative; display:grid; place-items:center; height:120px; border-radius:14px; background:#fff; color:#111; font-size:26px; }
+.no::after { content:"✕"; position:absolute; top:10px; right:12px; display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:#f6d4d1; color:#a32d2d; font-size:11px; font-weight:800; }
+.yes::after { content:"✓"; background:#dff5e3; color:#1f7a3a; }
+.grid-bg { background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:40px 40px; }
+</style>
+</head>
+<body>
+<section class="board" id="identity">
+  <div class="g" style="grid-template-columns:1.4fr 1fr">
+    <div class="card grid-bg" style="background-color:var(--bk);min-height:420px;display:flex;flex-direction:column;justify-content:space-between">
+      <span class="k" style="opacity:1;color:var(--lp)">Brand guidelines</span>
+      <div class="mark" style="font-size:118px;line-height:.9"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div>
+      <span style="opacity:.6">A no-code and low-code product studio</span>
+    </div>
+    <div class="g" style="grid-template-rows:1fr 1fr">
+      <div class="card" style="background:var(--pu)"><p class="k" style="opacity:.8">Mission</p><div style="font:800 34px/1.05 Inter;letter-spacing:-.03em">Make custom software possible for teams that don’t have developers.</div></div>
+      <div class="card" style="background:#fff;color:#111;display:grid;place-items:center"><div class="mark" style="font-size:64px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div>
+    </div>
+  </div>
+  <div class="g" style="grid-template-columns:repeat(4,1fr);margin-top:18px">
+    <div class="card" style="background:#000;display:grid;place-items:center;height:150px"><div class="mark" style="font-size:34px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div>
+    <div class="card" style="background:#fff;color:#111;display:grid;place-items:center;height:150px"><div class="mark" style="font-size:24px;flex-direction:column;align-items:flex-start;line-height:1"><span class="a">SHIP<span class="s" style="height:.8em"></span></span><span class="b">FAST</span></div></div>
+    <div class="card" style="background:var(--dp);display:grid;place-items:center;height:150px"><div class="mark" style="font-size:34px"><span class="a">SHIP</span><span class="s" style="background:var(--lime)"></span><span class="b" style="color:var(--lime)">FAST</span></div></div>
+    <div class="card" style="background:#1b1b20;display:flex;gap:18px;align-items:center;justify-content:center;height:150px"><i style="width:22px;height:80px;background:#fff;transform:skewX(-22deg)"></i><i style="width:22px;height:80px;background:var(--pu);transform:skewX(-22deg)"></i><i style="width:22px;height:80px;border:3px solid var(--lp);transform:skewX(-22deg)"></i></div>
+  </div>
+</section>
+
+<section class="board" id="system">
+  <div class="g" style="grid-template-columns:1.1fr 1fr">
+    <div class="card" style="background:#1b1b20"><p class="k">Color</p>
+      <div class="g sw" style="grid-template-columns:repeat(4,1fr)"><div><i style="background:#705cf6"></i><b>Purple</b><small>#705CF6</small></div><div><i style="background:#000;border:1px solid #333"></i><b>Black</b><small>#000000</small></div><div><i style="background:#fff"></i><b>White</b><small>#FFFFFF</small></div><div><i style="background:#d9d9d9"></i><b>Gray light</b><small>#D9D9D9</small></div></div>
+      <div class="g sw" style="grid-template-columns:repeat(4,1fr);margin-top:18px"><div><i style="background:#38327c;height:70px"></i><b>Dark purple</b><small>#38327C</small></div><div><i style="background:#c5bdfa;height:70px"></i><b>Light purple</b><small>#C5BDFA</small></div><div><i style="background:#d4f53c;height:70px"></i><b>Lime</b><small>accent</small></div><div><i style="background:#7a7a86;height:70px"></i><b>Dark gray</b><small>#7A7A86</small></div></div>
+    </div>
+    <div class="card" style="background:var(--pu)"><p class="k" style="opacity:.8">Type</p>
+      <div style="font:800 54px/1 Inter;letter-spacing:-.03em">Inter</div><div style="opacity:.85;margin:6px 0 18px">Extra bold to thin, for everything written</div>
+      <div style="display:flex;gap:18px;font:400 30px Inter"><span style="font-weight:800">Aa</span><span style="font-weight:600">Aa</span><span>Aa</span><span style="font-weight:300">Aa</span></div>
+      <div style="margin-top:28px;font:700 54px/1 Rubik">Rubik 128</div><div style="opacity:.85;margin-top:6px">Numbers, stats and step markers</div>
+    </div>
+  </div>
+  <div class="card" style="background:#1b1b20;margin-top:18px"><p class="k">Logo rules</p>
+    <div class="g" style="grid-template-columns:repeat(5,1fr)">
+      <div class="no yes"><div class="mark"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div>
+      <div class="no"><div class="mark" style="transform:rotate(-24deg)"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div>
+      <div class="no"><div class="mark" style="color:#e0b400"><span class="a">SHIP</span><span class="s" style="background:#e0b400"></span><span class="b">FAST</span></div></div>
+      <div class="no"><div class="mark" style="transform:scaleX(1.5)"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div>
+      <div class="no"><div class="mark" style="-webkit-text-stroke:1px #111;color:transparent"><span class="a">SHIP</span><span class="s" style="background:transparent;border:1px solid #111"></span><span class="b">FAST</span></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:10px;font-size:12.5px;opacity:.7"><span>Use as is</span><span>Don’t rotate</span><span>Don’t recolor</span><span>Don’t stretch</span><span>Don’t remove the fill</span></div>
+  </div>
+</section>
+<script>document.getElementById(new URLSearchParams(location.search).get('s') || 'identity').classList.add('on');</script>
+</body>
+</html>

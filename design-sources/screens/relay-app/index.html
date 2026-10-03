@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Relay — screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --b50:#f0faff; --b100:#d6f1fe; --b500:#03a9fc; --b700:#0277b6; --b800:#01568a; --b900:#013e66;
+  --n900:#0c2647; --n700:#1e3655; --n600:#2b3d58; --n500:#445469;
+  --ink:#0f1b2d; --body:#3d4a5c; --muted:#6c7889; --line:#e2e7ee; --line2:#eef1f5; --bg:#f4f6f9; --white:#fff;
+  --ok:#3f8a1f; --ok-bg:#ecf6e5; --warn:#b06a0e; --warn-bg:#fdf3e3; --err:#b42d2d; --err-bg:#fcecec; --info:#1d5fa8; --info-bg:#e9f1fb; --pend:#4b6fe0; --pend-bg:#edf1fd; --neu:#6c757d; --neu-bg:#eef0f2;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing:border-box; }
+html,body { margin:0; }
+body { width:1440px; height:900px; overflow:hidden; background:var(--bg); color:var(--ink); font:14px/1.45 Inter, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+.screen { display:none; width:1440px; height:900px; }
+.screen.on { display:flex; flex-direction:column; }
+svg.ico { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+
+/* Top nav */
+.top { display:flex; align-items:center; gap:30px; height:66px; padding:0 36px; background:#fff; border-bottom:1px solid var(--line); }
+.logo { display:flex; align-items:center; gap:9px; font-size:20px; font-weight:800; letter-spacing:-.03em; }
+.mark { position:relative; width:28px; height:28px; border-radius:9px; background:var(--n700); overflow:hidden; }
+.mark::before, .mark::after { content:""; position:absolute; top:7px; width:14px; height:14px; border-radius:50%; border:3px solid var(--b500); }
+.mark::before { left:3px; } .mark::after { left:11px; border-color:#fff; border-left-color:transparent; border-bottom-color:transparent; transform:rotate(45deg); }
+.top nav { display:flex; gap:4px; }
+.top nav span { padding:8px 13px; border-radius:9px; color:var(--body); font-weight:500; font-size:13.5px; }
+.top nav span.on { color:var(--b700); font-weight:650; background:var(--b50); }
+.top .sp { flex:1; }
+.tenant { display:flex; align-items:center; gap:8px; padding:6px 10px 6px 6px; border:1px solid var(--line); border-radius:11px; font-size:12.5px; }
+.tenant i { display:grid; place-items:center; width:26px; height:26px; border-radius:7px; background:var(--n700); color:#fff; font-style:normal; font-size:10.5px; font-weight:700; }
+.tenant b { display:block; font-size:12.5px; } .tenant small { color:var(--muted); font-size:10.5px; }
+.rb { display:inline-flex; align-items:center; padding:2px 8px; border-radius:6px; font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; }
+.rb.msp { background:#e8ecf5; color:var(--n700); } .rb.co { background:#f1ebfb; color:#6b45b8; } .rb.br { background:#e6f4f2; color:var(--b800); } .rb.pa { background:#fbeef4; color:#a33d6b; }
+.av { display:grid; place-items:center; flex:none; width:32px; height:32px; border-radius:50%; background:var(--n700); color:#fff; font-size:11px; font-weight:700; }
+.av.t { background:var(--b100); color:var(--b800); } .av.p { background:#efe9fb; color:#6b45b8; } .av.o { background:var(--warn-bg); color:var(--warn); } .av.g { background:var(--neu-bg); color:var(--neu); }
+.avs { display:flex; } .avs .av { width:26px; height:26px; margin-left:-7px; border:2px solid #fff; font-size:9.5px; } .avs .av:first-child { margin-left:0; }
+
+.page { flex:1; padding:26px 36px; overflow:hidden; }
+.head { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:18px; }
+.crumb { margin:0 0 4px; color:var(--muted); font-size:12px; }
+h1 { margin:0; font-size:28px; font-weight:750; letter-spacing:-.8px; }
+.sub { margin:4px 0 0; color:var(--muted); font-size:13px; }
+.btn { display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 15px; border:1px solid var(--line); border-radius:10px; background:#fff; color:var(--n700); font:600 13px Inter; white-space:nowrap; }
+.btn.cta { border-color:var(--b700); background:var(--b700); color:#fff; }
+.btn.navy { border-color:var(--n700); background:var(--n700); color:#fff; }
+.btn.danger { border-color:var(--err); background:var(--err); color:#fff; }
+.btn.sm { height:30px; padding:0 11px; font-size:12px; border-radius:8px; }
+.btns { display:flex; gap:10px; align-items:center; }
+.card { background:#fff; border:1px solid var(--line); border-radius:16px; }
+.tabs { display:flex; gap:6px; }
+.tab { display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 15px; border:1px solid var(--line); border-radius:99px; background:#fff; color:var(--body); font-weight:600; font-size:13px; }
+.tab em { padding:0 7px; border-radius:10px; background:var(--neu-bg); color:var(--muted); font-size:11px; font-style:normal; }
+.tab.on { border-color:var(--n700); background:var(--n700); color:#fff; }
+.tab.on em { background:rgba(255,255,255,.2); color:#fff; }
+.utabs { display:flex; gap:22px; border-bottom:1px solid var(--line); }
+.utabs span { padding:10px 0; color:var(--muted); font-weight:600; font-size:13px; }
+.utabs span.on { color:var(--b700); box-shadow:inset 0 -2px 0 var(--b700); }
+.search { display:flex; align-items:center; gap:9px; width:280px; height:38px; padding:0 12px; border:1px solid var(--line); border-radius:10px; background:#fff; color:var(--muted); font-size:13px; }
+.pill { display:inline-flex; align-items:center; gap:6px; padding:3px 9px; border-radius:99px; font-size:11.5px; font-weight:650; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok { background:var(--ok-bg); color:var(--ok); } .pill.warn { background:var(--warn-bg); color:var(--warn); } .pill.err { background:var(--err-bg); color:var(--err); } .pill.info { background:var(--info-bg); color:var(--info); } .pill.pend { background:var(--pend-bg); color:var(--pend); } .pill.neu { background:var(--neu-bg); color:var(--neu); }
+.pill.flat::before { display:none; }
+.id { display:inline-flex; padding:3px 8px; border-radius:7px; background:var(--neu-bg); color:var(--n700); font:700 11.5px var(--mono); }
+.mono { font-family:var(--mono); }
+
+/* Order cards */
+.group-h { display:flex; align-items:center; gap:10px; margin:6px 0 12px; font-size:13px; font-weight:700; }
+.group-h small { color:var(--muted); font-weight:500; }
+.grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
+.oc { position:relative; display:flex; flex-direction:column; padding:16px 18px 14px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 1px 2px rgba(15,27,45,.04); }
+.oc.final { box-shadow:inset 3px 0 0 var(--err), 0 1px 2px rgba(15,27,45,.04); }
+.oc.soon { box-shadow:inset 3px 0 0 var(--warn), 0 1px 2px rgba(15,27,45,.04); }
+.oc-h { display:flex; align-items:center; justify-content:space-between; }
+.oc h3 { margin:12px 0 2px; font-size:16.5px; font-weight:700; letter-spacing:-.02em; }
+.oc .meta { color:var(--muted); font-size:12px; }
+.oc .meta b { color:var(--body); font-weight:600; }
+.note { display:flex; align-items:center; gap:7px; margin-top:10px; padding:7px 10px; border-radius:9px; font-size:11.5px; font-weight:600; }
+.note.warn { background:var(--warn-bg); color:#8a520a; } .note.err { background:var(--err-bg); color:#962424; }
+.fill { display:flex; align-items:center; gap:16px; margin-top:14px; padding-top:14px; border-top:1px solid var(--line2); }
+.donut { position:relative; width:74px; height:74px; flex:none; }
+.donut svg { width:74px; height:74px; transform:rotate(-90deg); }
+.donut circle { fill:none; stroke-width:7; }
+.donut .t { stroke:var(--line2); } .donut .v { stroke:var(--b500); stroke-linecap:round; }
+.donut.warnc .v { stroke:var(--warn); } .donut.errc .v { stroke:var(--err); } .donut.okc .v { stroke:var(--ok); }
+.donut b { position:absolute; inset:0; display:grid; place-items:center; align-content:center; font:700 16px var(--mono); line-height:1.1; }
+.donut b small { font:600 8.5px Inter; color:var(--muted); letter-spacing:.08em; }
+.kv small { display:block; color:var(--muted); font-size:9.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.kv b { display:block; margin-bottom:6px; font:700 14px var(--mono); }
+.kv b.err { color:var(--err); }
+.oc-f { display:flex; align-items:center; justify-content:space-between; margin-top:14px; }
+.ib { display:grid; place-items:center; width:32px; height:32px; border-radius:9px; background:var(--b50); color:var(--b700); }
+
+/* Status model screen */
+.cols { display:grid; grid-template-columns:1fr 380px; gap:18px; }
+table { width:100%; border-collapse:collapse; }
+th { padding:11px 14px; background:#f8fafc; border-bottom:1px solid var(--line); color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.06em; text-align:left; text-transform:uppercase; }
+td { padding:12px 14px; border-bottom:1px solid var(--line2); color:var(--body); font-size:13px; vertical-align:middle; }
+td b { color:var(--ink); font-weight:650; } td small { display:block; color:var(--muted); font-size:11.5px; }
+.src { display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:12px; }
+.modal-wrap { position:relative; }
+.scrim { position:absolute; inset:0; border-radius:16px; background:rgba(11,26,51,.32); }
+.modal { position:absolute; left:50%; top:50%; width:440px; padding:22px; border-radius:18px; background:#fff; transform:translate(-50%,-50%); box-shadow:0 30px 70px rgba(11,26,51,.28); }
+.modal h3 { margin:12px 0 6px; font-size:18px; letter-spacing:-.02em; }
+.modal p { margin:0 0 14px; color:var(--body); font-size:13px; }
+.opt { display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); border-radius:11px; font-size:13px; }
+.opt i { width:16px; height:16px; border:2px solid #b8c1cd; border-radius:50%; }
+.opt.on { border-color:var(--b700); background:var(--b50); } .opt.on i { border:5px solid var(--b700); }
+.ta { height:64px; padding:10px 12px; margin:10px 0 14px; border:1px solid var(--b700); border-radius:11px; box-shadow:0 0 0 4px var(--b100); color:var(--body); font-size:12.5px; }
+.callout { display:flex; gap:10px; padding:12px 14px; border-radius:12px; background:var(--info-bg); color:#174d8a; font-size:12.5px; }
+.rule { padding:16px 18px; border-left:3px solid var(--b700); border-radius:0 12px 12px 0; background:#fff; }
+
+/* Order detail */
+.sticky { display:flex; align-items:center; gap:22px; padding:14px 20px; margin-bottom:16px; border-radius:16px; background:var(--n700); color:#fff; }
+.sticky .id { background:rgba(255,255,255,.14); color:#fff; }
+.sticky h2 { margin:0; font-size:18px; letter-spacing:-.02em; }
+.sticky small { color:#b9c6da; font-size:12px; }
+.sticky .stat { padding-left:20px; border-left:1px solid rgba(255,255,255,.16); }
+.sticky .stat b { display:block; font:700 15px var(--mono); }
+.sticky .stat small { font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+.bar { height:6px; border-radius:6px; background:var(--line2); overflow:hidden; } .bar i { display:block; height:100%; background:var(--b500); border-radius:6px; }
+.dcols { display:grid; grid-template-columns:1fr 330px; gap:16px; }
+.br-row { display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr 120px; align-items:center; gap:14px; padding:13px 18px; border-top:1px solid var(--line2); font-size:13px; }
+.br-row > .pill { justify-self:start; }
+.br-row.h { border-top:0; padding-top:4px; padding-bottom:8px; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.team { padding:6px 0; }
+.mem { display:flex; align-items:center; gap:11px; padding:10px 18px; }
+.mem b { display:block; font-size:13px; } .mem small { color:var(--muted); font-size:11.5px; }
+.mem .rb { margin-left:auto; }
+.sec-t { padding:16px 18px 4px; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.cand { display:flex; align-items:center; gap:12px; padding:11px 18px; border-top:1px solid var(--line2); }
+.cand b { display:block; font-size:13px; } .cand small { color:var(--muted); font-size:11.5px; }
+.cand .pill { margin-left:auto; }
+
+/* Company view */
+.co-wrap { display:grid; grid-template-columns:1fr 360px; gap:18px; }
+.req { padding:22px; }
+.steps { display:grid; grid-template-columns:repeat(4,1fr); margin:20px 0 6px; }
+.st { position:relative; text-align:center; font-size:12px; color:var(--muted); }
+.st::before { content:""; position:absolute; top:13px; left:-50%; right:50%; height:3px; background:var(--line); }
+.st:first-child::before { display:none; }
+.st.done::before, .st.now::before { background:var(--b500); }
+.st i { position:relative; z-index:1; display:grid; place-items:center; width:28px; height:28px; margin:0 auto 8px; border-radius:50%; border:2px solid var(--line); background:#fff; font-style:normal; font-weight:700; font-size:12px; }
+.st.done i { background:var(--b500); border-color:var(--b500); color:#fff; }
+.st.now i { border-color:var(--b700); color:var(--b700); box-shadow:0 0 0 5px var(--b100); }
+.st b { display:block; color:var(--ink); font-size:12.5px; }
+.review { display:flex; align-items:center; gap:14px; padding:14px 22px; border-top:1px solid var(--line2); }
+.review b { display:block; } .review small { color:var(--muted); font-size:12px; }
+.review .btns { margin-left:auto; }
+.hidden-note { display:flex; gap:10px; margin:14px 0 0; padding:12px 14px; border:1px dashed #c9d2de; border-radius:12px; color:var(--muted); font-size:12.5px; }
+
+/* Design system board */
+.ds { display:grid; grid-template-columns:1.1fr 1fr 1fr; grid-template-rows:auto auto; gap:16px; padding:28px 36px; flex:1; }
+.ds .card { padding:20px; }
+.ds h4 { margin:0 0 14px; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.sw-row { display:flex; gap:10px; }
+.sw { flex:1; }
+.sw i { display:block; height:64px; border-radius:12px; border:1px solid rgba(0,0,0,.05); }
+.sw b { display:block; margin-top:8px; font-size:12.5px; } .sw small { display:block; color:var(--muted); font:500 11px var(--mono); }
+.ratio { display:flex; align-items:center; gap:10px; margin-top:14px; padding:10px 12px; border-radius:11px; font-size:12.5px; }
+.ratio.bad { background:var(--err-bg); color:#962424; } .ratio.good { background:var(--ok-bg); color:#2f6a16; }
+.ratio b { font-family:var(--mono); }
+.scale { display:flex; height:30px; margin-top:12px; border-radius:9px; overflow:hidden; }
+.scale i { flex:1; }
+.btn-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.btn-grid .btn { justify-content:center; }
+.btn.ghost { border-color:transparent; background:transparent; color:var(--b700); }
+.btn.sec { border-color:var(--b700); color:var(--b700); }
+.dens { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.dens div { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+.dens span { display:flex; align-items:center; justify-content:space-between; padding:0 12px; border-top:1px solid var(--line2); font-size:12px; color:var(--body); }
+.dens span:first-child { border-top:0; background:#f8fafc; color:var(--muted); font-size:10.5px; font-weight:700; letter-spacing:.06em; }
+.dens .c span { height:44px; } .dens .d span { height:32px; }
+.rules p { display:flex; gap:10px; margin:0 0 10px; font-size:12.5px; color:var(--body); }
+.rules p::before { content:"→"; color:var(--b700); font-weight:700; }
+.type-row { display:flex; align-items:baseline; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--line2); }
+.type-row small { color:var(--muted); font:500 11px var(--mono); }
+
+/* Training */
+.train { flex:1; display:grid; grid-template-columns:1fr 360px; gap:18px; padding:26px 36px; }
+.stage { position:relative; overflow:hidden; border-radius:20px; background:radial-gradient(60% 70% at 40% 30%, #e7f7f4, #f4f6f9 70%); border:1px solid var(--line); }
+.node { position:absolute; display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 10px 30px rgba(11,26,51,.08); font-size:12px; }
+.node b { display:block; font-size:13px; } .node small { color:var(--muted); }
+.node .ni { display:grid; place-items:center; width:34px; height:34px; border-radius:10px; background:var(--b50); color:var(--b700); }
+.node.active { border-color:var(--b700); box-shadow:0 0 0 5px var(--b100), 0 10px 30px rgba(11,26,51,.1); }
+.node.dim { opacity:.45; }
+.wire { position:absolute; inset:0; }
+.narr { position:absolute; left:28px; bottom:28px; width:420px; padding:20px; border-radius:16px; background:#fff; box-shadow:0 20px 50px rgba(11,26,51,.12); }
+.narr small { color:var(--b700); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.narr h3 { margin:6px 0 6px; font-size:20px; letter-spacing:-.02em; }
+.narr p { margin:0; color:var(--body); font-size:13px; }
+.ctrl { position:absolute; right:24px; bottom:28px; display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:99px; background:#fff; box-shadow:0 10px 30px rgba(11,26,51,.1); font-size:12px; color:var(--muted); }
+.ctrl i { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--neu-bg); color:var(--n700); font-style:normal; font-size:12px; }
+.ctrl i.on { background:var(--b700); color:#fff; }
+.progress { position:absolute; top:22px; left:28px; right:28px; display:flex; gap:5px; }
+.progress i { flex:1; height:4px; border-radius:4px; background:var(--line); } .progress i.on { background:var(--b700); }
+.jlist .j { display:flex; align-items:center; gap:12px; padding:14px 18px; border-top:1px solid var(--line2); }
+.jlist .j:first-of-type { border-top:0; }
+.jlist .j b { display:block; font-size:13.5px; } .jlist .j small { color:var(--muted); font-size:11.5px; }
+.jlist .j.on { background:var(--b50); }
+.jlist .num { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:var(--neu-bg); color:var(--n700); font:700 11px var(--mono); }
+.jlist .j.on .num { background:var(--b700); color:#fff; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20zM12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V4h11v17M15 9h5v12M2 21h20M8 8h3M8 12h3M8 16h3"/></symbol>
+  <symbol id="i-hub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="20" r="2"/><path d="m7 7 3 3M17 7l-3 3M12 15v3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14a6 6 0 0 1 3 6"/></symbol>
+  <symbol id="i-time" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+</svg>
+
+<template id="top">
+  <header class="top">
+    <div class="logo"><span class="mark"></span>Relay</div>
+    <nav><span>Dashboard</span><span>Companies</span><span data-k="orders">Manage orders</span><span>Candidates</span><span>Reports</span><span>Users &amp; roles</span></nav>
+    <div class="sp"></div>
+    <div class="tenant"><i>WC</i><div><b>Westcoast Staffing MSP</b><small>Main agency · all branches</small></div></div>
+    <span class="rb msp">MSP</span>
+    <span class="av">AV</span>
+  </header>
+</template>
+
+<!-- 1. Manage orders with urgency -->
+<section class="screen" id="manage" data-top="orders">
+  <div class="page">
+    <div class="head">
+      <div class="tabs"><span class="tab">Pending <em>4</em></span><span class="tab on">Open <em>12</em></span><span class="tab">Closed <em>34</em></span><span class="tab">Voided <em>2</em></span></div>
+      <div class="btns"><span class="search"><svg class="ico"><use href="#i-search"/></svg>Search order #</span><span class="btn"><svg class="ico"><use href="#i-filter"/></svg>Filters</span><span class="btn cta"><svg class="ico"><use href="#i-plus"/></svg>New service order</span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><div><h1>Open orders</h1><p class="sub">Active orders that can still be filled.</p></div><span style="color:var(--muted);font-size:12.5px">Sorted by time left · 3 closing soon</span></div>
+    <div class="group-h">Closing soon <span class="pill warn flat">3 orders</span></div>
+    <div class="grid">
+      <div class="oc final"><div class="oc-h"><span class="id">JO-183-1</span><span class="pill err">Final hours</span></div><h3>Picker / Packer</h3><div class="meta">Shift 1 · 9:00 AM · <b>Harbor Logistics</b></div><div class="note err"><svg class="ico" style="width:15px;height:15px"><use href="#i-alert"/></svg>8h 12m left · 5 positions open · affects fill rate</div><div class="fill"><div class="donut errc"><svg viewBox="0 0 74 74"><circle class="t" cx="37" cy="37" r="31"/><circle class="v" cx="37" cy="37" r="31" stroke-dasharray="194.8" stroke-dasharray="194.8" stroke-dashoffset="162"/></svg><b>1/6<small>FILLED</small></b></div><div class="kv"><small>Time left</small><b class="err">8h 12m</b><small>Still needed</small><b>5</b></div></div><div class="oc-f"><span class="avs"><span class="av t">RS</span><span class="av p">FR</span></span><span class="btn cta sm">Fill positions</span></div></div>
+      <div class="oc soon"><div class="oc-h"><span class="id">JO-224-1</span><span class="pill warn">Expires soon</span></div><h3>Junior Associate</h3><div class="meta">Shift 1 · 7:00 AM · <b>Northline Foods</b></div><div class="note warn"><svg class="ico" style="width:15px;height:15px"><use href="#i-clock"/></svg>Closes today at 11:59 PM · 2 positions open</div><div class="fill"><div class="donut warnc"><svg viewBox="0 0 74 74"><circle class="t" cx="37" cy="37" r="31"/><circle class="v" cx="37" cy="37" r="31" stroke-dasharray="194.8" stroke-dashoffset="65"/></svg><b>4/6<small>FILLED</small></b></div><div class="kv"><small>Time left</small><b>16h 05m</b><small>Still needed</small><b>2</b></div></div><div class="oc-f"><span class="avs"><span class="av t">RS</span><span class="av o">ST</span></span><span class="btns"><span class="ib"><svg class="ico"><use href="#i-user"/></svg></span><span class="ib"><svg class="ico"><use href="#i-file"/></svg></span></span></div></div>
+      <div class="oc soon"><div class="oc-h"><span class="id">JO-335-1</span><span class="pill warn">Expires soon</span></div><h3>Forklift Operator</h3><div class="meta">Shift 2 · 2:00 PM · <b>Copperfield Packaging</b></div><div class="fill"><div class="donut"><svg viewBox="0 0 74 74"><circle class="t" cx="37" cy="37" r="31"/><circle class="v" cx="37" cy="37" r="31" stroke-dasharray="194.8" stroke-dashoffset="97"/></svg><b>2/4<small>FILLED</small></b></div><div class="kv"><small>Time left</small><b>1d 18h</b><small>Still needed</small><b>2</b></div></div><div class="oc-f" style="margin-top:auto"><span class="avs"><span class="av p">FR</span></span><span class="btns"><span class="ib"><svg class="ico"><use href="#i-user"/></svg></span><span class="ib"><svg class="ico"><use href="#i-file"/></svg></span></span></div></div>
+      <div class="oc"><div class="oc-h"><span class="id">JO-341-2</span><span class="pill ok">Filled</span></div><h3>Line Cook</h3><div class="meta">Shift 1 · 6:00 AM · <b>Northline Foods</b></div><div class="note" style="background:var(--ok-bg);color:var(--ok)"><svg class="ico" style="width:15px;height:15px"><use href="#i-check"/></svg>Fully staffed · no action needed</div><div class="fill"><div class="donut okc"><svg viewBox="0 0 74 74"><circle class="t" cx="37" cy="37" r="31"/><circle class="v" cx="37" cy="37" r="31" stroke-dasharray="194.8" stroke-dashoffset="0"/></svg><b>3/3<small>FILLED</small></b></div><div class="kv"><small>Time left</small><b>14h 40m</b><small>Still needed</small><b>0</b></div></div><div class="oc-f"><span class="avs"><span class="av o">ST</span></span><span class="btns"><span class="ib"><svg class="ico"><use href="#i-user"/></svg></span><span class="ib"><svg class="ico"><use href="#i-file"/></svg></span></span></div></div>
+    </div>
+    <div class="group-h" style="margin-top:22px">Everything else <small>· 8 orders</small></div>
+    <div class="grid" style="height:140px;overflow:hidden">
+      <div class="oc"><div class="oc-h"><span class="id">JO-348-1</span><span class="meta"><svg class="ico" style="width:14px;display:inline;vertical-align:-3px"><use href="#i-clock"/></svg> Mar 18</span></div><h3>Store Associate</h3><div class="meta">Shift 1 · 9:00 AM · <b>Harbor Logistics</b></div></div>
+      <div class="oc"><div class="oc-h"><span class="id">JO-352-1</span><span class="meta">Mar 19</span></div><h3>Machine Operator</h3><div class="meta">Shift 3 · 10:00 PM · <b>Copperfield Packaging</b></div></div>
+      <div class="oc"><div class="oc-h"><span class="id">JO-355-3</span><span class="meta">Mar 21</span></div><h3>Stockroom Assistant</h3><div class="meta">Shift 1 · 8:00 AM · <b>Northline Foods</b></div></div>
+      <div class="oc"><div class="oc-h"><span class="id">JO-360-1</span><span class="meta">Mar 24</span></div><h3>Quality Inspector</h3><div class="meta">Shift 2 · 1:00 PM · <b>Harbor Logistics</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Closed orders + void with reason -->
+<section class="screen" id="status" data-top="orders">
+  <div class="page">
+    <div class="head">
+      <div class="tabs"><span class="tab">Pending <em>4</em></span><span class="tab">Open <em>12</em></span><span class="tab on">Closed <em>34</em></span><span class="tab">Voided <em>2</em></span></div>
+      <div class="btns"><span class="search"><svg class="ico"><use href="#i-search"/></svg>Search order #</span><span class="btn"><svg class="ico"><use href="#i-filter"/></svg>Outcome: All</span></div>
+    </div>
+    <div class="cols">
+      <div class="card modal-wrap" style="overflow:hidden">
+        <table>
+          <tr><th>Order</th><th>Client</th><th>Final fill</th><th>Outcome</th><th>How it closed</th><th></th></tr>
+          <tr><td><span class="id">JO-310-1</span><b style="display:block;margin-top:6px">Picker / Packer</b></td><td>Harbor Logistics</td><td class="mono"><b>6/6</b></td><td><span class="pill ok">Fully filled</span></td><td><span class="src"><svg class="ico"><use href="#i-bot"/></svg>Auto-closed · start date</span></td><td><svg class="ico"><use href="#i-dots"/></svg></td></tr>
+          <tr><td><span class="id">JO-298-2</span><b style="display:block;margin-top:6px">Line Cook</b></td><td>Northline Foods</td><td class="mono"><b>2/4</b></td><td><span class="pill pend">Incomplete</span></td><td><span class="src"><svg class="ico"><use href="#i-user"/></svg>Closed by staffer · client accepted 2</span></td><td><svg class="ico"><use href="#i-dots"/></svg></td></tr>
+          <tr><td><span class="id">JO-301-1</span><b style="display:block;margin-top:6px">Forklift Operator</b></td><td>Copperfield Packaging</td><td class="mono"><b>0/3</b></td><td><span class="pill warn">Unfilled</span></td><td><span class="src"><svg class="ico"><use href="#i-bot"/></svg>Auto-closed · start date</span></td><td><svg class="ico"><use href="#i-dots"/></svg></td></tr>
+          <tr><td><span class="id">JO-287-1</span><b style="display:block;margin-top:6px">Store Associate</b></td><td>Harbor Logistics</td><td class="mono"><b>5/5</b></td><td><span class="pill ok">Fully filled</span></td><td><span class="src"><svg class="ico"><use href="#i-user"/></svg>Closed by staffer</span></td><td><svg class="ico"><use href="#i-dots"/></svg></td></tr>
+          <tr><td><span class="id">JO-279-4</span><b style="display:block;margin-top:6px">Quality Inspector</b></td><td>Northline Foods</td><td class="mono"><b>1/2</b></td><td><span class="pill pend">Incomplete</span></td><td><span class="src"><svg class="ico"><use href="#i-bot"/></svg>Auto-closed · start date</span></td><td><svg class="ico"><use href="#i-dots"/></svg></td></tr>
+          <tr><td style="border:0"><span class="id">JO-270-1</span><b style="display:block;margin-top:6px">Machine Operator</b></td><td style="border:0">Copperfield Packaging</td><td style="border:0" class="mono"><b>4/4</b></td><td style="border:0"><span class="pill ok">Fully filled</span></td><td style="border:0"><span class="src"><svg class="ico"><use href="#i-bot"/></svg>Auto-closed · start date</span></td><td style="border:0"><svg class="ico"><use href="#i-dots"/></svg></td></tr>
+        </table>
+        <div class="scrim"></div>
+        <div class="modal">
+          <span class="pill neu">MSP only · Void order</span>
+          <h3>Void SO-41 and its 3 job orders?</h3>
+          <p>Void is only for orders entered in error. The order and its history stay visible in Voided Orders.</p>
+          <div class="opt on"><i></i>Duplicate of another order</div>
+          <div class="opt"><i></i>Wrong client or department</div>
+          <div class="opt"><i></i>Other entry error</div>
+          <div class="ta">Created twice from the client's email request. Original is SO-40.</div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--muted);font-size:12px">Logged with your name and time</span><span class="btns"><span class="btn">Cancel</span><span class="btn danger">Void 4 orders</span></span></div>
+        </div>
+      </div>
+      <div style="display:grid;gap:14px;align-content:start">
+        <div class="rule"><b style="display:block;margin-bottom:4px">No order is deleted.</b><span style="color:var(--body);font-size:13px">Every exit has an outcome, a source and a reason.</span></div>
+        <div class="card" style="padding:18px">
+          <div style="color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">Outcome · what happened</div>
+          <div style="display:grid;gap:10px;font-size:12.5px;color:var(--body)">
+            <div><span class="pill ok">Fully filled</span> every position filled</div>
+            <div><span class="pill pend">Incomplete</span> client accepted fewer workers</div>
+            <div><span class="pill warn">Unfilled</span> start date passed with 0 filled</div>
+          </div>
+          <div style="color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 12px">Closure · how it ended</div>
+          <div style="display:grid;gap:10px;font-size:12.5px;color:var(--body)">
+            <div class="src"><svg class="ico"><use href="#i-bot"/></svg>Auto-closed by the system at start date</div>
+            <div class="src"><svg class="ico"><use href="#i-user"/></svg>Closed by a staffer, with a note</div>
+          </div>
+        </div>
+        <div class="callout"><svg class="ico"><use href="#i-info"/></svg><span>Only MSP entry errors go to <b>Voided</b>. Voiding a service order voids its job orders and keeps an audit record.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Order detail with sticky context and team -->
+<section class="screen" id="detail" data-top="orders">
+  <div class="page">
+    <p class="crumb">Manage orders / Open / SO-38</p>
+    <div class="sticky">
+      <span class="id">SO-38</span>
+      <div><h2>Picker / Packer · Shift 1</h2><small>Harbor Logistics · Riverside DC · Mar 18–20 · multi-day</small></div>
+      <div class="stat"><b>9/14</b><small>Filled</small></div>
+      <div class="stat"><b>3</b><small>Branches</small></div>
+      <div class="stat" style="min-width:150px"><b>1d 06h</b><small>Until start</small></div>
+      <div style="flex:1"></div>
+      <span class="pill warn" style="background:rgba(253,243,227,.95)">Expires soon</span>
+    </div>
+    <div class="utabs" style="margin-bottom:16px"><span>Overview</span><span class="on">Fulfillment</span><span>Candidates · 22</span><span>Assignments</span><span>Notes</span><span>Activity</span></div>
+    <div class="dcols">
+      <div class="card" style="overflow:hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 18px"><b style="font-size:15px">Branch pledges</b><span class="btn sm"><svg class="ico" style="width:15px"><use href="#i-plus"/></svg>Invite branch</span></div>
+        <div class="br-row h"><span>Branch</span><span>Pledged</span><span>Filled</span><span>Progress</span><span>Status</span></div>
+        <div class="br-row"><span class="co" style="display:flex;gap:10px;align-items:center"><span class="av t">RS</span><span><b>Riverside</b><small style="display:block;color:var(--muted);font-size:11.5px">Host branch</small></span></span><span class="mono">6</span><span class="mono"><b>5</b></span><span><div class="bar"><i style="width:83%"></i></div></span><span class="pill info">Filling</span></div>
+        <div class="br-row"><span class="co" style="display:flex;gap:10px;align-items:center"><span class="av p">FR</span><span><b>Fresno</b><small style="display:block;color:var(--muted);font-size:11.5px">Participant</small></span></span><span class="mono">5</span><span class="mono"><b>4</b></span><span><div class="bar"><i style="width:80%"></i></div></span><span class="pill info">Filling</span></div>
+        <div class="br-row"><span class="co" style="display:flex;gap:10px;align-items:center"><span class="av o">ST</span><span><b>Stockton</b><small style="display:block;color:var(--muted);font-size:11.5px">Invited for this order only</small></span></span><span class="mono">3</span><span class="mono"><b>0</b></span><span><div class="bar"><i style="width:0"></i></div></span><span class="pill neu">Pending invite</span></div>
+        <div class="sec-t">Recently submitted</div>
+        <div class="cand"><span class="av g">MT</span><div><b>Marcus Tran</b><small>Fresno · forklift certified · available Mar 18</small></div><span class="pill pend">Client review</span></div>
+        <div class="cand"><span class="av g">LB</span><div><b>Leah Brooks</b><small>Riverside · 2 prior assignments with client</small></div><span class="pill ok">Accepted</span></div>
+        <div class="cand"><span class="av g">DO</span><div><b>Diego Ortiz</b><small>Riverside · compliance check in progress</small></div><span class="pill warn">Compliance</span></div>
+      </div>
+      <div style="display:grid;gap:16px;align-content:start">
+        <div class="card team">
+          <div class="sec-t" style="padding-top:12px">Order team</div>
+          <div class="mem"><span class="av">AV</span><div><b>Ana Vega</b><small>Westcoast MSP · accountable owner</small></div><span class="rb msp">Host</span></div>
+          <div class="mem"><span class="av t">JK</span><div><b>Jordan Kim</b><small>MSP collaborator</small></div><span class="rb br">Co-host</span></div>
+          <div class="mem"><span class="av p">FR</span><div><b>Fresno branch</b><small>Can pledge and submit</small></div><span class="rb co" style="background:var(--neu-bg);color:var(--n600)">Participant</span></div>
+        </div>
+        <div class="callout"><svg class="ico"><use href="#i-info"/></svg><span>A co-host helps run the order but never takes ownership. Cross-branch invites apply to this order only.</span></div>
+        <div class="hidden-note" style="margin:0"><svg class="ico"><use href="#i-lock"/></svg><span>Pledges, branch names and internal notes are hidden from the client company.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Company view of the same order -->
+<section class="screen" id="company">
+  <header class="top">
+    <div class="logo"><span class="mark"></span>Relay</div>
+    <nav><span>Dashboard</span><span class="on">My orders</span><span>Workers</span><span>Timesheets</span><span>Invoices</span></nav>
+    <div class="sp"></div>
+    <div class="tenant"><i style="background:#6b45b8">HL</i><div><b>Harbor Logistics</b><small>Riverside DC</small></div></div>
+    <span class="rb co">Client</span><span class="av p">CP</span>
+  </header>
+  <div class="page">
+    <div class="head"><div><p class="crumb">My orders / SO-38</p><h1>Picker / Packer · Shift 1</h1><p class="sub">Riverside DC · Mar 18–20 · 14 workers requested</p></div><div class="btns"><span class="btn">Reorder</span><span class="btn cta">Message staffing team</span></div></div>
+    <div class="co-wrap">
+      <div class="card" style="overflow:hidden">
+        <div class="req">
+          <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:15px">Request progress</b><span class="pill info">9 of 14 confirmed</span></div>
+          <div class="steps"><div class="st done"><i>✓</i><b>Requested</b>Mar 11</div><div class="st done"><i>✓</i><b>Accepted by MSP</b>Mar 11</div><div class="st now"><i>3</i><b>Staffing</b>9 of 14</div><div class="st"><i>4</i><b>Workers start</b>Mar 18</div></div>
+          <div class="bar" style="margin-top:16px"><i style="width:64%"></i></div>
+        </div>
+        <div style="padding:6px 22px 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Candidates for your review · 2</div>
+        <div class="review"><span class="av g">MT</span><div><b>Marcus Tran</b><small>Forklift certified · available Mar 18</small></div><span class="btns"><span class="btn sm">Decline</span><span class="btn cta sm">Accept</span></span></div>
+        <div class="review"><span class="av g">KS</span><div><b>Kim Sato</b><small>3 years warehouse · night shift ok</small></div><span class="btns"><span class="btn sm">Decline</span><span class="btn cta sm">Accept</span></span></div>
+        <div style="padding:6px 22px 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--line2);padding-top:14px">Confirmed workers · 9</div>
+        <div class="review" style="border:0;padding-top:4px"><span class="avs"><span class="av g">LB</span><span class="av g">AR</span><span class="av g">PJ</span><span class="av g">NE</span><span class="av g">+5</span></span><small style="margin-left:6px">All compliance checks complete</small></div>
+      </div>
+      <div style="display:grid;gap:16px;align-content:start">
+        <div class="card" style="padding:18px"><b style="display:block;margin-bottom:12px">Order details</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12.5px"><div><small style="display:block;color:var(--muted)">Shift</small><b>9:00 AM – 5:30 PM</b></div><div><small style="display:block;color:var(--muted)">Days</small><b>3 · Mar 18–20</b></div><div><small style="display:block;color:var(--muted)">Department</small><b>Outbound</b></div><div><small style="display:block;color:var(--muted)">Site contact</small><b>C. Park</b></div></div></div>
+        <div class="hidden-note" style="margin:0;background:#fff"><svg class="ico"><use href="#i-lock"/></svg><span>Same order, client view. Branch pledges, internal notes and MSP fill-rate targets are not shown here.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Design system -->
+<section class="screen" id="system">
+  <div class="ds">
+    <div class="card"><h4>Brand · one color, two jobs</h4>
+      <div class="sw-row"><div class="sw"><i style="background:#03a9fc"></i><b>brand-500 · identity</b><small>#03A9FC</small></div><div class="sw"><i style="background:#0277b6"></i><b>brand-700 · interaction</b><small>#0277B6</small></div><div class="sw"><i style="background:#1e3655"></i><b>navy-700 · repeated controls</b><small>#1E3655</small></div></div>
+      <div class="ratio bad"><svg class="ico"><use href="#i-alert"/></svg>White text on brand-500 <b>2.60:1</b> · fails WCAG AA</div>
+      <div class="ratio good"><svg class="ico"><use href="#i-check"/></svg>White text on brand-700 <b>4.86:1</b> · passes AA</div>
+      <div class="scale"><i style="background:#f0faff"></i><i style="background:#d6f1fe"></i><i style="background:#a8e2fe"></i><i style="background:#5cc8fd"></i><i style="background:#03a9fc"></i><i style="background:#0290d8"></i><i style="background:#0277b6"></i><i style="background:#01568a"></i><i style="background:#013e66"></i></div>
+    </div>
+    <div class="card"><h4>Status · one meaning per color</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="pill ok">Fully filled</span><span class="pill pend">Incomplete</span><span class="pill warn">Unfilled</span><span class="pill warn">Expires soon</span><span class="pill err">Final hours</span><span class="pill info">Filling</span><span class="pill neu">Pending invite</span></div>
+      <h4 style="margin-top:22px">Role badges · never a status color</h4>
+      <div style="display:flex;gap:8px"><span class="rb pa">Platform</span><span class="rb msp">MSP</span><span class="rb br">Branch</span><span class="rb co">Client</span></div>
+      <h4 style="margin-top:22px">Type · Inter + JetBrains Mono</h4>
+      <div class="type-row"><b style="font-size:28px;letter-spacing:-.8px">Open orders</b><small>H1 28</small></div>
+      <div class="type-row"><b style="font-size:18px">Branch pledges</b><small>H3 18</small></div>
+      <div class="type-row"><span>Body text for dense forms</span><small>Body 14</small></div>
+      <div class="type-row" style="border:0"><span class="mono" style="font-weight:700">JO-183-1 · $18.50</span><small>IDs &amp; money</small></div>
+    </div>
+    <div class="card"><h4>Buttons · 6 variants</h4>
+      <div class="btn-grid"><span class="btn cta">Primary</span><span class="btn navy">Navy</span><span class="btn sec">Secondary</span><span class="btn">Neutral</span><span class="btn ghost">Ghost</span><span class="btn danger">Destructive</span></div>
+      <h4 style="margin-top:22px">Rules</h4>
+      <div class="rules"><p>Bright brand is for one moment per screen; navy for controls that repeat.</p><p>Navy never touches a call to action.</p><p>Labels sit above inputs, never inside them.</p><p>No raw hex in product code: tokens only.</p></div>
+    </div>
+    <div class="card" style="grid-column:1 / 3"><h4>Density · same component, two rhythms</h4>
+      <div class="dens"><div class="c"><span>COMFORTABLE · 56px ROWS</span><span>Picker / Packer<b class="mono">6/6</b></span><span>Line Cook<b class="mono">2/4</b></span><span>Forklift Operator<b class="mono">0/3</b></span></div><div class="d"><span>DATA · 40px ROWS</span><span>Picker / Packer<b class="mono">6/6</b></span><span>Line Cook<b class="mono">2/4</b></span><span>Forklift Operator<b class="mono">0/3</b></span><span>Store Associate<b class="mono">5/5</b></span><span>Machine Operator<b class="mono">4/4</b></span></div></div>
+    </div>
+    <div class="card"><h4>Shape · 4px grid</h4>
+      <div style="display:flex;gap:12px;align-items:flex-end"><i style="width:44px;height:44px;border-radius:8px;border:1.5px solid var(--b700);background:var(--b50)"></i><i style="width:44px;height:44px;border-radius:12px;border:1.5px solid var(--b700);background:var(--b50)"></i><i style="width:44px;height:44px;border-radius:16px;border:1.5px solid var(--b700);background:var(--b50)"></i><i style="width:80px;height:44px;border-radius:99px;border:1.5px solid var(--b700);background:var(--b50)"></i></div>
+      <p style="margin:12px 0 0;color:var(--muted);font-size:12px">8 · 12 · 16 · pill. Never mix 8 and 16 in nested cards.</p>
+      <div class="ratio good" style="margin-top:16px"><svg class="ico"><use href="#i-check"/></svg>Border token <b>3.15:1</b> · was 1.3:1</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Training -->
+<section class="screen" id="training">
+  <header class="top"><div class="logo"><span class="mark"></span>Relay <span style="font-weight:500;color:var(--muted);font-size:14px;margin-left:6px">Training</span></div><nav><span class="on">User journeys</span><span>Training home</span><span>Glossary</span></nav><div class="sp"></div><span class="pill warn flat">Time off · coming soon</span></header>
+  <div class="train">
+    <div class="stage">
+      <div class="progress"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <svg class="wire" viewBox="0 0 980 720" preserveAspectRatio="none"><g fill="none" stroke="#c9d6e2" stroke-width="2" stroke-dasharray="5 6"><path d="M250 150 C 380 150, 380 330, 470 330"/><path d="M590 330 C 680 330, 680 140, 770 140"/><path d="M590 330 L 770 300"/><path d="M590 330 C 680 330, 680 460, 770 460"/><path d="M860 500 C 860 560, 700 590, 600 590"/></g><path d="M590 330 L 770 300" stroke="#0277b6" stroke-width="3" fill="none"/></svg>
+      <div class="node" style="left:60px;top:110px"><span class="ni"><svg class="ico"><use href="#i-building"/></svg></span><div><b>Client company</b><small>Places a service order</small></div></div>
+      <div class="node" style="left:430px;top:290px"><span class="ni"><svg class="ico"><use href="#i-hub"/></svg></span><div><b>MSP</b><small>Distributes job orders</small></div></div>
+      <div class="node dim" style="left:740px;top:100px"><span class="ni"><svg class="ico"><use href="#i-users"/></svg></span><div><b>Branch A</b><small>Pledges · fills</small></div></div>
+      <div class="node active" style="left:740px;top:262px"><span class="ni"><svg class="ico"><use href="#i-users"/></svg></span><div><b>Branch B</b><small>Pledges 5 workers</small></div></div>
+      <div class="node dim" style="left:740px;top:420px"><span class="ni"><svg class="ico"><use href="#i-users"/></svg></span><div><b>Branch C</b><small>Invited · pending</small></div></div>
+      <div class="node dim" style="left:470px;top:560px"><span class="ni"><svg class="ico"><use href="#i-time"/></svg></span><div><b>Timekeeping</b><small>Workers clock in</small></div></div>
+      <div class="narr"><small>Step 5 of 12 · Pledges</small><h3>Branches commit before they fill.</h3><p>A pledge tells the MSP how many workers a branch can supply. Fill rate is measured against the pledge, not against hope.</p></div>
+      <div class="ctrl"><i>‹</i><i class="on">❚❚</i><i>›</i><span style="padding:0 6px">5 / 12</span></div>
+    </div>
+    <div class="card jlist">
+      <div style="padding:18px 18px 10px"><b style="font-size:15px">Journey library</b><small style="display:block;color:var(--muted);font-size:12px;margin-top:2px">Learn the workflow before the screens</small></div>
+      <div class="j on"><span class="num">01</span><div><b>Order journey</b><small>Client → MSP → branches · 12 steps</small></div></div>
+      <div class="j"><span class="num">02</span><div><b>Recruiter journey</b><small>Bench → pledge → fill · 13 steps</small></div></div>
+      <div class="j"><span class="num">03</span><div><b>Worker journey</b><small>Apply → work → get paid · 12 steps</small></div></div>
+      <div class="j"><span class="num">04</span><div><b>Payroll batch journey</b><small>Hours → invoice → paystubs · 13 steps</small></div></div>
+      <div class="j"><span class="num">05</span><div><b>Time off journey</b><small>Policy → request → approval · 10 steps</small></div><span class="pill warn flat" style="margin-left:auto">Soon</span></div>
+      <div style="margin:10px 18px 18px" class="callout"><svg class="ico"><use href="#i-info"/></svg><span>Each journey links into role-specific lessons, operating rules and practice exercises.</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const id = new URLSearchParams(location.search).get('s') || 'manage';
+  const s = document.getElementById(id);
+  if (s.dataset.top) { const t = document.getElementById('top').content.cloneNode(true); t.querySelector(`[data-k="${s.dataset.top}"]`)?.classList.add('on'); s.prepend(t); }
+  s.classList.add('on');
+</script>
+</body>
+</html>

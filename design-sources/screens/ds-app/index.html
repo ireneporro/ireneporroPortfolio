@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Foundry — boards</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+:root { --ink:#12141a; --body:#4a4f5c; --muted:#7b8090; --line:#e5e7ec; --line2:#f0f1f4; --bg:#f5f6f8; --mono:"JetBrains Mono", ui-monospace, monospace; }
+* { box-sizing:border-box; } html,body { margin:0; }
+body { width:1440px; overflow:hidden; background:var(--bg); color:var(--ink); font:14px/1.45 Inter, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+.board { display:none; width:1440px; padding:40px 48px 48px; }
+.board.on { display:block; }
+.kick { margin:0 0 6px; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+h2 { margin:0 0 24px; font-size:26px; font-weight:750; letter-spacing:-.03em; }
+.card { background:#fff; border:1px solid var(--line); border-radius:18px; }
+.mono { font-family:var(--mono); }
+
+/* Theme scopes: same token names, different values */
+.t-relay { --brand-500:#03a9fc; --brand-cta:#0277b6; --brand-cta-hover:#01568a; --brand-50:#f0faff; --brand-100:#d6f1fe; --primary-700:#1e3655; --ok:#3f8a1f; --ok-bg:#ecf6e5; --warn:#b06a0e; --warn-bg:#fdf3e3; --err:#b42d2d; --err-bg:#fcecec; --n600:#6c757d; --surface:#f4f6f9; }
+.t-meralis { --brand-500:#b27cf5; --brand-cta:#8549d8; --brand-cta-hover:#521c8f; --brand-50:#f8f3fe; --brand-100:#f1e8fc; --primary-700:#3b1466; --ok:#2f8a4c; --ok-bg:#e8f6ed; --warn:#b06a0e; --warn-bg:#fdf3e3; --err:#c03a3a; --err-bg:#fdeceb; --n600:#574f60; --surface:#f7f6fa; }
+.duo { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.prod { padding:22px; border-radius:20px; background:var(--surface); border:1px solid var(--line); }
+.prod-h { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.prod-h b { display:flex; align-items:center; gap:10px; font-size:17px; letter-spacing:-.02em; }
+.prod-h b i { width:26px; height:26px; border-radius:8px; background:var(--brand-cta); }
+.prod-h code { color:var(--muted); font:500 11px var(--mono); }
+.ui { padding:18px; border:1px solid var(--line); border-radius:16px; background:#fff; }
+.row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; height:38px; padding:0 15px; border-radius:10px; border:1px solid var(--line); background:#fff; font:600 13px Inter; color:var(--primary-700); }
+.btn.cta { background:var(--brand-cta); border-color:var(--brand-cta); color:#fff; }
+.btn.navy { background:var(--primary-700); border-color:var(--primary-700); color:#fff; }
+.btn.sec { border-color:var(--brand-cta); color:var(--brand-cta); }
+.pill { display:inline-flex; align-items:center; gap:6px; padding:3px 9px; border-radius:99px; font-size:11.5px; font-weight:650; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok { background:var(--ok-bg); color:var(--ok); } .pill.warn { background:var(--warn-bg); color:var(--warn); } .pill.err { background:var(--err-bg); color:var(--err); } .pill.br { background:var(--brand-100); color:var(--brand-cta); }
+.field { margin-top:14px; } .field label { display:block; margin-bottom:6px; font-size:12px; font-weight:600; }
+.input { display:flex; align-items:center; height:40px; padding:0 12px; border:1px solid #8a929b; border-radius:10px; font-size:13px; color:var(--body); }
+.input.focus { border-color:var(--brand-cta); box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--brand-cta); }
+.tabs { display:flex; gap:18px; margin-top:14px; border-bottom:1px solid var(--line); }
+.tabs span { padding:8px 0; font-size:12.5px; font-weight:600; color:var(--muted); }
+.tabs span.on { color:var(--brand-cta); box-shadow:inset 0 -2px 0 var(--brand-cta); }
+table { width:100%; border-collapse:collapse; margin-top:12px; }
+th { padding:8px 10px; background:#f8f9fb; border-bottom:1px solid var(--line); color:var(--muted); font-size:10.5px; font-weight:700; letter-spacing:.05em; text-align:left; text-transform:uppercase; }
+td { padding:10px; border-bottom:1px solid var(--line2); font-size:12.5px; color:var(--body); }
+td b { color:var(--ink); }
+.scale { display:flex; height:34px; margin-top:14px; border-radius:10px; overflow:hidden; }
+.scale i { flex:1; }
+.kpi { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+.kpi div { padding:12px; border:1px solid var(--line); border-radius:12px; }
+.kpi small { display:block; color:var(--muted); font-size:11px; }
+.kpi b { font-size:20px; letter-spacing:-.03em; }
+.kpi b.c { color:var(--brand-cta); }
+.toggle { display:inline-block; width:34px; height:20px; border-radius:20px; background:var(--primary-700); position:relative; }
+.toggle::after { content:""; position:absolute; top:3px; right:3px; width:14px; height:14px; border-radius:50%; background:#fff; }
+.check { display:inline-grid; place-items:center; width:18px; height:18px; border-radius:5px; background:var(--primary-700); color:#fff; font-size:11px; }
+
+/* Token board */
+.tok { display:grid; grid-template-columns:1.25fr 1fr; gap:22px; }
+.tt td, .tt th { padding:9px 12px; }
+.tt td code { font:500 12px var(--mono); color:var(--ink); }
+.sw { display:inline-block; width:16px; height:16px; margin-right:6px; vertical-align:-3px; border-radius:5px; border:1px solid rgba(0,0,0,.06); }
+.same { color:#2f6a16; font-weight:650; font-size:11.5px; }
+.diff { color:#8a4c09; font-weight:650; font-size:11.5px; }
+.ring { position:relative; width:330px; height:330px; margin:10px auto 0; }
+.ring svg { width:330px; height:330px; transform:rotate(-90deg); }
+.ring .lbl { position:absolute; inset:0; display:grid; place-items:center; align-content:center; text-align:center; }
+.ring .lbl b { font:800 64px Inter; letter-spacing:-.05em; }
+.ring .lbl small { color:var(--muted); font-size:13px; }
+.legend { display:grid; gap:10px; margin-top:20px; }
+.legend div { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--body); }
+.legend i { width:12px; height:12px; border-radius:4px; }
+
+/* Scales board */
+.sc { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+.sc .card { padding:22px; }
+.sc h4 { margin:0 0 16px; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.sp-row { display:flex; align-items:center; gap:12px; margin-bottom:9px; font-size:12px; color:var(--body); }
+.sp-row code { width:82px; font:500 11.5px var(--mono); color:var(--ink); }
+.sp-row i { height:14px; border-radius:4px; background:#3a4152; }
+.ty-row { display:flex; align-items:baseline; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--line2); }
+.ty-row small { color:var(--muted); font:500 11px var(--mono); }
+.rad { display:flex; gap:14px; align-items:flex-end; }
+.rad div { display:grid; justify-items:center; gap:8px; font:500 11px var(--mono); color:var(--muted); }
+.rad i { width:64px; height:64px; border:2px solid #3a4152; background:#f1f2f5; }
+.dens div { display:flex; justify-content:space-between; align-items:center; padding:0 12px; border-bottom:1px solid var(--line2); font-size:12px; }
+
+/* Contrast board */
+.cx { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.cx .card { padding:20px; display:flex; flex-direction:column; gap:14px; }
+.cx h4 { margin:0; font-size:15px; }
+.bf { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.bf div { display:grid; gap:8px; padding:12px; border-radius:12px; background:#f8f9fb; font-size:11px; color:var(--muted); }
+.bf div.good { background:#eef7e9; }
+.bf b { font:800 22px Inter; letter-spacing:-.03em; color:var(--ink); }
+.bf div.bad b { color:#b42d2d; } .bf div.good b { color:#2f6a16; }
+.demo { display:grid; place-items:center; height:76px; border-radius:12px; background:#fff; border:1px solid var(--line); }
+
+/* Rules board */
+.rules { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.rule { overflow:hidden; }
+.rule .vis { display:grid; grid-template-columns:1fr 1fr; }
+.rule .vis > div { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; height:170px; padding:14px; }
+.rule .vis .row { flex-wrap:nowrap; }
+.rule .vis .btn { height:34px; padding:0 12px; }
+.rule .vis div.do { background:#f1f8ec; } .rule .vis div.dont { background:#fcf0ef; }
+.tag { padding:2px 8px; border-radius:6px; font-size:10.5px; font-weight:800; letter-spacing:.06em; }
+.tag.do { background:#d9efcd; color:#2f6a16; } .tag.dont { background:#f6d4d1; color:#a32d2d; }
+.rule .txt { padding:16px 18px; }
+.rule .txt b { display:block; font-size:14px; margin-bottom:4px; }
+.rule .txt span { color:var(--body); font-size:12.5px; }
+
+/* Process board */
+.pr { display:grid; grid-template-columns:1.1fr 1fr; gap:22px; }
+.memo { padding:22px; }
+.memo-row { display:grid; grid-template-columns:44px 1fr 140px; gap:12px; align-items:center; padding:11px 0; border-bottom:1px solid var(--line2); font-size:12.5px; }
+.memo-row code { font:700 11.5px var(--mono); color:var(--muted); }
+.ruling { padding:3px 9px; border-radius:7px; font-size:11px; font-weight:700; text-align:center; }
+.ruling.k { background:#e8f2fd; color:#1d5fa8; } .ruling.a { background:#eef7e9; color:#2f6a16; } .ruling.r { background:#fcecec; color:#a32d2d; } .ruling.d { background:#f1f2f5; color:var(--muted); }
+.flow { display:grid; gap:12px; }
+.step { display:flex; gap:14px; align-items:flex-start; padding:16px 18px; }
+.step .n { display:grid; place-items:center; flex:none; width:32px; height:32px; border-radius:10px; background:#12141a; color:#fff; font:700 12px var(--mono); }
+.step b { display:block; font-size:14px; } .step span { color:var(--body); font-size:12.5px; }
+.term { margin-top:4px; padding:14px 16px; border-radius:14px; background:#12141a; color:#c9d1e0; font:500 12px/1.7 var(--mono); }
+.term .g { color:#7ee2a8; } .term .y { color:#f6c26b; } .term .m { color:#7b8090; }
+.bar { height:8px; border-radius:8px; background:var(--line2); overflow:hidden; } .bar i { display:block; height:100%; border-radius:8px; }
+</style>
+</head>
+<body>
+
+<!-- 1. One system, two brands -->
+<section class="board" id="themes">
+  <p class="kick">Same tokens · same components · two products</p>
+  <h2>One system, two brands</h2>
+  <div class="duo">
+    <div class="prod t-relay">
+      <div class="prod-h"><b><i></i>Relay · staffing marketplace</b><code>--brand-cta: #0277B6</code></div>
+      <div class="ui">
+        <div class="row"><span class="btn cta">Fill positions</span><span class="btn navy">Assign</span><span class="btn sec">Invite branch</span><span class="btn">Cancel</span></div>
+        <div class="tabs"><span class="on">Open orders</span><span>Closed</span><span>Voided</span></div>
+        <div class="kpi"><div><small>Fill rate</small><b class="c">83%</b></div><div><small>Open orders</small><b>12</b></div><div><small>Closing soon</small><b>3</b></div></div>
+        <div class="field"><label>Search order</label><div class="input focus">JO-183</div></div>
+        <table><tr><th>Order</th><th>Fill</th><th>Status</th></tr><tr><td><b>Picker / Packer</b></td><td class="mono">5/6</td><td><span class="pill br">Filling</span></td></tr><tr><td><b>Line Cook</b></td><td class="mono">3/3</td><td><span class="pill ok">Filled</span></td></tr><tr><td><b>Forklift Operator</b></td><td class="mono">0/3</td><td><span class="pill warn">Unfilled</span></td></tr></table>
+        <div class="row" style="margin-top:14px"><span class="toggle"></span><span style="font-size:12.5px">Notify branches</span><span class="check">✓</span><span style="font-size:12.5px">Auto-close at start date</span></div>
+      </div>
+      <div class="scale"><i style="background:#f0faff"></i><i style="background:#d6f1fe"></i><i style="background:#a8e2fe"></i><i style="background:#5cc8fd"></i><i style="background:#03a9fc"></i><i style="background:#0290d8"></i><i style="background:#0277b6"></i><i style="background:#01568a"></i><i style="background:#013e66"></i></div>
+    </div>
+    <div class="prod t-meralis">
+      <div class="prod-h"><b><i></i>Meralis · HR &amp; payroll</b><code>--brand-cta: #8549D8</code></div>
+      <div class="ui">
+        <div class="row"><span class="btn cta">Approve batch</span><span class="btn navy">Assign role</span><span class="btn sec">Request info</span><span class="btn">Cancel</span></div>
+        <div class="tabs"><span class="on">Pending</span><span>History</span><span>Audit</span></div>
+        <div class="kpi"><div><small>Requests</small><b class="c">14</b></div><div><small>Employees</small><b>1,284</b></div><div><small>Over 48h</small><b>3</b></div></div>
+        <div class="field"><label>Search people</label><div class="input focus">Alex Mor</div></div>
+        <table><tr><th>Employee</th><th>Type</th><th>Status</th></tr><tr><td><b>Alex Morgan</b></td><td>Direct deposit</td><td><span class="pill br">In review</span></td></tr><tr><td><b>Jamal Price</b></td><td>Compensation</td><td><span class="pill ok">Approved</span></td></tr><tr><td><b>Marta Osei</b></td><td>Timecard</td><td><span class="pill warn">Missing</span></td></tr></table>
+        <div class="row" style="margin-top:14px"><span class="toggle"></span><span style="font-size:12.5px">Email reviewers</span><span class="check">✓</span><span style="font-size:12.5px">Apply next cycle</span></div>
+      </div>
+      <div class="scale"><i style="background:#f8f3fe"></i><i style="background:#f1e8fc"></i><i style="background:#ddc6f9"></i><i style="background:#c8a2f7"></i><i style="background:#b27cf5"></i><i style="background:#8549d8"></i><i style="background:#7029bd"></i><i style="background:#521c8f"></i><i style="background:#3b1466"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Tokens shared vs product -->
+<section class="board" id="tokens">
+  <p class="kick">Semantic tokens · one name, one job</p>
+  <h2>177 of 193 tokens are shared</h2>
+  <div class="tok">
+    <div class="card" style="overflow:hidden">
+      <table class="tt" style="margin:0">
+        <tr><th>Token</th><th>Relay</th><th>Meralis</th><th></th></tr>
+        <tr><td><code>--space-4</code></td><td class="mono">1rem</td><td class="mono">1rem</td><td class="same">Shared</td></tr>
+        <tr><td><code>--radius-md</code></td><td class="mono">12px</td><td class="mono">12px</td><td class="same">Shared</td></tr>
+        <tr><td><code>--fs-body</code></td><td class="mono">14px</td><td class="mono">14px</td><td class="same">Shared</td></tr>
+        <tr><td><code>--row-comfortable</code></td><td class="mono">56px</td><td class="mono">56px</td><td class="same">Shared</td></tr>
+        <tr><td><code>--touch-min</code></td><td class="mono">44px</td><td class="mono">44px</td><td class="same">Shared</td></tr>
+        <tr><td><code>--focus-ring</code></td><td class="mono">2px + 2px</td><td class="mono">2px + 2px</td><td class="same">Shared</td></tr>
+        <tr><td><code>--border-default</code></td><td><span class="sw" style="background:#8a929b"></span><span class="mono">#8A929B</span></td><td><span class="sw" style="background:#8a929b"></span><span class="mono">#8A929B</span></td><td class="same">Shared</td></tr>
+        <tr><td><code>--brand-500</code></td><td><span class="sw" style="background:#03a9fc"></span><span class="mono">#03A9FC</span></td><td><span class="sw" style="background:#b27cf5"></span><span class="mono">#B27CF5</span></td><td class="diff">Themed</td></tr>
+        <tr><td><code>--brand-cta</code></td><td><span class="sw" style="background:#0277b6"></span><span class="mono">#0277B6</span></td><td><span class="sw" style="background:#8549d8"></span><span class="mono">#8549D8</span></td><td class="diff">Themed</td></tr>
+        <tr><td><code>--primary-700</code></td><td><span class="sw" style="background:#1e3655"></span><span class="mono">#1E3655</span></td><td><span class="sw" style="background:#3b1466"></span><span class="mono">#3B1466</span></td><td class="diff">Themed</td></tr>
+        <tr><td style="border:0"><code>--neutral-600</code></td><td style="border:0"><span class="sw" style="background:#6c757d"></span><span class="mono">#6C757D</span></td><td style="border:0"><span class="sw" style="background:#574f60"></span><span class="mono">#574F60</span></td><td style="border:0" class="diff">Themed</td></tr>
+      </table>
+    </div>
+    <div class="card" style="padding:24px">
+      <div class="ring"><svg viewBox="0 0 330 330"><circle cx="165" cy="165" r="140" fill="none" stroke="#f0f1f4" stroke-width="30"/><circle cx="165" cy="165" r="140" fill="none" stroke="#12141a" stroke-width="30" stroke-dasharray="879.6" stroke-dashoffset="72.9"/><circle cx="165" cy="165" r="140" fill="none" stroke="#e0a43c" stroke-width="30" stroke-dasharray="72.9 879.6" stroke-dashoffset="0" transform="rotate(330.2 165 165)"/></svg><div class="lbl"><b>92%</b><small>of token names shared</small></div></div>
+      <div class="legend"><div><i style="background:#12141a"></i>177 shared: spacing, radius, type, density, motion, focus, borders, z-index</div><div><i style="background:#e0a43c"></i>16 product-only: data-viz and feature accents</div><div><i style="background:#f0f1f4;border:1px solid var(--line)"></i>Brand values swap through one adapter layer</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Foundations -->
+<section class="board" id="scales">
+  <p class="kick">Foundations</p>
+  <h2>Scales every screen inherits</h2>
+  <div class="sc">
+    <div class="card"><h4>Spacing · 4px base, in rem</h4>
+      <div class="sp-row"><code>--space-1</code><i style="width:4px"></i>4</div><div class="sp-row"><code>--space-2</code><i style="width:8px"></i>8</div><div class="sp-row"><code>--space-3</code><i style="width:12px"></i>12</div><div class="sp-row"><code>--space-4</code><i style="width:16px"></i>16</div><div class="sp-row"><code>--space-6</code><i style="width:24px"></i>24</div><div class="sp-row"><code>--space-8</code><i style="width:32px"></i>32</div><div class="sp-row"><code>--space-12</code><i style="width:48px"></i>48</div><div class="sp-row"><code>--space-16</code><i style="width:64px"></i>64</div><div class="sp-row"><code>--space-24</code><i style="width:96px"></i>96</div><div class="sp-row"><code>--space-32</code><i style="width:128px"></i>128</div>
+    </div>
+    <div class="card"><h4>Type · Inter + mono for data</h4>
+      <div class="ty-row"><b style="font-size:28px;letter-spacing:-.8px">Heading one</b><small>28 · H1</small></div>
+      <div class="ty-row"><b style="font-size:22px;letter-spacing:-.4px">Heading two</b><small>22 · H2</small></div>
+      <div class="ty-row"><b style="font-size:18px">Heading three</b><small>18 · H3</small></div>
+      <div class="ty-row"><span style="font-size:16px">Lead paragraph</span><small>16</small></div>
+      <div class="ty-row"><span>Body, minimum for forms</span><small>14 · body</small></div>
+      <div class="ty-row"><span style="font-size:12px;color:var(--muted)">Caption and helper text</span><small>12</small></div>
+      <div class="ty-row"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--muted)">COLUMN HEADER</span><small>11 · micro</small></div>
+      <div class="ty-row" style="border:0"><span class="mono" style="font-weight:700">JO-183-1 · $1,092.00</span><small>IDs &amp; money</small></div>
+    </div>
+    <div class="card"><h4>Shape &amp; density</h4>
+      <div class="rad"><div><i style="border-radius:8px"></i>8 · sm</div><div><i style="border-radius:12px"></i>12 · md</div><div><i style="border-radius:16px"></i>16 · lg</div><div><i style="width:90px;border-radius:99px"></i>pill</div></div>
+      <h4 style="margin-top:26px">Row height</h4>
+      <div class="dens" style="border:1px solid var(--line);border-radius:12px;overflow:hidden"><div style="height:56px"><span>Comfortable</span><b class="mono">56px</b></div><div style="height:40px;background:#f8f9fb"><span>Data</span><b class="mono">40px</b></div><div style="height:44px;border:0"><span>Touch target minimum</span><b class="mono">44px</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Contrast -->
+<section class="board" id="contrast">
+  <p class="kick">Accessibility · WCAG 2.2 AA</p>
+  <h2>Four fixes that made the UI readable</h2>
+  <div class="cx">
+    <div class="card"><h4>CTA text on brand</h4><div class="demo" style="gap:10px;grid-template-columns:1fr 1fr;padding:0 14px"><span class="btn" style="background:#03a9fc;border-color:#03a9fc;color:#fff">Save</span><span class="btn" style="background:#0277b6;border-color:#0277b6;color:#fff">Save</span></div><div class="bf"><div class="bad">Before<b>2.60:1</b></div><div class="good">After<b>4.86:1</b></div></div><span style="font-size:12.5px;color:var(--body)">Brand split into identity and interaction shades.</span></div>
+    <div class="card"><h4>Input borders</h4><div class="demo" style="gap:10px;grid-template-columns:1fr 1fr;padding:0 14px"><span class="input" style="border-color:#e3e6ea">Name</span><span class="input" style="border-color:#8a929b">Name</span></div><div class="bf"><div class="bad">Before<b>1.30:1</b></div><div class="good">After<b>3.15:1</b></div></div><span style="font-size:12.5px;color:var(--body)">One border token, used everywhere a control ends.</span></div>
+    <div class="card"><h4>Focus ring</h4><div class="demo" style="gap:10px;grid-template-columns:1fr 1fr;padding:0 14px"><span class="input" style="border-color:#8a929b;box-shadow:0 0 0 3px #e8f6fe">Email</span><span class="input" style="border-color:#0277b6;box-shadow:0 0 0 2px #fff,0 0 0 4px #0277b6">Email</span></div><div class="bf"><div class="bad">Before<b>1.13:1</b></div><div class="good">After<b>2 layers</b></div></div><span style="font-size:12.5px;color:var(--body)">White gap plus brand ring, visible on any surface.</span></div>
+    <div class="card"><h4>Placeholder text</h4><div class="demo" style="gap:10px;grid-template-columns:1fr 1fr;padding:0 14px"><span class="input" style="border-color:#8a929b;color:#c4c8ce">Search</span><span class="input" style="border-color:#8a929b;color:#6c757d">Search</span></div><div class="bf"><div class="bad">Before<b>2.07:1</b></div><div class="good">After<b>4.69:1</b></div></div><span style="font-size:12.5px;color:var(--body)">Hints you can actually read, never a label substitute.</span></div>
+  </div>
+  <div class="card" style="margin-top:20px;padding:20px 24px;display:flex;gap:40px;align-items:center">
+    <b style="font-size:15px;min-width:220px">Migration in the HR product</b>
+    <div style="flex:1"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px"><span>Legacy UI library usage</span><span class="mono">319 → 0 files</span></div><div class="bar"><i style="width:100%;background:#2f8a4c"></i></div></div>
+    <div style="flex:1"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px"><span>Legacy tables</span><span class="mono">63 → 0 files</span></div><div class="bar"><i style="width:100%;background:#2f8a4c"></i></div></div>
+    <div style="flex:1"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px"><span>CTA color swept</span><span class="mono">~190 files</span></div><div class="bar"><i style="width:100%;background:#2f8a4c"></i></div></div>
+  </div>
+</section>
+
+<!-- 5. Rules -->
+<section class="board t-relay" id="rules">
+  <p class="kick">Rules a team can apply without asking</p>
+  <h2>Do · Don’t</h2>
+  <div class="rules">
+    <div class="card rule"><div class="vis"><div class="do"><span class="tag do">DO</span><div class="row"><span class="btn cta">Save</span><span class="btn navy">Assign</span></div></div><div class="dont"><span class="tag dont">DON’T</span><div class="row"><span class="btn navy">Save</span><span class="btn navy">Assign</span></div></div></div><div class="txt"><b>Navy never touches a call to action.</b><span>The brand shade marks the one primary action; navy carries controls that repeat.</span></div></div>
+    <div class="card rule"><div class="vis"><div class="do"><span class="tag do">DO</span><div style="width:150px"><label style="font-size:11px;font-weight:600">Email</label><div class="input" style="height:32px">ana@site.com</div></div></div><div class="dont"><span class="tag dont">DON’T</span><div class="input" style="width:150px;height:32px;color:#b7bcc4">Email</div></div></div><div class="txt"><b>Labels sit above inputs.</b><span>Placeholders disappear when typing; a label never does.</span></div></div>
+    <div class="card rule"><div class="vis"><div class="do"><span class="tag do">DO</span><div class="row"><span class="pill ok">Approved</span><span style="padding:2px 8px;border-radius:6px;background:#e8ecf5;color:#1e3655;font-size:10.5px;font-weight:700">MSP</span></div></div><div class="dont"><span class="tag dont">DON’T</span><div class="row"><span class="pill ok">Approved</span><span class="pill ok">Client</span></div></div></div><div class="txt"><b>Roles never borrow status colors.</b><span>A role badge must not read as a state.</span></div></div>
+    <div class="card rule"><div class="vis"><div class="do"><span class="tag do">DO</span><div style="padding:10px;border-radius:16px;border:1px solid var(--line);background:#fff"><div style="width:90px;height:40px;border-radius:12px;background:#f1f2f5"></div></div></div><div class="dont"><span class="tag dont">DON’T</span><div style="padding:10px;border-radius:8px;border:1px solid var(--line);background:#fff"><div style="width:90px;height:40px;border-radius:16px;background:#f1f2f5"></div></div></div></div><div class="txt"><b>Nested radius shrinks inward.</b><span>Never put a 16px card inside an 8px one.</span></div></div>
+    <div class="card rule"><div class="vis"><div class="do"><span class="tag do">DO</span><code class="mono" style="font-size:11px">color: var(--brand-cta);</code></div><div class="dont"><span class="tag dont">DON’T</span><code class="mono" style="font-size:11px">color: #0277B6;</code></div></div><div class="txt"><b>Tokens only, no raw hex.</b><span>A raw value can’t be themed, audited or fixed in one place.</span></div></div>
+    <div class="card rule"><div class="vis"><div class="do"><span class="tag do">DO</span><span class="pill ok">Fully filled</span></div><div class="dont"><span class="tag dont">DON’T</span><span style="color:#3f8a1f;font-size:12px">Fully filled</span></div></div><div class="txt"><b>Status is a shape, not just a color.</b><span>Dot plus label plus tint, so meaning survives color blindness.</span></div></div>
+  </div>
+</section>
+
+<!-- 6. Process -->
+<section class="board" id="process">
+  <p class="kick">How the system is maintained</p>
+  <h2>Design rulings, developers and AI agents</h2>
+  <div class="pr">
+    <div class="card memo">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:15px">Deviation memo · developers → design</b><span style="color:var(--muted);font-size:12px">15 items · 1 review</span></div>
+      <div class="memo-row"><code>A1</code><span>Button ships 7 variants; the spec defined 3</span><span class="ruling k">6 official</span></div>
+      <div class="memo-row"><code>A3</code><span>Two Tabs and two Table implementations</span><span class="ruling a">One canonical API</span></div>
+      <div class="memo-row"><code>A5</code><span>Old primary token was undefined</span><span class="ruling k">Alias, then retire</span></div>
+      <div class="memo-row"><code>B1</code><span>Big stat numbers in the identity shade</span><span class="ruling a">Move to CTA shade</span></div>
+      <div class="memo-row"><code>B4</code><span>Checkboxes shipped in brand color</span><span class="ruling a">Navy, per spec</span></div>
+      <div class="memo-row"><code>—</code><span>Amber “warning” button variant</span><span class="ruling d">Deferred</span></div>
+      <div class="memo-row" style="border:0"><code>B8</code><span>Plan to move CTAs to navy</span><span class="ruling r">Rejected</span></div>
+      <div style="margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center">
+        <div style="padding:12px;border-radius:12px;background:#f8f9fb"><b style="font-size:22px">16</b><small style="display:block;color:var(--muted);font-size:11px">Decisions logged</small></div>
+        <div style="padding:12px;border-radius:12px;background:#f8f9fb"><b style="font-size:22px">47</b><small style="display:block;color:var(--muted);font-size:11px">Components</small></div>
+        <div style="padding:12px;border-radius:12px;background:#f8f9fb"><b style="font-size:22px">17</b><small style="display:block;color:var(--muted);font-size:11px">Spec documents</small></div>
+        <div style="padding:12px;border-radius:12px;background:#f8f9fb"><b style="font-size:22px">2</b><small style="display:block;color:var(--muted);font-size:11px">Products</small></div>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="card step"><span class="n">01</span><div><b>Rules written before components</b><span>Guidelines, tokens and decisions live as text, so people and AI agents read the same source.</span></div></div>
+      <div class="card step"><span class="n">02</span><div><b>Agents work inside the rules</b><span>“Never invent a token. Never duplicate a component. Surface conflicts.”</span></div></div>
+      <div class="card step"><span class="n">03</span><div><b>Every PR is checked</b><span>A token checker flags raw values before review.</span></div></div>
+      <div class="term"><span class="m"># example output</span><br><span class="m">$ check-tokens src/</span><br><span class="g">✓</span> 44 components resolve to tokens<br><span class="y">!</span> RequestRow.tsx:42  raw #6c757d → <span class="g">var(--text-muted)</span><br><span class="y">!</span> BatchCard.tsx:118 padding 13px → <span class="g">var(--space-3)</span><br><span class="m">2 suggestions · 0 errors</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const id = new URLSearchParams(location.search).get('s') || 'themes';
+  document.getElementById(id).classList.add('on');
+</script>
+</body>
+</html>
