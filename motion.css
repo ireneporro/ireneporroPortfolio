@@ -257,3 +257,8 @@
   .motion .studio-laptop { transform: none; }
   .studio-glare { display: none; }
 }
+@media (max-width: 760px) {
+  .premium-nav nav.open { background: #0e0e12 !important; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); z-index: 60; }
+  .premium-nav nav.open a { padding: 14px 14px; border-radius: 12px; font-size: 15px; color: #fff; }
+  .premium-nav nav.open a:active { background: rgba(255, 255, 255, .06); }
+}

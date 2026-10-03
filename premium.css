@@ -263,3 +263,7 @@ h1 { margin: 0; max-width: 800px; font-family: var(--serif); font-size: clamp(64
 }
 
 @media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+@media (max-width: 760px) {
+  .premium-nav nav.open { background: #0e0e12; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .premium-nav nav.open a { padding: 14px; border-radius: 12px; font-size: 15px; color: #fff; }
+}
