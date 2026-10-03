@@ -1,0 +1,8 @@
+/* Foundry: neutral ink palette so it reads as the system under both brands. */
+body.foundry { --brand:#12141a; --soft:#f1f2f5; }
+.foundry .foundry-brand b { width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#0d7f75 0 50%,#7029bd 50% 100%); }
+.foundry h1 em { background:linear-gradient(90deg,#0d7f75,#7029bd); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.foundry .primary-link { background:#12141a; }
+.foundry .screen-stage { background:#f3f4f7; padding:18px; }
+.foundry .intro-bottom a:not(.primary-link), .foundry .chapter-copy a, .foundry .disclosure a { color:#12141a; text-decoration:underline; text-underline-offset:3px; }
+.foundry code { padding:1px 6px; border-radius:5px; background:#f1f2f5; font-size:.92em; }
