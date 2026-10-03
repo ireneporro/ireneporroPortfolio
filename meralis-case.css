@@ -17,3 +17,10 @@ figcaption { display:flex; justify-content:space-between; gap:24px; padding:18px
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
 .disclosure a { color:var(--brand); text-decoration:underline; }
 @media(max-width:760px) { .eyebrow { font-size:10.5px; letter-spacing:.08em; } figcaption { font-size:11.5px; } .intro-meta > span:last-child { font-size:11px; } .model span, .project-facts span { font-size:10.5px; } }
+
+.tldr { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:6px; margin-bottom:34px; border:1px solid var(--line); border-radius:16px; background:#fff; overflow:hidden; }
+.tldr > div { padding:18px 22px; border-left:1px solid var(--line); }
+.tldr > div:first-child { border-left:0; }
+.tldr span { display:block; margin-bottom:6px; color:var(--brand); font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.tldr p { margin:0; color:var(--ink); font-size:14px; line-height:1.55; }
+@media(max-width:760px){ .tldr { grid-template-columns:1fr; } .tldr > div { border-left:0; border-top:1px solid var(--line); } .tldr > div:first-child { border-top:0; } }
