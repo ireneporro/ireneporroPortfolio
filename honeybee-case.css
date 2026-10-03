@@ -1,0 +1,9 @@
+body.honeybee { --brand:#1aa3c4; --soft:#e4f6fa; --line:#e5eef0; }
+.honeybee h1, .honeybee h2 { font-family:"Poppins", Inter, sans-serif; letter-spacing:-.03em; }
+.honeybee h1 em { font-style:normal; color:#1aa3c4; }
+.honeybee .hb-brand b { width:36px; height:36px; border-radius:11px; background:#fbe7a6; font-size:18px; }
+.honeybee .primary-link { background:#1aa3c4; }
+.honeybee .screen-stage { background:#eef8fa; }
+.honeybee .wrap + .wrap { margin-top:28px; }
+.hb-duo { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+@media (max-width:760px) { .hb-duo { grid-template-columns:1fr; } }
