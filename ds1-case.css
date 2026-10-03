@@ -1,0 +1,7 @@
+body.ds1 { --brand:#1e3655; --soft:#f2f7fe; --line:#dee2e6; }
+.ds1 h1 em { font-style:normal; color:#638fcc; }
+.ds1 .ds1-brand b { width:auto; height:36px; padding:0 10px; border-radius:10px; background:#1e3655; color:#fff; font-size:14px; }
+.ds1 .primary-link { background:#1e3655; }
+.ds1 .screen-stage { background:#eef1f6; padding:16px; }
+.ds1 .wrap + .wrap { margin-top:28px; }
+.ds1 .chapter-copy a { color:#1e3655; text-decoration:underline; }

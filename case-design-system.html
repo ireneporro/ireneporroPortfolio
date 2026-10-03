@@ -1,249 +1,36 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Design System Case Study — B2B SaaS | Irene Porro</title>
-    <meta
-      name="description"
-      content="An anonymized B2B HR design system case study by Irene Porro: scalable UI foundations, reusable components and product decisions built for implementation."
-    />
-    <link rel="icon" href="./assets/favicon.ico?v=2" sizes="any" />
-    <link rel="icon" href="./assets/favicon.svg?v=2" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png?v=2" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Design System Case Study — B2B SaaS | Irene Porro" />
-    <meta property="og:description" content="Shared foundations, reusable rules, tokens and components designed to reduce repeated product and implementation decisions." />
-    <meta property="og:image" content="https://www.ireneporro.com/assets/design-system/COVERC.png" />
-    <meta property="og:url" content="https://www.ireneporro.com/case-design-system.html" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Design System Case Study — B2B SaaS | Irene Porro" />
-    <meta name="twitter:description" content="Shared foundations, reusable rules, tokens and components for scalable B2B SaaS products." />
-    <meta name="twitter:image" content="https://www.ireneporro.com/assets/design-system/COVERC.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@500;600;700;800&family=Nanum+Pen+Script&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./premium-case.css?v=7" />
-  </head>
-  <body>
-    <div class="paper-grain" aria-hidden="true"></div>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design System 1.0 — Foundations and Components | Irene Porro</title>
+<meta name="description" content="The first version of a design system for B2B products: foundations, components and states, by Irene Porro." />
+<link rel="icon" href="./assets/favicon.ico?v=2" sizes="any" /><link rel="icon" href="./assets/favicon.svg?v=2" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./meralis-case.css?v=2" />
+<link rel="stylesheet" href="./ds1-case.css" />
 
-    <header class="case-nav">
-      <a class="back" href="./index.html#work">← <span>Irene Porro / Selected work</span></a>
-      <nav aria-label="Case study navigation"><a href="#overview">Overview</a><a href="#foundations">Foundations</a><a href="#components">Components</a><a href="#impact">Outcome</a></nav>
-      <a class="contact" href="./index.html#contact">Let’s talk ↗</a>
-    </header>
-
-    <main class="journal-page case-page design-system-case">
-      <section class="case-hero" id="overview">
-        <div class="case-hero-copy">
-          <p class="eyebrow">Case study / B2B HR Design System</p>
-          <h1>Turning repeated UI decisions into a shared product system.</h1>
-          <p>
-            The product did not need a new coat of paint. It needed a common
-            language for decisions that were being solved repeatedly across
-            dense HR workflows, product screens and implementation.
-          </p>
-          <div class="proof-strip">
-            <span>Design Systems</span>
-            <span>B2B + HR</span>
-            <span>UI Foundations</span>
-            <span>Component Rules</span>
-            <span>Engineering Handoff</span>
-          </div>
-        </div>
-        <figure class="case-hero-visual">
-          <img src="./assets/design-system/Cover.png" alt="Design System case study cover" width="2048" height="1536" decoding="async" />
-        </figure>
-      </section>
-
-      <section class="case-summary">
-        <article>
-          <span>Challenge</span>
-          <p>
-            Forms, data views, status states and operational screens were
-            repeating the same decisions without one reliable set of rules.
-            The system had to improve consistency without forcing a full redesign.
-          </p>
-        </article>
-        <article>
-          <span>Role</span>
-          <p>
-            I defined foundations, component behavior, interaction states and
-            usage rules, connecting what designers needed to decide with what
-            developers needed to implement.
-          </p>
-        </article>
-        <article>
-          <span>Outcome</span>
-          <p>
-            12+ foundations and component groups covering color, typography,
-            grids, shadows, icons, loaders, form states, tables and dashboard
-            patterns.
-          </p>
-        </article>
-      </section>
-
-      <section class="case-story">
-        <div>
-          <p class="eyebrow">Story</p>
-          <h2>The system had to improve delivery, not decorate Figma.</h2>
-        </div>
-        <div class="case-story-copy">
-          <p>
-            A component library would not solve the real problem on its own.
-            The team needed to understand when to reuse a decision, when a
-            product context required an exception and how states should behave
-            once the screen reached development.
-          </p>
-          <p>
-            I focused on the layer where product quality becomes visible in
-            daily work: hierarchy, spacing, states, component behavior and
-            documentation that could survive beyond the original Figma file.
-          </p>
-        </div>
-      </section>
-
-      <section id="foundations" class="case-section">
-        <div class="case-section-copy">
-          <p class="eyebrow">01 / Foundations</p>
-          <h2>Start with decisions that affect every screen.</h2>
-          <p>
-            I started by defining the visual foundations that every screen
-            depends on: color, typography, layout, spacing and elevation. This
-            gave the interface a more stable hierarchy before moving into
-            individual components.
-          </p>
-          <ul class="case-note-list">
-            <li>Created a clearer visual language for product screens.</li>
-            <li>Defined repeatable rules for hierarchy, spacing and surface depth.</li>
-            <li>Kept the system aligned with the existing product direction.</li>
-          </ul>
-        </div>
-        <div class="case-image-grid foundations-grid">
-          <figure class="case-shot tall">
-            <img src="./assets/design-system/Slide-4-3---2.png" alt="Design system color foundations" width="2048" height="4696" loading="lazy" decoding="async" />
-          </figure>
-          <div class="foundation-stack">
-            <figure class="case-shot">
-              <img src="./assets/design-system/Slide-4-3---3.png" alt="Layout grids and spacing system" width="2048" height="2390" loading="lazy" decoding="async" />
-            </figure>
-            <figure class="case-shot">
-              <img src="./assets/design-system/Slide-4-3---4.png" alt="Elevation and shadow system" width="2048" height="1744" loading="lazy" decoding="async" />
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="case-section compact case-section-vertical">
-        <div class="case-section-copy">
-          <p class="eyebrow">02 / Utility Layer</p>
-          <h2>Design the states people notice when the product stops moving.</h2>
-          <p>
-            The utility layer covers the details that often create inconsistency:
-            icon sizing, loaders, empty states and progress feedback. These
-            patterns reduce ambiguity in the moments where the product is
-            loading, waiting or guiding the user forward.
-          </p>
-          <ul class="case-note-list">
-            <li>Documented reusable patterns for transitional states.</li>
-            <li>Reduced one-off decisions across repeated interface moments.</li>
-            <li>Protected clarity in loading, empty and in-progress states.</li>
-          </ul>
-        </div>
-        <div class="case-image-grid two">
-          <figure class="case-shot">
-            <img src="./assets/design-system/Slide-4-3---5.png" alt="Iconography scale and rules" width="2048" height="1062" loading="lazy" decoding="async" />
-          </figure>
-          <figure class="case-shot">
-            <img src="./assets/design-system/Slide-4-3---6.png" alt="UI utility elements and skeleton loaders" width="2048" height="2382" loading="lazy" decoding="async" />
-          </figure>
-        </div>
-      </section>
-
-      <section id="components" class="case-section">
-        <div class="case-section-copy">
-          <p class="eyebrow">03 / Components</p>
-          <h2>Components are product decisions, not reusable shapes.</h2>
-          <p>
-            Components were organized around usage, states and behavior, not
-            only appearance. Buttons, badges, inputs, dropdowns, search, tabs,
-            progress, empty states, toasts and messaging patterns were treated
-            as product decisions that needed to be reused consistently.
-          </p>
-          <ul class="case-note-list">
-            <li>Defined component states, sizes and usage logic.</li>
-            <li>Designed for dense B2B screens where consistency matters at scale.</li>
-            <li>Made the library easier to translate into reusable frontend patterns.</li>
-          </ul>
-        </div>
-        <div class="case-image-grid">
-          <figure class="case-shot tall">
-            <img src="./assets/design-system/Slide-4-3---7.png" alt="Buttons, badges and component states" width="2048" height="2940" loading="lazy" decoding="async" />
-          </figure>
-          <figure class="case-shot tall">
-            <img src="./assets/design-system/Slide-4-3---8.png" alt="Text field component states" width="2048" height="2854" loading="lazy" decoding="async" />
-          </figure>
-          <figure class="case-shot tall">
-            <img src="./assets/design-system/Slide-4-3---9.png" alt="Dropdowns, color picker and messenger input" width="2048" height="4182" loading="lazy" decoding="async" />
-          </figure>
-          <figure class="case-shot tall">
-            <img src="./assets/design-system/Slide-4-3---10.png" alt="Search, tabs, process bar and toast components" width="2048" height="3514" loading="lazy" decoding="async" />
-          </figure>
-        </div>
-      </section>
-
-      <section class="case-section compact case-section-vertical">
-        <div class="case-section-copy">
-          <p class="eyebrow">04 / Data & Patterns</p>
-          <h2>The system had to survive dense product screens.</h2>
-          <p>
-            B2B HR products are rarely made of simple marketing pages. The
-            system needed to support tables, task lists, popups and attachment
-            patterns: the kind of everyday product density where clarity,
-            hierarchy and spacing directly affect usability.
-          </p>
-          <ul class="case-note-list">
-            <li>Supported data-heavy workflows and repeated operational tasks.</li>
-            <li>Created patterns for lists, tables, overlays and attachments.</li>
-            <li>Balanced information density with readable, human interface rhythm.</li>
-          </ul>
-        </div>
-        <figure class="case-shot wide">
-          <img src="./assets/design-system/Slide-4-3---12.png" alt="Tables, task lists and popup patterns" width="2048" height="1536" loading="lazy" decoding="async" />
-        </figure>
-      </section>
-
-      <section id="impact" class="case-section impact case-section-vertical">
-        <div class="case-section-copy">
-          <p class="eyebrow">05 / Impact</p>
-          <h2>A clearer contract between design and development.</h2>
-          <p>
-            The system gave the team a more reliable base for creating,
-            reviewing and implementing product screens. Instead of treating
-            consistency as a final visual check, it made the underlying rules
-            available earlier in the design and delivery process.
-          </p>
-          <ul class="case-note-list">
-            <li>Improved design consistency across product patterns.</li>
-            <li>Created a clearer source of truth for design and development.</li>
-            <li>Made future UI work easier to scale without restarting from scratch.</li>
-          </ul>
-        </div>
-        <figure class="case-shot wide">
-          <img src="./assets/design-system/Slide-4-3---13.png" alt="Dashboard examples and design system impact" width="2048" height="3462" loading="lazy" decoding="async" />
-        </figure>
-      </section>
-
-      <section class="case-next">
-        <a href="./index.html#work">← Back to selected work</a>
-        <a href="./assets/design-system/design-system-case-study.pdf" target="_blank" rel="noopener">View PDF</a>
-      </section>
-    </main>
-    <script src="./premium-case.js?v=2"></script>
-  </body>
-</html>
+</head><body class="ds1">
+<a class="skip-link" href="#main">Skip to case study</a>
+<header class="case-nav"><a class="back" href="./index.html#work">← <span>Irene Porro / Selected work</span></a><nav aria-label="Case study"><a href="#foundations">Foundations</a><a href="#components">Components</a><a href="#next">What came next</a></nav><a class="contact" href="./index.html#contact">Let’s talk ↗</a></header>
+<main id="main">
+<section class="meralis-intro wrap" id="overview">
+  <div class="intro-meta"><span class="brand ds1-brand"><b>1.0</b>Design System</span><span>Design system / Version 1.0</span></div>
+  <p class="eyebrow">Foundations · Components · Documentation</p>
+  <h1>The first version of the design system<br><em>behind our B2B products.</em></h1>
+  <div class="intro-bottom"><p>Before this, every new screen meant deciding again how a button, a table or an empty state should look. I built version 1.0 in Figma: foundations, components with all their states, and short usage notes next to each one so developers could follow them without asking.</p><a class="primary-link" href="./case-foundry.html">See version 2.0, Foundry ↗</a></div>
+</section>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/colors.webp" data-zoom aria-label="Enlarge: Color ramps for primary navy, neutrals, blue, cyan, orange and purple, with status colors, transparency and gradient"><img src="./assets/design-system/v1/colors.webp" alt="Color ramps for primary navy, neutrals, blue, cyan, orange and purple, with status colors, transparency and gradient" loading="lazy" decoding="async" width="2880" height="1548" /></a></div><figcaption><span>Color: one primary navy, neutrals and four secondary ramps</span><a href="./assets/design-system/v1/colors.webp" data-zoom data-alt="Color ramps for primary navy, neutrals, blue, cyan, orange and purple, with status colors, transparency and gradient">Enlarge ↗</a></figcaption></figure></div>
+<section class="project-facts wrap" aria-label="Project summary">
+  <div><span>My role</span><strong>Designer and owner</strong><p>I set the foundations, designed each component and wrote the usage notes.</p></div>
+  <div><span>Scope</span><strong>18 Figma pages</strong><p>Grid, spacing, type, color, icons, shadows, images, buttons, inputs, navigation, feedback, cards, tables and more.</p></div>
+  <div><span>Base</span><strong>Inter · Lucide · 4px grid</strong><p>One typeface, an open-source icon set in five sizes and a spacing scale in multiples of four.</p></div>
+</section>
+<section class="chapter wrap" id="foundations"><div class="chapter-heading"><p class="eyebrow">01 / Foundations</p><h2>Small rules that every screen inherits.</h2></div><div class="chapter-copy"><p>Spacing uses multiples of 4, text sizes are in rem (1rem = 16px) so they respect browser settings, and the layout is a 12-column grid with a 1200px maximum width. The palette has one primary navy for structure and actions, neutral grays for text and borders, and four secondary ramps for data and status.</p></div></section>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/type.webp" data-zoom aria-label="Enlarge: Type scale, spacing scale, grid and elevation levels"><img src="./assets/design-system/v1/type.webp" alt="Type scale, spacing scale, grid and elevation levels" loading="lazy" decoding="async" width="2880" height="1600" /></a></div><figcaption><span>Typography, spacing, grid and elevation</span><a href="./assets/design-system/v1/type.webp" data-zoom data-alt="Type scale, spacing scale, grid and elevation levels">Enlarge ↗</a></figcaption></figure></div>
+<section class="chapter wrap" id="components"><div class="chapter-heading"><p class="eyebrow">02 / Components</p><h2>Every component with every state.</h2></div><div class="chapter-copy"><p>Each component shows default, hover, press, focus and disabled, with the transition timing (400ms ease in/out) written next to it. I added notes where people usually made different choices, like how to pair Cancel and Save in the same modal.</p></div></section>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/buttons.webp" data-zoom aria-label="Enlarge: Primary, secondary, tertiary and icon buttons in all states"><img src="./assets/design-system/v1/buttons.webp" alt="Primary, secondary, tertiary and icon buttons in all states" loading="lazy" decoding="async" width="2880" height="1534" /></a></div><figcaption><span>Buttons</span><a href="./assets/design-system/v1/buttons.webp" data-zoom data-alt="Primary, secondary, tertiary and icon buttons in all states">Enlarge ↗</a></figcaption></figure></div>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/forms.webp" data-zoom aria-label="Enlarge: Inputs, selects, multiselect, upload, controls, badges, tabs and pagination"><img src="./assets/design-system/v1/forms.webp" alt="Inputs, selects, multiselect, upload, controls, badges, tabs and pagination" loading="lazy" decoding="async" width="2880" height="1316" /></a></div><figcaption><span>Forms and selection</span><a href="./assets/design-system/v1/forms.webp" data-zoom data-alt="Inputs, selects, multiselect, upload, controls, badges, tabs and pagination">Enlarge ↗</a></figcaption></figure></div>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/feedback.webp" data-zoom aria-label="Enlarge: Steppers, progress bars, toasts, empty state and skeleton"><img src="./assets/design-system/v1/feedback.webp" alt="Steppers, progress bars, toasts, empty state and skeleton" loading="lazy" decoding="async" width="2880" height="1238" /></a></div><figcaption><span>Feedback and status</span><a href="./assets/design-system/v1/feedback.webp" data-zoom data-alt="Steppers, progress bars, toasts, empty state and skeleton">Enlarge ↗</a></figcaption></figure></div>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/nav.webp" data-zoom aria-label="Enlarge: Desktop headers, sidebars, icon rails and mobile bottom navigation"><img src="./assets/design-system/v1/nav.webp" alt="Desktop headers, sidebars, icon rails and mobile bottom navigation" loading="lazy" decoding="async" width="2880" height="1360" /></a></div><figcaption><span>Navigation</span><a href="./assets/design-system/v1/nav.webp" data-zoom data-alt="Desktop headers, sidebars, icon rails and mobile bottom navigation">Enlarge ↗</a></figcaption></figure></div>
+<div class="wrap"><figure class="screen-figure"><div class="screen-stage"><a class="screen-zoom" href="./assets/design-system/v1/data.webp" data-zoom aria-label="Enlarge: Table with sortable headers and CRM cards"><img src="./assets/design-system/v1/data.webp" alt="Table with sortable headers and CRM cards" loading="lazy" decoding="async" width="2880" height="1268" /></a></div><figcaption><span>Tables and cards</span><a href="./assets/design-system/v1/data.webp" data-zoom data-alt="Table with sortable headers and CRM cards">Enlarge ↗</a></figcaption></figure></div>
+<section class="chapter wrap" id="next"><div class="chapter-heading"><p class="eyebrow">03 / What came next</p><h2>Why there is a version 2.0.</h2></div><div class="chapter-copy"><p>Version 1.0 lived in Figma and worked well for one product. Once a second product started using it, the gaps showed: colors were defined as raw values instead of roles, the bright accents failed contrast on buttons, and code drifted from the file.</p><p>That led to <a href="./case-foundry.html">Foundry</a>, a token-based version shared by both products, with accessibility fixed in the values themselves.</p></div></section>
+<footer class="case-footer wrap"><div><span>Want to see the next version?</span><h2>Foundry.</h2></div><a class="primary-link" href="./case-foundry.html">Open Foundry ↗</a><a href="./more-work.html">← Back to more work</a></footer>
+</main><dialog class="image-dialog" aria-label="Enlarged board"><form method="dialog"><button aria-label="Close">Close ×</button></form><img alt="" /><p></p></dialog><script src="./meralis-case.js"></script></body></html>
