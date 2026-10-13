@@ -19,6 +19,17 @@ body { width:1440px; background:#111114; color:#fff; font:14px/1.45 Inter, sans-
 .no::after { content:"✕"; position:absolute; top:10px; right:12px; display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:#f6d4d1; color:#a32d2d; font-size:11px; font-weight:800; }
 .yes::after { content:"✓"; background:#dff5e3; color:#1f7a3a; }
 .grid-bg { background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:40px 40px; }
+.slide { position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:16px; background:#000; }
+.wm { position:absolute; font:800 260px/0.8 Inter; letter-spacing:-.05em; color:rgba(254,254,254,.05); white-space:nowrap; }
+.lbl { display:inline-flex; align-items:center; gap:10px; margin-top:12px; font-size:13px; opacity:.75; } .lbl b { padding:4px 12px; border-radius:99px; background:#1b1b20; color:var(--lime); font-size:12px; opacity:1; }
+.dev { position:absolute; border-radius:14px; background:#1d1d24; border:6px solid #2b2b33; box-shadow:0 30px 60px rgba(0,0,0,.6); }
+.dev i { display:block; height:8px; margin:12px 12px 0; border-radius:4px; background:#33333d; } .dev i.p { width:40%; background:var(--pu); }
+.chip { display:inline-block; padding:6px 14px; border-radius:99px; background:#1f1f24; color:var(--lime); font-weight:700; font-size:15px; }
+.step { display:flex; align-items:center; gap:22px; padding:22px 30px; border:1.5px solid #3a3a44; border-radius:999px; }
+.step b { font:700 56px/1 Rubik; } .step b::after { content:""; display:inline-block; width:9px; height:9px; margin-left:3px; background:currentColor; }
+.step small { display:block; font-size:13px; font-weight:600; } .step em { font-style:normal; color:var(--lime); font-size:13px; font-weight:600; }
+.post { position:relative; overflow:hidden; border-radius:14px; }
+.av2 { display:grid; place-items:center; border-radius:50%; font-weight:800; color:#fff; }
 </style>
 </head>
 <body>
@@ -65,6 +76,65 @@ body { width:1440px; background:#111114; color:#fff; font:14px/1.45 Inter, sans-
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:10px;font-size:12.5px;opacity:.7"><span>Use as is</span><span>Don’t rotate</span><span>Don’t recolor</span><span>Don’t stretch</span><span>Don’t remove the fill</span></div>
   </div>
 </section>
+
+<section class="board" id="presentations">
+  <p class="k" style="opacity:1;color:var(--lp)">Uses · Presentations</p>
+  <div style="font:800 40px/1.05 Inter;letter-spacing:-.03em;margin-bottom:28px">Slide templates for pitches, reports and client decks.</div>
+  <div class="g" style="grid-template-columns:1.25fr 1fr">
+    <div>
+      <div class="slide grid-bg"><span class="wm" style="right:-30px;bottom:-40px">FAST</span>
+        <div style="position:absolute;left:8%;top:50%;transform:translateY(-50%)"><div class="mark" style="font-size:64px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div><div style="margin-top:10px;letter-spacing:.5em;font-size:13px;opacity:.7">STUDIO</div></div>
+        <div class="dev" style="right:6%;top:16%;width:36%;height:52%"><i class="p"></i><i></i><i style="width:70%"></i><i></i><i style="width:55%"></i></div>
+        <div class="dev" style="right:34%;top:44%;width:13%;height:46%;border-radius:18px"><i class="p" style="width:60%"></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="lbl"><b>Cover</b> 1920×1080 · logo at full size, watermark at 5% white</div>
+    </div>
+    <div class="g" style="grid-template-rows:auto auto">
+      <div>
+        <div class="slide"><span class="wm" style="left:-20px;bottom:-60px;font-size:200px">SHIP</span>
+          <svg style="position:absolute;left:-14%;top:8%;height:84%" viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="#705cf6" stroke-width="1.2" stroke-dasharray="4 5"/></svg>
+          <div style="position:absolute;left:6%;top:50%;transform:translateY(-50%);font-size:20px">Custom:</div>
+          <div style="position:absolute;left:30%;top:13%;display:grid;gap:10px;justify-items:start"><span class="chip">marketplaces</span><span class="chip" style="margin-left:18px">internal apps</span><span class="chip" style="margin-left:24px">MVPs</span><span class="chip" style="margin-left:18px">client portals</span><span class="chip">apps</span></div>
+          <div style="position:absolute;right:7%;top:50%;transform:translateY(-50%);font:700 20px/1.3 Inter;max-width:30%">without breaking the bank</div>
+        </div>
+        <div class="lbl"><b>Informational</b> one idea per slide</div>
+      </div>
+      <div>
+        <div class="slide" style="padding:22px 26px;display:grid;gap:10px;align-content:center">
+          <div class="step" style="border-color:var(--pu)"><b>1</b><div><small>Discover</small><em>Contact us</em></div></div>
+          <div class="step"><b>2</b><div><small>Design &amp; develop</small><em>Our process</em></div></div>
+          <div class="step"><b>3</b><div><small>Launch &amp; growth</small><em>Outcome</em></div></div>
+        </div>
+        <div class="lbl"><b>Process</b> Rubik for every number, from 32px</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="board" id="social">
+  <p class="k" style="opacity:1;color:var(--lp)">Uses · Social media</p>
+  <div style="font:800 40px/1.05 Inter;letter-spacing:-.03em;margin-bottom:28px">Templates with fixed sizes and logo positions for every channel.</div>
+  <div class="post grid-bg" style="height:190px;background-color:#000"><div class="dev" style="left:8%;top:22%;width:9%;height:110%;border-radius:20px;transform:rotate(-14deg)"><i class="p"></i><i></i><i></i></div><div class="dev" style="left:16%;top:30%;width:9%;height:110%;border-radius:20px;transform:rotate(-14deg)"><i class="p"></i><i></i></div>
+    <div style="position:absolute;right:6%;bottom:30%"><div class="mark" style="font-size:34px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div><i style="position:absolute;left:24%;right:6%;bottom:20%;height:2px;background:var(--pu)"></i></div>
+  <div class="lbl"><b>LinkedIn cover</b> 1128×191 · logo bottom right</div>
+  <div class="g" style="grid-template-columns:1.25fr 1fr 1fr;margin-top:22px;align-items:start">
+    <div><div class="post" style="display:grid;grid-template-columns:1.2fr 1fr;aspect-ratio:1200/627;background:#000">
+      <div style="padding:26px;display:grid;align-content:space-between"><div class="mark" style="font-size:16px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div><div><div style="font-size:15px">We’re hiring!</div><div style="font:800 34px/1.05 Inter;letter-spacing:-.03em;color:var(--pu)">Product Designer</div><div style="margin-top:8px;font-size:11.5px;opacity:.7">Join the team that ships custom software in weeks.</div></div><span style="justify-self:start;padding:9px 16px;border-radius:99px;background:var(--pu);font-size:12px;font-weight:700">shipfast.studio/careers →</span></div>
+      <div style="background:linear-gradient(160deg,#38327c,#705cf6);display:grid;place-items:center"><div style="display:flex;gap:10px"><i style="width:18px;height:90px;background:#fff;transform:skewX(-22deg)"></i><i style="width:18px;height:90px;background:var(--lime);transform:skewX(-22deg)"></i></div></div>
+    </div><div class="lbl"><b>Post with link</b> 1200×627</div></div>
+    <div><div class="post" style="aspect-ratio:1;background:#000;padding:24px;display:grid;align-content:space-between">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;opacity:.7"><b>Dana Whitfield</b> · Northwind Logistics</span><span style="padding:3px 9px;border-radius:99px;background:var(--lp);color:#38327c;font-size:9.5px;font-weight:800">#CLIENT</span></div>
+      <div style="font:700 19px/1.3 Inter;color:var(--lime)">“They turned a spreadsheet we had outgrown into an app <span style="color:#fff">our whole team uses every day.</span>”</div>
+      <div style="justify-self:end"><div class="mark" style="font-size:13px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div></div>
+    </div><div class="lbl"><b>Testimonial</b> 1080×1080</div></div>
+    <div><div class="post grid-bg" style="aspect-ratio:600/335;background-color:#0b0b0d;padding:18px;display:grid;place-items:center">
+      <div style="position:relative;width:78%;padding:16px;border:2px solid #fff;border-right-color:var(--pu);border-bottom-color:var(--pu);border-radius:18px;text-align:center"><div style="font-size:11px;color:var(--lp)">Studio Podcast · S2 E11</div><div style="font:800 16px/1.2 Inter;margin-top:6px">Building internal tools without a dev team</div><div style="height:3px;margin:10px 20% 0;border-radius:2px;background:linear-gradient(90deg,var(--pu) 40%,#444 0)"></div></div>
+      <span class="av2" style="position:absolute;left:12px;top:12px;width:46px;height:46px;background:#38327c;border:3px solid var(--pu)">JR</span><span class="av2" style="position:absolute;right:12px;bottom:12px;width:46px;height:46px;background:#705cf6;border:3px solid var(--lp)">AM</span>
+    </div><div class="lbl"><b>X post</b> 600×335</div>
+    <div class="post grid-bg" style="margin-top:18px;aspect-ratio:3/1;background-color:#000;padding:14px 18px;display:grid;align-content:space-between"><div class="mark" style="font-size:13px"><span class="a">SHIP</span><span class="s"></span><span class="b">FAST</span></div><div style="text-align:right;font:800 17px/1.15 Inter">We use tech to start,<br>grow and scale <span style="color:var(--pu)">your business</span></div></div><div class="lbl"><b>X cover</b> 1500×500 · logo top left</div></div>
+  </div>
+</section>
+
 <script>document.getElementById(new URLSearchParams(location.search).get('s') || 'identity').classList.add('on');</script>
 </body>
 </html>
