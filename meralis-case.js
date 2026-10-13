@@ -28,3 +28,9 @@ document.querySelectorAll('[data-proto]').forEach(screen => {
   addEventListener('resize', fit);
   if ('ResizeObserver' in window) new ResizeObserver(fit).observe(screen);
 });
+document.querySelectorAll('.live-proto-video').forEach(video => {
+  if (!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && getComputedStyle(video).display !== 'none') video.play().catch(() => {}); else video.pause();
+  }, { threshold: .35 }).observe(video);
+});

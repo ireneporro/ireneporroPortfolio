@@ -155,3 +155,5 @@
   .rl-route { grid-auto-flow:column; } .rl-route li::after { display:none; }
 }
 @media (prefers-reduced-motion:reduce) { .fd-input i { animation:none; } }
+.tag-row span.tag-live { display:inline-flex; align-items:center; gap:6px; border-color:#cfe9a8; background:#f2fbe3; color:#2f5d12; }
+.tag-row span.tag-live::before { content:""; width:6px; height:6px; border-radius:50%; background:#5bb31d; box-shadow:0 0 0 3px rgba(91,179,29,.18); }
