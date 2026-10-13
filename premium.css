@@ -163,11 +163,16 @@ h1 { margin: 0; max-width: 800px; font-family: var(--serif); font-size: clamp(64
 .about-image img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center; }
 .about-image span { position: absolute; right: -22px; bottom: -18px; border: 1px solid rgba(255,255,255,.28); border-radius: 14px; padding: 13px 19px 15px; background: rgba(20,20,22,.76); color: white; font-family: "Cormorant Garamond",Georgia,serif; font-size: 29px; font-style: italic; font-weight: 500; line-height: 1; letter-spacing: .01em; box-shadow: inset 0 1px 0 rgba(255,255,255,.18),0 14px 32px rgba(0,0,0,.15); backdrop-filter: blur(16px) saturate(145%); -webkit-backdrop-filter: blur(16px) saturate(145%); }
 .about-content > p:not(.kicker) { margin: 24px 0 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+.about-stats { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin: 30px 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.about-stats div { padding: 16px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.about-stats dt { font-family: var(--serif); font-size: 42px; line-height: 1; color: var(--violet); }
+.about-stats dd { margin: 8px 0 0; font-size: 13px; line-height: 1.4; }
 .about-tags { margin-top: 30px; }
 .about-tags span { border-color: rgba(90,45,104,.2); background: rgba(255,255,255,.86); color: #3d2047; box-shadow: 0 7px 20px rgba(48,36,55,.07); }
 .about-tags span:nth-child(2) { background: #f1efff; }
 .about-tags span:nth-child(3) { background: #f4ffd2; }
 .about-tags span:nth-child(4) { background: #edf6ff; }
+.about-tags span:nth-child(5) { background: #fff1f6; }
 
 .standards-list article > span { color: var(--violet); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
