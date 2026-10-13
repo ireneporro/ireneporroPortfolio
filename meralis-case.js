@@ -20,3 +20,11 @@
     }
   });
 })();
+document.querySelectorAll('[data-proto]').forEach(screen => {
+  const frame = screen.querySelector('iframe');
+  const fit = () => { if (screen.clientWidth) frame.style.transform = `scale(${screen.clientWidth / 1440})`; };
+  fit();
+  addEventListener('load', fit);
+  addEventListener('resize', fit);
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(screen);
+});

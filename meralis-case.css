@@ -24,3 +24,20 @@ figcaption { display:flex; justify-content:space-between; gap:24px; padding:18px
 .tldr span { display:block; margin-bottom:6px; color:var(--brand); font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
 .tldr p { margin:0; color:var(--ink); font-size:14px; line-height:1.55; }
 @media(max-width:760px){ .tldr { grid-template-columns:1fr; } .tldr > div { border-left:0; border-top:1px solid var(--line); } .tldr > div:first-child { border-top:0; } }
+
+/* Live prototype embed (Meralis, Foundry, Certa) */
+.live-proto { padding-block:100px 20px; }
+.live-proto-head { display:grid; grid-template-columns:1fr 1fr; gap:24px 100px; align-items:end; margin-bottom:36px; }
+.live-proto-head p { color:var(--body); font-size:15px; margin:0 0 18px; }
+.live-proto-frame { overflow:hidden; border:1px solid var(--line); border-radius:18px; background:#fff; box-shadow:0 30px 80px rgba(12,14,20,.12); }
+.live-proto-bar { display:flex; align-items:center; gap:7px; height:38px; padding:0 14px; border-bottom:1px solid var(--line); background:#f6f6f8; color:var(--muted); font-size:12px; }
+.live-proto-bar i { width:10px; height:10px; border-radius:50%; background:#dcdde2; }
+.live-proto-bar span { margin-left:10px; }
+.live-proto-screen { position:relative; aspect-ratio:1440 / 900; overflow:hidden; }
+.live-proto-screen iframe { position:absolute; top:0; left:0; width:1440px; height:900px; border:0; transform:scale(var(--s, .5)); transform-origin:0 0; }
+.live-proto-note { margin:14px 0 0; color:var(--muted); font-size:13px; }
+@media (max-width:760px) {
+  .live-proto { padding-block:70px 10px; }
+  .live-proto-head { grid-template-columns:1fr; }
+  .live-proto-screen iframe { pointer-events:none; }
+}

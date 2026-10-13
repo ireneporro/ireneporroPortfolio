@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1440" />
+<title>Foundry · Playground</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+/* ---------- Tool chrome (neutral, not themed) ---------- */
+:root {
+  --ink:#12141a; --body:#4a4f5c; --muted:#7b8090; --line:#e5e7ec; --line2:#f0f1f4; --bg:#f5f6f8;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+  --chrome-ring:0 0 0 2px #fff, 0 0 0 4px #12141a;
+
+  /* Shared Foundry tokens (identical in both products) */
+  --text-on-brand:#ffffff; --surface-card:#ffffff; --text-strong:#12141a; --text-body:#4a4f5c;
+  --border-default:#8a929b; --border-subtle:#e5e7ec; --surface-disabled:#eceef2; --text-disabled:#6b7180;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-pill:999px;
+  --space-2:0.5rem; --space-3:0.75rem; --space-4:1rem; --row-data:40px;
+  --shadow-overlay:0 12px 32px rgba(18,20,26,.16);
+  --motion-fast:160ms; --motion-base:320ms;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; width:1440px; height:900px; overflow:hidden; }
+body { background:var(--bg); color:var(--ink); font:14px/1.45 Inter, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+button { font:inherit; color:inherit; cursor:pointer; }
+.mono { font-family:var(--mono); }
+.kick { margin:0; color:var(--muted); font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+.card { background:#fff; border:1px solid var(--line); border-radius:18px; }
+.vh { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+/* Theme scopes: same token names, different values */
+.t-relay { --brand-500:#03a9fc; --brand-cta:#0277b6; --brand-cta-hover:#01568a; --brand-50:#f0faff; --brand-100:#d6f1fe; --primary-700:#1e3655; --ok:#3f8a1f; --ok-bg:#ecf6e5; --warn:#b06a0e; --warn-bg:#fdf3e3; --err:#b42d2d; --err-bg:#fcecec; --neutral-600:#6c757d; --surface:#f4f6f9; }
+.t-meralis { --brand-500:#b27cf5; --brand-cta:#8549d8; --brand-cta-hover:#521c8f; --brand-50:#f8f3fe; --brand-100:#f1e8fc; --primary-700:#3b1466; --ok:#2f8a4c; --ok-bg:#e8f6ed; --warn:#b06a0e; --warn-bg:#fdf3e3; --err:#c03a3a; --err-bg:#fdeceb; --neutral-600:#574f60; --surface:#f7f6fa; }
+.t-relay, .t-meralis { --focus-ring:0 0 0 2px #fff, 0 0 0 4px var(--brand-cta); }
+/* Before Foundry: the raw identity shade was used as the CTA */
+.t-relay.before, .t-meralis.before { --brand-cta:var(--brand-500); --brand-cta-hover:var(--brand-500); --focus-ring:0 0 0 3px var(--brand-100); }
+
+/* Top bar */
+.top { display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 20px; background:#fff; border-bottom:1px solid var(--line); }
+.logo { display:flex; align-items:center; gap:12px; }
+.logo i { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:var(--ink); color:#fff; font:700 14px var(--mono); font-style:normal; }
+.logo b { font-size:16px; letter-spacing:-.02em; }
+.logo span { color:var(--muted); font-size:12.5px; }
+.stats { display:flex; gap:8px; margin-left:10px; }
+.stats span { padding:4px 9px; border-radius:99px; background:var(--line2); color:var(--body); font-size:11.5px; font-weight:600; }
+.seg { display:inline-flex; padding:3px; gap:2px; border-radius:11px; background:var(--line2); }
+.seg button { display:inline-flex; align-items:center; gap:8px; height:32px; padding:0 13px; border:0; border-radius:8px; background:transparent; color:var(--body); font-size:12.5px; font-weight:600; white-space:nowrap; transition:background-color var(--motion-fast), color var(--motion-fast), box-shadow var(--motion-fast); }
+.seg button:hover { color:var(--ink); }
+.seg button[aria-pressed="true"] { background:#fff; color:var(--ink); box-shadow:0 1px 2px rgba(18,20,26,.08), 0 0 0 1px var(--line); }
+.seg button:focus-visible, .sw-btn:focus-visible, .comp:focus-visible, .chrome-btn:focus-visible { outline:none; box-shadow:var(--chrome-ring); }
+.seg .dot { width:10px; height:10px; border-radius:50%; }
+.seg small { color:var(--muted); font-weight:500; }
+.brand-switch button { height:36px; padding:0 16px; font-size:13px; }
+.top-r { display:flex; align-items:center; gap:14px; }
+.sw-btn { display:inline-flex; white-space:nowrap; flex:none; align-items:center; gap:10px; height:36px; padding:0 12px 0 10px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:12.5px; font-weight:600; }
+.sw-btn .track { position:relative; width:32px; height:18px; border-radius:18px; background:#cfd3da; transition:background-color var(--motion-fast); }
+.sw-btn .track::after { content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2); transition:transform var(--motion-fast); }
+.sw-btn[aria-pressed="true"] .track { background:var(--ink); }
+.sw-btn[aria-pressed="true"] .track::after { transform:translateX(14px); }
+kbd { padding:1px 6px; border:1px solid var(--line); border-radius:5px; background:var(--bg); color:var(--muted); font:500 10.5px var(--mono); }
+
+/* Layout */
+.main { display:grid; grid-template-columns:216px 1fr 372px; gap:16px; height:840px; padding:16px; }
+.col { display:flex; flex-direction:column; gap:16px; min-height:0; }
+
+/* Left list */
+.side { padding:16px 12px; display:flex; flex-direction:column; gap:4px; min-height:0; }
+.side .kick { padding:0 8px 8px; }
+.comp { display:flex; align-items:center; justify-content:space-between; width:100%; padding:9px 10px; border:0; border-radius:10px; background:transparent; text-align:left; }
+.comp:hover { background:var(--bg); }
+.comp[aria-pressed="true"] { background:var(--ink); color:#fff; }
+.comp[aria-pressed="true"] small { color:#a9aebb; }
+.comp span { display:grid; }
+.comp b { font-size:13px; font-weight:650; }
+.comp small { color:var(--muted); font-size:11px; }
+.comp em { padding:1px 6px; border-radius:5px; background:#fdf3e3; color:#8a4c09; font:700 10px var(--mono); font-style:normal; }
+.comp[aria-pressed="true"] em { background:#2a2e38; color:#f6c26b; }
+.side-foot { margin-top:auto; padding:14px 10px 4px; border-top:1px solid var(--line2); }
+.side-foot b { display:block; font-size:22px; letter-spacing:-.03em; }
+.side-foot p { margin:2px 0 10px; color:var(--body); font-size:12px; }
+.shared-bar { display:flex; height:8px; border-radius:8px; overflow:hidden; background:#e0a43c; }
+.shared-bar i { width:91.7%; background:var(--ink); }
+.legend { display:grid; gap:4px; margin-top:10px; font-size:11.5px; color:var(--body); }
+.legend span { display:flex; align-items:center; gap:7px; }
+.legend i { width:9px; height:9px; border-radius:3px; }
+
+/* Card header */
+.card-h { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.card-h h2 { margin:2px 0 0; font-size:16px; letter-spacing:-.02em; }
+.code-chip { display:inline-flex; align-items:center; gap:7px; padding:5px 9px; border-radius:8px; background:var(--bg); color:var(--body); font:500 11.5px var(--mono); white-space:nowrap; }
+.code-chip i { width:12px; height:12px; border-radius:4px; background:var(--brand-cta); transition:background-color var(--motion-base); }
+.code-chip.warn-chip { background:#fcecec; color:#a32d2d; }
+
+/* ---------- Themed component layer ---------- */
+.scope, .scope * { transition:background-color var(--motion-base) ease, color var(--motion-base) ease, border-color var(--motion-base) ease, box-shadow var(--motion-fast) ease, fill var(--motion-base) ease; }
+.fade-in { animation:fadeIn .32s ease both; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(3px); } to { opacity:1; transform:none; } }
+
+/* Button */
+.f-btn { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:8px; height:38px; padding:0 15px; border:1px solid transparent; border-radius:var(--radius-sm); font:600 13px Inter, sans-serif; white-space:nowrap; outline:none; }
+.f-btn.primary { background:var(--brand-cta); border-color:var(--brand-cta); color:var(--text-on-brand); }
+.f-btn.primary:hover:not(:disabled), .f-btn.primary.is-hover { background:var(--brand-cta-hover); border-color:var(--brand-cta-hover); }
+.f-btn.secondary { background:var(--surface-card); border-color:var(--brand-cta); color:var(--brand-cta); }
+.f-btn.secondary:hover:not(:disabled), .f-btn.secondary.is-hover { background:var(--brand-50); }
+.f-btn.ghost { background:var(--surface-card); border-color:var(--border-subtle); color:var(--primary-700); }
+.f-btn.ghost:hover:not(:disabled), .f-btn.ghost.is-hover { background:var(--surface); }
+.f-btn:focus-visible, .f-btn.is-focus { box-shadow:var(--focus-ring); }
+.f-btn:disabled, .f-btn.is-disabled { background:var(--surface-disabled); border-color:var(--surface-disabled); color:var(--text-disabled); cursor:not-allowed; }
+.f-btn.is-loading { cursor:progress; }
+.f-btn.is-loading .lbl { visibility:hidden; }
+.f-btn.is-loading::after { content:""; position:absolute; left:50%; top:50%; width:15px; height:15px; margin:-8px 0 0 -8px; border-radius:50%; border:2px solid currentColor; border-right-color:transparent; animation:spin .7s linear infinite; }
+.spin { display:inline-block; width:14px; height:14px; border-radius:50%; border:2px solid currentColor; border-right-color:transparent; animation:spin .7s linear infinite; flex:none; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Input */
+.f-field { display:grid; gap:6px; }
+.f-field label, .f-field .f-label { font-size:12px; font-weight:600; color:var(--text-strong); }
+.f-input { display:flex; align-items:center; gap:8px; height:38px; padding:0 12px; border:1px solid var(--border-default); border-radius:var(--radius-sm); background:var(--surface-card); color:var(--text-body); }
+.f-input input { flex:1; min-width:0; height:100%; border:0; outline:none; background:transparent; font:13px Inter, sans-serif; color:var(--text-strong); }
+.f-input input::placeholder { color:var(--neutral-600); }
+.f-input > svg { flex:none; color:var(--neutral-600); }
+.f-input:hover, .f-input.is-hover { border-color:var(--neutral-600); }
+.f-input:focus-within, .f-input.is-focus { border-color:var(--brand-cta); box-shadow:var(--focus-ring); }
+.f-input.is-disabled { background:var(--surface-disabled); border-color:var(--surface-disabled); }
+.f-input.is-disabled input { color:var(--text-disabled); }
+.f-input.is-error { border-color:var(--err); }
+.f-help { display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--neutral-600); }
+.f-help.err { color:var(--err); font-weight:600; }
+
+/* Status pill */
+.f-pill { display:inline-flex; align-items:center; gap:6px; height:22px; padding:0 9px; border:0; border-radius:var(--radius-pill); font:650 11.5px Inter, sans-serif; white-space:nowrap; }
+.f-pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.f-pill.ok { background:var(--ok-bg); color:var(--ok); } .f-pill.warn { background:var(--warn-bg); color:var(--warn); }
+.f-pill.err { background:var(--err-bg); color:var(--err); } .f-pill.br { background:var(--brand-50); color:var(--brand-cta); }
+.f-pill.neu { background:var(--surface); color:var(--neutral-600); }
+button.f-pill { cursor:pointer; outline:none; }
+.f-pill.is-hover { box-shadow:inset 0 0 0 1px currentColor; }
+.f-pill:focus-visible, .f-pill.is-focus { box-shadow:var(--focus-ring); }
+.f-pill.is-disabled { background:var(--surface-disabled); color:var(--text-disabled); cursor:not-allowed; }
+.skel { display:inline-block; border-radius:6px; background:linear-gradient(90deg, var(--surface) 0%, var(--border-subtle) 50%, var(--surface) 100%); background-size:200% 100%; animation:shimmer 1.2s linear infinite; }
+@keyframes shimmer { from { background-position:200% 0; } to { background-position:-200% 0; } }
+
+/* Table */
+.f-table { width:100%; border-collapse:collapse; background:var(--surface-card); }
+.f-table th { height:30px; padding:0 12px; background:var(--surface); border-bottom:1px solid var(--border-subtle); color:var(--neutral-600); font-size:10.5px; font-weight:700; letter-spacing:.05em; text-align:left; text-transform:uppercase; }
+.f-table td { height:var(--row-data); padding:0 12px; border-bottom:1px solid var(--border-subtle); font-size:12.5px; color:var(--text-body); }
+.f-table tr:last-child td { border-bottom:0; }
+.f-table td b { color:var(--text-strong); font-weight:600; }
+.f-table tbody tr { cursor:pointer; outline:none; }
+.f-table tbody tr:hover td, .f-table tr.is-hover td { background:var(--surface); }
+.f-table tr.is-sel td { background:var(--brand-50); }
+.f-table tr.is-sel .f-pill.br { background:var(--surface-card); }
+.f-table tr.is-sel td:first-child { box-shadow:inset 3px 0 0 var(--brand-cta); }
+.f-table tbody tr:focus-visible td, .f-table tr.is-focus td { box-shadow:inset 0 2px 0 var(--brand-cta), inset 0 -2px 0 var(--brand-cta); }
+.f-table tbody tr:focus-visible td:first-child, .f-table tr.is-focus td:first-child { box-shadow:inset 2px 0 0 var(--brand-cta), inset 0 2px 0 var(--brand-cta), inset 0 -2px 0 var(--brand-cta); }
+.f-table tbody tr:focus-visible td:last-child, .f-table tr.is-focus td:last-child { box-shadow:inset -2px 0 0 var(--brand-cta), inset 0 2px 0 var(--brand-cta), inset 0 -2px 0 var(--brand-cta); }
+.f-table tr.is-disabled td, .f-table tr.is-disabled td b { color:var(--text-disabled); cursor:not-allowed; }
+.tbl-wrap { border:1px solid var(--border-subtle); border-radius:var(--radius-md); overflow:hidden; }
+
+/* Empty state */
+.f-empty { display:grid; justify-items:center; gap:6px; padding:18px; text-align:center; }
+.f-empty .ic { display:grid; place-items:center; width:42px; height:42px; margin-bottom:4px; border-radius:var(--radius-md); background:var(--brand-50); color:var(--brand-cta); }
+.f-empty .ic.lock { background:var(--surface); color:var(--neutral-600); }
+.f-empty b { font-size:14px; color:var(--text-strong); }
+.f-empty.compact { display:flex; align-items:center; gap:14px; padding:22px 18px; text-align:left; }
+.f-empty.compact .ic { margin:0; }
+.f-empty.compact .txt { flex:1; display:grid; }
+.f-empty.compact p { margin:0; }
+#tbl { height:153px; }
+.f-empty p { margin:0 0 8px; max-width:330px; font-size:12.5px; color:var(--text-body); }
+
+/* Toast */
+.f-toast { display:flex; align-items:center; gap:12px; width:360px; padding:11px 12px 11px 14px; border:1px solid var(--border-subtle); border-radius:var(--radius-md); background:var(--surface-card); box-shadow:var(--shadow-overlay); position:relative; overflow:hidden; }
+.f-toast .ti { display:grid; place-items:center; flex:none; width:26px; height:26px; border-radius:50%; background:var(--ok-bg); color:var(--ok); }
+.f-toast .ti.err { background:var(--err-bg); color:var(--err); }
+.f-toast .ti.load { background:var(--brand-50); color:var(--brand-cta); }
+.f-toast .tt { flex:1; min-width:0; display:grid; }
+.f-toast .tt b { font-size:13px; color:var(--text-strong); }
+.f-toast .tt span { font-size:11.5px; color:var(--text-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.f-link { height:28px; padding:0 8px; border:0; border-radius:6px; background:transparent; color:var(--brand-cta); font:650 12.5px Inter, sans-serif; outline:none; }
+.f-link:hover, .f-link.is-hover { background:var(--brand-50); }
+.f-link:focus-visible, .f-link.is-focus { box-shadow:var(--focus-ring); }
+.f-x { display:grid; place-items:center; width:26px; height:26px; border:0; border-radius:6px; background:transparent; color:var(--neutral-600); outline:none; }
+.f-x:hover { background:var(--surface); }
+.f-x:focus-visible { box-shadow:var(--focus-ring); }
+.f-toast .prog { position:absolute; left:0; bottom:0; height:3px; background:var(--brand-cta); }
+.f-toast.is-hover .prog { width:62%; }
+.f-toast .paused { font:600 10.5px var(--mono); color:var(--neutral-600); }
+.toast-in { animation:toastIn .35s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes toastIn { from { opacity:0; transform:translateY(-6px) scale(.98); } to { opacity:1; transform:none; } }
+
+/* Modal */
+.f-scrim { position:absolute; inset:0; display:grid; place-items:center; background:rgba(18,20,26,.32); border-radius:inherit; }
+.f-modal { width:400px; padding:18px 18px 16px; border-radius:var(--radius-lg); background:var(--surface-card); box-shadow:var(--shadow-overlay); }
+.f-modal h3 { margin:0 0 4px; font-size:15px; color:var(--text-strong); letter-spacing:-.01em; }
+.f-modal p { margin:0 0 12px; font-size:12.5px; color:var(--text-body); }
+.f-check { display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--text-strong); }
+.f-box { display:grid; place-items:center; width:18px; height:18px; border:1px solid var(--border-default); border-radius:5px; background:var(--surface-card); color:#fff; }
+.f-box.on { background:var(--primary-700); border-color:var(--primary-700); }
+.f-modal .acts { display:flex; justify-content:flex-end; gap:8px; margin-top:14px; }
+
+/* ---------- Product screen ---------- */
+.screen-card { padding:14px 16px 16px; display:flex; flex-direction:column; gap:12px; flex:none; }
+.appframe { position:relative; border:1px solid var(--border-subtle); border-radius:14px; background:var(--surface-card); overflow:hidden; }
+.app-nav { display:flex; align-items:center; gap:22px; height:44px; padding:0 16px; border-bottom:1px solid var(--border-subtle); }
+.app-logo { display:flex; align-items:center; gap:9px; margin-right:6px; font-weight:750; font-size:14px; letter-spacing:-.02em; color:var(--text-strong); }
+.app-logo i { width:22px; height:22px; border-radius:7px; background:var(--brand-500); }
+.app-nav a { display:flex; align-items:center; height:44px; color:var(--neutral-600); font-size:12.5px; font-weight:600; text-decoration:none; }
+.app-nav a.on { color:var(--brand-cta); box-shadow:inset 0 -2px 0 var(--brand-cta); }
+.avatar { display:grid; place-items:center; width:28px; height:28px; margin-left:auto; border-radius:50%; background:var(--primary-700); color:#fff; font-size:11px; font-weight:700; }
+.app-body { padding:14px 16px 16px; background:var(--surface); }
+.title-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.title-row h3 { display:flex; align-items:center; gap:9px; margin:0; font-size:18px; letter-spacing:-.025em; color:var(--text-strong); }
+.title-row small { display:block; margin-top:1px; color:var(--neutral-600); font-size:12px; font-weight:500; }
+.count { display:inline-grid; place-items:center; min-width:24px; height:22px; padding:0 7px; border-radius:var(--radius-pill); background:var(--brand-100); color:var(--primary-700); font:700 11.5px var(--mono); }
+.btns { display:flex; gap:8px; }
+.tool-row { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:12px; min-height:58px; }
+.tool-row .f-field { width:290px; }
+.toast-slot { min-height:52px; }
+
+/* ---------- Playground ---------- */
+.play { flex:1; min-height:0; padding:14px 16px 14px; display:flex; flex-direction:column; gap:12px; }
+.play .seg button { height:30px; padding:0 11px; font-size:12px; }
+.p-tag { display:inline-flex; align-items:center; gap:6px; margin-left:8px; }
+.p-tag em { padding:1px 6px; border-radius:5px; background:#fdf3e3; color:#8a4c09; font:700 10px var(--mono); font-style:normal; }
+.p-tag span { color:var(--muted); font-size:12px; font-weight:500; }
+.stage { position:relative; flex:1; min-height:0; display:grid; place-items:center; border-radius:14px; border:1px solid var(--line); background-color:var(--surface); background-image:radial-gradient(rgba(18,20,26,.07) 1px, transparent 1px); background-size:14px 14px; overflow:hidden; }
+.specimen { padding:24px 28px; border:1px solid var(--border-subtle); border-radius:14px; background:var(--surface-card); }
+.tip { position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); padding:4px 8px; border-radius:6px; background:#12141a; color:#fff; font-size:11px; font-weight:600; white-space:nowrap; }
+.stage-inner { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px; }
+.note { display:flex; gap:10px; align-items:baseline; font-size:12.5px; color:var(--body); }
+.note b { flex:none; color:var(--ink); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+
+/* ---------- Right panels ---------- */
+.panel { padding:14px 16px; display:flex; flex-direction:column; min-height:0; }
+.insp { flex:1; }
+.insp-body { flex:1; min-height:0; overflow:auto; margin-top:12px; }
+.insp-empty { display:grid; place-items:center; height:100%; padding:0 26px; text-align:center; color:var(--body); font-size:12.5px; }
+.insp-empty b { display:block; margin-bottom:4px; color:var(--ink); font-size:13.5px; }
+.insp-empty .hint { display:inline-flex; align-items:center; gap:8px; margin-top:12px; padding:6px 10px; border:1px dashed #c3c7cf; border-radius:8px; color:var(--muted); font-size:11.5px; }
+.insp-name { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; }
+.insp-name b { font-size:14px; letter-spacing:-.01em; }
+.insp-name span { color:var(--muted); font-size:11px; }
+.tk { width:100%; border-collapse:collapse; }
+.tk th { padding:6px 6px; border-bottom:1px solid var(--line); color:var(--muted); font-size:10px; font-weight:700; letter-spacing:.06em; text-align:left; text-transform:uppercase; white-space:nowrap; }
+.tk th.cur { color:var(--ink); }
+.tk td { padding:7px 6px; border-bottom:1px solid var(--line2); vertical-align:top; font-size:11.5px; }
+.tk td.prop { color:var(--muted); font-size:10.5px; padding-top:9px; }
+.tk code { display:block; font:700 11.5px var(--mono); color:var(--ink); white-space:nowrap; }
+.tk .use { display:block; margin-top:2px; color:var(--muted); font-size:10.5px; }
+.tk th:nth-child(n+2) { width:96px; }
+.tk .val { display:flex; align-items:center; gap:6px; font:500 11px var(--mono); color:var(--body); white-space:nowrap; }
+.tk td.curv { background:#fafbfc; }
+.tk .sw { flex:none; width:14px; height:14px; border-radius:4px; border:1px solid rgba(0,0,0,.08); }
+.tag-s { font-weight:650; color:#2f6a16; }
+.tag-t { font-weight:650; color:#8a4c09; }
+.insp-foot { margin-top:10px; padding-top:10px; border-top:1px solid var(--line2); color:var(--muted); font-size:11.5px; }
+
+/* Inspect mode */
+.inspecting .scope [data-tok] { cursor:help; }
+.tok-hot { outline:2px dashed #12141a !important; outline-offset:2px; }
+.tok-pin { outline:2px solid #12141a !important; outline-offset:2px; }
+
+/* Contrast */
+.cx { flex:none; }
+.cx-hero { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px; margin-top:12px; padding:12px 14px; border-radius:14px; background:var(--bg); }
+.cx-hero .demo { display:grid; place-items:center; width:92px; height:40px; border-radius:8px; color:#fff; font:600 13px Inter; transition:background-color var(--motion-base); }
+.cx-hero .ratio { font:800 28px Inter; letter-spacing:-.04em; font-variant-numeric:tabular-nums; }
+.cx-hero .ratio.bump { display:inline-block; animation:bump .45s cubic-bezier(.2,.8,.2,1); }
+@keyframes bump { 0% { opacity:.2; transform:translateY(6px); } 100% { opacity:1; transform:none; } }
+.cx-hero small { display:block; color:var(--muted); font-size:11px; }
+.badge { display:inline-flex; align-items:center; gap:5px; padding:3px 8px; border-radius:7px; font:700 11px Inter; white-space:nowrap; }
+.badge.pass { background:#e5f3dc; color:#2f6a16; } .badge.fail { background:#fbe1df; color:#a32d2d; }
+.cx-list { margin-top:8px; }
+.cx-row { display:grid; grid-template-columns:34px 1fr 54px 62px; align-items:center; gap:10px; padding:6px 2px; border-bottom:1px solid var(--line2); }
+.cx-row:last-child { border-bottom:0; }
+.cx-row .aa { display:grid; place-items:center; width:34px; height:24px; border-radius:6px; font:700 11.5px Inter; border:1px solid rgba(0,0,0,.06); transition:background-color var(--motion-base), color var(--motion-base); }
+.cx-row .lb { display:grid; font-size:12px; color:var(--ink); font-weight:600; }
+.cx-row .lb small { color:var(--muted); font:500 10.5px var(--mono); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cx-row .r { font:700 12.5px var(--mono); text-align:right; font-variant-numeric:tabular-nums; }
+.cx-row .badge { justify-self:end; }
+.cx-sum { display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding-top:8px; border-top:1px solid var(--line); font-size:12px; color:var(--body); }
+.cx-sum b { color:var(--ink); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <div class="logo">
+      <i aria-hidden="true">F</i>
+      <div><b>Foundry</b> <span>Design system</span></div>
+      <div class="stats"><span>42 components</span><span>193 tokens</span><span>WCAG 2.2 AA</span></div>
+    </div>
+    <div class="seg brand-switch" role="group" aria-label="Product brand">
+      <button type="button" data-brand="meralis" aria-pressed="true"><span class="dot" style="background:#8549d8"></span>Meralis <small>HR &amp; payroll</small></button>
+      <button type="button" data-brand="relay" aria-pressed="false"><span class="dot" style="background:#0277b6"></span>Relay <small>Staffing marketplace</small></button>
+    </div>
+    <div class="top-r">
+      <button type="button" class="sw-btn" id="tokBtn" aria-pressed="false"><span class="track" aria-hidden="true"></span>Show tokens <kbd>T</kbd></button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Component list -->
+    <nav class="card side" aria-label="Components">
+      <p class="kick">Components</p>
+      <div id="compList"></div>
+      <div class="side-foot">
+        <b>177 / 193</b>
+        <p>tokens shared by both products</p>
+        <div class="shared-bar" aria-hidden="true"><i></i></div>
+        <div class="legend">
+          <span><i style="background:#12141a"></i>Shared: space, radius, type, focus</span>
+          <span><i style="background:#e0a43c"></i>Themed: brand, neutrals, data-viz</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Center -->
+    <div class="col scope t-meralis" id="scope">
+      <section class="card screen-card" aria-labelledby="scrH">
+        <div class="card-h">
+          <div><p class="kick">Product screen</p><h2 id="scrH">Same components, <span id="brandWord">Meralis</span></h2></div>
+          <span class="code-chip" id="ctaChip"><i></i><span id="ctaCode">--brand-cta · #8549D8</span></span>
+        </div>
+        <div class="appframe" id="screen"></div>
+      </section>
+
+      <section class="card play" aria-labelledby="playH">
+        <div class="card-h">
+          <div><p class="kick">Playground</p><h2><span id="playH">Button</span><span class="p-tag" id="playTag"></span></h2></div>
+          <div class="seg" role="group" aria-label="Component state" id="stateSeg"></div>
+        </div>
+        <div class="stage" id="stage"></div>
+        <div class="note"><b>Contract</b><span id="note"></span></div>
+      </section>
+    </div>
+
+    <!-- Right -->
+    <div class="col">
+      <section class="card panel insp" aria-labelledby="inspH" aria-live="polite">
+        <div class="card-h">
+          <div><p class="kick">Token inspector</p><h2 id="inspH">Tokens in use</h2></div>
+          <span class="code-chip" id="inspMode">Off</span>
+        </div>
+        <div class="insp-body" id="inspBody"></div>
+      </section>
+
+      <section class="card panel cx" aria-labelledby="cxH">
+        <div class="card-h">
+          <div><p class="kick">Contrast · WCAG 2.2 AA</p><h2 id="cxH">Text on brand</h2></div>
+          <button type="button" class="sw-btn" id="beforeBtn" aria-pressed="false"><span class="track" aria-hidden="true"></span>Before Foundry</button>
+        </div>
+        <div class="cx-hero" id="cxHero"></div>
+        <div class="cx-list" id="cxList"></div>
+        <div class="cx-sum" id="cxSum"></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- Probes used to resolve token values for each brand -->
+<div class="t-meralis" id="probe-meralis" hidden></div>
+<div class="t-relay" id="probe-relay" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Data ---------- */
+  const BRANDS = { meralis: "Meralis", relay: "Relay" };
+  const COPY = {
+    meralis: {
+      nav: ["Requests", "People", "Payroll", "Reports"], initials: "AM",
+      title: "Pending requests", count: 14, sub: "Northstar Retail · October payroll",
+      primary: "Approve batch", secondary: "Request info", ghost: "Cancel",
+      search: "Search people", ph: "Name or request type",
+      cols: ["Employee", "Request", "Submitted", "Status"],
+      rows: [["Alex Morgan", "Direct deposit", "Oct 9", "br", "In review"], ["Jamal Price", "Compensation", "Oct 8", "ok", "Approved"], ["Marta Osei", "Timecard", "Oct 7", "warn", "Missing"]],
+      toast: ["Batch #248 approved", "14 requests sent to payroll"], loadingToast: "Approving 14 requests…", errToast: ["Couldn’t approve batch", "Payroll is locked until 6 pm"],
+      pills: [["br", "In review"], ["ok", "Approved"], ["warn", "Missing"], ["err", "Rejected"], ["neu", "Draft"]],
+      input: { label: "Effective date", value: "Oct 24, 2026", help: "Applies from the next payroll cycle", err: "Date must be after the payroll cutoff (Oct 20)", load: "Checking cutoff…" },
+      modal: { t: "Approve 14 requests?", p: "Changes apply to the October payroll run. Employees are notified by email.", c: "I reviewed the totals" },
+      empty: { t: "No pending requests", p: "New requests from employees show up here.", a: "Create request" },
+      noRes: "No people match “Jordan”",
+      noPerm: { t: "You can’t view payroll requests", p: "Ask an admin for the Payroll reviewer role.", a: "Request access" }
+    },
+    relay: {
+      nav: ["Orders", "Workers", "Branches", "Reports"], initials: "AM",
+      title: "Open orders", count: 12, sub: "Northstar Retail · Store 2",
+      primary: "Fill positions", secondary: "Invite branch", ghost: "Cancel",
+      search: "Search orders", ph: "Order or role",
+      cols: ["Role", "Order", "Filled", "Status"],
+      rows: [["Picker / Packer", "JO-183", "5/6", "br", "Filling"], ["Line Cook", "JO-179", "3/3", "ok", "Filled"], ["Forklift Operator", "JO-176", "0/3", "warn", "Unfilled"]],
+      toast: ["JO-183 sent to 4 branches", "Workers are notified by SMS"], loadingToast: "Sending JO-183 to branches…", errToast: ["Couldn’t send order", "Branch list is out of date"],
+      pills: [["br", "Filling"], ["ok", "Filled"], ["warn", "Unfilled"], ["err", "Cancelled"], ["neu", "Draft"]],
+      input: { label: "Bill rate", value: "$24.50 / h", help: "Shown to branches, not to workers", err: "Rate is below the branch minimum ($26.00)", load: "Checking rate card…" },
+      modal: { t: "Fill 3 positions?", p: "Order JO-183 goes to 4 branches. Workers are notified by SMS.", c: "I confirmed the shift times" },
+      empty: { t: "No open orders", p: "Orders you post show up here.", a: "Post order" },
+      noRes: "No orders match “Jordan”",
+      noPerm: { t: "You can’t view orders for this branch", p: "Ask an admin for Branch manager access.", a: "Request access" }
+    }
+  };
+
+  const COMPONENTS = [
+    { id: "button", name: "Button", fam: "Actions", states: ["Default", "Hover", "Focus", "Disabled", "Loading"] },
+    { id: "input", name: "Input", fam: "Forms", states: ["Default", "Hover", "Focus", "Disabled", "Loading", "Error"] },
+    { id: "pill", name: "Status pill", fam: "Feedback", states: ["Default", "Hover", "Focus", "Disabled", "Loading"] },
+    { id: "table", name: "Table row", fam: "Data", states: ["Default", "Hover", "Focus", "Disabled", "Loading", "Empty", "No permission"] },
+    { id: "modal", name: "Modal", fam: "Overlays", states: ["Default", "Hover", "Focus", "Disabled", "Loading"] },
+    { id: "toast", name: "Toast", fam: "Feedback", states: ["Default", "Hover", "Focus", "Loading", "Error"] },
+    { id: "empty", name: "Empty state", fam: "Patterns", p1: true, states: ["Empty", "No results", "Loading", "No permission"] }
+  ];
+
+  const NOTES = {
+    button: { Default: "One primary per view. Text sits on --brand-cta, never on the identity shade.", Hover: "Hover darkens to --brand-cta-hover. Size and label never change.", Focus: "Two-layer ring: 2px white gap plus 2px brand, visible on any surface.", Disabled: "Disabled stays readable and keeps its width. Explain why nearby.", Loading: "Keeps its width, blocks a second submit, exposes aria-busy." },
+    input: { Default: "Label above, helper below. Placeholder is a hint, never the label.", Hover: "Border moves to --neutral-600 on hover.", Focus: "Border and ring switch to --brand-cta.", Disabled: "Value stays legible on --surface-disabled.", Loading: "Async checks show inline. The field stays editable.", Error: "Error border plus a message that says how to fix it." },
+    pill: { Default: "Status is a shape: dot, label and tint. Never color alone.", Hover: "As filter chips, pills outline on hover.", Focus: "Same ring as every control.", Disabled: "Neutral fill when a filter does not apply.", Loading: "Skeletons keep the row height stable." },
+    table: { Default: "Data rows are 40px. Status always sits in the last column.", Hover: "Row tint uses --surface, never the brand.", Focus: "Rows are reachable by keyboard and show the ring.", Disabled: "Locked rows stay visible, with the reason in the status.", Loading: "Skeleton rows match the real row height.", Empty: "Empty explains what will appear and offers the next step.", "No permission": "Never a blank table: say what is hidden and who can grant access." },
+    modal: { Default: "Modals are for short, blocking decisions only.", Hover: "Primary action hover follows the button contract.", Focus: "Focus moves into the dialog and stays there.", Disabled: "Confirm unlocks only after the required check.", Loading: "Both actions lock while the request runs." },
+    toast: { Default: "Confirms an action. Auto-dismiss after 6s with undo.", Hover: "Hover pauses the timer.", Focus: "Actions inside a toast are reachable by keyboard.", Loading: "Long actions report progress in place.", Error: "Errors stay until dismissed and say what happened." },
+    empty: { Empty: "First-use state: what this is and the first action.", "No results": "Filtered empty: offer to clear filters, not to create.", Loading: "Skeleton keeps the layout from jumping.", "No permission": "Explains the missing role instead of hiding the page." }
+  };
+
+  /* ---------- Token annotations ---------- */
+  const T = {
+    btnPrimary: "background:--brand-cta|text:--text-on-brand|hover bg:--brand-cta-hover|focus:--focus-ring|radius:--radius-sm",
+    btnPrimaryHover: "background:--brand-cta-hover|text:--text-on-brand|radius:--radius-sm",
+    btnSecondary: "text:--brand-cta|border:--brand-cta|hover bg:--brand-50|focus:--focus-ring|radius:--radius-sm",
+    btnGhost: "text:--primary-700|border:--border-subtle|hover bg:--surface|radius:--radius-sm",
+    btnDisabled: "background:--surface-disabled|text:--text-disabled|radius:--radius-sm",
+    input: "border:--border-default|hover border:--neutral-600|focus border:--brand-cta|focus:--focus-ring|placeholder:--neutral-600|radius:--radius-sm",
+    inputFocus: "border:--brand-cta|ring:--focus-ring|text:--text-strong|radius:--radius-sm",
+    inputErr: "border:--err|message:--err|radius:--radius-sm",
+    inputDis: "background:--surface-disabled|text:--text-disabled",
+    label: "text:--text-strong",
+    help: "text:--neutral-600",
+    pill: { ok: "background:--ok-bg|text:--ok|radius:--radius-pill", warn: "background:--warn-bg|text:--warn|radius:--radius-pill", err: "background:--err-bg|text:--err|radius:--radius-pill", br: "background:--brand-50|text:--brand-cta|radius:--radius-pill", neu: "background:--surface|text:--neutral-600|radius:--radius-pill" },
+    pillDis: "background:--surface-disabled|text:--text-disabled",
+    row: "height:--row-data|hover bg:--surface|selected:--brand-50|selected bar:--brand-cta|divider:--border-subtle|text:--text-body",
+    th: "background:--surface|text:--neutral-600|divider:--border-subtle",
+    nav: "active:--brand-cta|text:--neutral-600|divider:--border-subtle",
+    logo: "mark:--brand-500",
+    avatar: "background:--primary-700|text:--text-on-brand",
+    count: "background:--brand-100|text:--primary-700|radius:--radius-pill",
+    toast: "surface:--surface-card|border:--border-subtle|icon:--ok|icon bg:--ok-bg|shadow:--shadow-overlay|radius:--radius-md",
+    toastErr: "icon:--err|icon bg:--err-bg|surface:--surface-card|radius:--radius-md",
+    link: "text:--brand-cta|hover bg:--brand-50|focus:--focus-ring",
+    modal: "surface:--surface-card|radius:--radius-lg|shadow:--shadow-overlay|title:--text-strong|body:--text-body",
+    check: "checked:--primary-700|border:--border-default",
+    empty: "icon:--brand-cta|icon bg:--brand-50|title:--text-strong|body:--text-body|radius:--radius-md",
+    emptyLock: "icon:--neutral-600|icon bg:--surface|title:--text-strong|body:--text-body",
+    skel: "base:--surface|shine:--border-subtle",
+    page: "background:--surface|title:--text-strong|meta:--neutral-600"
+  };
+  const tok = (name, spec) => ` data-name="${name}" data-tok="${spec}"`;
+
+  /* ---------- Icons ---------- */
+  const I = {
+    check: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    x: '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    alert: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 4.5v4.2M8 11.3v.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    alertC: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.8v3.6M8 10.9v.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    search: '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.7"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    cal: '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    inbox: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 11l2-6.5h10L17 11v4.5H3V11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 11h4l1 2h4l1-2h4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+    lock: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 9V6.5a3 3 0 016 0V9" stroke="currentColor" stroke-width="1.6"/></svg>',
+    searchBig: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
+  };
+
+  /* ---------- State ---------- */
+  const S = { brand: "meralis", comp: "button", state: "Default", inspect: false, before: false, filter: "", selRow: 0, pinned: null, hot: null, busy: false };
+  const $ = (id) => document.getElementById(id);
+  const scope = $("scope");
+
+  /* ---------- Builders ---------- */
+  function btn(kind, label, st, extra) {
+    st = st || "Default";
+    const cls = { Hover: " is-hover", Focus: " is-focus", Disabled: " is-disabled", Loading: " is-loading" }[st] || "";
+    let spec = kind === "primary" ? (st === "Hover" ? T.btnPrimaryHover : T.btnPrimary) : kind === "secondary" ? T.btnSecondary : T.btnGhost;
+    if (st === "Disabled") spec = T.btnDisabled;
+    const nm = "Button · " + kind + (st !== "Default" ? " · " + st.toLowerCase() : "");
+    const attrs = (st === "Disabled" ? ' disabled aria-disabled="true"' : "") + (st === "Loading" ? ' aria-busy="true"' : "");
+    return `<button type="button" class="f-btn ${kind}${cls}"${attrs}${tok(nm, spec)} ${extra || ""}><span class="lbl">${label}</span></button>`;
+  }
+  function pill(k, label, st) {
+    if (st === "Loading") return `<span class="skel" style="width:${50 + label.length * 5}px;height:22px;border-radius:99px"${tok("Status pill · loading", T.skel)}></span>`;
+    const cls = { Hover: " is-hover", Focus: " is-focus", Disabled: " is-disabled" }[st] || "";
+    const spec = st === "Disabled" ? T.pillDis : T.pill[k];
+    return `<span class="f-pill ${k}${cls}"${tok("Status pill · " + label, spec)}>${label}</span>`;
+  }
+  function field(c, st) {
+    const cls = { Hover: " is-hover", Focus: " is-focus", Disabled: " is-disabled", Error: " is-error" }[st] || "";
+    const spec = st === "Focus" ? T.inputFocus : st === "Error" ? T.inputErr : st === "Disabled" ? T.inputDis : T.input;
+    const right = st === "Loading" ? '<span class="spin" style="color:var(--brand-cta);width:13px;height:13px"></span>' : st === "Error" ? `<span style="color:var(--err);display:flex">${I.alertC}</span>` : "";
+    const help = st === "Error" ? `<span class="f-help err" id="pf-h"${tok("Helper · error", "text:--err")}>${c.err}</span>`
+      : st === "Loading" ? `<span class="f-help" id="pf-h"${tok("Helper", T.help)}>${c.load}</span>`
+      : `<span class="f-help" id="pf-h"${tok("Helper", T.help)}>${c.help}</span>`;
+    return `<div class="f-field" style="width:340px">
+      <label for="pf" ${tok("Label", T.label)}>${c.label}</label>
+      <div class="f-input${cls}"${tok("Input · " + st.toLowerCase(), spec)}>${I.cal}<input id="pf" value="${c.value}" aria-describedby="pf-h"${st === "Disabled" ? " disabled" : ""}${st === "Error" ? ' aria-invalid="true"' : ""}${st === "Loading" ? ' aria-busy="true"' : ""}>${right}</div>
+      ${help}</div>`;
+  }
+  function tableHTML(c, st, opts) {
+    opts = opts || {};
+    const head = `<thead><tr>${c.cols.map((h) => `<th scope="col"${tok("Table header", T.th)}>${h}</th>`).join("")}</tr></thead>`;
+    const span = c.cols.length;
+    let body;
+    if (st === "Loading") {
+      body = [0, 1, 2].map(() => `<tr${tok("Table row · loading", T.skel)}><td><span class="skel" style="width:110px;height:12px"></span></td><td><span class="skel" style="width:90px;height:12px"></span></td><td><span class="skel" style="width:40px;height:12px"></span></td><td><span class="skel" style="width:72px;height:20px;border-radius:99px"></span></td></tr>`).join("");
+    } else if (st === "Empty") {
+      body = `<tr><td colspan="${span}" style="height:auto;padding:0">${emptyHTML(c, "Empty", true)}</td></tr>`;
+    } else if (st === "No permission") {
+      body = `<tr><td colspan="${span}" style="height:auto;padding:0">${emptyHTML(c, "No permission", true)}</td></tr>`;
+    } else if (st === "No results") {
+      body = `<tr><td colspan="${span}" style="height:auto;padding:0">${emptyHTML(c, "No results", true, opts.q)}</td></tr>`;
+    } else {
+      const rows = opts.rows || c.rows.map((r, i) => [r, i]);
+      body = rows.map(([r, i], n) => {
+        let cls = "";
+        if (n === 0 && st === "Hover") cls = "is-hover";
+        if (n === 0 && st === "Focus") cls = "is-focus";
+        if (n === 0 && st === "Disabled") cls = "is-disabled";
+        if (opts.live && i === S.selRow) cls += " is-sel";
+        const dis = n === 0 && st === "Disabled";
+        const p = dis ? pill("neu", "Locked", "Default") : pill(r[3], r[4], "Default");
+        return `<tr class="${cls}" tabindex="0" data-row="${i}"${dis ? ' aria-disabled="true"' : ""}${opts.live && i === S.selRow ? ' aria-selected="true"' : ""}${tok("Table row" + (cls ? " · " + cls.replace("is-", "").trim() : ""), T.row)}><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="mono">${r[2]}</td><td>${p}</td></tr>`;
+      }).join("");
+    }
+    return `<div class="tbl-wrap"><table class="f-table">${head}<tbody>${body}</tbody></table></div>`;
+  }
+  function emptyHTML(c, st, inTable, q) {
+    if (st === "Loading") {
+      return `<div class="f-empty"${tok("Empty state · loading", T.skel)}><span class="skel" style="width:42px;height:42px;border-radius:12px"></span><span class="skel" style="width:170px;height:14px"></span><span class="skel" style="width:250px;height:11px"></span><span class="skel" style="width:120px;height:34px;margin-top:8px;border-radius:8px"></span></div>`;
+    }
+    if (st === "No permission") {
+      return `<div class="f-empty"${tok("Empty state · no permission", T.emptyLock)}><span class="ic lock">${I.lock}</span><b>${c.noPerm.t}</b><p>${c.noPerm.p}</p>${btn("secondary", c.noPerm.a)}</div>`;
+    }
+    if (st === "No results") {
+      const t = q ? (S.brand === "meralis" ? "No people match “" : "No orders match “") + esc(q) + "”" : c.noRes;
+      if (inTable) return `<div class="f-empty compact"${tok("Empty state · no results", T.empty)}><span class="ic">${I.searchBig}</span><span class="txt"><b>${t}</b><p>Check the spelling or clear the search.</p></span>${btn("ghost", "Clear search", "Default", 'data-act="clear"')}</div>`;
+      return `<div class="f-empty"${tok("Empty state · no results", T.empty)}><span class="ic">${I.searchBig}</span><b>${t}</b><p>Check the spelling or clear the search.</p>${btn("ghost", "Clear search", "Default", 'data-act="clear"')}</div>`;
+    }
+    return `<div class="f-empty"${tok("Empty state · empty", T.empty)}><span class="ic">${I.inbox}</span><b>${c.empty.t}</b><p>${c.empty.p}</p>${btn("primary", c.empty.a)}</div>`;
+  }
+  function toastHTML(c, st, live) {
+    if (st === "Loading") {
+      return `<div class="f-toast" role="status"${tok("Toast · loading", "icon:--brand-cta|icon bg:--brand-50|surface:--surface-card|radius:--radius-md")}><span class="ti load"><span class="spin" style="width:12px;height:12px"></span></span><span class="tt"><b>${c.loadingToast}</b><span>You can keep working</span></span></div>`;
+    }
+    if (st === "Error") {
+      return `<div class="f-toast" role="alert"${tok("Toast · error", T.toastErr)}><span class="ti err">${I.alert}</span><span class="tt"><b>${c.errToast[0]}</b><span>${c.errToast[1]}</span></span><button type="button" class="f-link"${tok("Link button", T.link)}>Retry</button><button type="button" class="f-x" aria-label="Dismiss"${tok("Icon button", "icon:--neutral-600|hover bg:--surface|focus:--focus-ring")}>${I.x}</button></div>`;
+    }
+    const hov = st === "Hover";
+    return `<div class="f-toast${hov ? " is-hover" : ""}${live ? " toast-in" : ""}" role="status"${tok("Toast · success", T.toast)}><span class="ti">${I.check}</span><span class="tt"><b>${c.toast[0]}</b><span>${c.toast[1]}</span></span>${hov ? '<span class="paused">Paused</span>' : ""}<button type="button" class="f-link${st === "Focus" ? " is-focus" : ""}"${tok("Link button" + (st === "Focus" ? " · focus" : ""), T.link)} data-act="undo">Undo</button><button type="button" class="f-x" aria-label="Dismiss"${tok("Icon button", "icon:--neutral-600|hover bg:--surface|focus:--focus-ring")} data-act="dismiss">${I.x}</button>${hov ? `<span class="prog"${tok("Toast timer", "fill:--brand-cta")}></span>` : ""}</div>`;
+  }
+  function modalHTML(c, st) {
+    const checked = st !== "Disabled";
+    const conf = st === "Hover" ? btn("primary", "Approve", "Hover") : st === "Focus" ? btn("primary", "Approve", "Focus") : st === "Disabled" ? btn("primary", "Approve", "Disabled") : st === "Loading" ? btn("primary", "Approve", "Loading") : btn("primary", "Approve");
+    const cancel = btn("ghost", "Cancel", st === "Loading" ? "Disabled" : "Default");
+    return `<div class="f-scrim"${tok("Scrim", "overlay:--shadow-overlay")}><div class="f-modal" role="dialog" aria-modal="true" aria-labelledby="mdl-t"${tok("Modal", T.modal)}>
+      <h3 id="mdl-t">${c.modal.t}</h3><p>${c.modal.p}</p>
+      <label class="f-check"${tok("Checkbox", T.check)}><span class="f-box${checked ? " on" : ""}">${checked ? I.check : ""}</span>${c.modal.c}</label>
+      <div class="acts">${cancel}${conf}</div></div></div>`;
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m])); }
+
+  /* ---------- Product screen ---------- */
+  function renderScreen() {
+    const c = COPY[S.brand];
+    $("screen").innerHTML = `
+      <div class="app-nav fade-in"${tok("Top navigation", T.nav)}>
+        <span class="app-logo"><i${tok("Logo mark", T.logo)}></i>${BRANDS[S.brand]}</span>
+        ${c.nav.map((n, i) => `<a href="#" class="${i === 0 ? "on" : ""}"${i === 0 ? ' aria-current="page"' : ""} onclick="return false">${n}</a>`).join("")}
+        <span class="avatar"${tok("Avatar", T.avatar)}>${c.initials}</span>
+      </div>
+      <div class="app-body"${tok("Page", T.page)}>
+        <div class="title-row fade-in">
+          <div><h3>${c.title} <span class="count"${tok("Count badge", T.count)}>${c.count}</span></h3><small>${c.sub}</small></div>
+          <div class="btns">${btn("secondary", c.secondary)}${btn("primary", c.primary, S.busy ? "Loading" : "Default", 'id="primaryAct"')}</div>
+        </div>
+        <div class="tool-row">
+          <div class="f-field">
+            <label for="q"${tok("Label", T.label)}>${c.search}</label>
+            <div class="f-input"${tok("Input", T.input)}>${I.search}<input id="q" type="search" placeholder="${c.ph}" value="${esc(S.filter)}" autocomplete="off"></div>
+          </div>
+          <div class="toast-slot" id="toastSlot" aria-live="polite">${toastHTML(c, "Default", true)}</div>
+        </div>
+        <div id="tbl"></div>
+      </div>`;
+    renderTable();
+    $("q").addEventListener("input", (e) => { S.filter = e.target.value; renderTable(); });
+  }
+  function renderTable() {
+    const c = COPY[S.brand];
+    const q = S.filter.trim().toLowerCase();
+    const rows = c.rows.map((r, i) => [r, i]).filter(([r]) => !q || (r[0] + " " + r[1] + " " + r[4]).toLowerCase().includes(q));
+    $("tbl").innerHTML = rows.length ? tableHTML(c, "Default", { rows, live: true }) : tableHTML(c, "No results", { q: S.filter.trim() });
+  }
+
+  /* ---------- Playground ---------- */
+  function renderList() {
+    $("compList").innerHTML = COMPONENTS.map((c) => `<button type="button" class="comp" data-comp="${c.id}" aria-pressed="${c.id === S.comp}"><span><b>${c.name}</b><small>${c.fam}</small></span>${c.p1 ? "" : "<em>P0</em>"}</button>`).join("");
+  }
+  function renderPlay() {
+    const comp = COMPONENTS.find((c) => c.id === S.comp);
+    if (!comp.states.includes(S.state)) S.state = comp.states[0];
+    $("playH").textContent = comp.name;
+    $("playTag").innerHTML = `${comp.p1 ? "" : "<em>P0</em>"}<span>${comp.fam}</span>`;
+    $("stateSeg").innerHTML = comp.states.map((s) => `<button type="button" data-state="${s}" aria-pressed="${s === S.state}">${s}</button>`).join("");
+    const c = COPY[S.brand], st = S.state;
+    let html = "";
+    switch (comp.id) {
+      case "button": html = `<div class="stage-inner specimen">${btn("primary", c.primary, st)}${btn("secondary", c.secondary, st)}${btn("ghost", c.ghost, st)}</div>`; break;
+      case "input": html = field(c.input, st); break;
+      case "pill": {
+        const tag = st === "Hover" || st === "Focus" || st === "Disabled" ? "button" : "span";
+        html = `<div class="stage-inner specimen" role="group" aria-label="Status filters">${c.pills.map(([k, l], i) => {
+          const s = i === 0 || st === "Disabled" || st === "Loading" ? st : "Default";
+          const p = pill(k, l, s);
+          const el = tag === "button" && st !== "Loading" ? p.replace(/^<span/, '<button type="button"').replace(/<\/span>$/, "</button>") : p;
+          return i === 0 && st === "Hover" ? `<span style="position:relative;display:inline-flex">${el}<span class="tip" role="tooltip">${S.brand === "meralis" ? "3 requests" : "4 orders"}</span></span>` : el;
+        }).join("")}</div>`;
+        break;
+      }
+      case "table": html = `<div style="width:600px">${tableHTML(c, st)}</div>`; break;
+      case "modal": html = `<div style="position:absolute;inset:0;padding:16px;opacity:.9">${tableHTML(c, "Default")}</div>` + modalHTML(c, st); break;
+      case "toast": html = toastHTML(c, st); break;
+      case "empty": html = `<div style="width:460px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--surface-card)">${emptyHTML(c, st)}</div>`; break;
+    }
+    $("stage").innerHTML = `<div class="fade-in" style="display:contents">${html}</div>`;
+    $("note").textContent = (NOTES[comp.id] && NOTES[comp.id][st]) || "";
+    // Rendered states are static examples: keep them out of the tab order
+    $("stage").querySelectorAll("button, input, tr[tabindex]").forEach((el) => { if (st !== "Default") el.setAttribute("tabindex", "-1"); });
+  }
+
+  /* ---------- Token resolution ---------- */
+  function resolve(brand, name) {
+    const v = getComputedStyle($("probe-" + brand)).getPropertyValue(name).trim();
+    return v;
+  }
+  function fmt(v) {
+    const m = v.match(/#([0-9a-f]{6}|[0-9a-f]{3})\b/gi);
+    if (!m) return { text: v || "—" };
+    const hex = m[m.length - 1].toUpperCase();
+    if (/^#[0-9a-f]{3,6}$/i.test(v)) return { hex, text: hex };
+    return { hex, text: hex };
+  }
+  function cell(v, cur) {
+    const f = fmt(v);
+    return `<td class="${cur ? "curv" : ""}"><span class="val">${f.hex ? `<span class="sw" style="background:${f.hex}"></span>` : ""}${f.text}</span></td>`;
+  }
+
+  /* ---------- Inspector ---------- */
+  function renderInspector() {
+    const body = $("inspBody");
+    $("inspMode").textContent = S.inspect ? (S.pinned ? "Pinned · Esc" : "Hover or click") : "Off";
+    const src = S.pinned || S.hot;
+    if (!S.inspect) {
+      body.innerHTML = `<div class="insp-empty"><div><b>See the tokens behind every pixel</b>Turn on Show tokens, then hover or click any element in the screen or the playground.<br><span class="hint">Every value is a semantic token. No raw hex.</span></div></div>`;
+      return;
+    }
+    if (!src) {
+      body.innerHTML = `<div class="insp-empty"><div><b>Pick an element</b>Hover to preview, click to pin. Values update when you switch brand.</div></div>`;
+      return;
+    }
+    const cur = S.brand, oth = cur === "meralis" ? "relay" : "meralis";
+    const items = src.tok.split("|").map((p) => { const i = p.indexOf(":"); return [p.slice(0, i), p.slice(i + 1)]; });
+    let themed = 0;
+    const rows = items.map(([prop, name]) => {
+      const a = resolve(cur, name), b = resolve(oth, name);
+      const same = a.replace(/\s/g, "").toLowerCase() === b.replace(/\s/g, "").toLowerCase();
+      if (!same) themed++;
+      return `<tr><td><code>${name}</code><span class="use">${prop} · <span class="${same ? "tag-s" : "tag-t"}">${same ? "Shared" : "Themed"}</span></span></td>${cell(a, true)}${cell(b, false)}</tr>`;
+    }).join("");
+    body.innerHTML = `<div class="insp-name"><b>${esc(src.name)}</b><span>${items.length} tokens · ${themed} themed</span></div>
+      <table class="tk"><thead><tr><th>Token · use</th><th class="cur">${BRANDS[cur]}</th><th>${BRANDS[oth]}</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="insp-foot">${themed ? `Same name in both products. The adapter maps ${themed === 1 ? "one value" : themed + " values"} to each brand.` : "Shared outright: identical in both products."}${S.before ? " Values shown are the Foundry tokens." : ""}</div>`;
+  }
+  function dataOf(el) { return { name: el.getAttribute("data-name"), tok: el.getAttribute("data-tok") }; }
+  function clearHot() { document.querySelectorAll(".tok-hot").forEach((e) => e.classList.remove("tok-hot")); }
+  function clearPin() { document.querySelectorAll(".tok-pin").forEach((e) => e.classList.remove("tok-pin")); }
+  function inspectable(t) { const el = t && t.closest && t.closest("[data-tok]"); return el && scope.contains(el) ? el : null; }
+
+  scope.addEventListener("mouseover", (e) => {
+    if (!S.inspect) return;
+    const el = inspectable(e.target);
+    clearHot();
+    if (el) { el.classList.add("tok-hot"); S.hot = dataOf(el); renderInspector(); }
+  });
+  scope.addEventListener("mouseleave", () => { if (!S.inspect) return; clearHot(); S.hot = null; renderInspector(); });
+  scope.addEventListener("focusin", (e) => {
+    if (!S.inspect) return;
+    const el = inspectable(e.target);
+    if (el) { clearHot(); el.classList.add("tok-hot"); S.hot = dataOf(el); renderInspector(); }
+  });
+  document.addEventListener("click", (e) => {
+    if (!S.inspect) return;
+    const el = inspectable(e.target);
+    if (!el) return;
+    e.preventDefault(); e.stopPropagation();
+    clearPin(); el.classList.add("tok-pin"); S.pinned = dataOf(el); renderInspector();
+  }, true);
+
+  /* ---------- Contrast ---------- */
+  function hexToRgb(h) { h = h.replace("#", ""); if (h.length === 3) h = h.split("").map((x) => x + x).join(""); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)); }
+  function lum(h) { return hexToRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0); }
+  function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  const fix2 = (n) => n.toFixed(2);
+  let lastHero = null;
+
+  function renderContrast() {
+    const b = S.brand, R = (n) => fmt(resolve(b, n)).hex;
+    const cta = S.before ? R("--brand-500") : R("--brand-cta");
+    const ctaName = S.before ? "--brand-500" : "--brand-cta";
+    const pairs = [
+      { l: "Primary button", fg: "#FFFFFF", bg: cta, d: `#FFF on ${ctaName}`, min: 4.5 },
+      { l: "Link · secondary", fg: cta, bg: "#FFFFFF", d: `${ctaName} on #FFF`, min: 4.5 },
+      { l: "Selected tint", fg: cta, bg: R("--brand-50"), d: `${ctaName} on --brand-50`, min: 4.5 },
+      { l: "Focus ring", fg: cta, bg: "#FFFFFF", d: `${S.before ? "--brand-500" : "--focus-ring"} vs page`, min: 3, ui: true },
+      { l: "Navy control", fg: "#FFFFFF", bg: R("--primary-700"), d: "#FFF on --primary-700", min: 4.5 }
+    ];
+    pairs.forEach((p) => (p.r = ratio(p.fg, p.bg)));
+    const hero = pairs[0];
+    const pass = hero.r >= hero.min;
+    $("cxHero").innerHTML = `<span class="demo" style="background:${hero.bg}" aria-hidden="true">${COPY[b].primary.split(" ")[0]}</span>
+      <div><span class="ratio${lastHero != null && Math.abs(lastHero - hero.r) > 0.005 ? " bump" : ""}" id="heroR">${fix2(hero.r)}:1</span><small>White on <span class="mono">${ctaName}</span></small></div>
+      <span class="badge ${pass ? "pass" : "fail"}">${pass ? "AA pass" : "AA fail"}</span>`;
+    lastHero = hero.r;
+    $("cxList").innerHTML = pairs.map((p) => {
+      const ok = p.r >= p.min;
+      const chip = p.ui ? `<span class="aa" style="background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 4px ${p.fg};border:0">&nbsp;</span>` : `<span class="aa" style="background:${p.bg};color:${p.fg}">Aa</span>`;
+      return `<div class="cx-row">${chip}<span class="lb">${p.l}<small>${p.d}</small></span><span class="r">${fix2(p.r)}</span><span class="badge ${ok ? "pass" : "fail"}">${ok ? "Pass" : "Fail"} ${p.min}</span></div>`;
+    }).join("");
+    const n = pairs.filter((p) => p.r >= p.min).length;
+    $("cxSum").innerHTML = `<span><b>${n} of ${pairs.length}</b> pairs pass AA in ${BRANDS[b]}</span><span class="mono" style="font-size:11px;color:var(--muted)">${S.before ? "raw brand color" : "Foundry tokens"}</span>`;
+  }
+  /* ---------- Global render ---------- */
+  function renderChrome() {
+    document.querySelectorAll("[data-brand]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.brand === S.brand)));
+    scope.classList.toggle("t-meralis", S.brand === "meralis");
+    scope.classList.toggle("t-relay", S.brand === "relay");
+    scope.classList.toggle("before", S.before);
+    if ($("brandWord").textContent !== BRANDS[S.brand]) {
+      $("brandWord").textContent = BRANDS[S.brand];
+      $("brandWord").classList.remove("fade-in"); void $("brandWord").offsetWidth; $("brandWord").classList.add("fade-in");
+    }
+    const hex = fmt(resolve(S.brand, S.before ? "--brand-500" : "--brand-cta")).hex;
+    $("ctaCode").textContent = S.before ? `raw #${hex.slice(1)} · no token` : `--brand-cta · ${hex}`;
+    $("ctaChip").classList.toggle("warn-chip", S.before);
+    $("tokBtn").setAttribute("aria-pressed", String(S.inspect));
+    $("beforeBtn").setAttribute("aria-pressed", String(S.before));
+    document.getElementById("app").classList.toggle("inspecting", S.inspect);
+  }
+  function renderAll() { renderChrome(); renderScreen(); renderPlay(); renderInspector(); renderContrast(); }
+
+  /* ---------- Events ---------- */
+  document.querySelectorAll("[data-brand]").forEach((b) => b.addEventListener("click", () => {
+    if (S.brand === b.dataset.brand) return;
+    S.brand = b.dataset.brand; S.hot = null; S.filter = "";
+    renderAll();
+    if (S.pinned) renderInspector();
+  }));
+  $("tokBtn").addEventListener("click", () => {
+    S.inspect = !S.inspect; S.hot = null;
+    if (!S.inspect) { S.pinned = null; clearPin(); clearHot(); }
+    renderChrome(); renderInspector();
+  });
+  $("beforeBtn").addEventListener("click", () => { S.before = !S.before; renderChrome(); renderContrast(); renderInspector(); });
+  $("compList").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-comp]"); if (!b) return;
+    S.comp = b.dataset.comp; S.state = COMPONENTS.find((c) => c.id === S.comp).states[0];
+    renderList(); renderPlay();
+  });
+  $("stateSeg").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-state]"); if (!b) return;
+    S.state = b.dataset.state; renderPlay();
+    const nb = $("stateSeg").querySelector(`[data-state="${S.state}"]`); if (nb) nb.focus();
+  });
+  // Live product screen behaviour
+  $("screen").addEventListener("click", (e) => {
+    if (S.inspect) return;
+    const row = e.target.closest("tr[data-row]");
+    if (row) { S.selRow = +row.dataset.row; renderTable(); return; }
+    const act = e.target.closest("[data-act]");
+    if (act && act.dataset.act === "clear") { S.filter = ""; $("q").value = ""; renderTable(); $("q").focus(); return; }
+    if (act && (act.dataset.act === "dismiss" || act.dataset.act === "undo")) { $("toastSlot").innerHTML = ""; return; }
+    if (e.target.closest("#primaryAct") && !S.busy) {
+      S.busy = true;
+      const pb = $("primaryAct"); pb.classList.add("is-loading"); pb.setAttribute("aria-busy", "true");
+      $("toastSlot").innerHTML = toastHTML(COPY[S.brand], "Loading");
+      setTimeout(() => {
+        S.busy = false;
+        const p = $("primaryAct"); if (p) { p.classList.remove("is-loading"); p.removeAttribute("aria-busy"); }
+        $("toastSlot").innerHTML = toastHTML(COPY[S.brand], "Default", true);
+      }, 1100);
+    }
+  });
+  $("screen").addEventListener("keydown", (e) => {
+    const row = e.target.closest && e.target.closest("tr[data-row]");
+    if (row && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); S.selRow = +row.dataset.row; renderTable(); const r = $("tbl").querySelector(`tr[data-row="${S.selRow}"]`); if (r) r.focus(); }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.target.matches && e.target.matches("input, textarea")) return;
+    if (e.key === "Escape" && S.pinned) { S.pinned = null; clearPin(); renderInspector(); }
+    if ((e.key === "t" || e.key === "T") && !e.metaKey && !e.ctrlKey) $("tokBtn").click();
+  });
+
+  renderList();
+  renderAll();
+})();
+</script>
+</body>
+</html>

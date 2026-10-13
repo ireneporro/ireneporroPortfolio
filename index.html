@@ -26,8 +26,8 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./premium.css?v=8" />
-    <link rel="stylesheet" href="./portfolio-devices.css" />
+    <link rel="stylesheet" href="./premium.css?v=9" />
+    <link rel="stylesheet" href="./portfolio-devices.css?v=3" />
     <link rel="stylesheet" href="./motion.css" />
     <script>
       if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -56,7 +56,7 @@
       <section class="premium-hero">
         <div class="hero-content reveal">
           <p class="kicker">Senior Product Designer · Design Systems · Design Engineering · AI-Assisted Prototyping</p>
-          <h1>I’m Irene. I design <span class="hero-accent">digital products</span>.</h1>
+          <h1>I’m Irene. I design complex B2B products and <span class="hero-accent">build them in code</span>.</h1>
           <p class="hero-lead">
             Most of my experience is in B2B SaaS: products with multiple roles,
             dense workflows and requirements that keep changing. I work from
@@ -134,7 +134,7 @@
               <div><dt>Role</dt><dd>Sole Product Designer</dd></div>
               <div><dt>Scope</dt><dd>9 roles, 51 documented flows</dd></div>
               <div><dt>System</dt><dd>42 components, ~150 tokens</dd></div>
-              <div><dt>Outcome</dt><dd>Launched · ~200–300 users, 10+ companies</dd></div>
+              <div><dt>Outcome</dt><dd>Launched after 4 years stalled · 10+ companies</dd></div>
             </dl>
             <span class="text-link">Open case study <b aria-hidden="true">↗</b></span>
           </div>
@@ -144,7 +144,11 @@
           <a class="project-link" href="./case-certa.html" aria-label="Open Certa Admin case study"></a>
           <div class="meralis-cover certa-cover">
             <div class="cover-wordmark"><span>C</span> Certa Admin <small>Certification platform</small></div>
-            <div class="cover-laptop"><div class="cover-laptop-screen"><img src="./assets/certa/dashboard.webp" alt="Certa Admin agency dashboard in a laptop mockup" width="2880" height="1800" loading="lazy" /></div><div class="cover-laptop-base"></div></div>
+            <div class="certa-flow" role="img" aria-label="An application moves from review to field inspection to an issued certificate">
+              <div class="cf-card cf-app"><span class="cf-step">01 · Application</span><b>Sunvale Bakery</b><small>12 products · submitted Mar 4</small><span class="cf-pill cf-rev">In review</span></div>
+              <div class="cf-card cf-visit"><span class="cf-step">02 · Inspection</span><b>Field visit</b><small>Thu 10:00 · Plant 2 · E. Brooks</small><div class="cf-check"><i></i><i></i><i class="off"></i></div><span class="cf-pill cf-sch">Scheduled</span></div>
+              <div class="cf-card cf-cert"><span class="cf-step">03 · Certificate</span><div class="cf-seal" aria-hidden="true">✓</div><b>Certified</b><small>Sunvale Bakery · 12 products</small><span class="cf-valid">Valid until Mar 2027</span></div>
+            </div>
             <p>Applications, inspections<br><em>and certificates.</em></p>
           </div>
           <div class="featured-copy">
@@ -165,7 +169,14 @@
         <div class="project-grid">
           <article class="project-card reveal">
             <a class="project-link" href="./case-foundry.html" aria-label="Open Foundry design system case study"></a>
-            <figure class="project-media"><img src="./assets/foundry/themes.webp" alt="Foundry design system: the same components in two product brands" width="2880" height="1610" loading="lazy" decoding="async" /></figure>
+            <div class="project-cover foundry-cover" role="img" aria-label="Foundry: the same components rendered in a purple and a cyan brand">
+              <div class="cover-wordmark"><span>F</span> Foundry <small>Design system · 2 products</small></div>
+              <div class="fd-split">
+                <div class="fd-side fd-m"><code>--brand-cta</code><span class="fd-btn">Approve batch</span><span class="fd-pill">In review</span><span class="fd-input">Alex Mor<i></i></span><span class="fd-toggle"><i></i></span></div>
+                <div class="fd-side fd-r"><code>--brand-cta</code><span class="fd-btn">Fill positions</span><span class="fd-pill">Filling</span><span class="fd-input">JO-183<i></i></span><span class="fd-toggle"><i></i></span></div>
+              </div>
+              <p>Same tokens. <em>Two brands.</em></p>
+            </div>
             <div class="project-card-copy">
               <div class="project-number">03 / Product system</div>
               <div class="tag-row"><span>Design System</span><span>Accessibility</span><span>AI-assisted</span></div>
@@ -177,7 +188,14 @@
 
           <article class="project-card reveal">
             <a class="project-link" href="./case-relay.html" aria-label="Open Relay case study"></a>
-            <figure class="project-media"><img src="./assets/relay/manage.webp" alt="Relay open orders grid with urgency states and fill progress" width="2880" height="1800" loading="lazy" decoding="async" /></figure>
+            <div class="project-cover relay-cover" role="img" aria-label="Relay: a staffing order with its fill progress, deadline and the route from client to MSP to agency branch">
+              <div class="cover-wordmark"><span>R</span> Relay <small>Staffing marketplace</small></div>
+              <div class="rl-stage">
+                <div class="rl-order"><div class="rl-top"><span class="rl-id">JO-183-1</span><span class="rl-urgent">Final hours</span></div><b>Picker / Packer</b><small>Shift 1 · 6:00 AM · Harbor Logistics</small><div class="rl-fill"><span class="rl-ring" style="--p:50%"><em>3/6</em></span><div><small>Time left</small><b class="rl-time">6h 12m</b></div></div></div>
+                <ol class="rl-route"><li>Client</li><li class="on">MSP</li><li>Branch</li></ol>
+              </div>
+              <p>Every order <em>has an owner.</em></p>
+            </div>
             <div class="project-card-copy">
               <div class="project-number">04 / Staffing marketplace</div>
               <div class="tag-row"><span>B2B SaaS</span><span>Workflow Rules</span><span>Design System</span></div>
