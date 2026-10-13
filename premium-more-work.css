@@ -186,7 +186,7 @@
 .ds-states code { grid-column:1 / -1; justify-self:center; padding:3px 9px; border-radius:6px; background:#f2f2f6; color:#555; font:600 10.5px ui-monospace,Menlo,monospace; }
 
 /* Honeybee */
-.mw-honey { --k:#1aa3c4; background-color:#fdf6dc; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cpath d='M14 0l14 8v16l-14 8L0 24V8zM14 32l14 8v16l-14 8L0 56V40z' fill='none' stroke='%23f2dd8c' stroke-width='1'/%3E%3C/svg%3E"); }
+.mw-honey { --k:#1aa3c4; background-color:#fdf6dc; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpolygon points='0.00,20.00 -17.32,10.00 -17.32,-10.00 -0.00,-20.00 17.32,-10.00 17.32,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,20.00 17.32,10.00 17.32,-10.00 34.64,-20.00 51.96,-10.00 51.96,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='17.32,50.00 -0.00,40.00 0.00,20.00 17.32,10.00 34.64,20.00 34.64,40.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='0.00,80.00 -17.32,70.00 -17.32,50.00 -0.00,40.00 17.32,50.00 17.32,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,80.00 17.32,70.00 17.32,50.00 34.64,40.00 51.96,50.00 51.96,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3C/svg%3E"); }
 .mw-honey .cover-wordmark > span { clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%); border-radius:0; background:#e8b923; color:#3a2a00; }
 .hb-plans { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; align-items:end; }
 .hb-plans > div { position:relative; display:grid; gap:8px; padding:18px 14px; border-radius:16px; background:#fff; box-shadow:0 14px 30px rgba(120,90,0,.10); }
@@ -217,7 +217,7 @@
   .ds-states > div:nth-child(n+4) { display:none; }
 }
 .legacy-cover.mw-wattle, .legacy-cover.mw-legacy { color:#f5f6f0; }
-.legacy-cover.mw-honey { background-color:#fdf6dc; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cpath d='M14 0l14 8v16l-14 8L0 24V8zM14 32l14 8v16l-14 8L0 56V40z' fill='none' stroke='%23efd57a' stroke-width='1.2'/%3E%3C/svg%3E"); }
+.legacy-cover.mw-honey { background-size:34.64px 60px; background-color:#fdf6dc; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpolygon points='0.00,20.00 -17.32,10.00 -17.32,-10.00 -0.00,-20.00 17.32,-10.00 17.32,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,20.00 17.32,10.00 17.32,-10.00 34.64,-20.00 51.96,-10.00 51.96,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='17.32,50.00 -0.00,40.00 0.00,20.00 17.32,10.00 34.64,20.00 34.64,40.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='0.00,80.00 -17.32,70.00 -17.32,50.00 -0.00,40.00 17.32,50.00 17.32,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,80.00 17.32,70.00 17.32,50.00 34.64,40.00 51.96,50.00 51.96,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3C/svg%3E"); }
 .mw-cover .br-guide img { height:auto; object-fit:cover; }
 .wp-phones img { max-width:30%; object-fit:contain; }
 @media (max-width:760px) { .wp-phones { max-height:240px; } }
