@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Irene Porro — cat with P tail">
+<g transform="translate(-5 0)">
+  <path fill="none" stroke="#3d2149" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" d="M100 167 C116 170 126 164 126 146 L126 62 Q126 40 146 40 Q166 40 166 61 Q166 82 146 82 L134 82"/>
+  <g transform="translate(10 0) translate(83 172) scale(.8) translate(-83 -172)" fill="#3d2149">
+    <path d="M54 172 Q48 134 60 114 Q50 102 52 86 L50 60 Q50 53 56 57 L68 69 Q77 67 86 69 L98 57 Q104 53 104 60 L102 86 Q104 102 94 114 Q112 134 112 172 Z"/>
+    <g stroke="#dfff5d" stroke-width="3.5" stroke-linecap="round"><path d="M64 94 L50 91"/><path d="M64 98 L51 102"/><path d="M90 94 L104 91"/><path d="M90 98 L103 102"/></g>
+    <circle cx="68" cy="86" r="4" fill="#dfff5d"/><circle cx="86" cy="86" r="4" fill="#dfff5d"/>
+  </g>
+  <g transform="translate(10 0)">
+  <rect x="34" y="78" width="14" height="94" rx="7" fill="#3d2149"/>
+  <g transform="rotate(-12 41 50)"><path fill="#dfff5d" d="M41 64 C24 55 20 41 26 34 C31 29 38 30 41 37 C44 30 51 29 56 34 C62 41 58 55 41 64 Z"/></g>
+</g>
+</g>
+</svg>

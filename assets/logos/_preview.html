@@ -1,0 +1,90 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logos IP</title>
+<style>
+/* Layout: sticky color toolbar over a responsive grid of logo cards; card ground = chosen backdrop */
+:root{
+  --page:#efede8; --bar:#fbfaf7; --fg:#2b1832; --muted:#6c6470; --line:rgba(43,24,50,.14); --chip:#e6e3dc; --btn-fg:#fff; --btn-bg:#3d2149;
+  --logo-bg:#a3a19c;
+  --ui:"Inter",Arial,sans-serif; --mono:ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#19171b;--bar:#211e24;--fg:#efe9f2;--muted:#a69daa;--line:rgba(239,233,242,.14);--chip:#2c2830;--btn-fg:#2b1832;--btn-bg:#dfff5d;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#19171b;--bar:#211e24;--fg:#efe9f2;--muted:#a69daa;--line:rgba(239,233,242,.14);--chip:#2c2830;--btn-fg:#2b1832;--btn-bg:#dfff5d;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--fg);font:500 14px/1.4 var(--ui)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+h1{font-size:16px;margin:0;letter-spacing:-.01em}
+.ctl{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.ctl input[type=color]{width:34px;height:28px;border:1px solid var(--line);border-radius:6px;padding:0;background:none;cursor:pointer}
+code{font:12px var(--mono);background:var(--chip);padding:3px 6px;border-radius:4px;user-select:all}
+.presets{display:flex;gap:6px;align-items:center;color:var(--muted)}
+.presets button{width:24px;height:24px;border-radius:50%;border:2px solid var(--bar);box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
+.presets button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--fg)}
+.actions{margin-left:auto;display:flex;gap:8px}
+.actions button{font:inherit;font-weight:600;border:1px solid var(--fg);background:transparent;color:var(--fg);border-radius:8px;padding:6px 12px;cursor:pointer}
+.actions button.primary{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-fg)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.summary{flex-basis:100%;color:var(--muted);font-size:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+main{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:20px;padding-block:20px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.card{background:var(--logo-bg);border-radius:12px;padding:20px;min-width:0}
+.card .name{font:600 12px var(--mono);color:#2b1832;opacity:.75;margin-bottom:8px}
+.big svg{width:100%;height:auto;max-height:340px;display:block}
+.sizes{display:flex;gap:16px;align-items:end;margin-top:12px;flex-wrap:wrap}
+.sizes span{display:block}
+</style></head><body style="margin:0">
+<header>
+  <h1>Logos IP</h1>
+  <label class="ctl" for="c-bg">Fondo <input id="c-bg" type="color" data-k="bg"><code></code></label>
+  <span class="presets">Cemento:
+    <button type="button" aria-label="Cemento claro" data-bg="#b5b3ae" style="background:#b5b3ae"></button>
+    <button type="button" aria-label="Cemento" data-bg="#a3a19c" style="background:#a3a19c"></button>
+    <button type="button" aria-label="Cemento medio" data-bg="#9a9893" style="background:#9a9893"></button>
+    <button type="button" aria-label="Cemento oscuro" data-bg="#8d8c88" style="background:#8d8c88"></button>
+    <button type="button" aria-label="Cemento húmedo" data-bg="#7f7e7a" style="background:#7f7e7a"></button>
+  </span>
+  <label class="ctl" for="c-ink">Violeta oscuro <input id="c-ink" type="color" data-k="ink"><code></code></label>
+  <label class="ctl" for="c-violet">Violeta corazón <input id="c-violet" type="color" data-k="violet"><code></code></label>
+  <label class="ctl" for="c-acid">Verde <input id="c-acid" type="color" data-k="acid"><code></code></label>
+  <div class="actions"><button type="button" id="reset">Restablecer</button><button type="button" id="copy" class="primary">Copiar colores</button></div>
+  <div class="summary">Para pasarme los colores: <code id="summary"></code></div>
+</header>
+<main id="grid"></main>
+<script>
+const SVGS = {"ip-cat-head": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"Irene Porro \u2014 IP cat\">\n  <path fill=\"#3d2149\" d=\"M38 64 L44 22 Q46 12 55 17 L86 41 Q100 37 114 41 L145 17 Q154 12 156 22 L162 64 Q176 86 172 113 Q166 162 100 172 Q34 162 28 113 Q24 86 38 64 Z\"/>\n  <path fill=\"#5a2d68\" d=\"M53 30 L56 54 L74 44 Z M147 30 L144 54 L126 44 Z\"/>\n  <g fill=\"#dfff5d\" transform=\"translate(-4 2)\">\n    <rect x=\"60\" y=\"99\" width=\"20\" height=\"47\" rx=\"10\"/>\n    <path fill-rule=\"evenodd\" d=\"M96 82 Q96 72 106 72 L120 72 Q150 72 150 99 Q150 126 120 126 L116 126 L116 136 Q116 146 106 146 Q96 146 96 136 Z M116 89 L116 109 L120 109 Q130 109 130 99 Q130 89 120 89 Z\"/>\n  </g>\n  <g stroke=\"#dfff5d\" stroke-width=\"3.5\" stroke-linecap=\"round\">\n    <path d=\"M8 104 L30 108\"/><path d=\"M10 124 L30 121\"/>\n    <path d=\"M192 104 L170 108\"/><path d=\"M190 124 L170 121\"/>\n  </g>\n  <path fill=\"#dfff5d\" transform=\"translate(66 85) rotate(-8) scale(.52) translate(-61 -38)\" d=\"M61 60 C38 48 33 30 41 21 C48 14 57 16 61 25 C65 16 74 14 81 21 C89 30 84 48 61 60 Z\"/>\n</svg>\n", "ip-cat-tail": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"Irene Porro \u2014 cat with P tail\">\n<g transform=\"translate(-5 0)\">\n  <path fill=\"none\" stroke=\"#3d2149\" stroke-width=\"14\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M100 167 C116 170 126 164 126 146 L126 62 Q126 40 146 40 Q166 40 166 61 Q166 82 146 82 L134 82\"/>\n  <g transform=\"translate(10 0) translate(83 172) scale(.8) translate(-83 -172)\" fill=\"#3d2149\">\n    <path d=\"M54 172 Q48 134 60 114 Q50 102 52 86 L50 60 Q50 53 56 57 L68 69 Q77 67 86 69 L98 57 Q104 53 104 60 L102 86 Q104 102 94 114 Q112 134 112 172 Z\"/>\n    <g stroke=\"#dfff5d\" stroke-width=\"3.5\" stroke-linecap=\"round\"><path d=\"M64 94 L50 91\"/><path d=\"M64 98 L51 102\"/><path d=\"M90 94 L104 91\"/><path d=\"M90 98 L103 102\"/></g>\n    <circle cx=\"68\" cy=\"86\" r=\"4\" fill=\"#dfff5d\"/><circle cx=\"86\" cy=\"86\" r=\"4\" fill=\"#dfff5d\"/>\n  </g>\n  <g transform=\"translate(10 0)\">\n  <rect x=\"34\" y=\"78\" width=\"14\" height=\"94\" rx=\"7\" fill=\"#3d2149\"/>\n  <g transform=\"rotate(-12 41 50)\"><path fill=\"#dfff5d\" d=\"M41 64 C24 55 20 41 26 34 C31 29 38 30 41 37 C44 30 51 29 56 34 C62 41 58 55 41 64 Z\"/></g>\n</g>\n</g>\n</svg>\n", "ip-heart": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"Irene Porro \u2014 ip heart\">\n  <g transform=\"rotate(-12 61 40)\">\n    <path fill=\"#dfff5d\" d=\"M61 60 C38 48 33 30 41 21 C48 14 57 16 61 25 C65 16 74 14 81 21 C89 30 84 48 61 60 Z\"/>\n  </g>\n  <rect x=\"50\" y=\"74\" width=\"22\" height=\"88\" rx=\"11\" fill=\"#3d2149\"/>\n  <path fill=\"#3d2149\" fill-rule=\"evenodd\" d=\"M80 85 Q80 74 91 74 Q97 74 100 79 L104 65 Q106 59 111 63 L120 74 L134 74 L143 63 Q148 59 150 65 L154 81 Q166 96 164 118 Q160 152 124 152 Q112 152 102 146 L102 186 Q102 196 91 196 Q80 196 80 186 Z M102 113 Q102 134 123 134 Q144 134 144 113 Q144 92 123 92 Q102 92 102 113 Z\"/>\n  <circle cx=\"115\" cy=\"109\" r=\"3.6\" fill=\"#3d2149\"/><circle cx=\"131\" cy=\"109\" r=\"3.6\" fill=\"#3d2149\"/>\n  <g stroke=\"#5a2d68\" stroke-width=\"2.6\" stroke-linecap=\"round\"><path d=\"M113 119 L86 115.6\"/><path d=\"M113 123.2 L86 127.6\"/><path d=\"M133 119 L190 112\"/><path d=\"M133 123.1 L188 132\"/></g>\n  <path fill=\"#dfff5d\" d=\"M123 125 C117 121 117 116 120 115 C121.5 114.5 122.6 115.4 123 116.5 C123.4 115.4 124.5 114.5 126 115 C129 116 129 121 123 125 Z\"/>\n</svg>\n", "ip-heart-green": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"Irene Porro \u2014 ip heart\">\n  <g transform=\"rotate(-12 61 40)\">\n    <path fill=\"#dfff5d\" d=\"M61 60 C38 48 33 30 41 21 C48 14 57 16 61 25 C65 16 74 14 81 21 C89 30 84 48 61 60 Z\"/>\n  </g>\n  <rect x=\"50\" y=\"74\" width=\"22\" height=\"88\" rx=\"11\" fill=\"#3d2149\"/>\n  <path fill=\"#3d2149\" fill-rule=\"evenodd\" d=\"M80 85 Q80 74 91 74 Q97 74 100 79 L104 65 Q106 59 111 63 L120 74 L134 74 L143 63 Q148 59 150 65 L154 81 Q166 96 164 118 Q160 152 124 152 Q112 152 102 146 L102 186 Q102 196 91 196 Q80 196 80 186 Z M102 113 Q102 134 123 134 Q144 134 144 113 Q144 92 123 92 Q102 92 102 113 Z\"/>\n  <circle cx=\"115\" cy=\"109\" r=\"3.6\" fill=\"#3d2149\"/><circle cx=\"131\" cy=\"109\" r=\"3.6\" fill=\"#3d2149\"/>\n  <g stroke=\"#dfff5d\" stroke-width=\"2.6\" stroke-linecap=\"round\"><path d=\"M113 119 L86 115.6\"/><path d=\"M113 123.2 L86 127.6\"/><path d=\"M133 119 L190 112\"/><path d=\"M133 123.1 L188 132\"/></g>\n  <path fill=\"#dfff5d\" d=\"M123 125 C117 121 117 116 120 115 C121.5 114.5 122.6 115.4 123 116.5 C123.4 115.4 124.5 114.5 126 115 C129 116 129 121 123 125 Z\"/>\n</svg>\n", "ip-heart-square": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"Irene Porro \u2014 ip heart square\">\n  <defs>\n    <mask id=\"p\"><rect width=\"200\" height=\"200\" fill=\"#fff\"/><rect x=\"102\" y=\"94\" width=\"40\" height=\"38\" rx=\"7\" fill=\"#000\"/></mask>\n  </defs>\n  <g transform=\"rotate(-10 61 42)\">\n    <path fill=\"#dfff5d\" d=\"M61 60 L42 41 Q34 33 40 25 Q47 17 55 23 L61 29 L67 23 Q75 17 82 25 Q88 33 80 41 Z\"/>\n  </g>\n  <rect x=\"50\" y=\"74\" width=\"22\" height=\"88\" rx=\"3\" fill=\"#3d2149\"/>\n  <g fill=\"#3d2149\" mask=\"url(#p)\">\n    <path d=\"M80 77 Q80 74 83 74 L102 74 L106 58 L122 74 L132 74 L148 58 L152 74 Q164 74 164 86 L164 140 Q164 152 152 152 L102 152 L102 193 Q102 196 99 196 L83 196 Q80 196 80 193 Z\"/>\n  </g>\n  \n  <circle cx=\"115\" cy=\"109\" r=\"3.4\" fill=\"#3d2149\"/><circle cx=\"131\" cy=\"109\" r=\"3.4\" fill=\"#3d2149\"/>\n  <g stroke=\"#5a2d68\" stroke-width=\"2.6\" stroke-linecap=\"square\"><path d=\"M113 119 L86 115.6\"/><path d=\"M113 123.2 L86 127.6\"/><path d=\"M133 119 L190 112\"/><path d=\"M133 123.1 L188 132\"/></g>\n  <path fill=\"#dfff5d\" d=\"M123 125 L118 120 Q116 118 118 116 Q120 114.5 122 116 L123 117 L124 116 Q126 114.5 128 116 Q130 118 128 120 Z\"/>\n</svg>\n", "ip-heart-square-green": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\" role=\"img\" aria-label=\"Irene Porro \u2014 ip heart square\">\n  <defs>\n    <mask id=\"p\"><rect width=\"200\" height=\"200\" fill=\"#fff\"/><rect x=\"102\" y=\"94\" width=\"40\" height=\"38\" rx=\"7\" fill=\"#000\"/></mask>\n  </defs>\n  <g transform=\"rotate(-10 61 42)\">\n    <path fill=\"#dfff5d\" d=\"M61 60 L42 41 Q34 33 40 25 Q47 17 55 23 L61 29 L67 23 Q75 17 82 25 Q88 33 80 41 Z\"/>\n  </g>\n  <rect x=\"50\" y=\"74\" width=\"22\" height=\"88\" rx=\"3\" fill=\"#3d2149\"/>\n  <g fill=\"#3d2149\" mask=\"url(#p)\">\n    <path d=\"M80 77 Q80 74 83 74 L102 74 L106 58 L122 74 L132 74 L148 58 L152 74 Q164 74 164 86 L164 140 Q164 152 152 152 L102 152 L102 193 Q102 196 99 196 L83 196 Q80 196 80 193 Z\"/>\n  </g>\n  \n  <circle cx=\"115\" cy=\"109\" r=\"3.4\" fill=\"#3d2149\"/><circle cx=\"131\" cy=\"109\" r=\"3.4\" fill=\"#3d2149\"/>\n  <g stroke=\"#dfff5d\" stroke-width=\"2.6\" stroke-linecap=\"square\"><path d=\"M113 119 L86 115.6\"/><path d=\"M113 123.2 L86 127.6\"/><path d=\"M133 119 L190 112\"/><path d=\"M133 123.1 L188 132\"/></g>\n  <path fill=\"#dfff5d\" d=\"M123 125 L118 120 Q116 118 118 116 Q120 114.5 122 116 L123 117 L124 116 Q126 114.5 128 116 Q130 118 128 120 Z\"/>\n</svg>\n"};
+const ORIG = {ink:'#3d2149', violet:'#5a2d68', acid:'#dfff5d'};
+const DEF = {bg:'#a3a19c', ...ORIG};
+let c = {...DEF};
+try { Object.assign(c, JSON.parse(localStorage.getItem('ip-logo-colors')||'{}')); } catch(e){}
+const grid = document.getElementById('grid');
+function recolor(svg, i){
+  let s = svg.replace(/id="([^"]+)"/g,'id="$1_'+i+'"').replace(/url\(#([^)]+)\)/g,'url(#$1_'+i+')');
+  for (const k of ['ink','violet','acid']) s = s.split(ORIG[k]).join('__'+k+'__');
+  for (const k of ['ink','violet','acid']) s = s.split('__'+k+'__').join(c[k]);
+  return s;
+}
+const summaryText = () => `Fondo ${c.bg} · Violeta oscuro ${c.ink} · Violeta corazón ${c.violet} · Verde ${c.acid}`;
+function render(){
+  document.documentElement.style.setProperty('--logo-bg', c.bg);
+  let i=0, out='';
+  for (const [n, svg] of Object.entries(SVGS)){
+    out += `<section class="card"><div class="name">${n}</div><div class="big">${recolor(svg,i++)}</div><div class="sizes">`;
+    for (const w of [96,48,32,16]) out += `<span style="width:${w}px">${recolor(svg,i++).replace('<svg','<svg width="'+w+'" height="'+w+'"')}</span>`;
+    out += `</div></section>`;
+  }
+  grid.innerHTML = out;
+  document.querySelectorAll('input[type=color]').forEach(inp=>{ inp.value=c[inp.dataset.k]; inp.nextElementSibling.textContent=c[inp.dataset.k]; });
+  document.querySelectorAll('[data-bg]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.bg===c.bg)));
+  document.getElementById('summary').textContent = summaryText();
+  try { localStorage.setItem('ip-logo-colors', JSON.stringify(c)); } catch(e){}
+}
+document.querySelectorAll('input[type=color]').forEach(inp=>inp.addEventListener('input',e=>{c[inp.dataset.k]=e.target.value; render();}));
+document.querySelectorAll('[data-bg]').forEach(b=>b.addEventListener('click',()=>{c.bg=b.dataset.bg; render();}));
+document.getElementById('reset').onclick=()=>{c={...DEF}; render();};
+document.getElementById('copy').onclick=(ev)=>{
+  const btn=ev.currentTarget, done=t=>{btn.textContent=t; setTimeout(()=>btn.textContent='Copiar colores',1600);};
+  try {
+    navigator.clipboard.writeText(summaryText()).then(()=>done('Copiado'),()=>{selectSummary(); done('Seleccionado: ⌘C');});
+  } catch(e){ selectSummary(); done('Seleccionado: ⌘C'); }
+};
+function selectSummary(){ const r=document.createRange(); r.selectNodeContents(document.getElementById('summary')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+render();
+</script></body></html>

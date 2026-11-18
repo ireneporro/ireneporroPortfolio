@@ -1,5 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <circle cx="64" cy="64" r="58" fill="#fffaf0" stroke="#3d2149" stroke-opacity=".22" stroke-width="3"/>
-  <text x="42" y="80" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#3d2149">I</text>
-  <text x="58" y="80" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#dfff5d" stroke="#3d2149" stroke-width="1.5">P</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Irene Porro — IP cat">
+  <path fill="#3d2149" d="M38 64 L44 22 Q46 12 55 17 L86 41 Q100 37 114 41 L145 17 Q154 12 156 22 L162 64 Q176 86 172 113 Q166 162 100 172 Q34 162 28 113 Q24 86 38 64 Z"/>
+  <path fill="#5a2d68" d="M53 30 L56 54 L74 44 Z M147 30 L144 54 L126 44 Z"/>
+  <g fill="#dfff5d" transform="translate(-4 2)">
+    <rect x="60" y="99" width="20" height="47" rx="10"/>
+    <path fill-rule="evenodd" d="M96 82 Q96 72 106 72 L120 72 Q150 72 150 99 Q150 126 120 126 L116 126 L116 136 Q116 146 106 146 Q96 146 96 136 Z M116 89 L116 109 L120 109 Q130 109 130 99 Q130 89 120 89 Z"/>
+  </g>
+  <g stroke="#dfff5d" stroke-width="3.5" stroke-linecap="round">
+    <path d="M8 104 L30 108"/><path d="M10 124 L30 121"/>
+    <path d="M192 104 L170 108"/><path d="M190 124 L170 121"/>
+  </g>
+  <path fill="#dfff5d" transform="translate(66 85) rotate(-8) scale(.52) translate(-61 -38)" d="M61 60 C38 48 33 30 41 21 C48 14 57 16 61 25 C65 16 74 14 81 21 C89 30 84 48 61 60 Z"/>
 </svg>

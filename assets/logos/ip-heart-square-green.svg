@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Irene Porro — ip heart square">
+  <defs>
+    <mask id="p"><rect width="200" height="200" fill="#fff"/><rect x="102" y="94" width="40" height="38" rx="7" fill="#000"/></mask>
+  </defs>
+  <g transform="rotate(-10 61 42)">
+    <path fill="#dfff5d" d="M61 60 L42 41 Q34 33 40 25 Q47 17 55 23 L61 29 L67 23 Q75 17 82 25 Q88 33 80 41 Z"/>
+  </g>
+  <rect x="50" y="74" width="22" height="88" rx="3" fill="#3d2149"/>
+  <g fill="#3d2149" mask="url(#p)">
+    <path d="M80 77 Q80 74 83 74 L102 74 L106 58 L122 74 L132 74 L148 58 L152 74 Q164 74 164 86 L164 140 Q164 152 152 152 L102 152 L102 193 Q102 196 99 196 L83 196 Q80 196 80 193 Z"/>
+  </g>
+  
+  <circle cx="115" cy="109" r="3.4" fill="#3d2149"/><circle cx="131" cy="109" r="3.4" fill="#3d2149"/>
+  <g stroke="#dfff5d" stroke-width="2.6" stroke-linecap="square"><path d="M113 119 L86 115.6"/><path d="M113 123.2 L86 127.6"/><path d="M133 119 L190 112"/><path d="M133 123.1 L188 132"/></g>
+  <path fill="#dfff5d" d="M123 125 L118 120 Q116 118 118 116 Q120 114.5 122 116 L123 117 L124 116 Q126 114.5 128 116 Q130 118 128 120 Z"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Irene Porro — ip heart">
+  <g transform="rotate(-12 61 40)">
+    <path fill="#dfff5d" d="M61 60 C38 48 33 30 41 21 C48 14 57 16 61 25 C65 16 74 14 81 21 C89 30 84 48 61 60 Z"/>
+  </g>
+  <rect x="50" y="74" width="22" height="88" rx="11" fill="#3d2149"/>
+  <path fill="#3d2149" fill-rule="evenodd" d="M80 85 Q80 74 91 74 Q97 74 100 79 L104 65 Q106 59 111 63 L120 74 L134 74 L143 63 Q148 59 150 65 L154 81 Q166 96 164 118 Q160 152 124 152 Q112 152 102 146 L102 186 Q102 196 91 196 Q80 196 80 186 Z M102 113 Q102 134 123 134 Q144 134 144 113 Q144 92 123 92 Q102 92 102 113 Z"/>
+  <circle cx="115" cy="109" r="3.6" fill="#3d2149"/><circle cx="131" cy="109" r="3.6" fill="#3d2149"/>
+  <g stroke="#dfff5d" stroke-width="2.6" stroke-linecap="round"><path d="M113 119 L86 115.6"/><path d="M113 123.2 L86 127.6"/><path d="M133 119 L190 112"/><path d="M133 123.1 L188 132"/></g>
+  <path fill="#dfff5d" d="M123 125 C117 121 117 116 120 115 C121.5 114.5 122.6 115.4 123 116.5 C123.4 115.4 124.5 114.5 126 115 C129 116 129 121 123 125 Z"/>
+</svg>
