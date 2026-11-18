@@ -9,7 +9,8 @@ body.honeybee { --brand:#0f6b67; --soft:#fff2d2; --line:#ebe4d5; }
 .hb-ba .screen-stage { max-height:720px; overflow:hidden; }
 .hb-ba figcaption span b { margin-right:6px; padding:2px 8px; border-radius:999px; background:#efe6d2; font-size:11px; letter-spacing:.04em; text-transform:uppercase; }
 .hb-ba figure:last-child figcaption span b { background:#f6b52e; color:#15302d; }
-.hb-changes { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin:0; padding:0; list-style:none; }
+.hb-changes { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin:0; padding:0; list-style:none; }
 .hb-changes li { padding:22px; border:1px solid var(--line); border-radius:16px; background:#fff; color:var(--body); font-size:15px; }
 .hb-changes b { display:block; margin-bottom:6px; color:#15302d; font-size:16px; }
+@media (max-width:1000px) { .hb-changes { grid-template-columns:1fr 1fr; } }
 @media (max-width:760px) { .hb-duo, .hb-changes { grid-template-columns:1fr; } }
