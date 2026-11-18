@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Honeybee Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --honey:#f6b52e; --honey-d:#b97a00; --honey-soft:#fff2d2; --honey-line:#f6e2b0;
+  --teal:#0f6b67; --teal-d:#0a5450; --teal-soft:#e4f2ef; --teal-line:#cfe6e1;
+  --ink:#15302d; --body:#4b5b58; --muted:#76837f; --line:#ebe4d5; --line2:#f3eee3;
+  --cream:#fffaf1; --white:#fff; --red:#c2412d; --red-soft:#fdeceb;
+  --r-sm:10px; --r:16px; --r-lg:24px;
+  --shadow:0 1px 2px rgba(21,48,45,.06), 0 12px 32px rgba(21,48,45,.08);
+  --wrap:1200px;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+html, body { margin:0; }
+body { background:var(--cream); color:var(--ink); font:16px/1.55 "Figtree", system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+button { font:inherit; color:inherit; cursor:pointer; }
+input, select { font:inherit; color:var(--ink); }
+a { color:inherit; }
+:focus-visible { outline:3px solid var(--honey); outline-offset:2px; border-radius:6px; }
+[hidden] { display:none !important; }
+h1, h2, h3, h4 { margin:0; letter-spacing:-.025em; line-height:1.12; }
+p { margin:0; }
+.wrap { width:min(var(--wrap), calc(100% - 64px)); margin-inline:auto; }
+svg.i { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+
+/* Buttons */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; height:48px; padding:0 22px; border:1.5px solid transparent; border-radius:999px; background:var(--teal); color:#fff; font-weight:700; font-size:15px; text-decoration:none; transition:background .15s, border-color .15s, transform .15s; white-space:nowrap; }
+.btn:hover { background:var(--teal-d); }
+.btn:active { transform:translateY(1px); }
+.btn.honey { background:var(--honey); color:var(--ink); }
+.btn.honey:hover { background:#eaa616; }
+.btn.ghost { background:transparent; border-color:var(--line); color:var(--ink); }
+.btn.ghost:hover { border-color:var(--ink); background:transparent; }
+.btn.sm { height:40px; padding:0 16px; font-size:14px; }
+.btn.block { width:100%; }
+.btn[disabled] { opacity:.45; cursor:not-allowed; }
+.link { padding:0; border:0; background:none; color:var(--teal); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.link:hover { color:var(--teal-d); }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--honey-d); font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+
+/* Header */
+.hdr { position:sticky; top:0; z-index:30; background:rgba(255,250,241,.92); backdrop-filter:blur(10px); border-bottom:1px solid transparent; transition:border-color .2s; }
+.hdr.scrolled { border-color:var(--line); }
+.hdr .wrap { display:flex; align-items:center; gap:36px; height:76px; }
+.logo { display:inline-flex; align-items:center; gap:10px; padding:0; border:0; background:none; font-size:20px; font-weight:800; letter-spacing:-.03em; text-decoration:none; }
+.logo small { color:var(--muted); font-weight:500; letter-spacing:0; }
+.mark { position:relative; width:32px; height:36px; flex:none; }
+.mark svg { width:100%; height:100%; display:block; }
+.nav { display:flex; gap:4px; }
+.nav button { height:40px; padding:0 14px; border:0; border-radius:999px; background:none; color:var(--body); font-weight:600; font-size:15px; }
+.nav button:hover { background:var(--line2); color:var(--ink); }
+.hdr-end { display:flex; align-items:center; gap:10px; margin-left:auto; }
+.menu-btn { display:none; width:44px; height:44px; border:1.5px solid var(--line); border-radius:12px; background:#fff; }
+.user-chip { display:flex; align-items:center; gap:10px; height:44px; padding:0 14px 0 5px; border:1.5px solid var(--line); border-radius:999px; background:#fff; font-weight:700; font-size:14px; }
+.av { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--honey-soft); color:var(--honey-d); font-weight:800; font-size:13px; }
+.mobile-nav { display:none; }
+.guest-grp { display:flex; gap:10px; }
+
+/* Hero */
+.hero { padding:56px 0 88px; }
+.hero .wrap { display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
+.pill { display:inline-flex; align-items:center; gap:8px; height:34px; padding:0 14px 0 6px; border:1px solid var(--honey-line); border-radius:999px; background:#fff; color:var(--body); font-size:14px; font-weight:600; }
+.pill b { display:inline-grid; place-items:center; height:24px; padding:0 9px; border-radius:999px; background:var(--honey); color:var(--ink); font-size:12px; font-weight:800; }
+.hero h1 { margin:22px 0 20px; font-size:64px; font-weight:800; letter-spacing:-.04em; line-height:1.02; }
+.hero h1 em { font-style:normal; color:var(--teal); }
+.hero .lead { max-width:520px; color:var(--body); font-size:19px; line-height:1.55; }
+.hero-cta { display:flex; gap:12px; margin-top:32px; }
+.trust { display:flex; align-items:center; gap:22px; margin-top:36px; color:var(--body); font-size:14px; }
+.trust > div { display:flex; align-items:center; gap:8px; }
+.trust svg { color:var(--teal); }
+.stars { color:var(--honey); letter-spacing:1px; }
+.hero-art { position:relative; height:600px; }
+.hero-art .blob { position:absolute; inset:24px 10px 24px 40px; border-radius:40px; background:linear-gradient(160deg, #ffe7a8 0%, #f8c454 100%); overflow:hidden; }
+.hero-art .blob::after { content:""; position:absolute; right:-60px; bottom:-60px; width:300px; height:340px; background:rgba(255,255,255,.18); clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.phone { position:absolute; left:50%; top:0; transform:translateX(-42%); width:290px; height:600px; padding:12px; border-radius:46px; background:#15302d; box-shadow:0 40px 80px rgba(70,45,0,.28); }
+.phone-screen { height:100%; padding:20px 16px; border-radius:36px; background:var(--cream); overflow:hidden; font-size:13px; }
+.ph-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.ph-top b { font-size:20px; letter-spacing:-.03em; }
+.ph-streak { padding:4px 9px; border-radius:999px; background:var(--honey-soft); color:var(--honey-d); font-size:11px; font-weight:800; }
+.ph-card { padding:14px; margin-bottom:10px; border-radius:16px; background:#fff; border:1px solid var(--line); }
+.ph-card.feature { background:var(--teal); border-color:var(--teal); color:#fff; }
+.ph-card.feature small { color:#bfe1dc; }
+.ph-card small { display:block; color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+.ph-card strong { display:block; margin:3px 0 10px; font-size:15px; }
+.ph-card .ph-join { display:inline-flex; height:30px; align-items:center; padding:0 12px; border-radius:999px; background:var(--honey); color:var(--ink); font-size:12px; font-weight:800; }
+.ph-row { display:flex; align-items:center; gap:10px; }
+.ph-row strong { margin:0 0 1px; font-size:14px; }
+.ph-row div span { display:block; }
+.ph-row span { color:var(--muted); font-size:12px; }
+.ph-ico { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; background:var(--teal-soft); color:var(--teal); flex:none; }
+.ph-ico.h { background:var(--honey-soft); color:var(--honey-d); }
+.ph-ico svg { width:18px; height:18px; }
+.ph-bar { height:6px; margin-top:10px; border-radius:6px; background:var(--line2); overflow:hidden; }
+.ph-bar i { display:block; width:70%; height:100%; background:var(--honey); }
+.float { position:absolute; display:flex; align-items:center; gap:12px; padding:12px 16px 12px 12px; border-radius:16px; background:#fff; box-shadow:var(--shadow); font-size:14px; }
+.float b { display:block; font-size:14px; }
+.float span { color:var(--muted); font-size:13px; }
+.float.f1 { left:0; top:120px; }
+.float.f2 { right:-6px; top:530px; }
+.float.f3 { left:-30px; top:440px; }
+
+/* Sections */
+.section { padding:96px 0; }
+.section.white { background:#fff; }
+.sec-head { display:flex; justify-content:space-between; align-items:end; gap:40px; margin-bottom:48px; }
+.sec-head h2 { margin-top:12px; font-size:44px; font-weight:800; max-width:640px; }
+.sec-head p { max-width:420px; color:var(--body); font-size:17px; }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.step { padding:32px; border-radius:var(--r-lg); background:var(--cream); border:1px solid var(--line); }
+.step-n { display:grid; place-items:center; width:44px; height:44px; margin-bottom:24px; border-radius:14px; background:var(--honey); font-weight:800; font-size:18px; }
+.step h3 { margin-bottom:10px; font-size:22px; }
+.step p { color:var(--body); }
+
+.services { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.svc { display:flex; flex-direction:column; gap:14px; padding:24px; border:1px solid var(--line); border-radius:var(--r-lg); background:#fff; text-align:left; transition:border-color .15s, box-shadow .15s, transform .15s; }
+.svc:hover { border-color:var(--teal-line); box-shadow:var(--shadow); transform:translateY(-2px); }
+.svc-ico { display:grid; place-items:center; width:52px; height:52px; border-radius:16px; background:var(--teal-soft); color:var(--teal); }
+.svc-ico.h { background:var(--honey-soft); color:var(--honey-d); }
+.svc-ico svg { width:24px; height:24px; }
+.svc h3 { font-size:19px; }
+.svc p { color:var(--body); font-size:15px; flex:1; }
+.svc .more { display:inline-flex; align-items:center; gap:6px; color:var(--teal); font-weight:700; font-size:14px; }
+.svc .tag { align-self:flex-start; padding:3px 10px; border-radius:999px; background:var(--line2); color:var(--body); font-size:12px; font-weight:700; }
+
+/* Plans */
+.plans-page { padding:64px 0 96px; }
+.plans-head { text-align:center; max-width:640px; margin:0 auto 36px; }
+.plans-head h1 { margin:12px 0 14px; font-size:52px; font-weight:800; letter-spacing:-.04em; }
+.plans-head p { color:var(--body); font-size:18px; }
+.toggle { display:inline-flex; gap:4px; padding:5px; margin:0 auto; border:1px solid var(--line); border-radius:999px; background:#fff; }
+.toggle button { display:inline-flex; align-items:center; gap:8px; height:42px; padding:0 20px; border:0; border-radius:999px; background:none; color:var(--body); font-weight:700; font-size:15px; }
+.toggle button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+.toggle .save { padding:2px 8px; border-radius:999px; background:var(--honey); color:var(--ink); font-size:12px; font-weight:800; }
+.toggle-row { display:flex; justify-content:center; margin-bottom:40px; }
+.plan-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch; }
+.plan { position:relative; display:flex; flex-direction:column; padding:32px; border:1.5px solid var(--line); border-radius:var(--r-lg); background:#fff; }
+.plan.pop { border-color:var(--teal); box-shadow:0 24px 50px rgba(15,107,103,.14); }
+.plan .badge { position:absolute; top:-14px; left:32px; height:28px; padding:0 12px; display:inline-flex; align-items:center; border-radius:999px; background:var(--teal); color:#fff; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.plan h3 { font-size:22px; }
+.plan .for { margin-top:6px; color:var(--body); font-size:15px; min-height:46px; }
+.price { display:flex; align-items:baseline; gap:4px; margin-top:22px; }
+.price b { font-size:52px; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.price span { color:var(--muted); font-weight:600; }
+.billed { min-height:22px; margin-top:8px; color:var(--muted); font-size:14px; }
+.billed em { font-style:normal; color:var(--teal); font-weight:700; }
+.plan .btn { margin:24px 0 26px; }
+.plan ul { display:grid; gap:12px; margin:0; padding:24px 0 0; border-top:1px solid var(--line); list-style:none; }
+.plan li { display:flex; align-items:center; gap:10px; font-size:15px; }
+.plan li svg { width:18px; height:18px; }
+.plan li.yes svg { color:var(--teal); }
+.plan li.no { color:#a6b0ad; }
+.plan li.no svg { color:#c8cfcd; }
+.plan-note { margin-top:28px; text-align:center; color:var(--muted); font-size:14px; }
+
+.compare { margin-top:72px; border:1px solid var(--line); border-radius:var(--r-lg); background:#fff; overflow:hidden; }
+.compare table { width:100%; border-collapse:collapse; }
+.compare th, .compare td { padding:16px 24px; border-bottom:1px solid var(--line2); text-align:center; font-size:15px; }
+.compare th:first-child, .compare td:first-child { text-align:left; }
+.compare thead th { background:var(--cream); font-size:14px; font-weight:800; }
+.compare thead th.pop { color:var(--teal); }
+.compare tbody tr:last-child td { border-bottom:0; }
+.compare td:first-child { display:flex; align-items:center; gap:12px; font-weight:600; }
+.compare td:first-child small { display:block; color:var(--muted); font-weight:500; font-size:13px; }
+.compare .svc-ico { width:36px; height:36px; border-radius:11px; }
+.compare .svc-ico svg { width:18px; height:18px; }
+.ck { color:var(--teal); } .dash { color:#c8cfcd; }
+
+/* Testimonials */
+.quotes { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.quote { display:flex; flex-direction:column; padding:28px; border-radius:var(--r-lg); background:var(--cream); border:1px solid var(--line); }
+.quote p { flex:1; font-size:17px; line-height:1.55; }
+.quote footer { display:flex; align-items:center; gap:12px; margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
+.quote footer b { display:block; font-size:15px; }
+.quote footer span { color:var(--muted); font-size:14px; }
+.quote .av { width:42px; height:42px; }
+.quote .av.t { background:var(--teal-soft); color:var(--teal); }
+
+/* FAQ */
+.faq { display:grid; grid-template-columns:1fr 1.4fr; gap:64px; }
+.faq h2 { margin-top:12px; font-size:44px; font-weight:800; }
+.faq-side p { margin-top:16px; color:var(--body); font-size:17px; }
+.faq-side .btn { margin-top:26px; }
+.faq-list details { border-bottom:1px solid var(--line); }
+.faq-list details:first-child { border-top:1px solid var(--line); }
+.faq-list summary { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:22px 0; font-size:18px; font-weight:700; cursor:pointer; list-style:none; }
+.faq-list summary::-webkit-details-marker { display:none; }
+.faq-list summary svg { transition:transform .2s; color:var(--muted); }
+.faq-list details[open] summary svg { transform:rotate(45deg); color:var(--teal); }
+.faq-list details p { padding:0 40px 22px 0; color:var(--body); }
+
+/* CTA band */
+.band { padding:0 0 96px; }
+.band-in { display:grid; grid-template-columns:1.3fr 1fr; align-items:center; gap:40px; padding:56px 64px; border-radius:32px; background:var(--ink); color:#fff; position:relative; overflow:hidden; }
+.band h2 { font-size:40px; font-weight:800; }
+.band p { margin-top:12px; color:#b8cbc8; font-size:17px; }
+.band-cta { position:relative; z-index:1; display:flex; justify-content:flex-end; gap:12px; }
+.band .btn.ghost { border-color:rgba(255,255,255,.3); color:#fff; }
+.band .btn.ghost:hover { border-color:#fff; }
+
+/* Footer */
+.ftr { padding:56px 0 40px; border-top:1px solid var(--line); background:#fff; }
+.ftr-top { display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:40px; }
+.ftr-top p { max-width:300px; margin-top:14px; color:var(--body); font-size:15px; }
+.ftr h4 { margin-bottom:14px; font-size:14px; color:var(--muted); font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+.ftr ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; }
+.ftr ul button { padding:0; border:0; background:none; color:var(--ink); font-weight:600; font-size:15px; }
+.ftr ul button:hover { color:var(--teal); text-decoration:underline; }
+.ftr-bottom { display:flex; justify-content:space-between; margin-top:48px; padding-top:24px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; }
+
+/* Checkout */
+.checkout { padding:40px 0 96px; }
+.stepper { display:flex; margin-top:0; justify-content:center; gap:8px; margin-bottom:40px; padding:0; list-style:none; }
+.stepper li { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:14px; font-weight:700; }
+.stepper li + li::before { content:""; width:40px; height:2px; margin-right:8px; background:var(--line); border-radius:2px; }
+.stepper li span { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--line2); font-size:13px; }
+.stepper li.done span { background:var(--teal); color:#fff; }
+.stepper li.now { color:var(--ink); }
+.stepper li.now span { background:var(--honey); color:var(--ink); }
+.co-grid { display:grid; grid-template-columns:1fr 400px; gap:32px; align-items:start; max-width:1040px; margin:0 auto; }
+.panel { padding:40px; border:1px solid var(--line); border-radius:var(--r-lg); background:#fff; }
+.panel h1 { font-size:34px; font-weight:800; }
+.panel .sub { margin:8px 0 28px; color:var(--body); }
+.field { display:grid; gap:7px; margin-bottom:18px; }
+.field label { font-size:14px; font-weight:700; }
+.field input, .field select { width:100%; height:50px; padding:0 16px; border:1.5px solid var(--line); border-radius:12px; background:#fff; font-size:16px; transition:border-color .15s; }
+.field input:hover, .field select:hover { border-color:#d8cfbb; }
+.field input:focus, .field select:focus { outline:0; border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-soft); }
+.field.err input { border-color:var(--red); }
+.field .msg { display:none; color:var(--red); font-size:13px; font-weight:600; }
+.field.err .msg { display:block; }
+.field .hint { color:var(--muted); font-size:13px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.check { display:flex; align-items:flex-start; gap:12px; margin:6px 0 24px; color:var(--body); font-size:15px; }
+.check input { width:20px; height:20px; margin:2px 0 0; accent-color:var(--teal); flex:none; }
+.check.err { color:var(--red); }
+.panel-foot { margin-top:20px; text-align:center; color:var(--body); font-size:15px; }
+.card-input { position:relative; }
+.card-input input { padding-right:96px; }
+.card-brands { position:absolute; right:12px; top:50%; display:flex; gap:6px; transform:translateY(-50%); }
+.card-brands i { width:34px; height:22px; border-radius:5px; background:var(--line2); border:1px solid var(--line); }
+.secure { display:flex; align-items:center; gap:8px; margin-top:16px; justify-content:center; color:var(--muted); font-size:13px; }
+.secure svg { width:16px; height:16px; }
+
+.summary { position:sticky; top:100px; padding:28px; border-radius:var(--r-lg); background:var(--ink); color:#fff; }
+.summary small { color:#9fb7b3; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.sum-plan { display:flex; justify-content:space-between; align-items:start; margin:10px 0 18px; }
+.sum-plan h3 { font-size:26px; }
+.sum-plan .link { color:var(--honey); font-size:14px; }
+.sum-bill { display:flex; gap:4px; padding:4px; margin-bottom:20px; border-radius:999px; background:rgba(255,255,255,.08); }
+.sum-bill button { flex:1; height:36px; border:0; border-radius:999px; background:none; color:#c9d8d5; font-weight:700; font-size:14px; }
+.sum-bill button[aria-pressed="true"] { background:#fff; color:var(--ink); }
+.sum-list { display:grid; gap:10px; margin:0 0 20px; padding:0 0 20px; list-style:none; border-bottom:1px solid rgba(255,255,255,.12); }
+.sum-list li { display:flex; align-items:center; gap:10px; font-size:15px; color:#dfe9e7; }
+.sum-list svg { width:18px; height:18px; color:var(--honey); }
+.sum-line { display:flex; justify-content:space-between; color:#c9d8d5; font-size:15px; margin-bottom:8px; }
+.sum-line.total { margin:14px 0 0; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); color:#fff; font-size:18px; font-weight:800; }
+.sum-note { margin-top:16px; color:#9fb7b3; font-size:13px; }
+
+/* Confirmation */
+.done-page { padding:56px 0 96px; }
+.done-card { max-width:760px; margin:0 auto; padding:56px; border:1px solid var(--line); border-radius:32px; background:#fff; text-align:center; }
+.done-ico { display:grid; place-items:center; width:84px; height:84px; margin:0 auto 26px; background:var(--honey); clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.done-ico svg { width:34px; height:34px; stroke-width:2.4; }
+.done-card h1 { font-size:44px; font-weight:800; letter-spacing:-.035em; }
+.done-card > p { max-width:520px; margin:14px auto 0; color:var(--body); font-size:18px; }
+.receipt { display:grid; grid-template-columns:repeat(3,1fr); margin:36px 0; border:1px solid var(--line); border-radius:var(--r); text-align:left; }
+.receipt div { padding:18px 22px; }
+.receipt div + div { border-left:1px solid var(--line); }
+.receipt small { display:block; color:var(--muted); font-size:13px; font-weight:700; }
+.receipt b { font-size:17px; }
+.done-cta { display:flex; justify-content:center; gap:12px; }
+
+/* Account */
+.acct { padding:48px 0 96px; }
+.acct-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:32px; }
+.acct-head h1 { margin-top:8px; font-size:46px; font-weight:800; letter-spacing:-.035em; }
+.acct-head p { margin-top:8px; color:var(--body); font-size:17px; }
+.notice { display:flex; align-items:center; gap:14px; padding:16px 20px; margin-bottom:28px; border-radius:var(--r); background:var(--honey-soft); border:1px solid var(--honey-line); font-size:15px; }
+.notice svg { color:var(--honey-d); }
+.notice b { font-weight:800; }
+.notice.end { background:var(--red-soft); border-color:#f6d0cb; }
+.notice.end svg { color:var(--red); }
+.notice .link { margin-left:auto; }
+.acct-grid { display:grid; grid-template-columns:1fr 380px; gap:28px; align-items:start; }
+.box { padding:28px; border:1px solid var(--line); border-radius:var(--r-lg); background:#fff; }
+.box-h { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.box-h h2 { font-size:22px; }
+.box-h span { color:var(--muted); font-size:14px; font-weight:600; }
+.progress { height:8px; margin:14px 0 22px; border-radius:8px; background:var(--line2); overflow:hidden; }
+.progress i { display:block; height:100%; border-radius:8px; background:var(--honey); transition:width .3s; }
+.svc-rows { display:grid; gap:0; }
+.svc-row { display:flex; align-items:center; gap:16px; padding:16px 0; border-top:1px solid var(--line2); }
+.svc-row .svc-ico { width:46px; height:46px; border-radius:14px; }
+.svc-row .svc-ico svg { width:22px; height:22px; }
+.svc-row div b { display:block; font-size:16px; }
+.svc-row div span { color:var(--muted); font-size:14px; }
+.svc-row .btn { margin-left:auto; }
+.svc-row .on { display:inline-flex; align-items:center; gap:6px; margin-left:auto; height:40px; padding:0 14px; border-radius:999px; background:var(--teal-soft); color:var(--teal); font-size:14px; font-weight:700; border:0; }
+.svc-row.locked { opacity:.6; }
+.svc-row .lock { margin-left:auto; color:var(--muted); font-size:14px; font-weight:600; }
+.side-stack { display:grid; gap:20px; }
+.plan-card { padding:26px; border-radius:var(--r-lg); background:var(--ink); color:#fff; }
+.plan-card small { color:#9fb7b3; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.plan-card h3 { margin:8px 0 4px; font-size:28px; }
+.plan-card p { color:#c9d8d5; font-size:15px; }
+.plan-card dl { display:grid; gap:10px; margin:20px 0; padding:18px 0; border-block:1px solid rgba(255,255,255,.12); }
+.plan-card dl div { display:flex; justify-content:space-between; font-size:15px; }
+.plan-card dt { color:#9fb7b3; } .plan-card dd { margin:0; font-weight:700; }
+.plan-card .btn { width:100%; }
+.plan-card .link { display:block; margin:14px auto 0; color:#c9d8d5; font-size:14px; }
+.upnext { display:flex; gap:14px; align-items:center; }
+.upnext .date { display:grid; place-items:center; width:56px; height:60px; border-radius:14px; background:var(--honey-soft); color:var(--honey-d); flex:none; line-height:1.1; }
+.upnext .date b { font-size:20px; color:var(--ink); }
+.upnext .date small { font-size:12px; font-weight:800; text-transform:uppercase; }
+.upnext p { color:var(--muted); font-size:14px; }
+.upnext strong { font-size:16px; }
+.box .btn.ghost { margin-top:18px; width:100%; }
+
+/* Cancel */
+.cancel { padding:56px 0 96px; }
+.cancel-card { max-width:720px; margin:0 auto; padding:48px; border:1px solid var(--line); border-radius:32px; background:#fff; }
+.cancel-card h1 { font-size:40px; font-weight:800; letter-spacing:-.035em; }
+.cancel-card > p { margin:10px 0 28px; color:var(--body); font-size:17px; }
+.reasons { display:grid; gap:10px; margin-bottom:28px; }
+.reason { display:flex; align-items:center; gap:14px; padding:16px 18px; border:1.5px solid var(--line); border-radius:14px; cursor:pointer; font-weight:600; }
+.reason:hover { border-color:#d8cfbb; }
+.reason input { width:20px; height:20px; margin:0; accent-color:var(--teal); }
+.reason:has(input:checked) { border-color:var(--teal); background:var(--teal-soft); }
+.cancel-actions { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.offer { text-align:center; }
+.offer-tag { display:inline-grid; place-items:center; width:132px; height:150px; margin:0 auto 24px; background:var(--honey); clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.offer-tag b { display:block; font-size:42px; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.offer-tag span { font-size:14px; font-weight:800; }
+.offer h1 { margin-bottom:12px; }
+.offer > p { max-width:520px; margin:0 auto 28px; color:var(--body); font-size:17px; }
+.offer .keep-list { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin:0 auto 32px; text-align:left; }
+.offer .keep-list div { display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; background:var(--cream); font-size:15px; font-weight:600; }
+.offer .keep-list svg { color:var(--teal); width:18px; height:18px; }
+.offer-cta { display:flex; flex-direction:column; align-items:center; gap:14px; }
+.offer-cta .link { color:var(--body); font-weight:600; }
+
+/* Login */
+.auth { padding:64px 0 96px; }
+.auth .panel { max-width:480px; margin:0 auto; }
+.auth .panel h1 { text-align:center; }
+.auth .panel .sub { text-align:center; }
+.auth .mark { width:44px; height:50px; margin:0 auto 18px; }
+
+/* Modal + toast */
+.scrim { position:fixed; inset:0; z-index:60; display:grid; place-items:center; padding:24px; background:rgba(21,48,45,.45); }
+.modal { position:relative; width:min(560px,100%); max-height:calc(100vh - 48px); overflow:auto; padding:36px; border-radius:28px; background:#fff; box-shadow:0 40px 80px rgba(0,0,0,.2); }
+.modal .x { position:absolute; right:18px; top:18px; display:grid; place-items:center; width:40px; height:40px; border:0; border-radius:50%; background:var(--line2); }
+.modal .x:hover { background:var(--line); }
+.modal .svc-ico { width:60px; height:60px; border-radius:18px; margin-bottom:18px; }
+.modal h2 { font-size:30px; font-weight:800; }
+.modal .m-sub { margin:8px 0 22px; color:var(--body); font-size:17px; }
+.modal ul { display:grid; gap:10px; margin:0 0 24px; padding:0; list-style:none; }
+.modal li { display:flex; gap:10px; align-items:center; }
+.modal li svg { color:var(--teal); width:18px; height:18px; }
+.modal .in-plans { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:26px; padding:16px; border-radius:14px; background:var(--cream); font-size:14px; font-weight:600; color:var(--body); }
+.modal .in-plans b { padding:4px 10px; border-radius:999px; background:#fff; border:1px solid var(--line); color:var(--ink); }
+.modal .m-cta { display:flex; gap:10px; }
+.toast { position:fixed; left:50%; bottom:28px; z-index:70; display:flex; align-items:center; gap:10px; padding:14px 20px; border-radius:14px; background:var(--ink); color:#fff; font-weight:600; font-size:15px; box-shadow:0 20px 40px rgba(0,0,0,.2); transform:translate(-50%, 20px); opacity:0; transition:opacity .2s, transform .2s; pointer-events:none; }
+.toast.show { opacity:1; transform:translate(-50%,0); }
+.toast svg { color:var(--honey); }
+.spin { width:18px; height:18px; border:2.5px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Responsive */
+@media (max-width:1100px) {
+  .hero .wrap { grid-template-columns:1fr; }
+  .hero-art { max-width:560px; width:100%; margin:0 auto; }
+  .services { grid-template-columns:repeat(2,1fr); }
+  .co-grid, .acct-grid { grid-template-columns:1fr; }
+  .summary { position:static; }
+}
+@media (max-width:860px) {
+  .wrap { width:calc(100% - 32px); }
+  .nav, .hdr-end .hide-m { display:none; }
+  .menu-btn { display:grid; place-items:center; }
+  .mobile-nav { position:absolute; left:0; right:0; top:76px; display:grid; gap:4px; padding:12px 16px 20px; background:var(--cream); border-bottom:1px solid var(--line); }
+  .mobile-nav[hidden] { display:none !important; }
+  .mobile-nav button { height:48px; padding:0 12px; border:0; border-radius:12px; background:none; text-align:left; font-weight:700; font-size:17px; }
+  .mobile-nav .btn { margin-top:8px; text-align:center; }
+  .hero { padding:32px 0 56px; }
+  .hero h1 { font-size:44px; }
+  .hero .lead { font-size:17px; }
+  .hero-cta { flex-direction:column; }
+  .trust { flex-direction:column; align-items:flex-start; gap:10px; }
+  .phone { width:270px; transform:translateX(-50%); }
+  .section { padding:64px 0; }
+  .sec-head { flex-direction:column; align-items:flex-start; gap:14px; margin-bottom:32px; }
+  .sec-head h2, .faq h2 { font-size:34px; }
+  .steps, .services, .quotes, .plan-grid { grid-template-columns:1fr; }
+  .faq { grid-template-columns:1fr; gap:24px; }
+  .band-in { grid-template-columns:1fr; padding:40px 28px; }
+  .band-cta { justify-content:flex-start; flex-direction:column; }
+  .band h2 { font-size:32px; }
+  .ftr-top { grid-template-columns:1fr 1fr; }
+  .ftr-top > div:first-child { grid-column:1 / -1; }
+  .ftr-bottom { flex-direction:column; gap:8px; }
+  .plans-head h1 { font-size:38px; }
+  .compare { overflow-x:auto; }
+  .compare table { min-width:640px; }
+  .panel, .done-card, .cancel-card { padding:28px 22px; }
+  .row2 { grid-template-columns:1fr; gap:0; }
+  .stepper li b { display:none; }
+  .stepper li + li::before { width:24px; }
+  .receipt { grid-template-columns:1fr; }
+  .receipt div + div { border-left:0; border-top:1px solid var(--line); }
+  .done-cta, .cancel-actions { flex-direction:column-reverse; align-items:stretch; }
+  .done-card h1, .acct-head h1 { font-size:34px; }
+  .acct-head { flex-direction:column; align-items:flex-start; }
+  .offer .keep-list { grid-template-columns:1fr; }
+  .notice { flex-wrap:wrap; }
+  .notice .link { margin-left:34px; }
+  .svc-row { display:grid; grid-template-columns:46px 1fr; column-gap:14px; row-gap:10px; }
+  .svc-row > .btn, .svc-row > .on, .svc-row > .lock { grid-column:2; justify-self:start; margin-left:0; }
+  .mobile-nav .btn { justify-content:center; background:var(--teal); color:#fff; }
+  .float { display:none; }
+  .hero-art { height:560px; }
+  .hero-art .blob { inset:40px 0 0; }
+  .phone { top:0; height:540px; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M12 9v11M4 13h16M12 9c-2-4-6-4-6-1.5S9 9 12 9zm0 0c2-4 6-4 6-1.5S15 9 12 9z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+    <!-- services -->
+    <symbol id="s-care" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M12 8v6M9 11h6"/></symbol>
+    <symbol id="s-mind" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></symbol>
+    <symbol id="s-still" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="s-move" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3 9.5v5M21 9.5v5M6.5 12h11"/></symbol>
+    <symbol id="s-align" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="1.8"/><path d="M12 7v6M8 21l4-8 4 8M7 10h10"/></symbol>
+    <symbol id="s-nourish" viewBox="0 0 24 24"><path d="M12 21c-4.5 0-7-3.5-7-7.5S8 6 12 8c4-2 7 1.5 7 5.5S16.5 21 12 21z"/><path d="M12 8c0-2 1-4 3-5"/></symbol>
+    <symbol id="s-glow" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></symbol>
+    <symbol id="s-cover" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  </defs>
+</svg>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <button class="logo" data-go="home" aria-label="Honeybee Health home">
+      <span class="mark"><svg viewBox="0 0 32 36"><path d="M16 1l14 8v18l-14 8-14-8V9z" fill="#f6b52e"/><path d="M9 15h14M9 20h14" stroke="#15302d" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+      Honeybee <small>Health</small>
+    </button>
+    <nav class="nav" aria-label="Main" data-public>
+      <button data-go="home" data-anchor="services">Services</button>
+      <button data-go="plans">Plans</button>
+      <button data-go="home" data-anchor="how">How it works</button>
+      <button data-go="home" data-anchor="faq">FAQ</button>
+    </nav>
+    <div class="hdr-end">
+      <span data-guest class="hide-m guest-grp">
+        <button class="btn ghost sm" data-go="login">Log in</button>
+        <button class="btn sm" data-go="plans">Get a plan</button>
+      </span>
+      <button class="user-chip hide-m" data-member hidden data-go="account"><span class="av" data-initials>SB</span><span data-firstname>Sofia</span></button>
+      <button class="menu-btn" aria-label="Menu" aria-expanded="false" id="menuBtn"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <button data-go="home" data-anchor="services">Services</button>
+    <button data-go="plans">Plans</button>
+    <button data-go="home" data-anchor="how">How it works</button>
+    <button data-go="home" data-anchor="faq">FAQ</button>
+    <button data-guest data-go="login">Log in</button>
+    <button data-member hidden data-go="account">My membership</button>
+    <button class="btn" data-guest data-go="plans">Get a plan</button>
+  </div>
+</header>
+
+<main id="app">
+
+<!-- HOME -->
+<section data-route="home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="pill"><b>New</b> One membership, eight wellness services</span>
+        <h1>Wellness that fits<br>into <em>your week.</em></h1>
+        <p class="lead">Doctor visits, therapy, meditation, gyms and more, all in one monthly plan. Book what you need from one app and stop paying for five subscriptions.</p>
+        <div class="hero-cta">
+          <button class="btn" data-go="plans">See plans <svg class="i"><use href="#i-arrow"/></svg></button>
+          <button class="btn ghost" data-go="home" data-anchor="how">How it works</button>
+        </div>
+        <div class="trust">
+          <div><span class="stars">★★★★★</span> <b>4.8</b> from 2,300 members</div>
+          <div><svg class="i"><use href="#i-shield"/></svg> Cancel anytime</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blob"></div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ph-top"><b>Today</b><span class="ph-streak">5-day streak</span></div>
+            <div class="ph-card feature">
+              <small>Up next · 3:00 PM</small>
+              <strong>Therapy with Dr. Lena Ortiz</strong>
+              <span class="ph-join">Join video call</span>
+            </div>
+            <div class="ph-card">
+              <div class="ph-row"><span class="ph-ico h"><svg class="i"><use href="#s-still"/></svg></span><div><strong>Evening wind-down</strong><span>10 min · Stillness</span></div></div>
+            </div>
+            <div class="ph-card">
+              <div class="ph-row"><span class="ph-ico"><svg class="i"><use href="#s-move"/></svg></span><div><strong>Yoga flow</strong><span>6:30 PM · Studio near you</span></div></div>
+            </div>
+            <div class="ph-card">
+              <small>Weekly goal</small>
+              <strong style="margin-bottom:0">3 of 4 sessions</strong>
+              <div class="ph-bar"><i></i></div>
+            </div>
+            <div class="ph-card">
+              <div class="ph-row"><span class="ph-ico"><svg class="i"><use href="#s-care"/></svg></span><div><strong>Talk to a doctor</strong><span>Average wait 8 min</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="float f1"><span class="ph-ico"><svg class="i"><use href="#s-care"/></svg></span><div><b>Doctor visit</b><span>$0 copay, 24/7</span></div></div>
+        <div class="float f2"><span class="ph-ico h"><svg class="i"><use href="#s-mind"/></svg></span><div><b>Therapy session</b><span>Booked for Thursday</span></div></div>
+        <div class="float f3"><span class="ph-ico"><svg class="i"><use href="#s-move"/></svg></span><div><b>1,200+ gyms</b><span>One pass, any studio</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section white" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow">What’s inside</span><h2>Eight services, one membership.</h2></div>
+        <p>Every plan includes virtual care. Pick a bigger plan to add therapy, fitness and more. Tap a service to see what it covers.</p>
+      </div>
+      <div class="services" id="svcGrid"></div>
+    </div>
+  </div>
+
+  <div class="section" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow">How it works</span><h2>Set up in five minutes.</h2></div>
+        <p>No paperwork and no separate sign-ups. Your membership unlocks each service with one account.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="step-n">1</span><h3>Choose a plan</h3><p>Start with the essentials or get everything. Switch or cancel any time from your account.</p></div>
+        <div class="step"><span class="step-n">2</span><h3>Activate your services</h3><p>Turn on the services you want with one tap. We connect your account, no extra passwords.</p></div>
+        <div class="step"><span class="step-n">3</span><h3>Book from one app</h3><p>See a doctor, join a class or start a meditation. Everything lives in the Honeybee app.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section white">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow">Members</span><h2>People use it every week.</h2></div>
+        <p>Rated 4.8 out of 5 by more than 2,300 members.</p>
+      </div>
+      <div class="quotes">
+        <figure class="quote" style="margin:0"><p>“I used to pay for therapy, a gym and a meditation app separately. Now it’s one bill and I actually use all three.”</p><footer><span class="av">BS</span><div><b>Brooklyn S.</b><span>Elite member · 1 year</span></div></footer></figure>
+        <figure class="quote" style="margin:0"><p>“I talked to a doctor at 11 PM about my son’s fever. Eight minutes, no copay, and a follow-up message the next morning.”</p><footer><span class="av t">MR</span><div><b>Marcus R.</b><span>Enhanced member · 8 months</span></div></footer></figure>
+        <figure class="quote" style="margin:0"><p>“The studio pass got me back into yoga. I book a class on my lunch break straight from the app.”</p><footer><span class="av">AK</span><div><b>Aisha K.</b><span>Enhanced member · 5 months</span></div></footer></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="faq">
+    <div class="wrap faq">
+      <div class="faq-side">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions, answered.</h2>
+        <p>Still not sure which plan is right? Compare every service side by side.</p>
+        <button class="btn ghost" data-go="plans">Compare plans</button>
+      </div>
+      <div class="faq-list">
+        <details open><summary>Can I cancel anytime? <svg class="i"><use href="#i-plus"/></svg></summary><p>Yes. Cancel from your account in a few clicks. Your services stay active until the end of the billing period you paid for.</p></details>
+        <details><summary>Do I need insurance? <svg class="i"><use href="#i-plus"/></svg></summary><p>No. Doctor visits and therapy sessions are included in your plan with no copay, whether or not you have insurance.</p></details>
+        <details><summary>Can I change my plan later? <svg class="i"><use href="#i-plus"/></svg></summary><p>You can upgrade right away or downgrade at your next billing date. We only charge the difference.</p></details>
+        <details><summary>Is there a family option? <svg class="i"><use href="#i-plus"/></svg></summary><p>Virtual care covers up to five family members on every plan. Other services are for the account holder.</p></details>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="band-in">
+        <div><h2>Your first week is on us.</h2><p>Try any plan free for 7 days. We remind you two days before your first charge.</p></div>
+        <div class="band-cta"><button class="btn honey" data-go="plans">Start free trial</button><button class="btn ghost" data-go="home" data-anchor="services">Explore services</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section data-route="plans" hidden>
+  <div class="plans-page">
+    <div class="wrap">
+      <div class="plans-head">
+        <span class="eyebrow">Plans</span>
+        <h1>Pick the plan that fits.</h1>
+        <p>Every plan includes 24/7 virtual care. Switch or cancel any time.</p>
+      </div>
+      <div class="toggle-row"><div class="toggle" role="group" aria-label="Billing">
+        <button aria-pressed="true" data-bill="monthly">Monthly</button>
+        <button aria-pressed="false" data-bill="yearly">Yearly <span class="save">2 months free</span></button>
+      </div></div>
+      <div class="plan-grid" id="planGrid"></div>
+      <p class="plan-note">7-day free trial on every plan · Prices in USD · Taxes calculated at checkout</p>
+      <div class="compare" id="compare"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGN UP -->
+<section data-route="signup" hidden>
+  <div class="checkout"><div class="wrap">
+    <ol class="stepper" data-stepper="2"></ol>
+    <div class="co-grid">
+      <form class="panel" id="signupForm" novalidate>
+        <h1>Create your account</h1>
+        <p class="sub">You’ll use this to log in to the website and the Honeybee app.</p>
+        <div class="row2">
+          <div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name" value="Sofia" /><span class="msg">Enter your first name</span></div>
+          <div class="field"><label for="ln">Last name</label><input id="ln" autocomplete="family-name" value="Bennett" /><span class="msg">Enter your last name</span></div>
+        </div>
+        <div class="field"><label for="em">Email</label><input id="em" type="email" autocomplete="email" value="sofia.bennett@mail.com" /><span class="msg">Enter a valid email address</span></div>
+        <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="new-password" value="honeybee2024" /><span class="hint">At least 8 characters</span><span class="msg">Use at least 8 characters</span></div>
+        <label class="check" id="termsWrap"><input type="checkbox" id="terms" checked /> <span>I agree to the <button type="button" class="link" data-modal="terms">terms</button> and <button type="button" class="link" data-modal="privacy">privacy policy</button>.</span></label>
+        <button class="btn block" type="submit">Continue to payment <svg class="i"><use href="#i-arrow"/></svg></button>
+        <p class="panel-foot">Already a member? <button type="button" class="link" data-go="login">Log in</button></p>
+      </form>
+      <aside class="summary" data-summary></aside>
+    </div>
+  </div></div>
+</section>
+
+<!-- PAYMENT -->
+<section data-route="payment" hidden>
+  <div class="checkout"><div class="wrap">
+    <ol class="stepper" data-stepper="3"></ol>
+    <div class="co-grid">
+      <form class="panel" id="payForm" novalidate>
+        <h1>Payment details</h1>
+        <p class="sub">You won’t be charged today. Your 7-day free trial starts now.</p>
+        <div class="field"><label for="cn">Name on card</label><input id="cn" autocomplete="cc-name" /><span class="msg">Enter the name on your card</span></div>
+        <div class="field"><label for="cc">Card number</label><div class="card-input"><input id="cc" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="19" /><span class="card-brands" aria-hidden="true"><i></i><i></i></span></div><span class="msg">Enter a 16-digit card number</span></div>
+        <div class="row2">
+          <div class="field"><label for="exp">Expiry</label><input id="exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7" /><span class="msg">Enter a valid date</span></div>
+          <div class="field"><label for="cvc">Security code</label><input id="cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" maxlength="4" /><span class="msg">Enter 3 or 4 digits</span></div>
+        </div>
+        <div class="field"><label for="country">Country</label><select id="country"><option>United States</option><option>Canada</option><option>United Kingdom</option></select></div>
+        <p style="margin:-4px 0 22px;font-size:14px;color:var(--body)">Testing? <button type="button" class="link" id="fillCard">Use a test card</button></p>
+        <button class="btn block" type="submit" id="payBtn">Start free trial</button>
+        <p class="secure"><svg class="i"><use href="#i-lock"/></svg> Payments are encrypted and processed securely</p>
+        <p class="panel-foot"><button type="button" class="link" data-go="signup">← Back to account details</button></p>
+      </form>
+      <aside class="summary" data-summary></aside>
+    </div>
+  </div></div>
+</section>
+
+<!-- THANKS -->
+<section data-route="thanks" hidden>
+  <div class="done-page"><div class="wrap">
+    <ol class="stepper" data-stepper="4"></ol>
+    <div class="done-card">
+      <div class="done-ico"><svg class="i"><use href="#i-check"/></svg></div>
+      <h1>Welcome to the hive, <span data-firstname>Sofia</span>!</h1>
+      <p>Your <b data-planname>Enhanced</b> membership is active. We sent the receipt and your app download link to <b data-email>sofia.bennett@mail.com</b>.</p>
+      <div class="receipt">
+        <div><small>Plan</small><b data-planline>Enhanced · Monthly</b></div>
+        <div><small>Free trial ends</small><b>Nov 25, 2026</b></div>
+        <div><small>Then</small><b data-thenprice>$49 / month</b></div>
+      </div>
+      <div class="done-cta"><button class="btn ghost" data-go="home">Back to home</button><button class="btn" data-go="account">Set up my services <svg class="i"><use href="#i-arrow"/></svg></button></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- LOGIN -->
+<section data-route="login" hidden>
+  <div class="auth"><div class="wrap">
+    <form class="panel" id="loginForm" novalidate>
+      <span class="mark"><svg viewBox="0 0 32 36"><path d="M16 1l14 8v18l-14 8-14-8V9z" fill="#f6b52e"/><path d="M9 15h14M9 20h14" stroke="#15302d" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+      <h1>Welcome back</h1>
+      <p class="sub">Log in to manage your membership.</p>
+      <div class="field"><label for="lem">Email</label><input id="lem" type="email" value="sofia.bennett@mail.com" /><span class="msg">Enter a valid email address</span></div>
+      <div class="field"><label for="lpw">Password</label><input id="lpw" type="password" value="honeybee2024" /><span class="msg">Enter your password</span></div>
+      <p style="margin:-6px 0 22px;text-align:right"><button type="button" class="link" id="forgot" style="font-size:14px">Forgot password?</button></p>
+      <button class="btn block" type="submit">Log in</button>
+      <p class="panel-foot">New to Honeybee? <button type="button" class="link" data-go="plans">See plans</button></p>
+    </form>
+  </div></div>
+</section>
+
+<!-- ACCOUNT -->
+<section data-route="account" hidden>
+  <div class="acct"><div class="wrap">
+    <div class="acct-head">
+      <div><span class="eyebrow">My membership</span><h1>Hi <span data-firstname>Sofia</span>, let’s get you set up.</h1><p>Activate the services in your plan. It takes one tap each.</p></div>
+      <button class="btn ghost" id="logout">Log out</button>
+    </div>
+    <div id="acctNotice"></div>
+    <div class="acct-grid">
+      <div class="box">
+        <div class="box-h"><h2>Your services</h2><span id="actCount">0 of 4 active</span></div>
+        <div class="progress"><i id="actBar" style="width:0"></i></div>
+        <div class="svc-rows" id="svcRows"></div>
+      </div>
+      <div class="side-stack">
+        <div class="plan-card" id="planCard"></div>
+        <div class="box">
+          <div class="box-h" style="margin-bottom:16px"><h2>Up next</h2></div>
+          <div class="upnext" id="upnext"></div>
+          <button class="btn ghost" id="bookBtn">Book a doctor visit</button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- CANCEL: reason -->
+<section data-route="cancel" hidden>
+  <div class="cancel"><div class="wrap">
+    <form class="cancel-card" id="reasonForm">
+      <button type="button" class="link" data-go="account" style="margin-bottom:22px;display:inline-flex;gap:6px;align-items:center;text-decoration:none"><svg class="i" style="width:18px;height:18px"><use href="#i-back"/></svg> Back to my membership</button>
+      <h1>Why are you leaving?</h1>
+      <p>Your answer helps us improve. It won’t change anything on your account.</p>
+      <div class="reasons">
+        <label class="reason"><input type="radio" name="reason" value="price" /> It’s too expensive for me right now</label>
+        <label class="reason"><input type="radio" name="reason" value="use" /> I’m not using it enough</label>
+        <label class="reason"><input type="radio" name="reason" value="service" /> A service I need is missing</label>
+        <label class="reason"><input type="radio" name="reason" value="other" /> Something else</label>
+      </div>
+      <div class="cancel-actions"><button type="button" class="btn ghost" data-go="account">Keep my membership</button><button class="btn" type="submit" id="reasonNext" disabled>Continue</button></div>
+    </form>
+  </div></div>
+</section>
+
+<!-- CANCEL: offer -->
+<section data-route="offer" hidden>
+  <div class="cancel"><div class="wrap">
+    <div class="cancel-card offer">
+      <div class="offer-tag"><div><b>50%</b><span>OFF</span></div></div>
+      <h1>Leaving so soon?</h1>
+      <p>Stay one more month at half price: <b data-halfprice>$24.50</b> instead of <b data-fullprice>$49</b>. Here’s what you keep:</p>
+      <div class="keep-list" id="keepList"></div>
+      <div class="offer-cta">
+        <button class="btn honey" id="takeOffer">Keep my plan at 50% off</button>
+        <button class="link" id="cancelAnyway">No thanks, cancel my membership</button>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-top">
+      <div>
+        <button class="logo" data-go="home" aria-label="Honeybee Health home"><span class="mark"><svg viewBox="0 0 32 36"><path d="M16 1l14 8v18l-14 8-14-8V9z" fill="#f6b52e"/><path d="M9 15h14M9 20h14" stroke="#15302d" stroke-width="2.6" stroke-linecap="round"/></svg></span>Honeybee <small>Health</small></button>
+        <p>Virtual care, therapy, fitness and more in one monthly membership.</p>
+      </div>
+      <div><h4>Membership</h4><ul><li><button data-go="plans">Plans &amp; pricing</button></li><li><button data-go="home" data-anchor="services">Services</button></li><li><button data-go="home" data-anchor="how">How it works</button></li></ul></div>
+      <div><h4>Account</h4><ul><li><button data-go="login">Log in</button></li><li><button data-go="account">My membership</button></li><li><button data-go="home" data-anchor="faq">Help &amp; FAQ</button></li></ul></div>
+      <div><h4>Legal</h4><ul><li><button data-modal="terms">Terms</button></li><li><button data-modal="privacy">Privacy</button></li></ul></div>
+    </div>
+    <div class="ftr-bottom"><span>© 2026 Honeybee Health</span><span>Not a substitute for emergency care. In an emergency, call 911.</span></div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden><div class="modal" role="dialog" aria-modal="true" id="modal"></div></div>
+<div class="toast" id="toast" role="status"><svg class="i"><use href="#i-check"/></svg><span></span></div>
+
+<script>
+const SVC = [
+  { id:'care', name:'Care 24/7', short:'Virtual doctor visits, day or night, with no copay.', icon:'s-care', tag:'All plans', points:['Video or chat with a licensed doctor in minutes','Prescriptions sent to your pharmacy','Covers up to 5 family members'], min:0 },
+  { id:'still', name:'Stillness', short:'Guided meditation, sleep stories and breathing.', icon:'s-still', h:1, tag:'All plans', points:['500+ guided sessions, 3 to 30 minutes','Sleep stories and soundscapes','Daily reminders you control'], min:0 },
+  { id:'mind', name:'Mind', short:'Video therapy with licensed therapists.', icon:'s-mind', h:1, tag:'Enhanced', points:['2 therapy sessions a month','Match with a therapist in 48 hours','Message your therapist between sessions'], min:1 },
+  { id:'cover', name:'Cover', short:'Term life insurance up to $50,000.', icon:'s-cover', tag:'Enhanced', points:['Coverage starts the day you join','No medical exam','Name up to 3 beneficiaries'], min:1 },
+  { id:'move', name:'Move', short:'One pass for 1,200+ gyms and studios.', icon:'s-move', tag:'Elite', points:['Gyms, yoga, pilates and climbing','Book classes from the app','Use it in any city'], min:2 },
+  { id:'align', name:'Align', short:'Chiropractic care and acupuncture.', icon:'s-align', h:1, tag:'Elite', points:['2 in-person visits a month','Clinics in 40 cities','Book same-week appointments'], min:2 },
+  { id:'nourish', name:'Nourish', short:'1:1 nutrition coaching and meal plans.', icon:'s-nourish', h:1, tag:'Elite', points:['Monthly video call with a dietitian','Weekly meal plans','Grocery lists in the app'], min:2 },
+  { id:'glow', name:'Glow', short:'Online dermatology and skin care plans.', icon:'s-glow', tag:'Elite', points:['Photo-based skin consultations','Personalized routine','Prescription treatments if needed'], min:2 },
+];
+const PLANS = [
+  { id:'foundation', name:'Foundation', for:'The essentials: a doctor any time and daily calm.', m:29, y:290 },
+  { id:'enhanced', name:'Enhanced', for:'Add therapy and life insurance for full peace of mind.', m:49, y:490, pop:1 },
+  { id:'elite', name:'Elite', for:'Everything Honeybee offers, including fitness and nutrition.', m:99, y:990 },
+];
+const S = { plan:1, bill:'monthly', member:false, first:'Sofia', last:'Bennett', email:'sofia.bennett@mail.com', active:{}, offer:false, cancelled:false, booked:false };
+const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const ic = (id, cls='i') => `<svg class="${cls}"><use href="#${id}"/></svg>`;
+const money = n => '$' + (Number.isInteger(n) ? n : n.toFixed(2));
+const included = p => SVC.filter(s => s.min <= p);
+const perMonth = p => S.bill === 'monthly' ? PLANS[p].m : Math.round(PLANS[p].y / 12);
+
+function renderServices() {
+  $('#svcGrid').innerHTML = SVC.map(s => `<button class="svc" data-svc="${s.id}"><span class="svc-ico ${s.h?'h':''}">${ic(s.icon)}</span><h3>${s.name}</h3><p>${s.short}</p><span class="tag">${s.tag === 'All plans' ? 'In every plan' : 'From ' + s.tag}</span><span class="more">Learn more ${ic('i-arrow')}</span></button>`).join('');
+}
+function renderPlans() {
+  $$('[data-bill]').forEach(b => b.setAttribute('aria-pressed', b.dataset.bill === S.bill));
+  $('#planGrid').innerHTML = PLANS.map((p, i) => {
+    const price = perMonth(i);
+    const billed = S.bill === 'yearly' ? `Billed ${money(p.y)} a year · <em>save ${money(p.m*12 - p.y)}</em>` : 'Billed monthly';
+    return `<article class="plan ${p.pop?'pop':''}">${p.pop?'<span class="badge">Most popular</span>':''}<h3>${p.name}</h3><p class="for">${p.for}</p><div class="price"><b>$${price}</b><span>/ month</span></div><p class="billed">${billed}</p><button class="btn ${p.pop?'':'ghost'} block" data-choose="${i}">Choose ${p.name}</button><ul>${SVC.map(s => `<li class="${s.min<=i?'yes':'no'}">${ic(s.min<=i?'i-check':'i-x')} ${s.name}</li>`).join('')}</ul></article>`;
+  }).join('');
+  $('#compare').innerHTML = `<table><thead><tr><th>Service</th>${PLANS.map(p => `<th class="${p.pop?'pop':''}">${p.name}</th>`).join('')}</tr></thead><tbody>${SVC.map(s => `<tr><td><span class="svc-ico ${s.h?'h':''}">${ic(s.icon)}</span><span>${s.name}<small>${s.short}</small></span></td>${PLANS.map((p,i) => `<td>${s.min<=i ? `<span class="ck">${ic('i-check')}</span>` : '<span class="dash">—</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+function renderStepper() {
+  const steps = ['Plan','Account','Payment','Done'];
+  $$('[data-stepper]').forEach(ol => {
+    const n = +ol.dataset.stepper;
+    ol.innerHTML = steps.map((t, i) => `<li class="${i+1 < n || n === 4 ? 'done' : i+1 === n ? 'now' : ''}"><span>${i+1 < n || n === 4 ? '✓' : i+1}</span><b>${t}</b></li>`).join('');
+  });
+}
+function renderSummary() {
+  const p = PLANS[S.plan], price = perMonth(S.plan);
+  const total = S.bill === 'yearly' ? p.y : p.m;
+  const html = `<small>Your plan</small><div class="sum-plan"><h3>${p.name}</h3><button type="button" class="link" data-go="plans">Change</button></div>
+    <div class="sum-bill" role="group" aria-label="Billing"><button type="button" data-bill="monthly" aria-pressed="${S.bill==='monthly'}">Monthly</button><button type="button" data-bill="yearly" aria-pressed="${S.bill==='yearly'}">Yearly · save ${money(p.m*12-p.y)}</button></div>
+    <ul class="sum-list">${included(S.plan).map(s => `<li>${ic('i-check')} ${s.name}</li>`).join('')}</ul>
+    <div class="sum-line"><span>${p.name} · ${S.bill === 'yearly' ? 'yearly' : 'monthly'}</span><span>${money(total)}</span></div>
+    <div class="sum-line"><span>7-day free trial</span><span>−${money(total)}</span></div>
+    <div class="sum-line total"><span>Due today</span><span>$0</span></div>
+    <p class="sum-note">Then ${money(total)} ${S.bill === 'yearly' ? `a year (${money(price)}/mo)` : 'a month'} from Nov 25, 2026. Cancel anytime.</p>`;
+  $$('[data-summary]').forEach(a => a.innerHTML = html);
+}
+function renderAccount() {
+  const p = PLANS[S.plan], inc = included(S.plan);
+  const n = inc.filter(s => S.active[s.id]).length;
+  $('#actCount').textContent = `${n} of ${inc.length} active`;
+  $('#actBar').style.width = (n / inc.length * 100) + '%';
+  $('#svcRows').innerHTML = SVC.map(s => {
+    const has = s.min <= S.plan, on = S.active[s.id];
+    const act = !has ? `<span class="lock">${s.tag} plan</span>` : on ? `<button class="on" data-open="${s.id}">${ic('i-check')} Active</button>` : `<button class="btn sm" data-activate="${s.id}">Activate</button>`;
+    return `<div class="svc-row ${has?'':'locked'}"><span class="svc-ico ${s.h?'h':''}">${ic(s.icon)}</span><div><b>${s.name}</b><span>${s.short}</span></div>${act}</div>`;
+  }).join('');
+  const price = perMonth(S.plan);
+  const next = S.cancelled ? 'No further charges' : S.offer ? `${money(price/2)} (50% off)` : `${money(S.bill==='yearly'?p.y:p.m)}`;
+  $('#planCard').innerHTML = `<small>Current plan</small><h3>${p.name}</h3><p>${S.bill === 'yearly' ? 'Yearly' : 'Monthly'} billing · ${inc.length} services</p>
+    <dl><div><dt>${S.cancelled ? 'Ends on' : 'Trial ends'}</dt><dd>${S.cancelled ? 'Nov 25, 2026' : 'Nov 25, 2026'}</dd></div><div><dt>Next charge</dt><dd>${next}</dd></div><div><dt>Card</dt><dd>•••• 4242</dd></div></dl>
+    ${S.cancelled ? `<button class="btn honey" id="reactivate">Reactivate membership</button>` : `<button class="btn honey" data-go="plans">${S.plan < 2 ? 'Upgrade plan' : 'Change plan'}</button><button class="link" data-go="cancel">Cancel membership</button>`}`;
+  $('#upnext').innerHTML = S.booked
+    ? `<div class="date"><small>Nov</small><b>19</b></div><div><strong>Doctor visit · 9:30 AM</strong><p>Video call with Dr. Sam Patel</p></div>`
+    : `<div class="date"><small>Nov</small><b>20</b></div><div><strong>Therapy · 3:00 PM</strong><p>${S.active.mind ? 'Video call with Dr. Lena Ortiz' : S.plan >= 1 ? 'Activate Mind to confirm this session' : 'Upgrade to Enhanced to book therapy'}</p></div>`;
+  $('#bookBtn').textContent = S.booked ? 'Reschedule doctor visit' : 'Book a doctor visit';
+  const nb = $('#acctNotice');
+  nb.innerHTML = S.cancelled
+    ? `<div class="notice end">${ic('i-info')}<span>Your membership is cancelled. You can use every service until <b>Nov 25, 2026</b>.</span><button class="link" id="reactivate2">Reactivate</button></div>`
+    : S.offer ? `<div class="notice">${ic('i-gift')}<span><b>50% off applied.</b> Your next charge is ${money(price/2)} instead of ${money(price)}.</span></div>` : '';
+}
+function renderOffer() {
+  const price = perMonth(S.plan);
+  $('[data-halfprice]').textContent = money(price/2);
+  $('[data-fullprice]').textContent = money(price);
+  $('#keepList').innerHTML = included(S.plan).slice(0, 4).map(s => `<div>${ic('i-check')} ${s.name}</div>`).join('');
+}
+function syncText() {
+  const p = PLANS[S.plan];
+  $$('[data-firstname]').forEach(e => e.textContent = S.first);
+  $$('[data-initials]').forEach(e => e.textContent = (S.first[0]||'') + (S.last[0]||''));
+  $$('[data-planname]').forEach(e => e.textContent = p.name);
+  $$('[data-email]').forEach(e => e.textContent = S.email);
+  $$('[data-planline]').forEach(e => e.textContent = `${p.name} · ${S.bill === 'yearly' ? 'Yearly' : 'Monthly'}`);
+  $$('[data-thenprice]').forEach(e => e.textContent = S.bill === 'yearly' ? `${money(p.y)} / year` : `${money(p.m)} / month`);
+  $$('[data-guest]').forEach(e => e.hidden = S.member);
+  $$('[data-member]').forEach(e => e.hidden = !S.member);
+}
+function renderAll() { renderPlans(); renderSummary(); renderStepper(); renderAccount(); renderOffer(); syncText(); }
+
+/* Router */
+function go(route, anchor, push = true) {
+  if ((route === 'account' || route === 'cancel' || route === 'offer') && !S.member) { route = 'login'; }
+  $$('[data-route]').forEach(s => s.hidden = s.dataset.route !== route);
+  $('#mobileNav').hidden = true; $('#menuBtn').setAttribute('aria-expanded', 'false');
+  if (push) history.replaceState(null, '', '#/' + route + (anchor ? '/' + anchor : ''));
+  renderAll();
+  if (anchor) { requestAnimationFrame(() => { const el = document.getElementById(anchor); if (el) window.scrollTo({ top: el.offsetTop - 70, behavior: push ? 'smooth' : 'auto' }); }); }
+  else window.scrollTo({ top:0, behavior:'auto' });
+}
+function toast(msg) { const t = $('#toast'); $('span', t).textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2600); }
+
+/* Modals */
+const MODALS = {
+  terms: () => `<h2>Terms of membership</h2><p class="m-sub">The short version.</p><ul><li>${ic('i-check')} Your trial is free for 7 days</li><li>${ic('i-check')} Billing renews monthly or yearly until you cancel</li><li>${ic('i-check')} Cancel any time; services stay on until the period ends</li><li>${ic('i-check')} Virtual care is not for emergencies</li></ul><div class="m-cta"><button class="btn" data-close>Got it</button></div>`,
+  privacy: () => `<h2>Your privacy</h2><p class="m-sub">Your health data stays between you and your care providers.</p><ul><li>${ic('i-check')} We never sell your data</li><li>${ic('i-check')} Providers only see what you share with them</li><li>${ic('i-check')} Download or delete your data from your account</li></ul><div class="m-cta"><button class="btn" data-close>Got it</button></div>`,
+};
+function openModal(html) { $('#modal').innerHTML = `<button class="x" data-close aria-label="Close">${ic('i-x')}</button>` + html; $('#scrim').hidden = false; $('#modal .x').focus(); }
+function closeModal() { $('#scrim').hidden = true; }
+function svcModal(id) {
+  const s = SVC.find(x => x.id === id);
+  const plans = PLANS.filter((p, i) => s.min <= i).map(p => `<b>${p.name}</b>`).join('');
+  const has = S.member && s.min <= S.plan;
+  openModal(`<span class="svc-ico ${s.h?'h':''}">${ic(s.icon)}</span><h2>${s.name}</h2><p class="m-sub">${s.short}</p><ul>${s.points.map(p => `<li>${ic('i-check')} ${p}</li>`).join('')}</ul><div class="in-plans">Included in ${plans}</div><div class="m-cta">${has ? `<button class="btn" data-close>Close</button>` : `<button class="btn" data-close data-go="plans">See plans</button><button class="btn ghost" data-close>Close</button>`}</div>`);
+}
+
+/* Validation helpers */
+function check(id, ok) { const f = $('#' + id).closest('.field'); f.classList.toggle('err', !ok); return ok; }
+
+/* Events */
+document.addEventListener('click', e => {
+  const t = e.target.closest('button, [data-go]');
+  if (!t) { if (e.target === $('#scrim')) closeModal(); return; }
+  if (t.hasAttribute('data-close')) closeModal();
+  if (t.dataset.go) { e.preventDefault(); go(t.dataset.go, t.dataset.anchor); return; }
+  if (t.dataset.modal) { openModal(MODALS[t.dataset.modal]()); return; }
+  if (t.dataset.svc) { svcModal(t.dataset.svc); return; }
+  if (t.dataset.open) { const s = SVC.find(x => x.id === t.dataset.open); toast(`Opening ${s.name} in the Honeybee app`); return; }
+  if (t.dataset.bill) { S.bill = t.dataset.bill; renderAll(); return; }
+  if (t.dataset.choose) {
+    S.plan = +t.dataset.choose;
+    if (S.member) { S.cancelled = false; S.offer = false; go('account'); toast(`You’re now on ${PLANS[S.plan].name}`); }
+    else go('signup');
+    return;
+  }
+  if (t.dataset.activate) { S.active[t.dataset.activate] = true; renderAccount(); toast(`${SVC.find(x => x.id === t.dataset.activate).name} is active`); return; }
+  if (t.id === 'menuBtn') { const nav = $('#mobileNav'); nav.hidden = !nav.hidden; t.setAttribute('aria-expanded', String(!nav.hidden)); return; }
+  if (t.id === 'fillCard') { $('#cn').value = S.first + ' ' + S.last; $('#cc').value = '4242 4242 4242 4242'; $('#exp').value = '08 / 29'; $('#cvc').value = '123'; $$('#payForm .field').forEach(f => f.classList.remove('err')); return; }
+  if (t.id === 'forgot') { toast('We sent a reset link to ' + ($('#lem').value || 'your email')); return; }
+  if (t.id === 'logout') { S.member = false; go('home'); toast('You’re logged out'); return; }
+  if (t.id === 'bookBtn') { S.booked = true; renderAccount(); toast('Doctor visit booked for tomorrow, 9:30 AM'); return; }
+  if (t.id === 'takeOffer') { S.offer = true; S.cancelled = false; go('account'); toast('50% off applied to your next month'); return; }
+  if (t.id === 'cancelAnyway') { S.cancelled = true; S.offer = false; go('account'); toast('Membership cancelled'); return; }
+  if (t.id === 'reactivate' || t.id === 'reactivate2') { S.cancelled = false; renderAccount(); toast('Welcome back! Your membership is active'); return; }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#scrim').hidden) closeModal(); });
+$('#signupForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = [check('fn', $('#fn').value.trim()), check('ln', $('#ln').value.trim()), check('em', /^\S+@\S+\.\S+$/.test($('#em').value)), check('pw', $('#pw').value.length >= 8)].every(Boolean);
+  const terms = $('#terms').checked; $('#termsWrap').classList.toggle('err', !terms);
+  if (!ok || !terms) { if (!terms && ok) toast('Please accept the terms to continue'); return; }
+  S.first = $('#fn').value.trim(); S.last = $('#ln').value.trim(); S.email = $('#em').value.trim();
+  go('payment');
+});
+$('#payForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const digits = v => v.replace(/\D/g, '');
+  const ok = [check('cn', $('#cn').value.trim()), check('cc', digits($('#cc').value).length === 16), check('exp', /^(0[1-9]|1[0-2])\d{2}$/.test(digits($('#exp').value))), check('cvc', /^\d{3,4}$/.test($('#cvc').value))].every(Boolean);
+  if (!ok) return;
+  const b = $('#payBtn'); b.disabled = true; b.innerHTML = '<span class="spin"></span> Processing';
+  setTimeout(() => { b.disabled = false; b.textContent = 'Start free trial'; S.member = true; S.active = {}; S.cancelled = false; S.offer = false; go('thanks'); }, 900);
+});
+$('#loginForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = [check('lem', /^\S+@\S+\.\S+$/.test($('#lem').value)), check('lpw', $('#lpw').value.length > 0)].every(Boolean);
+  if (!ok) return;
+  S.member = true; S.email = $('#lem').value; if (!Object.keys(S.active).length) S.active = { care:true }; go('account'); toast('Welcome back, ' + S.first);
+});
+$('#cc').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0,16).replace(/(\d{4})(?=\d)/g, '$1 '); });
+$('#exp').addEventListener('input', e => { const d = e.target.value.replace(/\D/g, '').slice(0,4); e.target.value = d.length > 2 ? d.slice(0,2) + ' / ' + d.slice(2) : d; });
+$$('#app input').forEach(i => i.addEventListener('input', () => i.closest('.field')?.classList.remove('err')));
+$('#terms').addEventListener('change', () => $('#termsWrap').classList.remove('err'));
+$$('input[name="reason"]').forEach(r => r.addEventListener('change', () => $('#reasonNext').disabled = false));
+$('#reasonForm').addEventListener('submit', e => { e.preventDefault(); go('offer'); });
+addEventListener('scroll', () => $('#hdr').classList.toggle('scrolled', scrollY > 8), { passive:true });
+
+/* Boot: #/route[/anchor] ; ?member=1 and ?plan=n for direct links */
+renderServices();
+const q = new URLSearchParams(location.search);
+if (q.has('member')) { S.member = true; S.active = { care:true, still:true }; }
+if (q.has('plan')) S.plan = +q.get('plan');
+if (q.has('bill')) S.bill = q.get('bill');
+if (q.has('booked')) S.booked = true;
+const [, r = 'home', a] = location.hash.split('/');
+go(r || 'home', a, false);
+addEventListener('hashchange', () => { const [, r2 = 'home', a2] = location.hash.split('/'); go(r2 || 'home', a2, false); });
+</script>
+</body>
+</html>

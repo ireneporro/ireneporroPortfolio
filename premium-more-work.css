@@ -186,14 +186,14 @@
 .ds-states code { grid-column:1 / -1; justify-self:center; padding:3px 9px; border-radius:6px; background:#f2f2f6; color:#555; font:600 10.5px ui-monospace,Menlo,monospace; }
 
 /* Honeybee */
-.mw-honey { --k:#1aa3c4; background-color:#fdf6dc; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpolygon points='0.00,20.00 -17.32,10.00 -17.32,-10.00 -0.00,-20.00 17.32,-10.00 17.32,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,20.00 17.32,10.00 17.32,-10.00 34.64,-20.00 51.96,-10.00 51.96,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='17.32,50.00 -0.00,40.00 0.00,20.00 17.32,10.00 34.64,20.00 34.64,40.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='0.00,80.00 -17.32,70.00 -17.32,50.00 -0.00,40.00 17.32,50.00 17.32,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,80.00 17.32,70.00 17.32,50.00 34.64,40.00 51.96,50.00 51.96,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3C/svg%3E"); }
-.mw-honey .cover-wordmark > span { clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%); border-radius:0; background:#e8b923; color:#3a2a00; }
+.mw-honey { --k:#0f6b67; background-color:#fdf6dc; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.64' height='60' viewBox='0 0 34.64 60'%3E%3Cpolygon points='0.00,20.00 -17.32,10.00 -17.32,-10.00 -0.00,-20.00 17.32,-10.00 17.32,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,20.00 17.32,10.00 17.32,-10.00 34.64,-20.00 51.96,-10.00 51.96,10.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='17.32,50.00 -0.00,40.00 0.00,20.00 17.32,10.00 34.64,20.00 34.64,40.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='0.00,80.00 -17.32,70.00 -17.32,50.00 -0.00,40.00 17.32,50.00 17.32,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3Cpolygon points='34.64,80.00 17.32,70.00 17.32,50.00 34.64,40.00 51.96,50.00 51.96,70.00' fill='none' stroke='%23efd57a' stroke-width='1.4'/%3E%3C/svg%3E"); }
+.mw-honey .cover-wordmark > span { clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%); border-radius:0; background:#f6b52e; color:#15302d; }
 .hb-plans { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; align-items:end; }
 .hb-plans > div { position:relative; display:grid; gap:8px; padding:18px 14px; border-radius:16px; background:#fff; box-shadow:0 14px 30px rgba(120,90,0,.10); }
-.hb-plans > div.pop { padding-top:30px; border:2px solid #1aa3c4; box-shadow:0 20px 44px rgba(26,163,196,.20); }
-.hb-plans span { position:absolute; top:-1px; left:50%; padding:3px 9px; border-radius:0 0 8px 8px; background:#1aa3c4; color:#fff; font-size:9.5px; font-weight:700; white-space:nowrap; transform:translateX(-50%); }
+.hb-plans > div.pop { padding-top:30px; border:2px solid #0f6b67; box-shadow:0 20px 44px rgba(15,107,103,.20); }
+.hb-plans span { position:absolute; top:-1px; left:50%; padding:3px 9px; border-radius:0 0 8px 8px; background:#0f6b67; color:#fff; font-size:9.5px; font-weight:700; white-space:nowrap; transform:translateX(-50%); }
 .hb-plans b { font-size:14px; letter-spacing:-.02em; }
-.hb-plans i { height:6px; border-radius:3px; background:#1aa3c4; opacity:.75; } .hb-plans i.off { background:#e5eef0; opacity:1; }
+.hb-plans i { height:6px; border-radius:3px; background:#0f6b67; opacity:.75; } .hb-plans i.off { background:#efe6d2; opacity:1; }
 
 /* Five Shadows */
 .mw-legacy { --k:#d0bc6c; background:radial-gradient(ellipse at 50% 0,rgba(181,51,51,.22),transparent 60%),#0d0d0d; color:#eaeaea; }
